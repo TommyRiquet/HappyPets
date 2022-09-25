@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "GabrielleSquelin",
     "database": "HappyPetsDb",
     "host": "localhost",
     "dialect": "mysql"
