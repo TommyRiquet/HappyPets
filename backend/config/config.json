@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "HappyPetsDb",
+    "database": "qtpets",
     "host": "localhost",
     "dialect": "mysql"
   },
