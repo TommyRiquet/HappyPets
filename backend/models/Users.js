@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        Pseudo: {
+        Age: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        Adresse: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -21,11 +25,15 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        role: {
+        Role: {
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
         Password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        PhotoLink: {
             type: DataTypes.STRING,
             allowNull: false
         }
