@@ -1,0 +1,33 @@
+
+.top-container{
+margin-top: 7vh;
+}
+
+.new-annonce-button{
+    float: right;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+    margin-right: 10px;
+}
+
+.annonces-container{
+    margin-top: 7vh;
+}
+
+.annonce-card{
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    margin: 10px;
+  }
+  .annonce-card .annonce-name, .annonce-card .annonce-race {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .annonce-card .annonce-date, .annonce-card  .annonce-master{
+    text-align: right;
+    color: grey;
+  }
+
+  .annonce-picture{
+    width: 80px !important;
+    height: 80px !important;
+  }
