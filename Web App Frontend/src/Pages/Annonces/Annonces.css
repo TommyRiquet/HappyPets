@@ -1,33 +1,33 @@
-
-.top-container{
-margin-top: 7vh;
+.body{
+  background-color: #F2F3F8;
 }
 
+.top-container{
+  margin-top: 7vh;
+}
 .new-annonce-button{
-    float: right;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
-    margin-right: 10px;
+  float: right;
+  margin-right: 10px;
+  padding: 12px 30px !important;
+  background-color: #33658A !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  transition: 0.2s !important;
+  font-size: large !important;
+  font-weight: bold !important;
+}
+.new-annonce-button:hover{
+  transform: scale(1.02);
 }
 
 .annonces-container{
-    margin-top: 7vh;
+  margin-top: 7vh;
 }
 
-.annonce-card{
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    margin: 10px;
-  }
-  .annonce-card .annonce-name, .annonce-card .annonce-race {
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-  .annonce-card .annonce-date, .annonce-card  .annonce-master{
-    text-align: right;
-    color: grey;
-  }
-
-  .annonce-picture{
-    width: 80px !important;
-    height: 80px !important;
-  }
+.no-result-message{
+  margin-top: 7vh;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: grey;
+}
