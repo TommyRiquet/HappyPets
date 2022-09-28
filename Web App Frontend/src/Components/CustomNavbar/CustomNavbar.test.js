@@ -1,6 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import CustomNavbar from './CustomNavbar';
 
-test('renders CustomNavbar', () => {
-  render(<CustomNavbar />);
-});
+describe('CustomNavbar', () => {
+    it('Should render without crash', async () => {
+        render(
+            <CustomNavbar/>
+        )
+    })
+})
