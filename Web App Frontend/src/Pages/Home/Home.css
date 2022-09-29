@@ -1,0 +1,73 @@
+.homeContent1{
+    /*Configuration image*/
+    background:url("../../Assets/homeBackGround1.png") no-repeat center center;
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*Configuration texte*/
+    max-width: 100%;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 300%;
+    text-align: center;
+    
+}
+
+.homeContent2{
+    /*Configuration page*/
+    background: #F2F3F8 no-repeat center center;
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    display: block;
+    block-size: auto;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    /*Configuration texte*/
+    max-width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 300%;
+    text-align: center;
+    
+}
+
+#imgChicken{
+    border-radius: 10% 10% 10% 10%;
+    max-width: 100%;
+    float:right;
+}
+
+.homeContent3{
+    /*Configuration page*/
+    background: #F26419 no-repeat center center;
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    display: block;
+    block-size: auto;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    /*Configuration texte*/
+    max-width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 250%;
+    text-align: center;
+    color:white;
+
+    
+}
+
+#imgCat{
+    border-radius: 10%;
+    max-width: 100%;
+    float: left;
+}
+
