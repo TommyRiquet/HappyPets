@@ -9,6 +9,7 @@ import './App.css';
 import Home from "../Home/Home";
 import Error from "../Error/Error";
 import Annonces from "../Annonces/Annonces";
+import Propositions from '../Propositions/Propositions';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
                   <Route path="/" element={<Home/>}/>
                   <Route path="/annonces" element={<Annonces/>}/>
                   <Route path="*" element={<Error/>}/>
+                  <Route path="/propositions" element={<Propositions/>}/>
               </Routes>
               <Footer/>
           </BrowserRouter>

@@ -1,0 +1,24 @@
+.proposition{
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: #1e1e1e 0 0 3px 0;
+    transition: 0.2s;
+  }
+  .proposition:hover{
+    transform: scale(1.01);
+    box-shadow: #1e1e1e 0 0 7px 0;
+  }
+  .proposition .proposition-name, .proposition .proposition-lieu {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .user-picture{
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .note-picture{
+    width: 80px !important;
+    height: 20px !important;
+  }
