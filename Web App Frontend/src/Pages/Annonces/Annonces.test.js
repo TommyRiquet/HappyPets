@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
-import CustomNavbar from './CustomNavbar';
+import Annonces from './Annonces';
 
-describe('CustomNavbar', () => {
+describe('Annonces', () => {
     it('Should render without crash', async () => {
         render(
-            <CustomNavbar/>
+            <Annonces/>
         )
     })
 })
