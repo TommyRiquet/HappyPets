@@ -1,0 +1,40 @@
+body{
+    background-color: #F2F3F8 !important;
+  }
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.UserForm{
+    text-align: center;
+    align-items: center;
+  }
+
+input[type=text]{
+    margin-top: 2%;
+    margin-left: 2%;
+  }
+
+input[type=password]{
+    margin-top: 2%;
+    margin-left: 2%;
+  }
+input[type=email]{
+    margin-top: 2%;
+    margin-left: 2%;
+  }
+input[type=tel]{
+    margin-top: 2%;
+    margin-left: 2%;
+  }
+input[type=number]{
+    margin-top: 2%;
+    margin-left: 2%;
+  }
+.UserDB{
+    margin-top: 2%;
+    margin-left: 2%;
+}
