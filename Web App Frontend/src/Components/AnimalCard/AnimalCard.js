@@ -17,7 +17,8 @@ function AnimalCard(props) {
                 <Row>
                     <Col className="g-2">
                       <div className='annonce-name'>
-                        <span data-testid="annonce-name">{(props.annonce.name.length===0? "Inconnu" :props.annonce.name )}</span><span data-testid="annonce-age">{(props.annonce.age>=0? ", "+props.annonce.age : "")}</span>
+                        <span data-testid="annonce-name">{(props.annonce.name.length===0? "Inconnu" :props.annonce.name )}</span>
+                        <span data-testid="annonce-age">{(props.annonce.age>=0? ", "+props.annonce.age : "")}</span>
                       </div>
                     </Col>
                     <Col><div className='annonce-date' data-testid="annonce-date">{props.annonce.date}</div></Col>
