@@ -17,16 +17,30 @@ function AnimalCard(props) {
                 <Row>
                     <Col className="g-2">
                       <div className='annonce-name'>
-                        <span data-testid="annonce-name">{(props.annonce.name.length===0? "Inconnu" :props.annonce.name )}</span><span data-testid="annonce-age">{(props.annonce.age>=0? ", "+props.annonce.age : "")}</span>
+                        <span data-testid="annonce-name">{
+                          (
+                              props.annonce.Pets.length===0 ? "Inconnu":
+                              props.annonce.Pets[0].Name.length===0? "Inconnu" :props.annonce.Pets[0].Name 
+                          )}</span>
+                        <span data-testid="annonce-age">{(
+                                                        props.annonce.Pets.length===0 ? "":
+                                                        props.annonce.Pets[0].Age>=0? ", "+props.annonce.Pets[0].Age : ""
+                                                        )}</span>
                       </div>
                     </Col>
-                    <Col><div className='annonce-date' data-testid="annonce-date">{props.annonce.date}</div></Col>
+                    <Col><div className='annonce-date' data-testid="annonce-date">{props.annonce.DateBegin.slice(5,10)+ "/"+props.annonce.DateEnd.slice(5,10)}</div></Col>
                 </Row>
                 <Row>
-                    <Col className="g-2" xs={8} md={8} lg={8} xl={8} xxl={8}><div className='annonce-race' data-testid="annonce-race">{props.annonce.race}</div></Col>
+                    <Col className="g-2" xs={8} md={8} lg={8} xl={8} xxl={8}><div className='annonce-race' data-testid="annonce-race">{
+                      props.annonce.Pets.length===0 ? "":
+                      props.annonce.Pets[0].Race}</div></Col>
                     <Col className='col-annonce-master'>
                       <div className='annonce-master' data-testid="annonce-master">
-                        {props.annonce.master.length===0 ? "Inconnu" : props.annonce.master}
+                        {
+                          props.annonce.Pets.length===0 ? "Inconnu":
+                          props.annonce.Pets[0].User.length===0 ? "Inconnu":
+                          props.annonce.Pets[0].User.Firstname.length===0 ? "Inconnu" : props.annonce.Pets[0].User.Firstname
+                        }
                       </div>
                     </Col>
                 </Row>

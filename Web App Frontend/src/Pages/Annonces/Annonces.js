@@ -1,4 +1,5 @@
 /*Importing Components */
+import { useEffect, useState } from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
 import AnimalCard from '../../Components/AnimalCard/AnimalCard';
 
@@ -6,30 +7,23 @@ import AnimalCard from '../../Components/AnimalCard/AnimalCard';
 import './Annonces.css';
 
 
-let ListAnnonces = [
-    {name: "Kiwi", age: 10, race:"Bichon Maltais", date:"11/07-11/09", master:"Quentin", photolink:""},
-    {name: "Kevin", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"},
-    {name: "Quentin", age: 22, race:"Market Maltais", date:"11/07-11/09", master:"Marina"},
-    {name: "", age: -2, race:"Bichon Maltais", date:"11/07-11/09", master:"Quentin"},
-    {name: "Kevin", age: -1, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"},
-    {name: "", age: 22, race:"Market Maltais", date:"11/07-11/09", master:"Marina"},
-    {name: "Kiwi", age: 2, race:"Bichon Maltais", date:"11/07-11/09", master:"Quentin"},
-    {name: "Kevin", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"},
-    {name: "Quentin", age: 22, race:"Market Maltais", date:"11/07-11/09", master:"Marina"},
-    {name: "Kiwi", age: 2, race:"Bichon Maltais", date:"11/07-11/09", master:"Quentin"},
-    {name: "Kevin", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"},
-    {name: "Quentin", age: 22, race:"Market Maltais", date:"11/07-11/09", master:"Marina"},
-    {name: "Quentin", age: 22, race:"Market Maltais", date:"11/07-11/09", master:"Marina"},
-    {name: "Kiwi", age: 2, race:"Bichon Maltais", date:"11/07-11/09", master:"Quentin"},
-    {name: "Kevin", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"},
-    {name: "Quentin", age: 22, race:"Market Maltais", date:"11/07-11/09", master:"Marina"},
-    {name: "Kiwi", age: 2, race:"Bichon Maltais", date:"11/07-11/09", master:"Quentin"},
-    {name: "Kevin", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"},
-    {name: "Kevin", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"},
-    {name: "Kevin", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"}
-]
-
 function Annonces() {
+    const [ListAnnonces,setListAnnonces] = useState([])
+
+
+    useEffect(()=>{
+        fetch('http://localhost:3001/annonces')
+            .then((response) => response.json())
+            .then((data) => setListAnnonces(data));
+    },[])
+
+
+
+    useEffect(()=>{
+        console.log(ListAnnonces)
+    },[ListAnnonces])
+
+
     return (
         <div className="Annonces">
                 <Container className='top-container'>
@@ -46,7 +40,7 @@ function Annonces() {
                             {
                                 ListAnnonces.map((annonce,index) => {
                                     return (
-                                        <Col key={index} onClick={e=>console.log(annonce.name)}>
+                                        <Col key={index} onClick={e=>console.log(index)}>
                                             <AnimalCard annonce={annonce} />
                                         </Col>
                                         )
