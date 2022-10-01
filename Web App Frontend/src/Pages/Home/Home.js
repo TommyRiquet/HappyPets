@@ -9,11 +9,11 @@ import imgCat from '../../Assets/homeBackGround3.png';
 
 function Home() {
     return (
-        <div className="Home">
-            <div className='homeContent1'>
+        <div>
+            <div className='homeContent1 scrollDiv'>
                 <p>Ensemble luttons contre les abandons</p>
             </div>
-            <div className='homeContent2'>
+            <div className='homeContent2 scrollDiv'>
                 <Container>
                     <Row xs={1} md={2}>
                         <Col style={{marginTop: '10%'}}>
@@ -25,7 +25,7 @@ function Home() {
                     </Row>
                 </Container>
             </div>
-            <div className='homeContent3'>
+            <div className='homeContent3 scrollDiv'>
                 <Container>
                     <Row xs={1} md={2}>
                         <Col style={{marginTop: '8%', maxWeight: '100%', maxHeight: '100%'}}>

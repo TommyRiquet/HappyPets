@@ -1,3 +1,12 @@
+html {
+    scroll-snap-type: y;
+}
+
+.scrollDiv{
+    scroll-snap-align: start; /* snap align start */
+}
+
+
 .homeContent1{
     /*Configuration image*/
     background:url("../../Assets/homeBackGround1.png") no-repeat center center;
@@ -70,4 +79,3 @@
     max-width: 100%;
     float: left;
 }
-
