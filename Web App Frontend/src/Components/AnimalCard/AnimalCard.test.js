@@ -4,6 +4,7 @@ import AnimalCard from './AnimalCard';
 
 describe('Test de rendu du composant <AnimalCard />', () => {
     it('Should render without crash', async () => {
+    
       const FakeAnnonce = {
         "DateBegin": "2022-10-01T21:00:00.000Z",
         "DateEnd": "2022-10-01T21:00:00.000Z",
@@ -72,13 +73,13 @@ describe("Test des props du composant <AnimalCard/>", () => {
       "User": {
       "Firstname": "Quentin"
       }}]}    
+
     render(
           <AnimalCard annonce={FakeAnnonce}/>
       )
       const propsName = screen.getByTestId("annonce-name")
       expect(propsName.textContent).toBe("Inconnu");
   })
-
 
 
   it('Should not display the Age if its negative 1', async () => {
@@ -94,6 +95,7 @@ describe("Test des props du composant <AnimalCard/>", () => {
       "User": {
       "Firstname": "Quentin"
       }}]}    
+
     render(
           <AnimalCard annonce={FakeAnnonce}/>
       )
@@ -101,6 +103,7 @@ describe("Test des props du composant <AnimalCard/>", () => {
       expect(propsAge.textContent).toBe("");
   })
   it('Should not display the Age if its negative 2', async () => {
+    
     const FakeAnnonce = {
       "DateBegin": "2022-10-01T21:00:00.000Z",
       "DateEnd": "2022-10-01T21:00:00.000Z",
@@ -122,6 +125,7 @@ describe("Test des props du composant <AnimalCard/>", () => {
   })
 
   it('Should not display the Race', async () => {
+
     const FakeAnnonce = {
       "DateBegin": "2022-10-01T21:00:00.000Z",
       "DateEnd": "2022-10-01T21:00:00.000Z",
@@ -143,6 +147,7 @@ describe("Test des props du composant <AnimalCard/>", () => {
   })
 
   it('Should replace the master name with "Inconnu"', async () => {
+
     const FakeAnnonce = {
       "DateBegin": "2022-10-01T21:00:00.000Z",
       "DateEnd": "2022-10-01T21:00:00.000Z",
