@@ -17,13 +17,21 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*Configuration texte*/
+
+    /*Configuration text*/
     max-width: 100%;
+    text-align: center;
     color: white;
     font-family: Arial, sans-serif;
+}
+
+.homeContent1 p{
+    margin-top: 10%;
+    font-size: 200%;
+}
+
+.homeContent1 h1{
     font-size: 300%;
-    text-align: center;
-    
 }
 
 .homeContent2{
@@ -38,7 +46,8 @@ html {
     align-items: center;
     padding-top: 5%;
     padding-bottom: 5%;
-    /*Configuration texte*/
+    
+    /*Configuration text*/
     max-width: 100%;
     font-family: Arial, sans-serif;
     font-size: 300%;
@@ -64,7 +73,8 @@ html {
     align-items: center;
     padding-top: 5%;
     padding-bottom: 5%;
-    /*Configuration texte*/
+
+    /*Configuration text*/
     max-width: 100%;
     font-family: Arial, sans-serif;
     font-size: 250%;
