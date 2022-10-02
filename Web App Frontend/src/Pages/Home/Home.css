@@ -11,6 +11,7 @@ html {
     /*Configuration image*/
     background:url("../../Assets/homeBackGround1.png") no-repeat center center;
     background-size: cover;
+    background-attachment: fixed;
     position: relative;
     height: 100vh;
     display: flex;
@@ -25,13 +26,14 @@ html {
     font-family: Arial, sans-serif;
 }
 
+.homeContent1 h1{
+    font-size: 400%;
+}
+
+
 .homeContent1 p{
     margin-top: 10%;
     font-size: 200%;
-}
-
-.homeContent1 h1{
-    font-size: 300%;
 }
 
 .homeContent2{
