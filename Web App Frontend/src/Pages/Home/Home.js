@@ -15,9 +15,9 @@ function getDate(){
     const d1 = new Date('09/15/22');
     const d2 = new Date();
     let diffMilli = d2.getTime() - d1.getTime();  
-    //get number of months between the beginning of the project and today
-    let diffMonth = Math.round(diffMilli / (1000 * 60 * 60 * 24 * 30));
-    return Math.round(diffMonth*(65000/12));
+    //get number of days between the beginning of the project and today (-1 to not count the day of the beginning)
+    let diffMonth = Math.round(diffMilli / (1000 * 60 * 60 * 24)) - 1;
+    return Math.round(diffMonth*(65000/12/30));
 
 }
 
