@@ -1,0 +1,25 @@
+
+.annonce-card{
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: #1e1e1e 0 0 3px 0;
+    transition: 0.2s;
+  }
+  .annonce-card:hover{
+    transform: scale(1.01);
+    box-shadow: #1e1e1e 0 0 7px 0;
+  }
+  .annonce-card .annonce-name, .annonce-card .annonce-race {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .annonce-card .annonce-date, .annonce-card  .annonce-master{
+    text-align: right;
+    color: grey;
+  }
+ 
+  .annonce-picture{
+    width: 80px !important;
+    height: 80px !important;
+  }

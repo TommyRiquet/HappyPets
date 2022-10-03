@@ -8,12 +8,14 @@ import './App.css';
 /* Importing Pages*/
 import Home from "../Home/Home";
 import Error from "../Error/Error";
+import Annonces from "../Annonces/Annonces";
 
 function App() {
   return (
           <BrowserRouter>
               <Routes>
                   <Route path="/" element={<Home/>}/>
+                  <Route path="/annonces" element={<Annonces/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>

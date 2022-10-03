@@ -1,0 +1,33 @@
+.body{
+  background-color: #F2F3F8;
+}
+
+.top-container{
+  margin-top: 7vh;
+}
+.new-annonce-button{
+  float: right;
+  margin-right: 10px;
+  padding: 0.6% 30px !important;
+  background-color: #33658A !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  transition: 0.2s !important;
+  font-size: large !important;
+  font-weight: bold !important;
+}
+.new-annonce-button:hover{
+  transform: scale(1.02);
+}
+
+.annonces-container{
+  margin-top: 10vh;
+}
+
+.no-result-message{
+  margin-top: 7vh;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: grey;
+}
