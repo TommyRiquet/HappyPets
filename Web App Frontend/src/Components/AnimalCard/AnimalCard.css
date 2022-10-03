@@ -14,12 +14,23 @@
     font-size: 1.2em;
     font-weight: bold;
   }
-  .annonce-card .annonce-date, .annonce-card  .annonce-master{
-    text-align: right;
-    color: grey;
-  }
  
   .annonce-picture{
     width: 80px !important;
     height: 80px !important;
   }
+
+.annonce-user-firstname, .annonce-localite, .annonce-date{
+  float: right;
+  color: grey;
+}
+.annonce-user-firstname{
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+.multiple-pet-annonce{
+  border: 2px rgb(172, 172, 172) solid;
+  border-radius: 20px;
+}
