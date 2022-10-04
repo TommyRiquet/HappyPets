@@ -61,11 +61,11 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
           }
       ]
   }
-
     
     render(
         <AnimalCard annonce={FakeAnnonce} image={"test"}/>
       )
+      
       const propsPetName = screen.getByTestId("annonce-name0")
       const propsPetWeight = screen.getByTestId("annonce-pets-weight0")
       const propsPetAge = screen.getByTestId("annonce-age0")
@@ -146,8 +146,7 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
       const propsPetWeight = screen.getByTestId("annonce-pets-weight0")
       expect(propsPetWeight.textContent).toBe("Petit,2kg");
   })
-
-
+  
 
   it('Should not display the Age if its negative 1', async () => {
     const FakeAnnonce = {
@@ -172,6 +171,7 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
           }
       ]
   }     
+
 
     render(
         <AnimalCard annonce={FakeAnnonce} image={"test"}/>
@@ -205,6 +205,7 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
           }
       ]
   }     
+
 
     render(
           <AnimalCard annonce={FakeAnnonce} image={"test"}/>

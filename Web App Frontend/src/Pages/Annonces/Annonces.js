@@ -25,6 +25,7 @@ const AnimauxImages = {"Chien":ChienImage,
                         "Serpent":SerpentImage,
                         "Tortue":TortueImage}
 
+
 function Annonces() {
     const [ListAnnonces,setListAnnonces] = useState([])
     let offset = 0
@@ -57,6 +58,7 @@ function Annonces() {
     *   Fonction qui permet de charger les annonces suivantes quand on arrive en bas de la page
     */
         if(window.innerHeight+e.target.documentElement.scrollTop+1 >= e.target.documentElement.scrollHeight){
+
             offset += 6 
             LoadAnnonces(offset)
         }
@@ -68,7 +70,9 @@ function Annonces() {
                 <h2>Animaux</h2>
                     <Button className='new-annonce-button' href='annonces/new'>Nouvelle Annonce</Button>
                 </Container>
+
                 <Container className='annonces-container'>
+
                     {
                     Object.keys(ListAnnonces).length === 0 ? 
                         <h2 className='no-result-message'>Aucun Résultat :/</h2> 
@@ -86,6 +90,7 @@ function Annonces() {
                                                         })
                                                     } />
                                             </Col>
+
                                         )
                                 })
                             }
