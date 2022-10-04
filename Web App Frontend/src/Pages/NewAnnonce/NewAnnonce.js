@@ -1,5 +1,5 @@
 /*Importing Components */
-import {Container, Button, Row, Col, Form, FloatingLabel} from 'react-bootstrap';
+import {Container, Button, Row, Col, Form} from 'react-bootstrap';
 import ReturnButton from '../../Components/ReturnButton/ReturnButton';
 
 /*Importing Styles*/
@@ -32,19 +32,19 @@ function NewAnnonce() {
                                         <Col>
                                         <Row>
                                             <Col className='radio-col'>
-                                                <label htmlFor='FormControlRadioGardiennage'> Gardiennage : </label>
-                                                <Form.Check type="radio" label="Yes" name="FormControlRadioGardiennage"></Form.Check>
-                                                <Form.Check type="radio" label="No" name="FormControlRadioGardiennage"></Form.Check>
-                                            
-                                                <label htmlFor='FormControlRadioGardiennage'> Promenade : </label>
-                                                <Form.Check type="radio" label="Yes" name="FormControlRadioPromenade"></Form.Check>
-                                                <Form.Check type="radio" label="No" name="FormControlRadioPromenade"></Form.Check>
+                                                <Row>
+                                                    <Col>
+                                                        <Form.Switch reverse style={{float:"left"}} id="custom-switch" className="custom-switch" label="Gardiennage" name="FormControlRadioGardiennage"></Form.Switch>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col>
+                                                        <Form.Check type="switch" reverse style={{float:"left"}} id="custom-switch" className="custom-switch" label="Promenade" name="FormControlRadioPromenade"></Form.Check>
+                                                    </Col>
+                                                </Row>
                                             </Col>
-                                        </Row>
-                                        </Col>
-                                    </Row>
 
-                                        <Form.Group>
+                                            <Form.Group>
                                             <Form.Label htmlFor="FormControlCalendrier">Calendrier</Form.Label>
                                             <Row>
                                                 <Col md>
@@ -57,15 +57,17 @@ function NewAnnonce() {
                                             </Row>
                                         </Form.Group>
 
+                                        </Row>
+                                        </Col>
+                                    </Row>
+
                                         <Form.Group>
                                             <Form.Label htmlFor="FormControlCommentaire"></Form.Label>
-                                            <FloatingLabel controlId="floatingTextarea" label="Commentaire">
                                                 <Form.Control
                                                 as="textarea"
-                                                placeholder="Laissez un commentaire"
+                                                placeholder="Commentaire"
                                                 style={{ height: '100px' }}
                                                 />
-                                            </FloatingLabel>
                                         </Form.Group>
 
                                         <Button className='submit-button' type="submit">Enregistrer</Button>

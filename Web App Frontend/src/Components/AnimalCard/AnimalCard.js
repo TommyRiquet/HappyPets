@@ -5,7 +5,7 @@ import { Card, Row, Col, } from 'react-bootstrap';
 import './AnimalCard.css';
 
 function AnimalCard(props) {
-  const MaxNumberOfPetsPerAnnonce = 2;
+  const MaxNumberOfPetsPerAnnonce = 3;
 
   return (
     <div className="AnimalCard">
@@ -19,11 +19,20 @@ function AnimalCard(props) {
                     :
                     <Row xs={3} md={2} lg={2} xl={2} xxl={2}>
                         <Col xs={4} sm={3} md={2} lg={3} xl={3} xxl={2}>
-                          <img src={props.image[index]} className="annonce-picture" alt="AnimalProfilePicture"/>
+                          <Row>
+                            <Col>
+                              <img src={props.image[index]} className="annonce-picture" alt="AnimalProfilePicture"/>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col className='annonce-pets-weight'>
+                              Petit,2kg
+                            </Col>
+                          </Row>
                         </Col>
                         <Col>
                           <Row>
-                            <Col className="g-1">
+                            <Col>
                               <div className='annonce-name'>
                                 <span data-testid="annonce-name">
                                   {
@@ -45,13 +54,15 @@ function AnimalCard(props) {
                               </Col>
                           </Row>
                           <Row>
-                              <Col className="g-2">
-                                <div className='annonce-race' data-testid="annonce-race">
-                                  {
-                                  pet.length===0 ? "":
-                                  pet.Race
-                                  }
-                                </div>
+                              <Col className='annonce-info-checkbox'>
+                                <input type="checkbox" name="chien-checkbox" checked disabled/>
+                                  <label for="chien-checkbox">Chien</label>
+                                  <br/>
+                                <input type="checkbox" name="chat-checkbox" disabled />
+                                  <label for="chat-checkbox">Chat</label>
+                                  <br/>
+                                <input type="checkbox" name="enfant-checkbox" checked disabled />
+                                  <label for="enfant-checkbox">Enfant</label>
                               </Col>
                           </Row>
                       </Col>

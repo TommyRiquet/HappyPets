@@ -1,4 +1,4 @@
-
+/*Carte annonce*/
 .annonce-card{
     background-color: #1e1e1e;
     border-radius: 10px;
@@ -10,16 +10,20 @@
     transform: scale(1.01);
     box-shadow: #1e1e1e 0 0 7px 0;
   }
+
+/*Taille du nom et de la race*/
   .annonce-card .annonce-name, .annonce-card .annonce-race {
     font-size: 1.2em;
     font-weight: bold;
   }
  
+/*Photo de l'annonce*/
   .annonce-picture{
     width: 80px !important;
     height: 80px !important;
   }
 
+/*Nom du User, localité et date de l'annonce*/
 .annonce-user-firstname, .annonce-localite, .annonce-date{
   float: right;
   color: grey;
@@ -30,7 +34,16 @@
   bottom: 10px;
 }
 
-.multiple-pet-annonce{
-  border: 2px rgb(172, 172, 172) solid;
-  border-radius: 20px;
+/*Poids de l'animal*/
+.annonce-pets-weight{
+  color: grey;
+  font-size: 0.8em;
+}
+
+/*Description de l'annonce*/
+.annonce-info-checkbox{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: grey;
+  font-size: 0.8em;
 }

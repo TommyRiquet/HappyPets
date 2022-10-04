@@ -73,7 +73,7 @@ function Annonces() {
                     Object.keys(ListAnnonces).length === 0 ? 
                         <h2 className='no-result-message'>Aucun Résultat :/</h2> 
                         :
-                        <Row xs={1} sm={1} lg={2}>
+                        <Row xs={1} sm={1} lg={2} >
                             {
                                 ListAnnonces.map((annonce,index) => {
                                     return (

@@ -5,7 +5,6 @@ import { Button } from 'react-bootstrap';
 import './ReturnButton.css';
 
 function ReturnButton(props) {
-
   return (
     <div className="ReturnButton">
       <Button variant="primary" href={props.returnLink} className="return-button">
