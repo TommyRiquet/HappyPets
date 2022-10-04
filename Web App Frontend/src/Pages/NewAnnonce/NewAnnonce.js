@@ -45,14 +45,14 @@ function NewAnnonce() {
                                             </Col>
 
                                             <Form.Group>
-                                            <Form.Label htmlFor="FormControlCalendrier">Calendrier</Form.Label>
+                                            <Form.Label htmlFor="FormControlCalendar">Calendrier</Form.Label>
                                             <Row>
                                                 <Col md>
-                                                    <Form.Control id="FormControlCalendrierDebut" type="date" placeholder="DateDebut"/>                                            
+                                                    <Form.Control id="FormControlCalendarBegin" type="date" placeholder="DateDebut"/>                                            
                                                 </Col>
                                                 {">"}
                                                 <Col md>
-                                                    <Form.Control id="FormControlCalendrierFin" type="date" placeholder="DateFin"/>    
+                                                    <Form.Control id="FormControlCalendarEnd" type="date" placeholder="DateFin"/>    
                                                 </Col>
                                             </Row>
                                         </Form.Group>
@@ -62,7 +62,7 @@ function NewAnnonce() {
                                     </Row>
 
                                         <Form.Group>
-                                            <Form.Label htmlFor="FormControlCommentaire"></Form.Label>
+                                            <Form.Label htmlFor="FormControlComment"></Form.Label>
                                                 <Form.Control
                                                 as="textarea"
                                                 placeholder="Commentaire"
