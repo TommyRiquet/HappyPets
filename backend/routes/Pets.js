@@ -8,4 +8,9 @@ router.get("/", async (req, res) => {
     res.json(listOfPets)
 })
 
+router.post("/", async (req, res) => {
+    const newPet = req.body
+    await Pets.create(newPet)
+    res.json(newPet)
+})
 module.exports = router

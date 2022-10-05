@@ -14,6 +14,14 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         Age: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        Weight: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        Height: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -22,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         Comment: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         }
 

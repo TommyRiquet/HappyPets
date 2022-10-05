@@ -1,0 +1,78 @@
+.formPet{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: auto;
+    align-items: center;
+    justify-content: center;
+    resize: none;
+    outline: none;
+    font-size: 1.2rem;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: #f5f5f5;
+}
+
+.formPet .row1{
+    grid-column: span 3;
+}
+
+.formPet .row2{
+    grid-column: span 6;
+}
+
+.formPet .row3{
+    grid-column: span 2;
+}
+
+.formPet .row-bottom{
+    grid-column: span 6;
+}
+
+.formPet input{
+    min-width: 100%;
+    height: 2rem;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.formPet select{
+    min-width: 100%;
+    border-radius: 5px;
+    height: 2rem;
+    border: 1px solid black;
+}
+
+.formPet textarea{
+    min-width: 100%;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.formPet label{
+    display: block;
+    text-align: center;
+    margin-top: 2vh;
+}
+
+.formPet .error{
+    color: red;
+    height: 20px;
+    font-size: 0.8rem;
+    margin-left: 5px;
+    text-align: left;
+    width: 400px;
+}
+.formPet button{
+    margin-top: 4vh;
+    min-width: 100%;
+    height: 5vh;
+    background-color: #f5f5f5;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+    outline: none;
+    cursor: pointer;
+}
