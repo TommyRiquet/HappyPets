@@ -10,7 +10,7 @@ import Home from "../Home/Home";
 import Error from "../Error/Error";
 import Annonces from "../Annonces/Annonces";
 import NewAnnonce from "../NewAnnonce/NewAnnonce";
-import UserForm from "../UserForm/UserForm";
+import {UserForm} from "../UserForm/UserForm";
 
 function App() {
   return (

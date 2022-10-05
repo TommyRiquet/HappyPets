@@ -3,9 +3,7 @@ import './UserForm.css';
 
 /*Importing Components */
 import {Container,Button, Form, Row, Col} from 'react-bootstrap';
-import axios from 'axios';
 import { useNavigate } from 'react-router';
-
 
 function inputControl(Nom, Prenom, Age, Ville, Postal, Mail, Phone, Pwd, Pwd2){
     let reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,4}))$/;
@@ -31,7 +29,7 @@ function inputControl(Nom, Prenom, Age, Ville, Postal, Mail, Phone, Pwd, Pwd2){
             }
         }
     }
-    if (Ville){
+    if (true){
         let temp = Ville.split('');
         for (let k in temp){
             if (parseInt(temp[k])){
@@ -79,24 +77,30 @@ function UserForm() {
 
     let navigate = useNavigate();
 
-    async function handleSubmit(data){
+    function handleSubmit(data){
     data.preventDefault();
     if(inputControl(data.target['Nom'].value,data.target['Prenom'].value,data.target['Age'].value,data.target['Ville'].value,data.target['Postal'].value,data.target['Mail'].value,data.target['Telephone'].value,data.target['pwd'].value,data.target['pwd2'].value)){
         if(data.target['Condition'].checked){
-            await axios.post('http://localhost:3001/users',{ 
-                LastName: data.target['Nom'].value, 
-                FirstName: data.target['Prenom'].value,
-                Age: data.target['Age'].value,
-                Ville: data.target['Ville'].value,
-                Postal: data.target['Postal'].value,
-                Email: data.target['Mail'].value,
-                Phone: data.target['Telephone'].value,
-                Role: 0,
-                Password: data.target['pwd'].value,
-                PhotoLink: 0,
-                createdAt: '29-09-22',
-                updatedAt: '29-08-22'
+            fetch('http://localhost:3001/users',{ 
+                method: 'POST',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    LastName: data.target['Nom'].value, 
+                    FirstName: data.target['Prenom'].value,
+                    Age: data.target['Age'].value,
+                    Ville: data.target['Ville'].value,
+                    Postal: data.target['Postal'].value,
+                    Email: data.target['Mail'].value,
+                    Phone: data.target['Telephone'].value,
+                    Role: 0,
+                    Password: data.target['pwd'].value,
+                    PhotoLink: 0,
+                    createdAt: '29-09-22',
+                    updatedAt: '29-08-22'
+                })
+                
             })
+            .then(response => response.json())
             .catch(function (error) {
                 console.log(error);
             });
@@ -185,4 +189,4 @@ function UserForm() {
     );
 }
 
-export default UserForm;
+export {UserForm, inputControl};
