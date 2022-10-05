@@ -8,8 +8,8 @@
 .new-annonce-button{
   float: right;
   margin-right: 10px;
-  padding: 0.7% 30px !important;
-  background-color: #33658A !important;
+  padding: 0.6% 30px !important;
+  background-color: #F2620A !important;
   border: 0 !important;
   border-radius: 10px !important;
   transition: 0.2s !important;
@@ -21,7 +21,7 @@
 }
 
 .annonces-container{
-  margin-top: 7vh;
+  margin-top: 10vh;
 }
 
 .no-result-message{
