@@ -17,15 +17,15 @@ function UserCard(props){
                             <Row>
                                 <Col className='g-2'>
                                     <div className='proposition-name'>
-                                        <span data-testid='proposition-name'>{(props.proposition.name.length===0? "Inconnu" :props.proposition.name )}</span>
-                                        <span data-testid='proposition-age'>{(props.proposition.age>=0? ","+props.proposition.age : "")}</span>
+                                        <span data-testid='proposition-name'>{(props.proposition.User.FirstName.length===0? "Inconnu" :props.proposition.User.FirstName )}</span>
+                                        <span data-testid='proposition-age'>{(props.proposition.User.Age>=0? ","+props.proposition.User.Age : "")}</span>
                                     </div>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col className='g-2'>
                                     <div className='proposition-lieu'>
-                                        <span data-testid='proposition-lieu'>{(props.proposition.lieu.length===0? "Inconnu" :props.proposition.lieu )}</span>
+                                        <span data-testid='proposition-lieu'>{(props.proposition.User.Adress.length===0? "Inconnu" :props.proposition.User.Adress )}</span>
                                     </div>
                                 </Col>
                             </Row>

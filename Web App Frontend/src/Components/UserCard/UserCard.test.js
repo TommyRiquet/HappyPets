@@ -3,7 +3,7 @@ import UserCard from './UserCard';
 
 describe('Component rendering test <UserCard />', () => {
     it('Should render without crash', async () => {
-      const FakeUser = {name: "Kevin", age: 21, lieu: 'Wavre'}
+      const FakeUser = {User : {FirstName: "Kevin", Age: 21, Adress: 'Wavre'}}
 
         render(
             <UserCard proposition={FakeUser}/>
@@ -11,35 +11,35 @@ describe('Component rendering test <UserCard />', () => {
     })
 })
 
-describe('Testing component props <UserVard />', () => {
+describe('Testing component props <Usercard />', () => {
 
     it('Should display everything correctly', async () =>{
-        const FakeUser = {name: "Kevin", age: 21, lieu: 'Wavre'}
+        const FakeUser = {User : {FirstName: "Kevin", Age: 21, Adress: 'Wavre'}}
 
         render(
             <UserCard proposition={FakeUser}/>
         )
-        const propsName = screen.getByTestId("proposition-name")
+        const propsFirstName = screen.getByTestId("proposition-name")
         const propsAge = screen.getByTestId("proposition-age")
-        const propsLieu = screen.getByTestId("proposition-lieu")
+        const propsAdress = screen.getByTestId("proposition-lieu")
 
-        expect(propsName.textContent).toBe(FakeUser.name);
-        expect(propsAge.textContent).toBe(","+FakeUser.age);
-        expect(propsLieu.textContent).toBe(FakeUser.lieu);
+        expect(propsFirstName.textContent).toBe(FakeUser.User.FirstName);
+        expect(propsAge.textContent).toBe(","+FakeUser.User.Age);
+        expect(propsAdress.textContent).toBe(FakeUser.User.Adress);
     })
 
-    it('Should replace the name with "Inconnu"', async () => {
-        const FakeUser = {name: "", age: 21, lieu: 'Wavre'}
+    it('Should replace the FirstName with "Inconnu"', async () => {
+        const FakeUser = {User : {FirstName: "", Age: 21, Adress: 'Wavre'}}
         
         render(
               <UserCard proposition={FakeUser}/>
           )
-          const propsName = screen.getByTestId("proposition-name")
-          expect(propsName.textContent).toBe("Inconnu");
+          const propsFirstName = screen.getByTestId("proposition-name")
+          expect(propsFirstName.textContent).toBe("Inconnu");
       })
 
     it('Should not display the Age if its negative', async () => {
-        const FakeUser = {name: "Kevin", age: -21, lieu: 'Wavre'}
+        const FakeUser = {User : {FirstName: "Kevin", Age: -21, Adress: 'Wavre'}}
         
         render(
               <UserCard proposition={FakeUser}/>
@@ -49,12 +49,12 @@ describe('Testing component props <UserVard />', () => {
     })
 
     it('should replace the place with "Inconnu"', async () =>{
-        const FakeUser = {name: "Kevin", age: 21, lieu: ''}
+        const FakeUser = {User : {FirstName: "Kevin", Age: 21, Adress: ''}}
 
         render(
             <UserCard proposition={FakeUser}/>
         )
-        const propsLieu = screen.getByTestId("proposition-lieu")
-        expect(propsLieu.textContent).toBe("Inconnu");
+        const propsAdress = screen.getByTestId("proposition-lieu")
+        expect(propsAdress.textContent).toBe("Inconnu");
     })
 })
