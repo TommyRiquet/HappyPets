@@ -76,3 +76,21 @@
     outline: none;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 1000px) {
+    .formPet .row1{
+        grid-column: span 6;
+    }
+
+    .formPet .row2{
+        grid-column: span 6;
+    }
+
+    .formPet .row3{
+        grid-column: span 6;
+    }
+
+    .formPet .row-bottom{
+        grid-column: span 6;
+    }
+}
