@@ -6,35 +6,21 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
-.UserForm{
-    text-align: center;
-    align-items: center;
-  }
-
-input[type=text]{
-    margin-top: 2%;
-    margin-left: 2%;
-  }
-
-input[type=password]{
-    margin-top: 2%;
-    margin-left: 2%;
-  }
-input[type=email]{
-    margin-top: 2%;
-    margin-left: 2%;
-  }
-input[type=tel]{
-    margin-top: 2%;
-    margin-left: 2%;
-  }
-input[type=number]{
-    margin-top: 2%;
-    margin-left: 2%;
-  }
 .UserDB{
-    margin-top: 2%;
-    margin-left: 2%;
+    /*padding-bottom: 5vh;*/
+    margin-left: 40%;
+    background-color: #F2620A !important;
+    --bs-btn-bg:#F2620A !important;
+    --bs-btn-border-color:#F2620A !important;
+    --bs-btn-hover-bg:#F2620A !important;
+    --bs-btn-active-bg:#F2620A !important;
+    --bs-btn-disabled-bg:#F2620A !important;
+    --bs-btn-disabled-border-color:#F2620A !important;
+    --bs-btn-hover-border-color:#F2620A !important;
+    --bs-btn-active-border-color:#F2620A !important;
+}
+
+h2{
+    margin: 4vh !important;
 }
