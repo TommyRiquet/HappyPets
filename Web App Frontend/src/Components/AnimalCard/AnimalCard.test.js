@@ -2,85 +2,216 @@ import { render, screen } from '@testing-library/react';
 import AnimalCard from './AnimalCard';
 
 
-describe('Test de rendu du composant <AnimalCard />', () => {
+describe('Component Render for the Component <AnimalCard />', () => {
     it('Should render without crash', async () => {
-      const FakeAnnonce = {name: "Kevin", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"}
+    
+      const FakeAnnonce = {
+        "DateBegin": "2022-10-02T12:00:00.000Z",
+        "DateEnd": "2022-10-02T12:00:00.000Z",
+        "Pets": [
+            {
+                "Name": "Lola",
+                "Type": "Chien",
+                "Race": "Jack Russel",
+                "Age": "15",
+                "User": {
+                    "Firstname": "Kevin"
+                },
+                "PetsAnnonces": {
+                    "createdAt": "2022-10-02T12:00:00.000Z",
+                    "updatedAt": "2022-10-02T12:00:00.000Z",
+                    "AnnonceId": 1,
+                    "PetId": 1
+                }
+            }
+        ]
+    }
 
         render(
-            <AnimalCard annonce={FakeAnnonce}/>
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
         )
     })
 })
 
 
-describe("Test des props du composant <AnimalCard/>", () => {
+
+describe("Props Test for a single pet for the component <AnimalCard/>", () => {
 
   it('Should display everything correctly', async () => {
-    const FakeAnnonce = {name: "Kiwi", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"}
+    
+    const FakeAnnonce = {
+      "DateBegin": "2022-10-02T12:00:00.000Z",
+      "DateEnd": "2022-10-02T12:00:00.000Z",
+      "Pets": [
+          {
+              "Name": "Lola",
+              "Type": "Chien",
+              "Race": "Jack Russel",
+              "Age": "15",
+              "Weight": "Petit,2kg",
+              "User": {
+                  "Firstname": "Kevin"
+              },
+              "PetsAnnonces": {
+                  "createdAt": "2022-10-02T12:00:00.000Z",
+                  "updatedAt": "2022-10-02T12:00:00.000Z",
+                  "AnnonceId": 1,
+                  "PetId": 1
+              }
+          }
+      ]
+  }
     
     render(
-          <AnimalCard annonce={FakeAnnonce}/>
+        <AnimalCard annonce={FakeAnnonce} image={"test"}/>
       )
-      const propsName = screen.getByTestId("annonce-name")
-      const propsAge = screen.getByTestId("annonce-age")
-      const propsRace = screen.getByTestId("annonce-race")
-      const propsDate = screen.getByTestId("annonce-date")
-      const propsMaster = screen.getByTestId("annonce-master")
+      
+      const propsPetName = screen.getByTestId("annonce-name0")
+      const propsPetWeight = screen.getByTestId("annonce-pets-weight0")
+      const propsPetAge = screen.getByTestId("annonce-age0")
+      const propsAnnonceDate = screen.getByTestId("annonce-date")
+      const propsAnnonceUser = screen.getByTestId("annonce-user-firstname")
 
-      expect(propsName.textContent).toBe(FakeAnnonce.name);
-      expect(propsAge.textContent).toBe(", "+FakeAnnonce.age);
-      expect(propsRace.textContent).toBe(FakeAnnonce.race);
-      expect(propsDate.textContent).toBe(FakeAnnonce.date);
-      expect(propsMaster.textContent).toBe(FakeAnnonce.master);
+      expect(propsPetName.textContent).toBe(FakeAnnonce.Pets[0].Name);
+      expect(propsPetWeight.textContent).toBe(FakeAnnonce.Pets[0].Weight);
+      expect(propsPetAge.textContent).toBe(", "+FakeAnnonce.Pets[0].Age);
+      expect(propsAnnonceDate.textContent).toBe(FakeAnnonce.DateBegin.slice(5,10).replace("-","/")+ ">"+FakeAnnonce.DateEnd.slice(5,10).replace("-","/"));
+      expect(propsAnnonceUser.textContent).toBe(FakeAnnonce.Pets[0].User.Firstname);
   })
 
+
+
   it('Should replace the name with "Inconnu"', async () => {
-    const FakeAnnonce = {name: "", age: 10, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"}
     
+    const FakeAnnonce = {
+      "DateBegin": "2022-10-02T12:00:00.000Z",
+      "DateEnd": "2022-10-02T12:00:00.000Z",
+      "Pets": [
+          {
+              "Name": "",
+              "Type": "Chien",
+              "Race": "Jack Russel",
+              "Age": "15",
+              "Weight": "3",
+              "User": {
+                  "Firstname": "Kevin"
+              },
+              "PetsAnnonces": {
+                  "createdAt": "2022-10-02T12:00:00.000Z",
+                  "updatedAt": "2022-10-02T12:00:00.000Z",
+                  "AnnonceId": 1,
+                  "PetId": 1
+              }
+          }
+      ]
+  }  
+
     render(
-          <AnimalCard annonce={FakeAnnonce}/>
+        <AnimalCard annonce={FakeAnnonce} image={"test"}/>
       )
-      const propsName = screen.getByTestId("annonce-name")
+      const propsName = screen.getByTestId("annonce-name0")
       expect(propsName.textContent).toBe("Inconnu");
   })
 
+
+  
+  it('Should Not display the weight', async () => {
+    
+    const FakeAnnonce = {
+      "DateBegin": "2022-10-02T12:00:00.000Z",
+      "DateEnd": "2022-10-02T12:00:00.000Z",
+      "Pets": [
+          {
+              "Name": "Lola",
+              "Type": "Chien",
+              "Race": "Jack Russel",
+              "Age": "15",
+              "Weight": "",
+              "User": {
+                  "Firstname": "Kevin"
+              },
+              "PetsAnnonces": {
+                  "createdAt": "2022-10-02T12:00:00.000Z",
+                  "updatedAt": "2022-10-02T12:00:00.000Z",
+                  "AnnonceId": 1,
+                  "PetId": 1
+              }
+          }
+      ]
+  }  
+
+    render(
+        <AnimalCard annonce={FakeAnnonce} image={"test"}/>
+      )
+      const propsPetWeight = screen.getByTestId("annonce-pets-weight0")
+      expect(propsPetWeight.textContent).toBe("Petit,2kg");
+  })
+  
+
   it('Should not display the Age if its negative 1', async () => {
-    const FakeAnnonce = {name: "Kiwi", age: -1, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"}
-    
+    const FakeAnnonce = {
+      "DateBegin": "2022-10-02T12:00:00.000Z",
+      "DateEnd": "2022-10-02T12:00:00.000Z",
+      "Pets": [
+          {
+              "Name": "Lola",
+              "Type": "Chien",
+              "Race": "Jack Russel",
+              "Age": "-1",
+              "Weight": "3",
+              "User": {
+                  "Firstname": "Kevin"
+              },
+              "PetsAnnonces": {
+                  "createdAt": "2022-10-02T12:00:00.000Z",
+                  "updatedAt": "2022-10-02T12:00:00.000Z",
+                  "AnnonceId": 1,
+                  "PetId": 1
+              }
+          }
+      ]
+  }     
+
+
     render(
-          <AnimalCard annonce={FakeAnnonce}/>
+        <AnimalCard annonce={FakeAnnonce} image={"test"}/>
       )
-      const propsAge = screen.getByTestId("annonce-age")
-      expect(propsAge.textContent).toBe("");
-  })
-  it('Should not display the Age if its negative 2', async () => {
-    const FakeAnnonce = {name: "Kiwi", age: -2, race:"Ptit Con Maltais", date:"11/07-11/09", master:"Tommy"}
-    
-    render(
-          <AnimalCard annonce={FakeAnnonce}/>
-      )
-      const propsAge = screen.getByTestId("annonce-age")
+      const propsAge = screen.getByTestId("annonce-age0")
       expect(propsAge.textContent).toBe("");
   })
 
-  it('Should not display the Race', async () => {
-    const FakeAnnonce = {name: "Kiwi", age: 10, race:"", date:"11/07-11/09", master:"Tommy"}
-    
-    render(
-          <AnimalCard annonce={FakeAnnonce}/>
-      )
-      const propsRace = screen.getByTestId("annonce-race")
-      expect(propsRace.textContent).toBe("");
-  })
 
-  it('Should replace the master name with "Inconnu"', async () => {
-    const FakeAnnonce = {name: "Kiwi", age: 10, race:"", date:"11/07-11/09", master:""}
-    
+  it('Should replace the user name with "Inconnu"', async () => {
+
+    const FakeAnnonce = {
+      "DateBegin": "2022-10-02T12:00:00.000Z",
+      "DateEnd": "2022-10-02T12:00:00.000Z",
+      "Pets": [
+          {
+              "Name": "Lola",
+              "Type": "Chien",
+              "Race": "Jack Russel",
+              "Age": "15",
+              "Weight": "3",
+              "User": {
+                  "Firstname": ""
+              },
+              "PetsAnnonces": {
+                  "createdAt": "2022-10-02T12:00:00.000Z",
+                  "updatedAt": "2022-10-02T12:00:00.000Z",
+                  "AnnonceId": 1,
+                  "PetId": 1
+              }
+          }
+      ]
+  }     
+
+
     render(
-          <AnimalCard annonce={FakeAnnonce}/>
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
       )
-      const propsMaster = screen.getByTestId("annonce-master")
-      expect(propsMaster.textContent).toBe("Inconnu");
+      const propsAnnonceUser = screen.getByTestId("annonce-user-firstname")
+      expect(propsAnnonceUser.textContent).toBe("Inconnu");
   })
 
 

@@ -10,6 +10,8 @@ import Home from "../Home/Home";
 import Error from "../Error/Error";
 import Annonces from "../Annonces/Annonces";
 import Propositions from '../Propositions/Propositions';
+import NewAnnonce from "../NewAnnonce/NewAnnonce";
+
 
 function App() {
   return (
@@ -17,8 +19,9 @@ function App() {
               <Routes>
                   <Route path="/" element={<Home/>}/>
                   <Route path="/annonces" element={<Annonces/>}/>
-                  <Route path="*" element={<Error/>}/>
+                  <Route path="/annonces/new" element={<NewAnnonce/>}/>
                   <Route path="/propositions" element={<Propositions/>}/>
+                  <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
           </BrowserRouter>

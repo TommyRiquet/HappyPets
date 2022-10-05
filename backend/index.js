@@ -10,8 +10,15 @@ app.use(cors())
 const db = require('./models')
 
 // Routers
-const userRouter = require('./routes/Users')
-app.use("/users", userRouter)
+const UserRouter = require('./routes/Users')
+app.use("/users", UserRouter)
+
+const PetsRouter = require('./routes/Pets')
+app.use("/pets", PetsRouter)
+
+const AnnoncesRouter = require('./routes/Annonces')
+app.use("/annonces", AnnoncesRouter)
+
 const propositionRouter = require('./routes/Propositions')
 app.use("/propositions", propositionRouter)
 
