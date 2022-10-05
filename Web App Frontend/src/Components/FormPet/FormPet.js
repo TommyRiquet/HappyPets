@@ -1,54 +1,18 @@
-import { Formik, Form, useField } from 'formik';
+import {Formik} from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 import './FormPet.css'
 
 
-const MyTextInput = ({ label, ...props }) => {
-    const [field, meta] = useField(props);
-    return (
-        <div>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <input  {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
-            ) : null}
-        </div>
-    );
-};
-
-
-const MySelect = ({ label, ...props }) => {
-    const [field, meta] = useField(props);
-    return (
-        <div>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <select {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
-            ) : null}
-        </div>
-    );
-};
-
-const MyText = ({ label, ...props }) => {
-    const [field, meta] = useField(props);
-    return (
-        <div>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <textarea {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
-            ) : null}
-        </div>
-    );
-};
-
-
-function FormPet (){
+function FormPet() {
     let navigate = useNavigate();
+
     function sendFormPet(event) {
         axios.post("http://localhost:3001/pets", {
             Name: event.target[0].value,
@@ -71,20 +35,22 @@ function FormPet (){
             }
         })
     }
+
     return (
-        <>
+        <div className="formPet">
             <h1>Inscrivez votre animal</h1>
             <Formik
-                initialValues= {{
-                name: '',
-                type: '',
-                race: '',
-                age: '',
-                weight: '',
-                height: '',
-                character: '',
-                comment: '',
+                initialValues={{
+                    name: '',
+                    type: '',
+                    race: '',
+                    age: '',
+                    weight: '',
+                    height: '',
+                    behaviour: '',
+                    comment: '',
                 }}
+                onSubmit={sendFormPet}
                 validationSchema={Yup.object({
                     name: Yup.string()
                         .max(25, 'Doit faire 25 caractères ou moins')
@@ -93,7 +59,7 @@ function FormPet (){
                     type: Yup.string()
                         .required('Champ obligatoire')
                         .oneOf(
-                            ['chat', 'chien', 'lapin','oiseau','poisson','nac'],
+                            ['Chat', 'Chien', 'Lapin', 'Oiseau', 'Poisson', 'NAC'],
                             'Type invalide'
                         ),
                     race: Yup.string()
@@ -102,106 +68,172 @@ function FormPet (){
                         .required('Champ obligatoire'),
                     age: Yup.number()
                         .min(0, "l'âge ne peut être négatif")
+                        .max(25, "l'âge doit être compris entre 0 et 25 ans")
                         .required('Champ obligatoire'),
                     weight: Yup.number()
-                        .min(0, "le poid ne peut être négatif")
+                        .min(0, "le poids ne peut être négatif")
+                        .max(100, "le poids doit être compris entre 0 et 100 kg")
                         .required('Champ obligatoire'),
                     height: Yup.string()
                         .required('Champ obligatoire')
                         .oneOf(
-                            ['grand', 'moyen', 'petit'],
+                            ['Grand', 'Moyen', 'Petit'],
                             'Taille invalide'
                         ),
                     behaviour: Yup.string()
                         .required('Champ obligatoire')
                         .oneOf(
-                            ['dominant', 'domine'],
+                            ['Dominant', 'Dominé'],
                             'Caractère invalide'
                         ),
                     comment: Yup.string(),
                 })}
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
-                }}
             >
-                <Form className={"formPet"} onSubmit={sendFormPet}>
-                    <div className="row1">
-                        <MyTextInput
-                            label="Nom"
-                            name="name"
-                            type="text"
-                        />
-                    </div>
+                {({
+                      handleSubmit,
+                      handleChange,
+                      values,
+                      errors,
+                  }) => (
+                    <Form noValidate onSubmit={handleSubmit}>
+                        <Row>
+                            <Form.Group
+                                as={Col}
+                            >
+                                <Form.Label>Nom</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="name"
+                                    value={values.name}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.name}
+                                />
+                                <Form.Control.Feedback type="invalid" >
+                                    {errors.name}
+                                </Form.Control.Feedback>
+                            </Form.Group>
 
-                    <div className="row1">
-                        <MySelect label="Type" name="type" className="row1">
-                            <option value="">Sélectionner un type</option>
-                            <option value="chat">Chat</option>
-                            <option value="chien">Chien</option>
-                            <option value="lapin">Lapin</option>
-                            <option value="oiseau">Oiseau</option>
-                            <option value="poisson">Poisson</option>
-                            <option value="nac">NAC</option>
-                        </MySelect>
-                    </div>
+                            <Form.Group
+                                as={Col}
+                            >
+                                <Form.Label>Type</Form.Label>
+                                <Form.Select name="type"
+                                             value={values.name}
+                                             onChange={handleChange}
+                                             isInvalid={!!errors.type}>
+                                    <option>Sélectionner un type</option>
+                                    <option value="Chat">Chat</option>
+                                    <option value="Chien">Chien</option>
+                                    <option value="Lapin">Lapin</option>
+                                    <option value="Oiseau">Oiseau</option>
+                                    <option value="Poisson">Poisson</option>
+                                    <option value="NAC">NAC</option>
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid" >
+                                    {errors.type}
+                                </Form.Control.Feedback>
+                            </Form.Group>
 
-                    <div className="row2">
-                        <MyTextInput
-                            label="Race"
-                            name="race"
-                            type="text"
-                        />
-                    </div>
 
-                    <div className="row3">
-                        <MyTextInput
-                            label="Age"
-                            name="age"
-                            type="number"
-                        />
-                    </div>
+                        </Row>
 
-                    <div className="row3">
-                        <MyTextInput
-                            label="Poids"
-                            name="weight"
-                            type="number"
-                        />
-                    </div>
+                        <Row>
+                            <Form.Group
+                                as={Col}
+                            >
+                                <Form.Label>Race</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="race"
+                                    value={values.race}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.race}
+                                />
+                                <Form.Control.Feedback type="invalid" >
+                                    {errors.race}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <Form.Group
+                                as={Col}
+                            >
+                                <Form.Label>Age</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    name="age"
+                                    value={values.age}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.age}
+                                />
+                                <Form.Control.Feedback type="invalid" >
+                                    {errors.age}
+                                </Form.Control.Feedback>
+                            </Form.Group>
 
-                    <div className="row3">
-                        <MySelect label="Taille" name="height" className="row-bottom">
-                            <option value="">Selectionner une taille</option>
-                            <option value="grand">Grand</option>
-                            <option value="moyen">Moyen</option>
-                            <option value="petit">Petit</option>
-                        </MySelect>
-                    </div>
+                            <Form.Group as={Col}>
+                                <Form.Label>Poids</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    name="weight"
+                                    value={values.weight}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.weight}
+                                />
+                                <Form.Control.Feedback type="invalid" >
+                                    {errors.weight}
+                                </Form.Control.Feedback>
+                            </Form.Group>
 
-                    <div className="row-bottom">
-                        <MySelect label="Caractère" name="behaviour" className="row-bottom">
-                            <option value="">Selectionner un caractère</option>
-                            <option value="dominant">Dominant</option>
-                            <option value="domine">Dominé</option>
-                        </MySelect>
-                    </div>
-
-                    <div className="row-bottom">
-                        <MyText
-                            className="row-bottom"
-                            label="Commentaire"
-                            name="comment"
-                        />
-                    </div>
-
-                    <button type="submit" className="row-bottom">Submit</button>
-                </Form>
+                            <Form.Group as={Col}>
+                                <Form.Label>Taille</Form.Label>
+                                <Form.Select name="height"
+                                             value={values.height}
+                                             onChange={handleChange}
+                                             isInvalid={!!errors.height}
+                                >
+                                    <option>Sélectionner une taille</option>
+                                    <option value="Grand">Grand</option>
+                                    <option value="Moyen">Moyen</option>
+                                    <option value="Petit">Petit</option>
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid" >
+                                    {errors.height}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>Caractère</Form.Label>
+                                <Form.Select name="behaviour"
+                                             value={values.behaviour}
+                                             onChange={handleChange}
+                                             isInvalid={!!errors.behaviour}>
+                                    <option>Sélectionner un caractère</option>
+                                    <option value="Dominant">Dominant</option>
+                                    <option value="Dominé">Dominé</option>
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid" >
+                                    {errors.behaviour}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>Commentaire</Form.Label>
+                                <Form.Control as="textarea" rows={3}/>
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button className='submit-button' type="submit">Inscrire l'animal</Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                )}
             </Formik>
-        </>
+        </div>
     );
 }
 
-export  default FormPet
+export default FormPet
