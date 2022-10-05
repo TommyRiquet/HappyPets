@@ -11,6 +11,7 @@ import Error from "../Error/Error";
 import Annonces from "../Annonces/Annonces";
 import CreatePet from "../CreatePet/CreatePet";
 import NewAnnonce from "../NewAnnonce/NewAnnonce";
+import {UserForm} from "../UserForm/UserForm";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                   <Route path="/annonces" element={<Annonces/>}/>
                   <Route path="/creationAnimal" element={<CreatePet/>}/>
                   <Route path="/annonces/new" element={<NewAnnonce/>}/>
+                  <Route path='/inscription' element={<UserForm/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
