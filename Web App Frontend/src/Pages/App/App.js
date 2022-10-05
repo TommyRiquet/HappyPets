@@ -10,6 +10,8 @@ import Home from "../Home/Home";
 import Error from "../Error/Error";
 import Annonces from "../Annonces/Annonces";
 import CreatePet from "../CreatePet/CreatePet";
+import NewAnnonce from "../NewAnnonce/NewAnnonce";
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
                   <Route path="/" element={<Home/>}/>
                   <Route path="/annonces" element={<Annonces/>}/>
                   <Route path="/creationAnimal" element={<CreatePet/>}/>
+                  <Route path="/annonces/new" element={<NewAnnonce/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
