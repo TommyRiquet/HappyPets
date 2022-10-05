@@ -104,6 +104,7 @@ function UserForm() {
             .catch(function (error) {
                 console.log(error);
             });
+            navigate('/');
         }
         else
         {
@@ -111,7 +112,6 @@ function UserForm() {
             return false;
         }
     }
-    navigate('/');
 
 }
     return (
