@@ -24,7 +24,7 @@ function UserCard(props){
                             </Row>
                             <Row>
                                 <Col className='g-2'>
-                                    <div className='proposition-lieu' data-testid='prposition-lieu'>{props.proposition.lieu}
+                                    <div className='proposition-lieu'>
                                         <span data-testid='proposition-lieu'>{(props.proposition.lieu.length===0? "Inconnu" :props.proposition.lieu )}</span>
                                     </div>
                                 </Col>

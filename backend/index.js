@@ -12,6 +12,8 @@ const db = require('./models')
 // Routers
 const userRouter = require('./routes/Users')
 app.use("/users", userRouter)
+const propositionRouter = require('./routes/Propositions')
+app.use("/propositions", propositionRouter)
 
 db.sequelize.sync().then(() => {
     app.listen(PORT, () => {

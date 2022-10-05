@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        Adresse: {
+        Adress: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -35,16 +35,19 @@ module.exports = (sequelize, DataTypes) => {
         },
         PhotoLink: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }
 
     })
     
-    // Users.associate = (models) => {
-    //     Users.hasMany(models.Pets, {
-    //         onDelete: "cascade"
-    //     })
-    // }
+     Users.associate = (models) => {
+         Users.hasMany(models.Pets, {
+             onDelete: "cascade"
+         })
+         Users.hasMany(models.Propositions, {
+                onDelete: "cascade"
+            })
+     }
 
     return Users;
 }
