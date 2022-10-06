@@ -1,16 +1,17 @@
 /*Importing Components */
 import FormPet from "../../Components/FormPet/FormPet";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
+import {Container } from 'react-bootstrap';
 
 /*Importing Styles*/
 import './CreatePet.css';
 
 function CreatePet(){
     return(
-        <div className={"createPet"}>
+        <Container>
             <CustomNavbar />
             <FormPet/>
-        </div>
+        </Container>
     )
 }
 
