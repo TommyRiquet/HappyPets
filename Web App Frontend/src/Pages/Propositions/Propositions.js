@@ -1,32 +1,50 @@
 /* Importing Components */
+import { useState, useEffect } from "react";
 import { Container, Row, Col} from "react-bootstrap";
 import UserCard from "../../Components/UserCard/UserCard";
 
 /* Importing style */
 import './Propositions.css';
 
-let ListPropositions = [
-    {name: "Kevin", age: 21, lieu: 'Wavre'},
-    {name: "Tommy", age: 20, lieu: 'Louvain la Neuve'},
-    {name: "Nathan", age: 21, lieu: 'Ottignies'},
-    {name: "Raphaël", age: 19, lieu: 'Wavre'},
-    {name: "Marina", age: 30, lieu: 'Rixensart'},
-    {name: "Quentin", age: 23, lieu: "Braine-l'Alleud"},
-    {name: "Kevin", age: 21, lieu: 'Wavre'},
-    {name: "Tommy", age: 20, lieu: 'Louvain la Neuve'},
-    {name: "Nathan", age: 21, lieu: 'Ottignies'},
-    {name: "Raphaël", age: 19, lieu: 'Wavre'},
-    {name: "Marina", age: 30, lieu: 'Rixensart'},
-    {name: "Quentin", age: 23, lieu: "Braine-l'Alleud"},
-    {name: "Kevin", age: 21, lieu: 'Wavre'},
-    {name: "Tommy", age: 20, lieu: 'Louvain la Neuve'},
-    {name: "Nathan", age: 21, lieu: 'Ottignies'},
-    {name: "Raphaël", age: 19, lieu: 'Wavre'},
-    {name: "Marina", age: 30, lieu: 'Rixensart'},
-    {name: "Quentin", age: 23, lieu: "Braine-l'Alleud"},
-]
+
 
 function Propositions(){
+    const [ListPropositions,setListPropositions] = useState([])
+    let offset = 0
+
+    useEffect(()=>{
+            window.addEventListener("scroll", handleScroll);
+            LoadProposition();
+        // eslint-disable-next-line
+    },[])
+
+  
+    function LoadProposition(offset = 0){
+    /*
+    *   Fonction qui permet de charger les annonces
+    */
+        fetch('http://localhost:3001/propositions?id=1')
+            .then((response) => response.json())
+            .then((data) => {
+                if(offset === 0){
+                    setListPropositions(data)
+                    return
+                }
+                setListPropositions(ListPropositions => [...ListPropositions, ...data])
+        });
+    }
+
+
+    function handleScroll(e){
+    /* 
+    *   Fonction qui permet de charger les annonces suivantes quand on arrive en bas de la page
+    */
+        if(window.innerHeight+e.target.documentElement.scrollTop+1 >= e.target.documentElement.scrollHeight){
+
+            offset += 6 
+            LoadProposition(offset)
+        }
+    }
     return (
         <div className="Propositions">
             <Container className='title'>
