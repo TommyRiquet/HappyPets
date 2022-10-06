@@ -93,7 +93,7 @@ function FormPet (){
                     type: Yup.string()
                         .required('Champ obligatoire')
                         .oneOf(
-                            ['Chat', 'Chien', 'Lapin','Oiseau','Poisson','NAC'],
+                            ['chat', 'chien', 'lapin','oiseau','poisson','nac'],
                             'Type invalide'
                         ),
                     race: Yup.string()
@@ -102,22 +102,20 @@ function FormPet (){
                         .required('Champ obligatoire'),
                     age: Yup.number()
                         .min(0, "l'âge ne peut être négatif")
-                        .max(25, "l'âge doit compris entre 0 et 25 ans")
                         .required('Champ obligatoire'),
                     weight: Yup.number()
                         .min(0, "le poid ne peut être négatif")
-                        .max(100, "Le l'âge doit compris entre 0 et 25 kg")
                         .required('Champ obligatoire'),
                     height: Yup.string()
                         .required('Champ obligatoire')
                         .oneOf(
-                            ['Grand', 'Moyen', 'Petit'],
+                            ['grand', 'moyen', 'petit'],
                             'Taille invalide'
                         ),
                     behaviour: Yup.string()
                         .required('Champ obligatoire')
                         .oneOf(
-                            ['Dominant', 'Domine'],
+                            ['dominant', 'domine'],
                             'Caractère invalide'
                         ),
                     comment: Yup.string(),
@@ -140,14 +138,13 @@ function FormPet (){
 
                     <div className="row1">
                         <MySelect label="Type" name="type" className="row1">
-                            <optgroup label="Sélectionner un type">
-                                <option value="Chat">Chat</option>
-                                <option value="Chien">Chien</option>
-                                <option value="Lapin">Lapin</option>
-                                <option value="Oiseau">Oiseau</option>
-                                <option value="Poisson">Poisson</option>
-                                <option value="NAC">NAC</option>
-                            </optgroup>
+                            <option value="">Sélectionner un type</option>
+                            <option value="chat">Chat</option>
+                            <option value="chien">Chien</option>
+                            <option value="lapin">Lapin</option>
+                            <option value="oiseau">Oiseau</option>
+                            <option value="poisson">Poisson</option>
+                            <option value="nac">NAC</option>
                         </MySelect>
                     </div>
 
@@ -177,20 +174,18 @@ function FormPet (){
 
                     <div className="row3">
                         <MySelect label="Taille" name="height" className="row-bottom">
-                            <optgroup label="Selectionner une taille">
-                                <option value="Grand">Grand</option>
-                                <option value="Moyen">Moyen</option>
-                                <option value="petit">Petit</option>
-                            </optgroup>
+                            <option value="">Selectionner une taille</option>
+                            <option value="grand">Grand</option>
+                            <option value="moyen">Moyen</option>
+                            <option value="petit">Petit</option>
                         </MySelect>
                     </div>
 
                     <div className="row-bottom">
                         <MySelect label="Caractère" name="behaviour" className="row-bottom">
-                            <optgroup label="Sélectionner une taille">
-                                <option value="Dominant">Dominant</option>
-                                <option value="Dominé">Dominé</option>
-                            </optgroup>
+                            <option value="">Selectionner un caractère</option>
+                            <option value="dominant">Dominant</option>
+                            <option value="domine">Dominé</option>
                         </MySelect>
                     </div>
 
