@@ -19,7 +19,8 @@ app.use("/pets", PetsRouter)
 const AnnoncesRouter = require('./routes/Annonces')
 app.use("/annonces", AnnoncesRouter)
 
-
+const propositionRouter = require('./routes/Propositions')
+app.use("/propositions", propositionRouter)
 
 db.sequelize.sync().then(() => {
     app.listen(PORT, () => {

@@ -9,8 +9,10 @@ import './App.css';
 import Home from "../Home/Home";
 import Error from "../Error/Error";
 import Annonces from "../Annonces/Annonces";
+import Propositions from '../Propositions/Propositions';
 import NewAnnonce from "../NewAnnonce/NewAnnonce";
 import {UserForm} from "../UserForm/UserForm";
+
 
 function App() {
   return (
@@ -19,7 +21,11 @@ function App() {
                   <Route path="/" element={<Home/>}/>
                   <Route path="/annonces" element={<Annonces/>}/>
                   <Route path="/annonces/new" element={<NewAnnonce/>}/>
+
+                  <Route path="/propositions" element={<Propositions/>}/>
+
                   <Route path='/inscription' element={<UserForm/>}/>
+
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
