@@ -1,0 +1,18 @@
+body{
+    background-color: #F2F3F8;
+}
+
+
+/*CSS for the organisation of the page*/
+.title-container{
+    text-align: center;
+    margin-top: 2%;
+    font-size: 400% !important;
+}
+
+
+.main-container{
+    max-width: 100%;
+    margin-top: 5%;
+    text-align: center;
+}

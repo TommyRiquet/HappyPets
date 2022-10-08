@@ -9,6 +9,7 @@ import './App.css';
 import Home from "../Home/Home";
 import Error from "../Error/Error";
 import Annonces from "../Annonces/Annonces";
+import Login from '../Login/Login';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               <Routes>
                   <Route path="/" element={<Home/>}/>
                   <Route path="/annonces" element={<Annonces/>}/>
+                  <Route path="/login" element={<Login/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
