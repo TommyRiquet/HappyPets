@@ -7,7 +7,7 @@ import './ReturnButton.css';
 function ReturnButton(props) {
   return (
     <div className="ReturnButton">
-      <Button variant="" href={props.returnLink} className="return-button">
+      <Button variant="" data-testid="button-return-link" href={props.returnLink} className="return-button">
         Retour
       </Button>
     </div>
