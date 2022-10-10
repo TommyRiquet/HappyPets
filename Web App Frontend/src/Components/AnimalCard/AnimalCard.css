@@ -47,3 +47,8 @@
   color: grey;
   font-size: 0.8em;
 }
+
+/*Localité de l'annonce*/
+.annonce-localite{
+  text-overflow: ellipsis;
+}

@@ -7,6 +7,7 @@ import './AnimalCard.css';
 function AnimalCard(props) {
   const MaxNumberOfPetsPerAnnonce = 3;
 
+
   return (
     <div className="AnimalCard">
       <Card className='annonce-card'>
@@ -80,7 +81,7 @@ function AnimalCard(props) {
                 <Row className='annonce-localite' data-testid={"annonce-localite"}>
                       <Col>
                         {
-                          "Localité"
+                          props.annonce.Pets[0].User.Ville
                         }
                       </Col>
                 </Row>
