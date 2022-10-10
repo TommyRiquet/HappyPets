@@ -67,8 +67,7 @@ function Annonces() {
     return (
         <div className="Annonces">
             <Container>
-                <Container className='top-container' fluid>
-                    
+                <Container className='top-container' fluid>        
                                 <Row>
                                     <Col>
                                         <h2>Animaux</h2>

@@ -70,6 +70,7 @@ function NewAnnonce() {
                                                             setSwitchPromenade(false)
                                                             setSwitchGardiennage(true)
                                                             }}></Form.Switch>
+
                                                     </Col>
                                                 </Row>
                                                 <Row>
@@ -81,6 +82,7 @@ function NewAnnonce() {
                                                             setSwitchPromenade(true)
                                                             setSwitchGardiennage(false)
                                                         }}></Form.Switch>
+
                                                     </Col>
                                                 </Row>
                                             </Col>
@@ -94,6 +96,7 @@ function NewAnnonce() {
                                                 {">"}
                                                 <Col md>
                                                     <Form.Control required id="FormControlCalendarEnd" type="date" placeholder="DateFin"/>    
+
                                                 </Col>
                                             </Row>
                                         </Form.Group>

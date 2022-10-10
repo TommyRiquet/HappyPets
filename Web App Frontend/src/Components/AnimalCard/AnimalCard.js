@@ -7,7 +7,6 @@ import './AnimalCard.css';
 function AnimalCard(props) {
   const MaxNumberOfPetsPerAnnonce = 3;
 
-
   return (
     <div className="AnimalCard">
       <Card className='annonce-card'>
