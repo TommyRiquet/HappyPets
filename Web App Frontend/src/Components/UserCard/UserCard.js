@@ -25,7 +25,8 @@ function UserCard(props){
                             <Row>
                                 <Col className='g-2'>
                                     <div className='proposition-lieu'>
-                                        <span data-testid='proposition-lieu'>{(props.proposition.User.Adress.length===0? "Inconnu" :props.proposition.User.Adress )}</span>
+                                        <span data-testid='proposition-lieu'>{(props.proposition.User.Ville.length===0? "Inconnu" :props.proposition.User.Ville )}</span>
+                                        <span data-testid='proposition-postal'>{(props.proposition.User.Postal>999 && props.proposition.User.Postal<9999? ","+props.proposition.User.Postal : "")}</span>
                                     </div>
                                 </Col>
                             </Row>
