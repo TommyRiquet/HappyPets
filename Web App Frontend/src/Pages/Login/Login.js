@@ -5,47 +5,6 @@ import './Login.css';
 
 function Login() {
 
-    const sendForm = (event) =>{
-        /*Cette fonction va envoyer les informations de l'utilisateur à la base de données et initier la session
-        PRE : l'evenement recu par le formulaire
-        POST : /
-        */ 
-       /*
-        const user ={
-            email: event.target[0].value,
-            password: event.target[1].value
-        };
-
-        event.preventDefault()
-
-        axios.post("/loginUser", user , { withCredentials: true })
-        .then(res => {
-            console.log(res)
-            if(res.data !== "notok"){
-                console.log(res)
-                localStorage.clear();
-                localStorage.setItem("id",res.data[0]._id);
-                localStorage.setItem("lastname",res.data[0].lastname);
-                localStorage.setItem("firstname",res.data[0].firstname);
-                localStorage.setItem("email",res.data[0].email);
-                localStorage.setItem("password",res.data[0].password);
-                localStorage.setItem("newsletter",res.data[0].newsletter);
-                console.log(res.data)
-                if(res.data[0].lastname==="admin"){
-                    localStorage.setItem("role","admin");
-                }else{
-                    localStorage.setItem("role","user");
-                }
-                navigate('/accueil');
-                window.location.reload()
-            }else{
-                console.log('Mot de Passe incorrecte')
-            }
-        })
-        .catch(err => console.log(err));
-*/
-        
-  };
 
     return (
         <div className="Login">
