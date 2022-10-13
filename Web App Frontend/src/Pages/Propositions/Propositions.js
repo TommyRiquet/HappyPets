@@ -19,6 +19,7 @@ function Propositions(){
 
   
     function LoadProposition(offset = 0){
+
         fetch('http://localhost:3001/propositions?id=1')
             .then((response) => response.json())
             .then((data) => {
@@ -32,6 +33,7 @@ function Propositions(){
 
 
     function handleScroll(e){
+
         if(window.innerHeight+e.target.documentElement.scrollTop+1 >= e.target.documentElement.scrollHeight){
 
             offset += 6 

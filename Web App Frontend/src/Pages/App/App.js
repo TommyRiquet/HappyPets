@@ -15,6 +15,7 @@ import {UserForm} from "../UserForm/UserForm";
 import MesAnnonces from '../MesAnnonces/MesAnnonces';
 
 
+
 function App() {
   return (
           <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
                   <Route path="/annonces/new" element={<NewAnnonce/>}/>
                   <Route path="/propositions" element={<Propositions/>}/>
                   <Route path="/mesannonces" element={<MesAnnonces/>}/>
+
                   <Route path='/inscription' element={<UserForm/>}/>
 
                   <Route path="*" element={<Error/>}/>

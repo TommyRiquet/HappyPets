@@ -20,6 +20,7 @@ router.get("/", async (req, res) => {
             limit : 6, 
             offset : parseInt(req.query.offset),
             attributes : [],
+
                 include : [{
                     model : Users,
                     attributes : ['FirstName', 'Age', 'Ville', 'postal'],
@@ -52,6 +53,7 @@ router.get("/annonce", async (req, res) => {
                     attributes : ['FirstName', 'Age', 'Ville', 'Postal'],
                 }],
             
+
         })
         res.json(ListPropositions)
     }

@@ -5,7 +5,7 @@ describe('Component rendering test <UserCard />', () => {
     it('Should render without crash', async () => {
       const FakeUser = {User : {FirstName: "Kevin", Age: 21, Ville: 'Wavre', Postal: 1330}}
 
-        render(
+      render(
             <UserCard proposition={FakeUser}/>
         )
     })
@@ -14,6 +14,7 @@ describe('Component rendering test <UserCard />', () => {
 describe('Testing component props <Usercard />', () => {
 
     it('Should display everything correctly', async () =>{
+
         const FakeUser = {User : {FirstName: "Kevin", Age: 21, Ville: 'Wavre', Postal: 1330}}
 
         render(
@@ -33,6 +34,7 @@ describe('Testing component props <Usercard />', () => {
 
     it('Should replace the FirstName with "Inconnu"', async () => {
         const FakeUser = {User : {FirstName: "", Age: 21, Ville: 'Wavre', Postal: 1330}}
+
         
         render(
               <UserCard proposition={FakeUser}/>
@@ -43,6 +45,7 @@ describe('Testing component props <Usercard />', () => {
 
     it('Should not display the Age if its negative', async () => {
         const FakeUser = {User : {FirstName: "Kevin", Age: -21, Ville: 'Wavre', Postal: 1330}}
+
         
         render(
               <UserCard proposition={FakeUser}/>
@@ -52,6 +55,7 @@ describe('Testing component props <Usercard />', () => {
     })
 
     it('should replace the place with "Inconnu"', async () =>{
+
         const FakeUser = {User : {FirstName: "Kevin", Age: 21, Ville: '', Postal: 1330}}
 
         render(
@@ -64,10 +68,13 @@ describe('Testing component props <Usercard />', () => {
     it('should not display the Postal if its different of 4 number', async () => {
         const FakeUser = {User : {FirstName: "Kevin", Age: 21, Ville: 'Wavre', Postal: 330}}
 
+
         render(
             <UserCard proposition={FakeUser}/>
         )
+
         const propsPostal = screen.getByTestId("proposition-postal")
         expect(propsPostal.textContent).toBe("");
+
     })
 })
