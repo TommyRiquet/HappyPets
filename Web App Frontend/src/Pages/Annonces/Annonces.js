@@ -66,39 +66,47 @@ function Annonces() {
 
     return (
         <div className="Annonces">
-                <Container className='top-container'>
-                <h2>Animaux</h2>
-                    <Button className='new-annonce-button' href='annonces/new'>Nouvelle Annonce</Button>
+            <Container>
+                <Container className='top-container' fluid>        
+                                <Row>
+                                    <Col>
+                                        <h2>Animaux</h2>
+                                    </Col>
+                                </Row>
+                                <Row className='new-annonce-button-row'>
+                                    <Col>
+                                        <Button className='new-annonce-button' variant="" href='annonces/new'>Nouvelle Annonce</Button>
+                                    </Col>
+                                </Row>
+                            </Container>
+
+                            <Container className='annonces-container'>
+
+                                {
+                                Object.keys(ListAnnonces).length === 0 ? 
+                                    <h2 className='no-result-message'>Aucun Résultat :/</h2> 
+                                    :
+                                    <Row xs={1} sm={1} lg={2} >
+                                        {
+                                            ListAnnonces.map((annonce,index) => {
+                                                return (
+                                                        <Col key={index} colSpan={annonce.Pets.length} onClick={()=>console.log(index)}>
+                                                            <AnimalCard annonce={annonce} image={
+                                                                    annonce.Pets.map((pet) => {                                                            
+                                                                        const ReturnTable = AnimauxImages[pet.Type]
+                                                                        return ReturnTable
+                                                                    })
+                                                                } />
+                                                        </Col>
+
+                                                    )
+                                            })
+                                        }
+                                    </Row>
+                                    }
+                                
+                            </Container>
                 </Container>
-
-                <Container className='annonces-container'>
-
-                    {
-                    Object.keys(ListAnnonces).length === 0 ? 
-                        <h2 className='no-result-message'>Aucun Résultat :/</h2> 
-                        :
-                        <Row xs={1} sm={1} lg={2} >
-                            {
-                                ListAnnonces.map((annonce,index) => {
-                                    console.log(annonce)
-                                    return (
-                                            <Col key={index} colSpan={annonce.Pets.length} onClick={()=>console.log(index)}>
-                                                <AnimalCard annonce={annonce} image={
-                                                        annonce.Pets.map((pet) => {                                                            
-                                                            const ReturnTable = AnimauxImages[pet.Type]
-                                                            return ReturnTable
-                                                        })
-                                                    } />
-                                            </Col>
-
-                                        )
-                                })
-                            }
-                        </Row>
-                        }
-                    
-                </Container>
-
         </div>
     );
 }

@@ -3,12 +3,13 @@
     width: 14vh;
     height: 5vh;
     background-color: #F2620A !important;
-    border: 0 ;
+
+    border: 0 !important;
     border-radius: 5px;
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
-    color: #f5f5f5;
+    color: #f5f5f5 !important;
     outline: none;
     cursor: pointer;
     font-size: large !important;

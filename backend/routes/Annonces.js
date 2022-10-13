@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {Annonces,Pets,Users} = require("../models")
+const {Annonces,Pets,Users,PetsAnnonces} = require("../models")
 
 
 router.get("/", async (req, res) => {
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
                             attributes: ['Name',"Type","Race","Age"],
                             include: [ {
                                 model:Users,
-                                attributes: ['Firstname'],
+                                attributes: ['Firstname','Ville','Postal'],
                             }]
                         }]
                 }
@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
                         attributes: ['Name',"Type","Race","Age"],
                         include: [ {
                             model:Users,
-                            attributes: ['Firstname'],
+                            attributes: ['Firstname','Ville','Postal'],
                         }]
                     }]
             }
@@ -47,6 +47,22 @@ router.get("/", async (req, res) => {
     }
 
   
+    router.post("/",async (req, res) => {
+            Annonces.create({
+                Comment: req.body.Comment,
+                DateBegin: req.body.DateBegin,
+                DateEnd: req.body.DateEnd,
+            }).then(annonce => {
+                PetsAnnonces.create({
+                    PetId: req.body.PetId,
+                    AnnonceId: annonce.dataValues.id
+                })
+            })
+            
+            res.json(200)
+    });
+
+
 })
 
 module.exports = router

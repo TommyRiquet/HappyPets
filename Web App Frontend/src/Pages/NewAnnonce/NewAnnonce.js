@@ -1,19 +1,47 @@
 /*Importing Components */
+import { useState } from 'react';
 import {Container, Button, Row, Col, Form} from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+
+/*Importing Components*/
 import ReturnButton from '../../Components/ReturnButton/ReturnButton';
 
 /*Importing Styles*/
 import './NewAnnonce.css';
 
 function NewAnnonce() {  
+    const [switchGardiennage,setSwitchGardiennage] = useState(false);
+    const [switchPromenade,setSwitchPromenade] = useState(false);
+
+    let navigate = useNavigate();
+
+
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(event.target);
+
+        fetch('http://localhost:3001/annonces',{ 
+                method: 'POST',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    Comment: event.target['Comment'].value, 
+                    DateBegin: event.target['FormControlCalendarBegin'].value, 
+                    DateEnd: event.target['FormControlCalendarEnd'].value, 
+                    PetId: "1",
+                    AnnonceId: "1",
+                })
+            })
+            .then(response => {
+                if(response.ok){
+                    navigate('/annonces')
+                }else{
+                    console.log("Erreur")
+                }
+            })
+        
     }
 
     return (
         <div className="NewAnnonces">
-            <ReturnButton returnLink="/annonces"/>
                 <div className="newAnnonces-container">
                     <Container>
                         <h2>Nouvelle Annonce</h2>
@@ -34,12 +62,26 @@ function NewAnnonce() {
                                             <Col className='radio-col'>
                                                 <Row>
                                                     <Col>
-                                                        <Form.Switch reverse style={{float:"left"}} id="custom-switch" className="custom-switch" label="Gardiennage" name="FormControlRadioGardiennage"></Form.Switch>
+                                                        <Form.Switch reverse style={{float:"left"}} id="switchGardiennage" className="custom-switch" 
+                                                        label="Gardiennage" name="FormControlRadioGardiennage" 
+                                                        checked={switchGardiennage}
+                                                        onChange={e=>{
+                                                            setSwitchPromenade(false)
+                                                            setSwitchGardiennage(true)
+                                                            }}></Form.Switch>
+
                                                     </Col>
                                                 </Row>
                                                 <Row>
                                                     <Col>
-                                                        <Form.Check type="switch" reverse style={{float:"left"}} id="custom-switch" className="custom-switch" label="Promenade" name="FormControlRadioPromenade"></Form.Check>
+                                                        <Form.Switch reverse style={{float:"left"}} id="switchPromenade" className="custom-switch" 
+                                                        label="Promenade" name="FormControlRadioPromenade" 
+                                                        checked={switchPromenade}
+                                                        onChange={e=>{
+                                                            setSwitchPromenade(true)
+                                                            setSwitchGardiennage(false)
+                                                        }}></Form.Switch>
+
                                                     </Col>
                                                 </Row>
                                             </Col>
@@ -48,11 +90,12 @@ function NewAnnonce() {
                                             <Form.Label htmlFor="FormControlCalendar">Calendrier</Form.Label>
                                             <Row>
                                                 <Col md>
-                                                    <Form.Control id="FormControlCalendarBegin" type="date" placeholder="DateDebut"/>                                            
+                                                    <Form.Control required id="FormControlCalendarBegin" type="date" placeholder="DateDebut"/>                                            
                                                 </Col>
                                                 {">"}
                                                 <Col md>
-                                                    <Form.Control id="FormControlCalendarEnd" type="date" placeholder="DateFin"/>    
+                                                    <Form.Control required id="FormControlCalendarEnd" type="date" placeholder="DateFin"/>    
+
                                                 </Col>
                                             </Row>
                                         </Form.Group>
@@ -60,18 +103,24 @@ function NewAnnonce() {
                                         </Row>
                                         </Col>
                                     </Row>
-
-                                        <Form.Group>
-                                            <Form.Label htmlFor="FormControlComment"></Form.Label>
-                                                <Form.Control
-                                                as="textarea"
-                                                placeholder="Commentaire"
-                                                style={{ height: '100px' }}
-                                                />
-                                        </Form.Group>
-
-                                        <Button className='submit-button' type="submit">Enregistrer</Button>
-                                    
+                                    <Row style={{width:"100%"}}>
+                                        <Col>
+                                            <Form.Group>
+                                                <Form.Label htmlFor="FormControlComment"></Form.Label>
+                                                    <Form.Control
+                                                    as="textarea"
+                                                    id="Comment"
+                                                    placeholder="Commentaire"
+                                                    style={{ height: '100px' }}
+                                                    />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='p-3'>
+                                            <Button className='submit-button' type="submit"  variant="">Enregistrer</Button>
+                                        </Col>  
+                                    </Row>
                                 </div>
                             </Form>
                         </div>
