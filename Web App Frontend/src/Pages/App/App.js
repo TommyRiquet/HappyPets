@@ -14,6 +14,8 @@ import Propositions from '../Propositions/Propositions';
 import CreatePet from "../CreatePet/CreatePet";
 import NewAnnonce from "../NewAnnonce/NewAnnonce";
 import {UserForm} from "../UserForm/UserForm";
+import MesAnnonces from '../MesAnnonces/MesAnnonces';
+
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
                   <Route path="/creationAnimal" element={<CreatePet/>}/>
                   <Route path="/annonces/new" element={<NewAnnonce/>}/>
                   <Route path="/propositions" element={<Propositions/>}/>
+                  <Route path="/mesannonces" element={<MesAnnonces/>}/>
+
                   <Route path='/inscription' element={<UserForm/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
