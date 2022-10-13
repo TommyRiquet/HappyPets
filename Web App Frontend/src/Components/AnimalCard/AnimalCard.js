@@ -88,8 +88,8 @@ function AnimalCard(props) {
                     <Col>
                       {
                         !("User" in props.annonce.Pets[0])? "": 
-                        props.annonce.Pets[0].User.length===0 ? "Inconnu":
-                        props.annonce.Pets[0].User.Firstname.length===0 ? "Inconnu" : props.annonce.Pets[0].User.Firstname
+                        props.annonce.Pets[0].User.length===0 ? "":
+                        props.annonce.Pets[0].User.Firstname.length===0 ? "" : props.annonce.Pets[0].User.Firstname
                       }
                     </Col>
                 </Row>
