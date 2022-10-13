@@ -27,7 +27,7 @@ function Login() {
                         </Row>
                         <Row className="justify-content-md-center">
                             <Col>
-                                <Button style={{border:"1px black solid", padding:"0.5% 15%"}} variant="light" type='submit'>Se connecter</Button>
+                                <Button className='button' variant="light" type='submit'>Se connecter</Button>
                             </Col>
                         </Row>
                     </Form>
@@ -35,7 +35,7 @@ function Login() {
                     <Row className="justify-content-md-center">
                         <Col md="auto">
                             {/* We have to create the route Registration to make it work*/}
-                            <a href='/registration'> Vous n'avez pas encore de compte ? Cliquez ici pour vous en créer un !</a>
+                            <p>Vous n'avez pas encore de compte ? <a href='/registration' className='linkRegistration'>Cliquez ici</a> pour vous en créer un !</p>
                         </Col>
                     </Row>      
                 </Container>
