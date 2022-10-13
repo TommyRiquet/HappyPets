@@ -12,7 +12,7 @@ function AnimalCard(props) {
       <Card className='annonce-card'>
         <Card.Body>
             <Row>
-              <Col>
+              <Col> 
                   {props.annonce.Pets.map((pet,index) => (
                     index>=MaxNumberOfPetsPerAnnonce?
                     null
@@ -87,9 +87,9 @@ function AnimalCard(props) {
                 <Row className='annonce-user-firstname' data-testid={"annonce-user-firstname"}>
                     <Col>
                       {
-                        props.annonce.Pets.length===0 ? "Inconnu":
-                        props.annonce.Pets[0].User.length===0 ? "Inconnu":
-                        props.annonce.Pets[0].User.Firstname.length===0 ? "Inconnu" : props.annonce.Pets[0].User.Firstname
+                        !("User" in props.annonce.Pets[0])? "": 
+                        props.annonce.Pets[0].User.length===0 ? "":
+                        props.annonce.Pets[0].User.Firstname.length===0 ? "" : props.annonce.Pets[0].User.Firstname
                       }
                     </Col>
                 </Row>

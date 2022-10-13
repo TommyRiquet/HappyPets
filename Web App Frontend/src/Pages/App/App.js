@@ -13,6 +13,8 @@ import Login from '../Login/Login';
 import Propositions from '../Propositions/Propositions';
 import NewAnnonce from "../NewAnnonce/NewAnnonce";
 import {UserForm} from "../UserForm/UserForm";
+import MesAnnonces from '../MesAnnonces/MesAnnonces';
+
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
                   <Route path="/login" element={<Login/>}/>
                   <Route path="/annonces/new" element={<NewAnnonce/>}/>
                   <Route path="/propositions" element={<Propositions/>}/>
+                  <Route path="/mesannonces" element={<MesAnnonces/>}/>
+
                   <Route path='/inscription' element={<UserForm/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
