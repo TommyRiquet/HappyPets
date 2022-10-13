@@ -5,13 +5,21 @@
 .top-container{
   margin-top: 7vh;
 }
+
+.top-container h2{
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #3C3C3C;
+}
+
+.new-annonce-button-row{
+  float: right !important;
+}
 .new-annonce-button{
-  float: right;
-  margin-right: 10px;
-  padding: 0.6% 30px !important;
   background-color: #F2620A !important;
   border: 0 !important;
   border-radius: 10px !important;
+  color: #F2F3F8 !important;
   transition: 0.2s !important;
   font-size: large !important;
   font-weight: bold !important;
@@ -21,7 +29,7 @@
 }
 
 .annonces-container{
-  margin-top: 10vh;
+  margin-top: 3vh;
 }
 
 .no-result-message{
