@@ -15,14 +15,10 @@ function Propositions(){
     useEffect(()=>{
             window.addEventListener("scroll", handleScroll);
             LoadProposition();
-        // eslint-disable-next-line
     },[])
 
   
     function LoadProposition(offset = 0){
-    /*
-    *   Fonction qui permet de charger les annonces
-    */
         fetch('http://localhost:3001/propositions?id=1')
             .then((response) => response.json())
             .then((data) => {
@@ -36,9 +32,6 @@ function Propositions(){
 
 
     function handleScroll(e){
-    /* 
-    *   Fonction qui permet de charger les annonces suivantes quand on arrive en bas de la page
-    */
         if(window.innerHeight+e.target.documentElement.scrollTop+1 >= e.target.documentElement.scrollHeight){
 
             offset += 6 

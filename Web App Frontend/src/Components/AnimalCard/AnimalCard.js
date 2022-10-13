@@ -12,7 +12,7 @@ function AnimalCard(props) {
       <Card className='annonce-card'>
         <Card.Body>
             <Row>
-              <Col>
+              <Col> 
                   {props.annonce.Pets.map((pet,index) => (
                     index>=MaxNumberOfPetsPerAnnonce?
                     null

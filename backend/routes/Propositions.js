@@ -8,9 +8,7 @@ router.get("/", async (req, res) => {
         const ListPropositions = await Propositions.findAll({
             limit : 20, 
             attributes : [],
-            where : {
-                AnnonceId : req.query.id
-            },
+            where : {AnnonceId : req.query.id},
                 include : [{
                     model : Users,
                     attributes : ['FirstName', 'Age', 'Ville', 'Postal'],
@@ -18,8 +16,7 @@ router.get("/", async (req, res) => {
 
         })
         res.json(ListPropositions)
-    }
-    if(req.query.offset===undefined || req.query.offset===0){
+    }else if(req.query.offset===undefined || req.query.offset===0){
         const ListPropositions = await Propositions.findAll({
             limit : 20, 
             attributes : [],

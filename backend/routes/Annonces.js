@@ -8,24 +8,6 @@ router.get("/", async (req, res) => {
     /*
     *   Route initial qui retourne les 20 premières annonces
     */
-    if(req.query.id!=undefined){
-        const listOfAnnonces = await Annonces.findAll(
-            {
-                limit: 20,
-                attributes: ['DateBegin','DateEnd'],
-                    include: [ {
-                        model:Pets,
-                        attributes: ['Name',"Type","Race","Age"],
-                        include: [ {
-                            model:Users,
-                            attributes: ['Firstname'],
-                            where : {id: req.query.id}
-                        }]
-                    }]
-            }
-        )
-        res.json(listOfAnnonces)
-    }
     if(req.query.offset===undefined || req.query.offset === "0"){
             const listOfAnnonces = await Annonces.findAll(
                 {
@@ -67,5 +49,42 @@ router.get("/", async (req, res) => {
 
   
 })
-
+router.get("/me", async(req,res) =>{
+    if(req.query.offset === "0"){
+        const listOfAnnonces = await Annonces.findAll(
+            {
+                limit: 20,
+                attributes: ['DateBegin','DateEnd'],
+                    include: [ {
+                        model:Pets,
+                        attributes: ['Name',"Type","Race","Age"],
+                        include: [ {
+                            model:Users,
+                            attributes: [],
+                                where : {id: req.query.id},
+                        }]
+                    }]
+            }
+        )
+        res.json(listOfAnnonces)
+    }else{
+        const listOfAnnonces = await Annonces.findAll(
+            {
+                limit: 6,
+                offset: parseInt(req.query.offset),
+                attributes: ['DateBegin','DateEnd'],
+                    include: [ {
+                        model:Pets,
+                        attributes: ['Name',"Type","Race","Age"],
+                        include: [ {
+                            model:Users,
+                            attributes: [],
+                                where : {id: req.query.id},
+                        }]
+                    }]
+            }
+        )
+        res.json(listOfAnnonces)
+    }
+})
 module.exports = router

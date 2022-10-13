@@ -1,10 +1,10 @@
 /*Importing Components */
 import { useEffect, useState } from 'react';
-import {Container, Row, Col, Button} from 'react-bootstrap';
+import {Container, Row, Col, } from 'react-bootstrap';
 import AnimalCard from '../../Components/AnimalCard/AnimalCard';
 
 /*Importing Styles*/
-import './Annonces.css';
+import './MesAnnonces.css';
 
 /*Importing Images*/
 import ChienImage from '../../Assets/Chien.jpg';
@@ -25,36 +25,71 @@ const AnimauxImages = {"Chien":ChienImage,
                         "Serpent":SerpentImage,
                         "Tortue":TortueImage}
 
-function MesAnnonces(){
-    const[ListAnnonces, setMesAnnonces] = useState ([]);
+function Annonces(){
+    const[ListAnnonces, setListAnnonces] = useState ([]);
     let offset = 0
 
     useEffect(()=>{
         window.addEventListener("scroll", handleScroll);
-        LoadMesAnnonces();
+        LoadAnnonces();
     },[])
 
-    function LoadMesAnnonces(offset = 0){
-        fetch('http://localhost:3001/annonces?id=1')
-            .then((response) => response.json())
-            .the ((data) => {
-                if(offset === 0){
-                    setMesAnnonces(data)
-                    return
-                }
-                setMesAnnonces(ListAnnonces => [...ListAnnonces, ...data])
-            });
-    }
+    function LoadAnnonces(offset = 0){
 
+            fetch('http://localhost:3001/annonces/me?id=1&offset='+offset)
+                .then((response) => response.json())
+                .then((data) => {
+                    if(offset === 0){
+                        setListAnnonces(data)
+                        return
+                    }
+                    setListAnnonces(ListAnnonces => [...ListAnnonces, ...data])
+            });
+        }
+    
     function handleScroll(e){
         if(window.innerHeight+e.target.documentElement.scrollTop+1 >= e.target.documentElement.scrollHeight){
 
             offset += 6 
-            LoadProposition(offset)
+            LoadAnnonces(offset)
         }
     }
     return (
-        1
-    )
+        <div className="mesnnonces">
+                <Container className='top-container'>
+                <h2>Mes Animaux</h2>
+               </Container>
+
+                <Container className='lesannonces-container'>
+
+                    {
+                    Object.keys(ListAnnonces).length === 0 ? 
+                        <h2 className='no-result-message'>Aucun Résultat :/</h2> 
+                        :
+                        <Row xs={1} sm={1} lg={2} >
+                            {
+                                ListAnnonces.map((annonce,index) => {
+                                    console.log(annonce)
+                                    return (
+                                            <Col key={index} colSpan={annonce.Pets.length} onClick={()=>console.log(index)}>
+                                                <AnimalCard annonce={annonce} image={
+                                                        annonce.Pets.map((pet) => {                                                            
+                                                            const ReturnTable = AnimauxImages[pet.Type]
+                                                            return ReturnTable
+                                                        })
+                                                    } />
+                                            </Col>
+
+                                        )
+                                })
+                            }
+                        </Row>
+                        }
+                    
+                </Container>
+
+        </div>
+    );
 }
-export default MesAnnonces;
+
+export default Annonces;
