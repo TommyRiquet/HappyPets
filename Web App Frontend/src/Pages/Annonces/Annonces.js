@@ -15,6 +15,7 @@ import PerroquetImage from '../../Assets/Perroquet.jpg';
 import LapinImage from '../../Assets/Lapin.jpg';
 import SerpentImage from '../../Assets/Serpent.jpg';
 import TortueImage from '../../Assets/Tortue.jpg';
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 
 const AnimauxImages = {"Chien":ChienImage,
                         "Chat":ChatImage,
@@ -66,6 +67,12 @@ function Annonces() {
 
     return (
         <div className="Annonces">
+            <CustomNavbar textLinkOne="Propositions"
+                          linkOne="/propositions"
+                          textLinkTwo="Annonces"
+                          linkTwo="/annonces"
+                          color="rgba(47, 72, 88, 1)"
+                />
                 <Container className='top-container'>
                 <h2>Animaux</h2>
                     <Button className='new-annonce-button' href='annonces/new'>Nouvelle Annonce</Button>

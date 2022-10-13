@@ -1,5 +1,6 @@
 /*Importing Components */
 import {Row, Col, Container } from 'react-bootstrap';
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
 import './Home.css';
 /*Importing Images*/
@@ -9,8 +10,16 @@ import imgCat from '../../Assets/homeBackGround3.png';
 function Home() {
     return (
         <div>
-            <div className='homeContent1 scrollDiv'>
+            <div className='scrollDiv '>
+            <CustomNavbar textLinkOne="S'inscrire"
+                          linkOne="/inscription" 
+                          textLinkTwo="Se connecter"
+                          linkTwo="/connexion"
+                          color="rgba(0, 0, 0, 0)"
+                          />
+                <div className='homeContent1'>
                 <h1>Ensemble luttons contre les abandons</h1>
+                </div>
             </div>
             <div className='homeContent2 scrollDiv'>
                 <Container>
