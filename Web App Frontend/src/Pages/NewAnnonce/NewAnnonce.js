@@ -42,7 +42,6 @@ function NewAnnonce() {
 
     return (
         <div className="NewAnnonces">
-            <ReturnButton returnLink="/annonces"/>
                 <div className="newAnnonces-container">
                     <Container>
                         <h2>Nouvelle Annonce</h2>
@@ -104,19 +103,24 @@ function NewAnnonce() {
                                         </Row>
                                         </Col>
                                     </Row>
-
-                                        <Form.Group>
-                                            <Form.Label htmlFor="FormControlComment"></Form.Label>
-                                                <Form.Control
-                                                as="textarea"
-                                                id="Comment"
-                                                placeholder="Commentaire"
-                                                style={{ height: '100px' }}
-                                                />
-                                        </Form.Group>
-
-                                        <Button className='submit-button' type="submit"  variant="">Enregistrer</Button>
-                                    
+                                    <Row style={{width:"100%"}}>
+                                        <Col>
+                                            <Form.Group>
+                                                <Form.Label htmlFor="FormControlComment"></Form.Label>
+                                                    <Form.Control
+                                                    as="textarea"
+                                                    id="Comment"
+                                                    placeholder="Commentaire"
+                                                    style={{ height: '100px' }}
+                                                    />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='p-3'>
+                                            <Button className='submit-button' type="submit"  variant="">Enregistrer</Button>
+                                        </Col>  
+                                    </Row>
                                 </div>
                             </Form>
                         </div>
