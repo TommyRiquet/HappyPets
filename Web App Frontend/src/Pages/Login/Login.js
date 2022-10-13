@@ -16,13 +16,13 @@ function Login() {
                         <Row className="justify-content-md-center mb-4">
                             <Col xs lg="6">
                                 <Form.Label style={{float: "left"}} htmlFor="email">Adresse e-mail</Form.Label>
-                                <Form.Control id="email"  placeholder="exemple@gmail.com" type='email' />
+                                <Form.Control id="email"  placeholder="exemple@gmail.com" type='email' required />
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center mb-4">
                             <Col xs lg="6">
                                 <Form.Label style={{float: "left"}} htmlFor="password">Mot de passe</Form.Label>
-                                <Form.Control id="password" placeholder="e5#3ft4%6" type='password' />
+                                <Form.Control id="password" placeholder="e5#3ft4%6" type='password' required />
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center">
