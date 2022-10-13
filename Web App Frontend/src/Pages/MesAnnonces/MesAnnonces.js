@@ -55,12 +55,12 @@ function Annonces(){
         }
     }
     return (
-        <div className="mesnnonces">
+        <div className="mesannonces">
                 <Container className='top-container'>
                 <h2>Mes Animaux</h2>
                </Container>
 
-                <Container className='lesannonces-container'>
+                <Container className='mesannonces-container'>
 
                     {
                     Object.keys(ListAnnonces).length === 0 ? 

@@ -87,7 +87,7 @@ function AnimalCard(props) {
                 <Row className='annonce-user-firstname' data-testid={"annonce-user-firstname"}>
                     <Col>
                       {
-                        props.annonce.Pets.length===0 ? "Inconnu":
+                        !("User" in props.annonce.Pets[0])? "": 
                         props.annonce.Pets[0].User.length===0 ? "Inconnu":
                         props.annonce.Pets[0].User.Firstname.length===0 ? "Inconnu" : props.annonce.Pets[0].User.Firstname
                       }

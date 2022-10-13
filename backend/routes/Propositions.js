@@ -4,19 +4,7 @@ const router = express.Router()
 const {Propositions,Users} = require("../models")
 
 router.get("/", async (req, res) => {
-    if(req.query.id!=undefined){
-        const ListPropositions = await Propositions.findAll({
-            limit : 20, 
-            attributes : [],
-            where : {AnnonceId : req.query.id},
-                include : [{
-                    model : Users,
-                    attributes : ['FirstName', 'Age', 'Ville', 'Postal'],
-                }],
-
-        })
-        res.json(ListPropositions)
-    }else if(req.query.offset===undefined || req.query.offset===0){
+ if(req.query.offset===undefined || req.query.offset===0){
         const ListPropositions = await Propositions.findAll({
             limit : 20, 
             attributes : [],
@@ -36,6 +24,34 @@ router.get("/", async (req, res) => {
                     model : Users,
                     attributes : ['FirstName', 'Age', 'Ville', 'postal'],
                 }],
+        })
+        res.json(ListPropositions)
+    }
+})
+
+router.get("/annonce", async (req, res) => {
+    if(req.query.offset === "0"){
+        const ListPropositions = await Propositions.findAll({
+            limit : 20, 
+            attributes : [],
+            where : {AnnonceId : req.query.id},
+                include : [{
+                    model : Users,
+                    attributes : ['FirstName', 'Age', 'Ville', 'Postal'],
+                }],
+            
+        })
+        res.json(ListPropositions)
+    }else{
+        const ListPropositions = await Propositions.findAll({
+            limit : 6, 
+            attributes : [],
+            where : {AnnonceId : req.query.id},
+                include : [{
+                    model : Users,
+                    attributes : ['FirstName', 'Age', 'Ville', 'Postal'],
+                }],
+            
         })
         res.json(ListPropositions)
     }
