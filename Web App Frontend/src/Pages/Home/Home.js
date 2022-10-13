@@ -8,7 +8,7 @@ import imgCat from '../../Assets/homeBackGround3.png';
 
 function Home() {
     return (
-        <div>
+        <div className="Home">
             <div className='homeContent1 scrollDiv'>
                 <h1>Ensemble luttons contre les abandons</h1>
             </div>
