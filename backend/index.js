@@ -8,6 +8,9 @@ const PORT = process.env.PORT || 3001
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+//date d'expiration de la session et du token
+const expireTime = 60 * 60 * 24
+
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -23,7 +26,7 @@ app.use(session({
     resave: false,
     saveUninitialised: true,
     cookie: {
-        expires: 60 * 60 * 24
+        expires: expireTime
     },
 }))
 const db = require('./models')

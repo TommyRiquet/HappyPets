@@ -1,7 +1,7 @@
 /*Importing Components */
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Footer from "../../Components/Footer/Footer";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Axios from "axios";
 
 /*Importing Styles*/
@@ -18,14 +18,16 @@ import NewAnnonce from "../NewAnnonce/NewAnnonce";
 import {UserForm} from "../UserForm/UserForm";
 import MesAnnonces from '../MesAnnonces/MesAnnonces';
 
-
+const [loginStatus, setLoginStatus] = useState(false);
 
 function App() {
     Axios.defaults.withCredentials = true
 
     useEffect(() => {
-        Axios.get("http://localhost:3001/users/login").then((response) => {
-            console.log(response)
+        Axios.get(`http://localhost:3001/users/login`).then(res => {
+            if (res.data.auth) {
+                setLoginStatus(true)
+            }
         })
     }, [])
   return (
