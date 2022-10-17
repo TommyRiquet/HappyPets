@@ -1,6 +1,8 @@
 /*Importing Components */
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Footer from "../../Components/Footer/Footer";
+import {useEffect} from "react";
+import Axios from "axios";
 
 /*Importing Styles*/
 import './App.css';
@@ -19,6 +21,13 @@ import MesAnnonces from '../MesAnnonces/MesAnnonces';
 
 
 function App() {
+    Axios.defaults.withCredentials = true
+
+    useEffect(() => {
+        Axios.get("http://localhost:3001/users/login").then((response) => {
+            console.log(response)
+        })
+    }, [])
   return (
           <BrowserRouter>
               <Routes>

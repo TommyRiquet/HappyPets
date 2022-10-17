@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+
 const cors = require('cors')
 require("dotenv").config();
 const PORT = process.env.PORT || 3001
@@ -7,20 +8,20 @@ const PORT = process.env.PORT || 3001
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-app.use(express.json())
+app.use(bodyParser.json())
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST"],
-    credentials: true
+    credentials: true //permet d'activer les cookies
 }))
-app.use(cookieParser())
-app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(session({
     key: "userId",
-    secret: "ilFaudraitEnFaireUnSecret",
+    secret: "foo",
     resave: false,
-    saveUninitialised: false,
+    saveUninitialised: true,
     cookie: {
         expires: 60 * 60 * 24
     },
