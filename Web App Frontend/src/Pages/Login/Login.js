@@ -18,7 +18,9 @@ function Login() {
         event.preventDefault()
         Axios.defaults.withCredentials = true
         axios.post("http://localhost:3001/users/login", user)
-            .then((response) => {
+            .then((res) => {
+                localStorage.setItem("accessToken", res.data.token)
+                localStorage.setItem("userInfo", res.data.user)
                 navigate("/")
             })
             .catch((error) => {

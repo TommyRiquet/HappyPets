@@ -41,33 +41,19 @@ router.post('/login', async (req, res) => {
         const match = await bcrypt.compare(req.body.Password, user.Password);
         if (!match) throw new myError("Mauvais mot de passe", 401);
 
-        //create session
-        req.session.user = user.dataValues;
         //create token
-        const id = user.dataValues.id
-        const token = jwt.sign({id}, "secret", {
+        const token = jwt.sign({id: user.dataValues.id, Role: user.dataValues.Role}, "secret", {
             expiresIn: 60 * 60 * 24
         });
-
-        res.json({loggedIn: true, token: token, user: user.dataValues});
+        res.json({token: token, user: user.dataValues});
     } catch (e) {
         const status = e.status || 500;
         res.status(status).json({error: e.message});
     }
 });
 
-
-router.get('/login', async (req, res) => {
-    console.log(req.session)
-    if (req.session.user) {
-        res.send({loggedIn: true, user: req.session.user})
-    } else {
-        res.send({loggedIn: false})
-    }
-})
-
-router.get('/isAuth', verifyToken, (req, res) => {
-    res.send("User is authenticated")
+router.get('/auth', verifyToken, async (req, res) => {
+    res.json({id: req.id, Role: req.Role})
 })
 
 module.exports = router

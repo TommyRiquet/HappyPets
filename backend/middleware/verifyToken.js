@@ -6,7 +6,8 @@ const verifyToken = (req, res, next) => {
         if (!token) throw new myError("No token provided", 400);
         jwt.verify(token, "secret", (err, decoded) => {
             if (err) throw new myError("Wrong token", 400);
-            req.userId = decoded.id;
+            req.id = decoded.id;
+            req.Role = decoded.Role;
             next();
         })
     } catch (e) {
