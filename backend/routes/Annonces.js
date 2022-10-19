@@ -1,7 +1,6 @@
 const express = require('express')
-const { query } = require('express')
 const router = express.Router()
-const {Annonces,Pets,Users,PetsAnnonces} = require("../models")
+const {Annonces,Pets,Users} = require("../models")
 
 
 router.get("/", async (req, res) => {
@@ -15,10 +14,10 @@ router.get("/", async (req, res) => {
                     attributes: ['DateBegin','DateEnd'],
                         include: [ {
                             model:Pets,
-                            attributes: ['Name',"Type","Race","Age"],
+                            attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
                             include: [ {
                                 model:Users,
-                                attributes: ['Firstname','Ville','Postal'],
+                                attributes: ['Firstname','Ville'],
                             }]
                         }]
                 }
@@ -36,10 +35,10 @@ router.get("/", async (req, res) => {
                 attributes: ['DateBegin','DateEnd'],
                     include: [ {
                         model:Pets,
-                        attributes: ['Name',"Type","Race","Age"],
+                        attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
                         include: [ {
                             model:Users,
-                            attributes: ['Firstname','Ville','Postal'],
+                            attributes: ['Firstname','Ville'],
                         }]
                     }]
             }
@@ -48,59 +47,6 @@ router.get("/", async (req, res) => {
     }
 
   
-    router.post("/",async (req, res) => {
-            Annonces.create({
-                Comment: req.body.Comment,
-                DateBegin: req.body.DateBegin,
-                DateEnd: req.body.DateEnd,
-            }).then(annonce => {
-                PetsAnnonces.create({
-                    PetId: req.body.PetId,
-                    AnnonceId: annonce.dataValues.id
-                })
-            })
-            
-            res.json(200)
-    });
-
-
 })
-router.get("/me", async(req,res) =>{
-    if(req.query.offset === "0"){
-        const listOfAnnonces = await Annonces.findAll(
-            {
-                limit: 20,
-                attributes: ['DateBegin','DateEnd'],
-                    include: [ {
-                        model:Pets,
-                        attributes: ['Name',"Type","Race","Age"],
-                        include: [ {
-                            model:Users,
-                            attributes: [],
-                                where : {id: req.query.id},
-                        }]
-                    }]
-            }
-        )
-        res.json(listOfAnnonces)
-    }else{
-        const listOfAnnonces = await Annonces.findAll(
-            {
-                limit: 6,
-                offset: parseInt(req.query.offset),
-                attributes: ['DateBegin','DateEnd'],
-                    include: [ {
-                        model:Pets,
-                        attributes: ['Name',"Type","Race","Age"],
-                        include: [ {
-                            model:Users,
-                            attributes: [],
-                                where : {id: req.query.id},
-                        }]
-                    }]
-            }
-        )
-        res.json(listOfAnnonces)
-    }
-})
+
 module.exports = router
