@@ -4,6 +4,10 @@ import { Card, Row, Col, } from 'react-bootstrap';
 /*Importing Styles*/
 import './AnimalCard.css';
 
+/*Importing Icons*/
+import FIcon from '../../Assets/F-Icon.png';
+import MIcon from '../../Assets/M-Icon.png';
+
 function AnimalCard(props) {
   const MaxNumberOfPetsPerAnnonce = 3;
 
@@ -12,7 +16,7 @@ function AnimalCard(props) {
       <Card className='annonce-card'>
         <Card.Body>
             <Row>
-              <Col> 
+              <Col>
                   {props.annonce.Pets.map((pet,index) => (
                     index>=MaxNumberOfPetsPerAnnonce?
                     null
@@ -25,8 +29,21 @@ function AnimalCard(props) {
                             </Col>
                           </Row>
                           <Row>
-                            <Col className={'annonce-pets-weight'} data-testid={"annonce-pets-weight"+index}>
-                              Petit,2kg
+                            <Col className={'annonce-pets-information'} style={{whiteSpace:'nowrap'}}>
+                                { 
+                                  props.annonce.Pets[index].Sexe === "F" ?<img data-testid={"annonce-pets-sexe"+index} src={FIcon} alt='F-icon' width={20}></img>:
+                                  props.annonce.Pets[index].Sexe === "M" ? <img data-testid={"annonce-pets-sexe"+index} src={MIcon} alt='M-icon' width={20}></img> :null
+                                }
+                              <span data-testid={"annonce-pets-height"+index}>
+                                {
+                                  " "+props.annonce.Pets[index].Height
+                                }
+                              </span>
+                              <span data-testid={"annonce-pets-weight"+index}>
+                                {
+                                  props.annonce.Pets[index].Weight === null ? " " : ", "+props.annonce.Pets[index].Weight+"kg"
+                                }
+                              </span>
                             </Col>
                           </Row>
                         </Col>
@@ -34,7 +51,7 @@ function AnimalCard(props) {
                           <Row>
                             <Col>
                               <div className='annonce-name'>
-                                <span data-testid={"annonce-name"+index}>
+                                <span data-testid={"annonce-pets-name"+index}>
                                   {
                                     ( 
                                           pet.length===0 ? "Inconnu":
@@ -42,11 +59,13 @@ function AnimalCard(props) {
                                       )
                                     }
                                   </span>
-                                  <span data-testid={"annonce-age"+index}>
+                                  <span data-testid={"annonce-pets-age"+index}>
                                     {
                                       (
                                         pet.length===0 ? "":
-                                        pet.Age>=0? ", "+pet.Age : ""
+                                        pet.Age>=0?
+                                        (", "+pet.Age+" an"+(pet.Age>1?"s":'')) 
+                                        : null
                                       )
                                     }
                                   </span>
@@ -77,7 +96,7 @@ function AnimalCard(props) {
                       }
                     </Col>
                 </Row>
-                <Row className='annonce-localite' data-testid={"annonce-localite"}>
+                <Row className='annonce-localite' data-testid={"annonce-user-city"}>
                       <Col>
                         {
                           props.annonce.Pets[0].User.Ville
@@ -87,9 +106,9 @@ function AnimalCard(props) {
                 <Row className='annonce-user-firstname' data-testid={"annonce-user-firstname"}>
                     <Col>
                       {
-                        !("User" in props.annonce.Pets[0])? "": 
-                        props.annonce.Pets[0].User.length===0 ? "":
-                        props.annonce.Pets[0].User.Firstname.length===0 ? "" : props.annonce.Pets[0].User.Firstname
+                        props.annonce.Pets.length===0 ? "Inconnu":
+                        props.annonce.Pets[0].User.length===0 ? "Inconnu":
+                        props.annonce.Pets[0].User.Firstname.length===0 ? "Inconnu" : props.annonce.Pets[0].User.Firstname
                       }
                     </Col>
                 </Row>
