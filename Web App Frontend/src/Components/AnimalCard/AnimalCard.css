@@ -35,7 +35,7 @@
 }
 
 /*Poids de l'animal*/
-.annonce-pets-weight{
+.annonce-pets-information{
   color: grey;
   font-size: 0.8em;
 }
@@ -46,9 +46,4 @@
   margin-bottom: 10px;
   color: grey;
   font-size: 0.8em;
-}
-
-/*Localité de l'annonce*/
-.annonce-localite{
-  text-overflow: ellipsis;
 }
