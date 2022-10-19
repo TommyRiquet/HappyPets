@@ -4,6 +4,7 @@ import AnimalCard from './AnimalCard';
 let FakeAnnonce = {
     "DateBegin": "2022-10-02T12:00:00.000Z",
     "DateEnd": "2022-10-02T12:00:00.000Z",
+    "Type": "Promenade",
     "Pets": [
         {
           "Name": "Lola",
@@ -25,6 +26,7 @@ let FakeAnnonce = {
 let FakeAnnonce2 = {
   "DateBegin": "2022-10-02T12:00:00.000Z",
   "DateEnd": "2022-10-02T12:00:00.000Z",
+  "Type": "Promenade",
   "Pets": [
       {
         "Name": "Chaussette",
@@ -60,6 +62,7 @@ let FakeAnnonce2 = {
 let FakeAnnonce3 = {
   "DateBegin": "2022-10-02T12:00:00.000Z",
   "DateEnd": "2022-10-02T12:00:00.000Z",
+  "Type": "Promenade",
   "Pets": [
       {
         "Name": "Yoda",
@@ -134,6 +137,7 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
       const propsPetSexe = screen.getByTestId("annonce-pets-sexe0")
 
       const propsAnnonceDate = screen.getByTestId("annonce-date")
+      const propsAnnonceType = screen.getByTestId("annonce-type")
       const propsAnnonceUser = screen.getByTestId("annonce-user-firstname")
 
       expect(propsPetName.textContent).toBe(FakeAnnonce.Pets[0].Name);
@@ -143,6 +147,7 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
       expect(propsPetSexe).toHaveAttribute('alt','F-icon');
 
       expect(propsAnnonceDate.textContent).toBe(FakeAnnonce.DateBegin.slice(5,10).replace("-","/")+ ">"+FakeAnnonce.DateEnd.slice(5,10).replace("-","/"));
+      expect(propsAnnonceType.textContent).toBe(FakeAnnonce.Type);
       expect(propsAnnonceUser.textContent).toBe(FakeAnnonce.Pets[0].User.Firstname);
   })
 
@@ -246,6 +251,18 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
       expect(propsAnnonceUser.textContent).toBe("");
   })
 
+
+
+  it('Should replace the type with null', async () => {
+
+    FakeAnnonce.Type = ""
+
+    render(
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
+      )
+      const propsAnnonceType = screen.getByTestId("annonce-type")
+      expect(propsAnnonceType.textContent).toBe("");
+  })
 
 })
 

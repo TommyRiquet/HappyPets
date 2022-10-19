@@ -17,6 +17,13 @@ function AnimalCard(props) {
         <Card.Body>
             <Row>
               <Col>
+                <Row>
+                  <Col>
+                    <span className='type-annonce' data-testid={'annonce-type'}>
+                      {props.annonce.Type}
+                    </span>
+                  </Col>
+                </Row>
                   {props.annonce.Pets.map((pet,index) => (
                     index>=MaxNumberOfPetsPerAnnonce?
                     null
