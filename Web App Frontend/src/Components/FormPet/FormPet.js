@@ -70,7 +70,7 @@ function FormPet() {
                     type: Yup.string()
                         .required('Champ obligatoire')
                         .oneOf(
-                            ['Chat', 'Chien', 'Lapin', 'Volaille', 'Oiseau', 'Poisson', 'NAC'],
+                            ['Chat', 'Chien', 'Rongeur', 'Oiseau', 'Poisson', 'NAC'],
                             'Type invalide'
                         ),
                     race: Yup.string()
@@ -100,7 +100,7 @@ function FormPet() {
                     sex: Yup.string()
                         .required('Champ obligatoire')
                         .oneOf(
-                            ['M', 'F','NC'],
+                            ['M', 'F', 'NC'],
                             'Sexe invalide'
                         ),
                     comment: Yup.string(),
@@ -130,7 +130,22 @@ function FormPet() {
                                     {errors.name}
                                 </Form.Control.Feedback>
                             </Form.Group>
-
+                            <Form.Group as={Col}>
+                                <Form.Label>Caractère</Form.Label>
+                                <Form.Select name="behaviour"
+                                             value={values.behaviour}
+                                             onChange={handleChange}
+                                             isInvalid={touched.behavior && errors.behaviour}>
+                                    <option>Sélectionner un caractère</option>
+                                    <option value="Dominant">Dominant</option>
+                                    <option value="Dominé">Dominé</option>
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.behaviour}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
+                        <Row>
                             <Form.Group as={Col}>
                                 <Form.Label>Type</Form.Label>
                                 <Form.Select name="type"
@@ -142,8 +157,7 @@ function FormPet() {
                                     <option>Sélectionner un type</option>
                                     <option value="Chat">Chat</option>
                                     <option value="Chien">Chien</option>
-                                    <option value="Lapin">Lapin</option>
-                                    <option value="Volaille">Lapin</option>
+                                    <option value="Rongeur">Rongeur</option>
                                     <option value="Oiseau">Oiseau</option>
                                     <option value="Poisson">Poisson</option>
                                     <option value="NAC">NAC</option>
@@ -152,11 +166,6 @@ function FormPet() {
                                     {errors.type}
                                 </Form.Control.Feedback>
                             </Form.Group>
-
-
-                        </Row>
-
-                        <Row>
                             <Form.Group as={Col}>
                                 <Form.Label>Race</Form.Label>
                                 <Form.Control
@@ -187,7 +196,22 @@ function FormPet() {
                                     {errors.age}
                                 </Form.Control.Feedback>
                             </Form.Group>
-
+                            <Form.Group as={Col}>
+                                <Form.Label>Sexe</Form.Label>
+                                <Form.Select name="sex"
+                                             value={values.sex}
+                                             onChange={handleChange}
+                                             onBlur={handleBlur}
+                                             isInvalid={touched.sex && errors.sex}>
+                                    <option>Sélectionner un sexe</option>
+                                    <option value="M">Mâle</option>
+                                    <option value="F">Femelle</option>
+                                    <option value="NC">Non connu</option>
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.sex}
+                                </Form.Control.Feedback>
+                            </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>Poids</Form.Label>
                                 <Form.Control
@@ -223,38 +247,6 @@ function FormPet() {
                         </Row>
                         <Row>
                             <Form.Group as={Col}>
-                                <Form.Label>Caractère</Form.Label>
-                                <Form.Select name="behaviour"
-                                             value={values.behaviour}
-                                             onChange={handleChange}
-                                             isInvalid={touched.behavior && errors.behaviour}>
-                                    <option>Sélectionner un caractère</option>
-                                    <option value="Dominant">Dominant</option>
-                                    <option value="Dominé">Dominé</option>
-                                </Form.Select>
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.behaviour}
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <Form.Label>Sexe</Form.Label>
-                                <Form.Select name="sex"
-                                             value={values.sex}
-                                             onChange={handleChange}
-                                             onBlur={handleBlur}
-                                             isInvalid={touched.sex && errors.sex}>
-                                    <option>Sélectionner un sexe</option>
-                                    <option value="M">Mâle</option>
-                                    <option value="F">Femelle</option>
-                                    <option value="NC">Non connu</option>
-                                </Form.Select>
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.sex}
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                        </Row>
-                        <Row>
-                            <Form.Group as={Col}>
                                 <Form.Label>Commentaire</Form.Label>
                                 <Form.Control name="comment" as="textarea" rows={3}/>
                             </Form.Group>
@@ -266,9 +258,9 @@ function FormPet() {
                             </Form.Group>
                         </Row>
                         <Row>
-                            <Col>
-                                <Button className='submit-button' type="submit" accept="image/*"
-                                        multiple>Enregistrer</Button>
+                            <Col className={"div-button"}>
+                                    <Button className='submit-button' type="submit" accept="image/*"
+                                            multiple>Enregistrer</Button>
                             </Col>
                         </Row>
                     </Form>

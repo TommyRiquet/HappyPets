@@ -6,8 +6,14 @@
     text-align: center;
 }
 
-.formPet button {
+.test {
     margin-top: 30px;
-    margin-left: auto;
+    margin-left: auto !important;
     margin-right: auto;
+}
+
+.div-button{
+    display: flex;
+    justify-content: center;
+    margin-top: 5% !important;
 }
