@@ -1,4 +1,13 @@
+.formPet{
+    margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+}
 .formPet h1{
     text-align: center;
 }
 
+.formPet button {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}

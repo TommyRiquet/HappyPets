@@ -1,6 +1,8 @@
 * {
     --main-color: #2F4858;
     --secondary-color: #F26419;
+    --background-color: #F2F3F8;
+    --text-color-white: white;
 }
 .form-control:focus{
     box-shadow: none !important;
