@@ -1,0 +1,16 @@
+:root{
+    --primary-color:#2F4858;
+    --secondary-color:#F2620A;
+    --tertiary-color:#F2F3F8;
+}
+
+.form-check-input:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border:1px solid var(--secondary-color) !important;
+}
+.form-select:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border:1px solid var(--secondary-color) !important;
+}

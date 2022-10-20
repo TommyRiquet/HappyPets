@@ -1,4 +1,5 @@
 /*External Import*/
+import React, { useEffect, useState } from "react";
 import {Container, Button, Row, Col, Form } from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
 import {Formik} from 'formik';
@@ -12,12 +13,48 @@ import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import './CreatePet.css';
 
 
+import ListAnimalRace from "../../Assets/race.json";
+
 function CreatePet(){
+    const [animalRace,setAnimalRace] = useState("");
+    const [animalRaceProposition,setAnimalRaceProposition] = useState([]);	
+    const [animalType,setAnimalType] = useState("");
+
     let navigate = useNavigate();
-    
+
+    useEffect(() => {
+        /*
+            Reset de la race de l'animal et des propositions lors du changement de type de l'animal
+        */
+        setAnimalRace("");
+        setAnimalRaceProposition([]);
+    },[animalType]);
+
+    useEffect(() => {
+        /*
+            Si le type de l'animal est renseigné, on récupère les races de cette animal et on les place dans la
+            variable d'état animalRaceProposition en regardant si la valeur entré correspond à une des races avec un regex
+        */
+        var reg = new RegExp(animalRace);
+        try{
+            const tempList = ListAnimalRace[animalType].filter((item) => {return reg.test(item)});
+            if(tempList[0] !== animalRace && animalRace !== ""){
+                setAnimalRaceProposition(tempList.slice(0,3));
+            }else{
+                setAnimalRaceProposition([])
+            }
+        }
+        catch{
+            setAnimalRaceProposition([]);
+        }
+            
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[animalRace]);
+
+
+
     function sendFormPet(event) {
         event.preventDefault()
-        console.log(event)
         const bodyFormData = new FormData();
 
         bodyFormData.append('Name', event.target['name'].value)
@@ -41,7 +78,6 @@ function CreatePet(){
             if (res.data.error) {
                 console.log(res.data.error)
             } else {
-                console.log(res.data)
                 navigate('/')
             }
         })
@@ -77,10 +113,6 @@ function CreatePet(){
                             ['Chat', 'Chien', 'Rongeur', 'Oiseau', 'Poisson', 'NAC'],
                             'Type invalide'
                         ),
-                    race: Yup.string()
-                        .max(25, 'Doit faire 25 caractères ou moins')
-                        .min(3, 'Doit faire 3 caractères ou plus')
-                        .required('Champ obligatoire'),
                     age: Yup.number()
                         .min(0, "l'âge ne peut être négatif")
                         .max(25, "l'âge doit être compris entre 0 et 25 ans")
@@ -156,11 +188,12 @@ function CreatePet(){
                                              value={values.type}
                                              onChange={handleChange}
                                              onBlur={handleBlur}
+                                             onInput={e=>setAnimalType(e.target.value)}
                                              isInvalid={errors.type && touched.type}
                                 >
-                                    <option>Sélectionner un type</option>
-                                    <option value="Chat">Chat</option>
+                                    <option value="no-value">Sélectionner un type</option>
                                     <option value="Chien">Chien</option>
+                                    <option value="Chat">Chat</option>
                                     <option value="Rongeur">Rongeur</option>
                                     <option value="Oiseau">Oiseau</option>
                                     <option value="Poisson">Poisson</option>
@@ -172,14 +205,27 @@ function CreatePet(){
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>Race</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="race"
-                                    value={values.race}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isInvalid={touched.race && errors.race}
-                                />
+                                        <Form.Control
+                                            type="text"
+                                            name="race"
+                                            disabled={values.type === '' || values.type === 'NAC' || values.type === 'Poisson' || values.type === 'no-value'}
+                                            value={animalRace}
+                                            autoComplete="off"
+                                            onChange={e=>setAnimalRace(e.target.value)}
+                                            onBlur={handleBlur}
+                                            isInvalid={touched.race && errors.race}
+                                        />
+                                        <div className="animal-proposition-container">
+                                            {animalRaceProposition.map((item, index) => {
+                                                return (
+                                                    <div key={index} className="animal-proposition-items" onClick={() => {setAnimalRace(item)}}>
+                                                        {item}
+                                                    </div>
+                                                )
+                                            })}
+
+                                        </div>
+
                                 <Form.Control.Feedback type="invalid">
                                     {errors.race}
                                 </Form.Control.Feedback>
