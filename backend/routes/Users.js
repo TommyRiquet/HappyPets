@@ -7,8 +7,24 @@ const {myError} = require("../middleware/Error")
 const {verifyToken} = require("../middleware/verifyToken")
 
 router.get("/", async (req, res) => {
-    const listOfUsers = await Users.findAll()
-    res.json(listOfUsers)
+    if(req.query.id){
+        const infoUser = await Users.findAll({
+            where:{
+                id: req.query.id
+            },
+            attributes: ['id','FirstName','LastName','Age','Ville','Postal','Email'],
+            include: [ {
+                model:Pets,
+                attributes: ['Name',"Type","Race","Age"]
+            }]
+        })
+        res.json(infoUser)
+    }
+    else{
+        const listOfUsers = await Users.findAll()
+        res.json(listOfUsers)
+    }
+    
 })
 
 router.post("/", async (req, res) => {
