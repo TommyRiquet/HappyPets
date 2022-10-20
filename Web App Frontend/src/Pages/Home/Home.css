@@ -54,7 +54,7 @@ html {
 
 .homeContent2{
     /*Configuration page*/
-    background: #F2F3F8 no-repeat center center;
+    background: var(--tertiary-color) no-repeat center center;
     background-size: cover;
     position: relative;
     height: 100vh !important;
@@ -80,7 +80,7 @@ html {
 
 .homeContent3{
     /*Configuration page*/
-    background: #F26419 no-repeat center center;
+    background: var(--secondary-color)no-repeat center center;
     background-size: cover;
     position: relative;
     height: 100vh !important;

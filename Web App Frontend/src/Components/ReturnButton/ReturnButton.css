@@ -2,7 +2,7 @@
     margin: 8vh 0 0 20vh; /* margin-top: 8vh; margin-left: 20vh; */
     width: 14vh;
     height: 5vh;
-    background-color: #F2620A !important;
+    background-color: var(--secondary-color) !important;
 
     border: 0 !important;
     border-radius: 5px;

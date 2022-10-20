@@ -34,7 +34,7 @@
     cursor:default;
 }
 .animal-proposition-items:hover{
-    background-color: #F2620A;
+    background-color: var(--secondary-color);
 }
 
 .animal-proposition-container{
