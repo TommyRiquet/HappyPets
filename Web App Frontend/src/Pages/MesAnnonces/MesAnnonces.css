@@ -1,5 +1,5 @@
 .body{
-    background-color: #F2F3F8;
+    background-color: var(--tertiary-color);
   }
   
   .top-container{

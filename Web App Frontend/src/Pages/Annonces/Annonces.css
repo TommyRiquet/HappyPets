@@ -1,5 +1,5 @@
 .body{
-  background-color: #F2F3F8;
+  background-color: var(--tertiary-color);
 }
 
 .top-container{
@@ -16,10 +16,10 @@
   float: right !important;
 }
 .new-annonce-button{
-  background-color: #F2620A !important;
+  background-color: var(--secondary-color) !important;
   border: 0 !important;
   border-radius: 10px !important;
-  color: #F2F3F8 !important;
+  color: var(--tertiary-color) !important;
   transition: 0.2s !important;
   font-size: large !important;
   font-weight: bold !important;

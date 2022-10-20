@@ -1,5 +1,5 @@
 body{
-    background-color: #F2F3F8;
+    background-color: var(--tertiary-color)
 }
 
 .Login{
@@ -23,7 +23,7 @@ body{
 }
 
 .button{
-    background-color: #F2620A !important;
+    background-color: var(--secondary-color) !important;
     border: 0 !important;
     border-radius: 5px;
     font-weight: bold;
@@ -46,7 +46,7 @@ body{
 }
 
 .linkRegistration{
-    color: #F2620A !important;
+    color: var(--secondary-color) !important;
     font-weight:500 !important;
     text-decoration: none !important;
 }
