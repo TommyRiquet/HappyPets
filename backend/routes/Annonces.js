@@ -12,13 +12,13 @@ router.get("/", async (req, res) => {
             const listOfAnnonces = await Annonces.findAll(
                 {
                     limit: 20,
-                    attributes: ['DateBegin','DateEnd'],
+                    attributes: ['Type','DateBegin','DateEnd'],
                         include: [ {
                             model:Pets,
-                            attributes: ['Name',"Type","Race","Age"],
+                            attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
                             include: [ {
                                 model:Users,
-                                attributes: ['Firstname','Ville','Postal'],
+                                attributes: ['Firstname','Ville'],
                             }]
                         }]
                 }
@@ -33,13 +33,13 @@ router.get("/", async (req, res) => {
             {
                 limit: 6,
                 offset: parseInt(req.query.offset),
-                attributes: ['DateBegin','DateEnd'],
+                attributes: ['Type','DateBegin','DateEnd'],
                     include: [ {
                         model:Pets,
-                        attributes: ['Name',"Type","Race","Age"],
+                        attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
                         include: [ {
                             model:Users,
-                            attributes: ['Firstname','Ville','Postal'],
+                            attributes: ['Firstname','Ville'],
                         }]
                     }]
             }
