@@ -9,15 +9,6 @@ import imgCat from '../../Assets/homeBackGround3.png';
 
 function Home() {
     return (
-        <div>
-            <div className='scrollDiv '>
-            <CustomNavbar textLinkOne="S'inscrire"
-                          linkOne="/inscription" 
-                          textLinkTwo="Se connecter"
-                          linkTwo="/connexion"
-                          color="rgba(0, 0, 0, 0)"
-                          />
-                <div className='homeContent1'>
                 <h1>Ensemble luttons contre les abandons</h1>
                 </div>
             </div>

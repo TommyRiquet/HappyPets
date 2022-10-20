@@ -67,45 +67,6 @@ function Annonces() {
 
     return (
         <div className="Annonces">
-            <CustomNavbar textLinkOne="Propositions"
-                          linkOne="/propositions"
-                          textLinkTwo="Annonces"
-                          linkTwo="/annonces"
-                          color="rgba(47, 72, 88, 1)"
-                />
-                <Container className='top-container'>
-                <h2>Animaux</h2>
-                    <Button className='new-annonce-button' href='annonces/new'>Nouvelle Annonce</Button>
-                </Container>
-
-                <Container className='annonces-container'>
-
-                    {
-                    Object.keys(ListAnnonces).length === 0 ? 
-                        <h2 className='no-result-message'>Aucun Résultat :/</h2> 
-                        :
-                        <Row xs={1} sm={1} lg={2} >
-                            {
-                                ListAnnonces.map((annonce,index) => {
-                                    console.log(annonce)
-                                    return (
-                                            <Col key={index} colSpan={annonce.Pets.length} onClick={()=>console.log(index)}>
-                                                <AnimalCard annonce={annonce} image={
-                                                        annonce.Pets.map((pet) => {                                                            
-                                                            const ReturnTable = AnimauxImages[pet.Type]
-                                                            return ReturnTable
-                                                        })
-                                                    } />
-                                            </Col>
-
-                                        )
-                                })
-                            }
-                        </Row>
-                        }
-                    
-                </Container>
-
         </div>
     );
 }

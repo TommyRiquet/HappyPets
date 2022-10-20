@@ -2,6 +2,10 @@ module.exports = (sequelize, DataTypes) => {
 
     const Annonces = sequelize.define("Annonces", {
 
+        Type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         Comment: {
             type: DataTypes.STRING,
             allowNull: true
