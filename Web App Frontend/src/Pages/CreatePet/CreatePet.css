@@ -5,3 +5,22 @@
     text-align: center;
     position: relative;
 }
+.formPet{
+    margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+}
+.formPet h1{
+    text-align: center;
+}
+
+.test {
+    margin-top: 30px;
+    margin-left: auto !important;
+    margin-right: auto;
+}
+
+.div-button{
+    display: flex;
+    justify-content: center;
+    margin-top: 5% !important;
+}
