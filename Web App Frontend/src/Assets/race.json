@@ -1,0 +1,24 @@
+{
+    "Chien": ["Airedale Terrier","Akita-Inu","Alaskan Malamute","American Staffordshire Terrier","Barbet","Barzoï","Basenji","Basset Hound","Beagle"
+    ,"Bearded Collie","Beauceron","Bedlington Terrier","Berger Allemand","Berger Australien","Berger Belge","Berger Blanc Suisse","Berger des Pyrénées"
+    ,"Bichon Frisé","Bichon Maltais","Bobtail","Border Collie","Border Terrier","Boston Terrier","Bouledogue français","Bouvier Bernois",
+    "Bouvier des Flandres","Bouvier des Ardennes","Boxer","Braque Allemand","Braque de weimar","Braque français","Briard",
+    "Bull Terrier","Bull Terrier Anglais","Bull Terrier Miniature","Bullmastiff","Bulldog Anglais","Cairn Terrier","Cane corso","Caniche","Carlin",
+    "Cavalier King Charles","Charplaninatz","Chien-Loup","Chihuahua","Chow-Chow","Cocker Américain","Cocker Anglais","Colley","Coton de Tuléar","Dalmatien","Doberman"
+    ,"Dogue Argentin","Dogue de Bordeaux","Epagneul breton","Epagneu nain","Epagneul tibétain","Eurasier","Fox terrier","Golden Retriever","Greyhound",
+    "Griffon korthals","Irish Woldhound","Jack Russel","Kerry Blue Terrier","Kromfohrländer","Labrador Retriever","Lakeland Terrier","Lévrier Afghan",
+    "Leonberg","Lhassa Apso","Löwchen","Malamute de l'Alaska","Mastiff","Mastiff Anglais","Mastiff Tosa","Mudi","Munsterlander","Norfolk Terrier",
+    "Norwich Terrier","Old English Sheepdog","Otterhound","Papillon","Pastor Allemand","Pastor Australien","Pastor Belge","Pastor de Beauce","Pastor de Brie",
+    "Pastor de Shetland","Pastor des Pyrénées","Peekapoo","Peekapoo","Pekinois","Petit Basset Griffon Vendeen","Petit Brabançon","Petit Chien Lion",
+    "Pointer","Porcelaine","Saint-Bernard","Samoyède","Schnauzer","Setter Anglais","Setter Irlandais","Setter Irlandais","Shiba Inu","Shih Tzu","Spitz Japonais",
+    "Springer Anglais","Springer Spaniel","Staffordshire Bull Terrier","Teckel","Terre-Neuve","Terrier Australien","Terrier Australien","Terrier Australien",
+    "Terre-Neuve","Westie","Yorkshire Terrier","Whippet","Weimaraner","Vizsla","Vallhund Suédois","Tosa","Tibetan Terrier","Tibetan Mastiff","Tervueren",
+    "Bulldog","Jack Russel","Fox Terrier","Labrador","Malamute","Mastiff","Pitbull","Rottweiler","Shih Tzu"],
+    "Chat": [
+        "Abyssin","American Curl","Angora Turc","Balinais","Bobtail Japonais","Bombay","British Shorthair","Burmese","Chat de gouttière","Chat de Siam",
+        "Cornish rex","Européen","Exotic Shorthair","Korat","Maine coon","Mandarin","Manx","Mau égyptien","Norvégien","Oriental","Ragdoll","Sacré de Birmanie"
+        ,"Scottish fold","Thaï","Tonkinois","Turc de Van","York chocolat","Bengal","Birman","Burmese","Chartreux","Exotic Shorthair","Himalayen",
+        "Persan","Siamois","Sphynx"],
+    "Rongeur": ["Cochon d'inde","Hamster","Lapin","Rat","Souris"],
+    "Oiseau": ["Canari","Perruche","Pigeon","Poule","Poulet","Poussin","Toucan"]
+}
