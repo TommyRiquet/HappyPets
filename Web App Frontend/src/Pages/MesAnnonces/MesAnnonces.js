@@ -69,7 +69,6 @@ function Annonces(){
                         <Row xs={1} sm={1} lg={2} >
                             {
                                 ListAnnonces.map((annonce,index) => {
-                                    console.log(annonce)
                                     return (
                                             <Col key={index} colSpan={annonce.Pets.length} onClick={()=>console.log(index)}>
                                                 <AnimalCard annonce={annonce} image={
