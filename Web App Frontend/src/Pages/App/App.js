@@ -12,7 +12,7 @@ import Annonces from "../Annonces/Annonces";
 import Login from '../Login/Login';
 import Propositions from '../Propositions/Propositions';
 import NewAnnonce from "../NewAnnonce/NewAnnonce";
-import {UserForm} from "../UserForm/UserForm";
+import {Register} from "../Register/Register";
 import MesAnnonces from '../MesAnnonces/MesAnnonces';
 import Account from '../Account/Account'
 import CreatePet from '../CreatePet/CreatePet'
@@ -30,7 +30,7 @@ function App() {
                   <Route path="/mesannonces" element={<MesAnnonces/>}/>
                   <Route path="/account" element={<Account/>}/>
                   <Route path="/createAnimal" element={<CreatePet/>}/>
-                  <Route path='/inscription' element={<UserForm/>}/>
+                  <Route path='/register' element={<Register/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
