@@ -1,0 +1,32 @@
+body{
+    background-color: #F2F3F8 !important;
+  }
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.UserDB{
+    /*padding-bottom: 5vh;*/
+    margin-left: 40%;
+    background-color: #F2620A !important;
+    --bs-btn-bg:#F2620A !important;
+    --bs-btn-border-color:#F2620A !important;
+    --bs-btn-hover-bg:#F2620A !important;
+    --bs-btn-active-bg:#F2620A !important;
+    --bs-btn-disabled-bg:#F2620A !important;
+    --bs-btn-disabled-border-color:#F2620A !important;
+    --bs-btn-hover-border-color:#F2620A !important;
+    --bs-btn-active-border-color:#F2620A !important;
+}
+
+h2{
+    margin: 4vh !important;
+}
+
+.form-control:focus{
+  box-shadow: none !important;
+  outline: none !important;
+  border: 1px solid #ced4da !important;
+}
