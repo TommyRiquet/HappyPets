@@ -30,6 +30,20 @@ function CreatePet(){
         setAnimalRaceProposition([]);
     },[animalType]);
 
+    function ChangeToCamelcase(e){
+        let returnString = "";
+        for(let i=0;i<e.target.value.length;i++){
+                if(e.target.value[i-1]===" "){
+                    returnString += e.target.value[i].toUpperCase();
+                }else if(i===0){
+                    returnString += e.target.value[i].toUpperCase();
+                }else{
+                    returnString += e.target.value[i];
+                }
+            }
+        setAnimalRace(returnString);
+    }
+
     useEffect(() => {
         /*
             Si le type de l'animal est renseigné, on récupère les races de cette animal et on les place dans la
@@ -38,8 +52,8 @@ function CreatePet(){
         var reg = new RegExp(animalRace);
         try{
             const tempList = ListAnimalRace[animalType].filter((item) => {return reg.test(item)});
-            if(tempList[0] !== animalRace && animalRace !== ""){
-                setAnimalRaceProposition(tempList.slice(0,3));
+            if(tempList[0] !== animalRace && animalRace !== "" && tempList[0][0]===animalRace[0]){
+                setAnimalRaceProposition(tempList[0]);
             }else{
                 setAnimalRaceProposition([])
             }
@@ -50,6 +64,7 @@ function CreatePet(){
             
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[animalRace]);
+
 
 
 
@@ -67,7 +82,6 @@ function CreatePet(){
         bodyFormData.append('Sex', event.target['sex'].value)
         bodyFormData.append('Comment', event.target['comment'].value)
         bodyFormData.append('Image', event.target['image'])
-        console.log(bodyFormData)
 
         axios({
             method: "post",
@@ -204,28 +218,26 @@ function CreatePet(){
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col}>
+                                    
                                 <Form.Label>Race</Form.Label>
+                                    <div className="race-form-container">
                                         <Form.Control
                                             type="text"
                                             name="race"
                                             disabled={values.type === '' || values.type === 'NAC' || values.type === 'Poisson' || values.type === 'no-value'}
                                             value={animalRace}
                                             autoComplete="off"
-                                            onChange={e=>setAnimalRace(e.target.value)}
+                                            onChange={e=>ChangeToCamelcase(e)}
                                             onBlur={handleBlur}
                                             isInvalid={touched.race && errors.race}
                                         />
-                                        <div className="animal-proposition-container">
-                                            {animalRaceProposition.map((item, index) => {
-                                                return (
-                                                    <div key={index} className="animal-proposition-items" onClick={() => {setAnimalRace(item)}}>
-                                                        {item}
-                                                    </div>
-                                                )
-                                            })}
-
+                                        <div className="animal-proposition">
+                                            {animalRaceProposition}
                                         </div>
-
+                                        <div className="animal-race">
+                                            {animalRace}
+                                        </div>
+                                    </div>
                                 <Form.Control.Feedback type="invalid">
                                     {errors.race}
                                 </Form.Control.Feedback>
