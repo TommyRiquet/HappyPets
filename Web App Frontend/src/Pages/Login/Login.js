@@ -2,6 +2,7 @@
 import {Row, Col, Form, Button, Container } from 'react-bootstrap';
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
 import './Login.css';
 
@@ -31,6 +32,12 @@ function Login() {
 
     return (
         <div className="Login">
+            <CustomNavbar textLinkOne="Propositions"
+                          linkOne="/propositions"
+                          textLinkTwo="Annonces"
+                          linkTwo="/annonces"
+                          color="rgba(47, 72, 88, 1)"
+            />
                 <Container className='title-container'>
                 <h2>Connexion</h2>
                 </Container>
