@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import {Container, Button, Row, Col, Form} from 'react-bootstrap';
 import { useNavigate } from 'react-router';
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 
 /*Importing Components*/
 import ReturnButton from '../../Components/ReturnButton/ReturnButton';
@@ -42,6 +43,12 @@ function NewAnnonce() {
 
     return (
         <div className="NewAnnonces">
+            <CustomNavbar textLinkOne="Propositions"
+                          linkOne="/propositions"
+                          textLinkTwo="Annonces"
+                          linkTwo="/annonces"
+                          color="rgba(47, 72, 88, 1)"
+            />
                 <div className="newAnnonces-container">
                     <Container>
                         <h2>Nouvelle Annonce</h2>
