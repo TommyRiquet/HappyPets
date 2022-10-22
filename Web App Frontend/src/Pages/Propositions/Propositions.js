@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col} from "react-bootstrap";
 import UserCard from "../../Components/UserCard/UserCard";
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 
 /* Importing style */
 import './Propositions.css';
@@ -42,6 +43,12 @@ function Propositions(){
     }
     return (
         <div className="Propositions">
+            <CustomNavbar textLinkOne="Propositions"
+                          linkOne="/propositions"
+                          textLinkTwo="Annonces"
+                          linkTwo="/annonces"
+                          color="rgba(47, 72, 88, 1)"
+            />
             <Container className='title'>
                 <h2>Propositions</h2>
             </Container>

@@ -1,6 +1,7 @@
 /*Importing Components */
 import {Row, Col, Container } from 'react-bootstrap';
 import { useState,useEffect } from 'react';
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
 import './Home.css';
 /*Importing Images*/
@@ -29,9 +30,17 @@ function Home() {
     }
 
     return (
-        <div className="Home">
-            <div className='homeContent1 scrollDiv'>
+        <div>
+            <div className='scrollDiv '>
+                <CustomNavbar textLinkOne="S'inscrire"
+                          linkOne="/inscription" 
+                          textLinkTwo="Se connecter"
+                          linkTwo="/connexion"
+                          color="rgba(0, 0, 0, 0)"
+                />
+                <div className='homeContent1'>
                 <h1>Ensemble luttons contre les abandons</h1>
+                </div>
             </div>
             <div className='homeContent2 scrollDiv'>
                 <Container>
@@ -56,9 +65,9 @@ function Home() {
                         <Col style={{marginTop: '8%', maxWeight: '100%', maxHeight: '100%'}}>
                             <img id="imgCat" src={imgCat} alt="cat"/>
                         </Col>
-                        <Col style={{marginTop: '8%', maxWeight: '100%', maxHeight: '100%'}}>
-                            <p>Hospitalisation d’urgence, perte d’un logement...sont autant de difficultés qui ne laissent parfois 
-                            d’autres choix que d’abandonner son animal. Durant les inondations de 2021, un énorme réseau d’entraide s’est
+                        <Col style={{marginTop: '3%', maxWeight: '100%', maxHeight: '100%'}}>
+                            <p>Hospitalisation d’urgence, perte d’un logement...autant de difficultés qui ne laissent parfois 
+                            d’autres choix que d’abandonner son animal. <br/> Durant les inondations de 2021, un énorme réseau d’entraide s’est
                             créé via les réseaux sociaux.<br/> Nous continuons l’effort ici.</p>
                         </Col>
                     </Row>
