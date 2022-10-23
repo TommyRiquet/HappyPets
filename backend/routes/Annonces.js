@@ -49,4 +49,9 @@ router.get("/", async (req, res) => {
   
 })
 
+router.get("/amount", async (req, res) => {
+    const listOfAnnonces = await Annonces.findAll()
+    res.json(listOfAnnonces.length)
+})
+
 module.exports = router

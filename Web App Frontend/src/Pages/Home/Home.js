@@ -1,5 +1,6 @@
 /*Importing Components */
-import {Card,Row, Col, Container } from 'react-bootstrap';
+import {Row, Col, Container } from 'react-bootstrap';
+import { useState,useEffect } from 'react';
 /*Importing Styles*/
 import './Home.css';
 /*Importing Images*/
@@ -8,6 +9,25 @@ import imgCat from '../../Assets/homeBackGround3.png';
 import imgCounter from '../../Assets/counter-home.png'
 
 function Home() {
+
+    const [CounterAnnonces,setCounterAnnonces] = useState()
+    useEffect(()=>{
+        getCounterAnnonces()
+    },[])
+
+    
+    function getCounterAnnonces(){
+        /*
+        Fonction qui permet de savoir combien d'annonces existent
+        */
+            fetch('http://localhost:3001/annonces/amount')
+                .then((response) => response.json())
+                .then((data) => {
+                    setCounterAnnonces(data)
+                    console.log(data);
+            });
+    }
+
     return (
         <div className="Home">
             <div className='homeContent1 scrollDiv'>
@@ -20,8 +40,8 @@ function Home() {
                             <p>Près de <span style={{color:'orange'}}>65 000</span> animaux domestiques sont abandonnés tous les ans par leurs maîtres à l'approche de l'été.</p>
                             <div id="counter-home">
                                     <img src={imgCounter}/><br/>
-                                    <p id='number-counter-home'>115</p>
-                                    <p id="text-counter-home">Animaux sauvés grâce à la plateforme</p>
+                                    <p><span id='number-counter-home'>{CounterAnnonces}</span><br/>
+                                    <span id="text-counter-home">Animaux sauvés grâce à la plateforme</span></p>
                             </div>
                         </Col>
                         <Col>
