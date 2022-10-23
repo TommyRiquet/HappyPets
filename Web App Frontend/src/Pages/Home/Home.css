@@ -57,7 +57,7 @@ html {
     background: var(--tertiary-color) no-repeat center center;
     background-size: cover;
     position: relative;
-    height: 100vh !important;
+    height: 125vh !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,6 +70,31 @@ html {
     font-size: 300%;
     text-align: center;
     
+}
+
+#counter-home{
+    justify-content: center;
+    align-items: center;
+    max-width:90%;
+    border: none;
+    border-radius: 30px;
+    background-color: white;
+    margin-left:5%;
+}
+
+#counter-home img{
+    max-width: 30%;
+    max-height: 30%;
+}
+
+#number-counter-home{
+    color:#F26419;
+    font-weight: bold;
+    font-size: 200%;
+}
+
+#text-counter-home{
+    color:#656B79;
 }
 
 #imgChicken{
