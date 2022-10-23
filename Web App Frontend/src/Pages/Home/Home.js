@@ -1,10 +1,11 @@
 /*Importing Components */
-import {Row, Col, Container } from 'react-bootstrap';
+import {Card,Row, Col, Container } from 'react-bootstrap';
 /*Importing Styles*/
 import './Home.css';
 /*Importing Images*/
 import imgChicken from '../../Assets/homeBackGround2.png';
 import imgCat from '../../Assets/homeBackGround3.png';
+import imgCounter from '../../Assets/counter-home.png'
 
 function Home() {
     return (
@@ -16,9 +17,12 @@ function Home() {
                 <Container>
                     <Row xs={1} md={2}>
                         <Col style={{marginTop: '10%'}}>
-                            <p>Près de <span style={{color:'orange'}}>65 000</span> animaux domestiques sont abandonnés 
-                            tous les ans. Si la majorité se produit à l'approche de l'été, d'autres sont une conséquence 
-                            des aléas de la vie.</p>
+                            <p>Près de <span style={{color:'orange'}}>65 000</span> animaux domestiques sont abandonnés tous les ans par leurs maîtres à l'approche de l'été.</p>
+                            <div id="counter-home">
+                                    <img src={imgCounter}/><br/>
+                                    <p id='number-counter-home'>115</p>
+                                    <p id="text-counter-home">Animaux sauvés grâce à la plateforme</p>
+                            </div>
                         </Col>
                         <Col>
                             <img id="imgChicken" src={imgChicken} alt="chicken"/>
