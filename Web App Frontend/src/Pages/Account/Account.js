@@ -77,7 +77,7 @@ function Account() {
                                     <td>Code postal</td>
                                 </tr>
                                 <tr>
-                                    <td>{InfoUser.Ville}</td>
+                                    <td>{InfoUser.City}</td>
                                     <td>{InfoUser.Postal}</td>
                                 </tr>
                                 <tr>
