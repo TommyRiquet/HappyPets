@@ -37,7 +37,7 @@ function Home() {
                 <Container>
                     <Row xs={1} md={2}>
                         <Col style={{marginTop: '10%'}}>
-                            <p>Près de <span style={{color:'orange'}}>65 000</span> animaux domestiques sont abandonnés tous les ans par leurs maîtres à l'approche de l'été.</p>
+                            <p>Près de <span style={{color:'orange'}}>65 000</span> animaux domestiques sont abandonnés tous les ans. Si la majorité se produit à l’approche de l’été, d’autres sont une conséquence des aleas de la vie.</p>
                             <div id="counter-home">
                                     <img src={imgCounter}/><br/>
                                     <p><span id='number-counter-home'>{CounterAnnonces}</span><br/>
