@@ -35,7 +35,7 @@ function Home() {
                 <CustomNavbar textLinkOne="S'inscrire"
                           linkOne="/inscription" 
                           textLinkTwo="Se connecter"
-                          linkTwo="/connexion"
+                          linkTwo="/login"
                           color="rgba(0, 0, 0, 0)"
                 />
                 <div className='homeContent1'>
