@@ -21,7 +21,6 @@ router.get("/:email", async(req, res) => {
 })
 
 router.post("/",async (req, res) => {
-    if (UserExisting(req.body.Email)){
         bcrypt.hash(req.body.Password, 10).then((hash) => {
             Users.create({
                 FirstName: req.body.FirstName,
@@ -37,7 +36,6 @@ router.post("/",async (req, res) => {
             })
             res.json('Succes')
         }) 
-    }
 });
 
 module.exports = router

@@ -20,16 +20,16 @@ function Register() {
     const [Resemail, setResemail] = useState('');
 
     const schema = yup.object().shape({
-        LastName: yup.string().matches(/^[a-zA-Z]*$/,'Que des characteres').required('Champ obligatoire'),
-        FirstName: yup.string().matches(/^[a-zA-Z]*$/,'Que des characteres').required('Champ obligatoire'),
+        LastName: yup.string().matches(/^[a-zA-Z]*$/,'Symboles et chiffres interdits').required('Champ obligatoire'),
+        FirstName: yup.string().matches(/^[a-zA-Z]*$/,'Symboles et chiffres interdits').required('Champ obligatoire'),
         Age: yup.date().max(sub({ years: 18 }, new Date()), "Il faut être âgé de 18 ans minimum").required('Champ obligatoire'),
-        City: yup.string().matches(/^[a-zA-Z]*$/,'Que des characteres').required('Champ obligatoire'),
+        City: yup.string().matches(/^[a-zA-Z]*$/,'Symboles et chiffres interdits').required('Champ obligatoire'),
         Postal: yup.number().min(1000,'Code postal incorrect').test('len', 'Numero incorrect', (val) => { if(val) return val.toString().length === 4; }).required('Champ obligatoire'),
-        Email: yup.string().email().test('exist','Email déjà utiliser', (val) => {if(val) setemailVerif(val); return Resemail === true;}).required('Champ obligatoire'),
+        Email: yup.string().email().test('exist','Email déjà utilisé ou champ vide', (val) => {if(val !== undefined){setemailVerif(val); return Resemail;}}).required('Champ obligatoire'),
         Phone: yup.number().test('len', 'Numero incorrect', (val) => { if(val) return val.toString().length === 9; }).required('Champ obligatoire'),
         Password: yup.string().min(8, '8 Charactère minimum.').minNumbers(2,'Le mot de passe doit contenir 2 numéro minimum').required('Champ obligatoire'),
         Password2: yup.string().required("Confirmation de mot de passe est obligatoire").oneOf([yup.ref("Password"), null],"Mot de passe différent"),
-        Terms: yup.bool().required('Champ obligatoire').oneOf([true], 'Accepter les terms'),
+        Terms: yup.bool().required('Champ obligatoire').oneOf([true], "Veuillez accepter les conditions d'utilisation"),
       });
       
 
@@ -135,13 +135,13 @@ function Register() {
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mb-3">
-                                    <Col sm="8">
+                                    <Col sm="7">
                                         <Form.Label>Numéro de téléphone:</Form.Label>
                                         <Form.Control type={'number'} name={"Phone"} placeholder={'Ex: 04********'} value={values.Phone} onChange={handleChange} onBlur={handleBlur} isValid={!errors.Phone && touched.Phone} isInvalid={errors.Phone && touched.Phone} required />
                                         <Form.Control.Feedback type="invalid">{errors.Phone}</Form.Control.Feedback>
                                     </Col>
-                                    <Col sm="4">
-                                        <Form.Label>Age:</Form.Label>
+                                    <Col sm="5">
+                                        <Form.Label>Date de naissance:</Form.Label>
                                         <Form.Control type={'date'} name={"Age"} onChange={handleChange} onBlur={handleBlur} isValid={!errors.Age && touched.Age} isInvalid={errors.Age && touched.Age}/>
                                         <Form.Control.Feedback type="invalid">{errors.Age}</Form.Control.Feedback>
                                     </Col>
@@ -178,7 +178,6 @@ function Register() {
                         )}
                     </Formik>
                 </div>
-
             </Container>
         </div>
     );
