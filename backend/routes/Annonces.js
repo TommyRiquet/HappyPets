@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
                             attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
                             include: [ {
                                 model:Users,
-                                attributes: ['Firstname','Ville'],
+                                attributes: ['Firstname','City'],
                             }]
                         }]
                 }
@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
                         attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
                         include: [ {
                             model:Users,
-                            attributes: ['Firstname','Ville'],
+                            attributes: ['Firstname','City'],
                         }]
                     }]
             }

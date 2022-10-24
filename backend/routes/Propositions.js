@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
             attributes : [],
                 include : [{
                     model : Users,
-                    attributes : ['FirstName', 'Age', 'Ville', 'Postal'],
+                    attributes : ['FirstName', 'Age', 'City', 'Postal'],
                 }],
 
         })
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 
                 include : [{
                     model : Users,
-                    attributes : ['FirstName', 'Age', 'Ville', 'postal'],
+                    attributes : ['FirstName', 'Age', 'City', 'postal'],
                 }],
         })
         res.json(ListPropositions)
@@ -38,7 +38,7 @@ router.get("/annonce", async (req, res) => {
             where : {AnnonceId : req.query.id},
                 include : [{
                     model : Users,
-                    attributes : ['FirstName', 'Age', 'Ville', 'Postal'],
+                    attributes : ['FirstName', 'Age', 'City', 'Postal'],
                 }],
             
         })
@@ -50,7 +50,7 @@ router.get("/annonce", async (req, res) => {
             where : {AnnonceId : req.query.id},
                 include : [{
                     model : Users,
-                    attributes : ['FirstName', 'Age', 'Ville', 'Postal'],
+                    attributes : ['FirstName', 'Age', 'City', 'Postal'],
                 }],
             
 
