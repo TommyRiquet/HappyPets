@@ -5,6 +5,7 @@
 
     .homeContent2{
         font-size: 150% !important;
+        height: 125vh !important;
         }
     
     .homeContent3{
@@ -57,7 +58,7 @@ html {
     background: var(--tertiary-color) no-repeat center center;
     background-size: cover;
     position: relative;
-    height: 125vh !important;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,7 +68,7 @@ html {
     /*Configuration text*/
     max-width: 100%;
     font-family: Arial, sans-serif;
-    font-size: 300%;
+    font-size: 200%;
     text-align: center;
     
 }
@@ -78,8 +79,8 @@ html {
     max-width:90%;
     border: none;
     border-radius: 30px;
-    background-color: white;
     margin-left:5%;
+    margin-top: 20%;
 }
 
 #counter-home img{
@@ -101,6 +102,7 @@ html {
     border-radius: 10% 10% 10% 10%;
     max-width: 100%;
     float:right;
+    margin-top: 10%;
 }
 
 .homeContent3{
@@ -117,7 +119,7 @@ html {
     /*Configuration text*/
     max-width: 100%;
     font-family: Arial, sans-serif;
-    font-size: 250%;
+    font-size: 200%;
     text-align: center;
     color:white;
 
