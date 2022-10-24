@@ -32,12 +32,7 @@ function Login() {
 
     return (
         <div className="Login">
-            <CustomNavbar textLinkOne="Propositions"
-                          linkOne="/propositions"
-                          textLinkTwo="Annonces"
-                          linkTwo="/annonces"
-                          color="rgba(47, 72, 88, 1)"
-            />
+            <CustomNavbar color="rgba(47, 72, 88, 1)"/>
                 <Container className='title-container'>
                 <h2>Connexion</h2>
                 </Container>
