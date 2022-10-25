@@ -40,11 +40,10 @@ function Account() {
         /*
         Fonction qui permet de charger les infos de l'utilisateur
         */
-            fetch('http://localhost:3001/users?id='+idUser)
+            fetch('http://localhost:3001/users/info?id='+idUser)
                 .then((response) => response.json())
                 .then((data) => {
-                    setInfoUser(data[0])
-                    console.log(data[0]);
+                    setInfoUser(data)
             });
     }
 
@@ -58,47 +57,56 @@ function Account() {
                 <Container className='account-container'>
                     <Row >
                         <Col md={6} xs={12} className="left-content">
-                            <img id="profilePic" src={profilePicture} alt="Profile picture"/>
+                            <img id="profilePic" src={profilePicture} alt="myself"/>
                             <br/>
                             <Button className='modify-button' variant="outline-secondary">Modifier vos informations</Button>
                         </Col>
                         <Col md={6} xs={12} className="right-content">
                             <table>
-                                <tr className='td-title'>
-                                    <td>Nom</td>
-                                    <td>Prénom</td>
-                                </tr>
-                                <tr>
-                                    <td>{InfoUser.LastName}</td>
-                                    <td>{InfoUser.FirstName}</td>
-                                </tr>
-                                <tr className='td-title'>
-                                    <td>Ville</td>
-                                    <td>Code postal</td>
-                                </tr>
-                                <tr>
-                                    <td>{InfoUser.City}</td>
-                                    <td>{InfoUser.Postal}</td>
-                                </tr>
-                                <tr>
-                                    <td className='td-title'>Adresse mail</td>
-                                </tr>
-                                <tr>
-                                    <td>{InfoUser.Email}</td>
-                                </tr>
-                                <tr>
-                                    <td className='td-title'>Animaux</td>
-                                </tr>
+                                <tbody>
+                                    <tr className='td-title'>
+                                        <td>Nom</td>
+                                        <td>Prénom</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{InfoUser.LastName}</td>
+                                        <td>{InfoUser.FirstName}</td>
+                                    </tr>
+                                    <tr className='td-title'>
+                                        <td>Ville</td>
+                                        <td>Code postal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{InfoUser.City}</td>
+                                        <td>{InfoUser.Postal}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='td-title'>Adresse mail</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{InfoUser.Email}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='td-title'>Animaux</td>
+                                    </tr>
+                                </tbody>
                                 </table>
-                                {InfoUser.Pets != 0 ?
-                                    <div className='div-pic-animal'>
-                                        {InfoUser.Pets.map((pet)=>{
-                                            return <td className='pic-animal'><img src={AnimauxPic[pet.Type]}/><br/><p className='name-animal'>{pet.Name}</p></td>
-                                        })}
-                                    </div>
+                                {InfoUser.Pets.length !== 0 ?
+                                    <table>
+                                        <tbody>
+                                            <tr className='div-pic-animal'>
+                                                    {InfoUser.Pets.map((pet,index)=>{
+                                                        return <td className='pic-animal' key={"pets"+index}><img alt="my own Pet" src={AnimauxPic[pet.Type]}/><br/>
+                                                        <p className='name-animal'>{pet.Name}</p></td>
+                                                    })}
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     :
                                     <p>Vous n'avez pas d'animaux :/</p>
+                                    
                             }
+
                         </Col>
                     </Row>
                 </Container>
