@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {Annonces,Pets,Users} = require("../models")
+const {Annonces,Pets,Users,PetsAnnonces} = require("../models")
 
 
 router.get("/", async (req, res) => {
@@ -53,5 +53,23 @@ router.get("/amount", async (req, res) => {
     const listOfAnnonces = await Annonces.findAll()
     res.json(listOfAnnonces.length)
 })
+
+
+router.post("/",async (req, res) => {
+    Annonces.create({
+        Type: req.body.Type,
+        Comment: req.body.Comment,
+        DateBegin: req.body.DateBegin,
+        DateEnd: req.body.DateEnd,
+    }).then(annonce => {
+        PetsAnnonces.create({
+            PetId: req.body.PetId,
+            AnnonceId: annonce.dataValues.id
+        })
+    })
+
+    res.json(200)
+});
+
 
 module.exports = router

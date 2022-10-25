@@ -23,11 +23,11 @@ function NewAnnonce() {
                 method: 'POST',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({
+                    Type: switchGardiennage ? "Gardiennage" : "Promenade",
                     Comment: event.target['Comment'].value, 
                     DateBegin: event.target['FormControlCalendarBegin'].value, 
                     DateEnd: event.target['FormControlCalendarEnd'].value, 
                     PetId: "1",
-                    AnnonceId: "1",
                 })
             })
             .then(response => {
