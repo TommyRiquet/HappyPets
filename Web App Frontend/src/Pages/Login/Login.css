@@ -50,3 +50,11 @@ body{
     font-weight:500 !important;
     text-decoration: none !important;
 }
+
+.custom-form-label{
+    float: left;
+}
+
+.form-login{
+    max-width: 500px;
+}
