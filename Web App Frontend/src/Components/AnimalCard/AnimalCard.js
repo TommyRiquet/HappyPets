@@ -106,7 +106,7 @@ function AnimalCard(props) {
                 <Row className='annonce-localite' data-testid={"annonce-user-city"}>
                       <Col>
                         {
-                          props.annonce.Pets[0].User.Ville
+                          props.annonce.Pets[0].User.City
                         }
                       </Col>
                 </Row>
