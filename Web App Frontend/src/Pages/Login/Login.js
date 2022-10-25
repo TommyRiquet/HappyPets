@@ -37,15 +37,15 @@ function Login() {
                 <Container className='main-container'>
                     <Form onSubmit={sendLogin}>
                         <Row className="justify-content-md-center mb-4">
-                            <Col xs lg="6">
-                                <Form.Label style={{float: "left"}} htmlFor="email">Adresse e-mail</Form.Label>
-                                <Form.Control id="email"  placeholder="exemple@gmail.com" type='email' required />
+                            <Col>
+                                <Form.Label className='custom-form-label' htmlFor="email">Adresse e-mail</Form.Label>
+                                <Form.Control id="email" className='form-login' placeholder="exemple@gmail.com" type='email' required />
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center mb-4">
-                            <Col xs lg="6">
-                                <Form.Label style={{float: "left"}} htmlFor="password">Mot de passe</Form.Label>
-                                <Form.Control id="password" placeholder="e5#3ft4%6" type='password' required />
+                            <Col>
+                                <Form.Label className='custom-form-label' htmlFor="password">Mot de passe</Form.Label>
+                                <Form.Control id="password" className='form-login' placeholder="e5#3ft4%6" type='password' required />
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center">
@@ -57,8 +57,7 @@ function Login() {
                     <br />
                     <Row className="justify-content-md-center">
                         <Col md="auto">
-                            {/* We have to create the route Registration to make it work*/}
-                            <p>Vous n'avez pas encore de compte ? <a href='/registration' className='linkRegistration'>Cliquez ici</a> pour vous en créer un !</p>
+                            <p>Vous n'avez pas encore de compte ? <a href='/register' className='linkRegistration'>Cliquez ici</a> pour vous en créer un !</p>
                         </Col>
                     </Row>      
                 </Container>
