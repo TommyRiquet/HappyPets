@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
-import Annonces from './Annonces';
+import Account from './Account';
 
-describe('Annonces', () => {
+describe('Account', () => {
     it('Should render without crash', async () => {
         render(
-            <Annonces/>
+            <Account/>
         )
     })
 })
