@@ -1,17 +1,28 @@
 const express = require('express')
 const router = express.Router()
-const {Users} = require("../models")
+const {Users,Pets} = require("../models")
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken')
 const {myError} = require("../middleware/Error")
 const {verifyToken} = require("../middleware/verifyToken")
 
-router.get("/", async (req, res) => {
-    const listOfUsers = await Users.findAll()
-    res.json(listOfUsers)
+
+router.get("/info", async (req, res) => {
+    const user = await Users.findOne({
+        attributes: ['FirstName','LastName','City','Postal','Email',],
+        where: {
+            id: req.query.id
+        },
+        include: [{
+            model: Pets,
+            attributes: ['Name','Type'],
+        }]
+    }
+    )
+    res.json(user)
 })
 
-router.get("/:email", async (req, res) => {
+router.get("/checkemail/:email", async (req, res) => {
     let existingUser = await Users.findOne({where: {Email: req.params.email}});
     if (existingUser === null) {
         res.json(true)

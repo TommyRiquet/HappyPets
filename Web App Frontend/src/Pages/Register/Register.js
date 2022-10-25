@@ -35,7 +35,7 @@ function Register() {
 
     
     useEffect(() => {
-        fetch('http://localhost:3001/users/'+emailVerif,{ 
+        fetch('http://localhost:3001/users/checkemail/'+emailVerif,{ 
                     method: 'GET',
                     headers: {'Content-type': 'application/json'},
         })
