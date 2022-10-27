@@ -28,7 +28,7 @@ describe('Testing component props <Usercard />', () => {
 
         expect(propsFirstName.textContent).toBe(FakeUser.User.FirstName);
         expect(propsAge.textContent).toBe(","+FakeUser.User.Age);
-        expect(propsVille.textContent).toBe(FakeUser.User.Ville);
+        expect(propsVille.textContent).toBe(FakeUser.User.City);
         expect(propsPostal.textContent).toBe(","+FakeUser.User.Postal);
     })
 
