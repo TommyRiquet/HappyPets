@@ -85,9 +85,14 @@ function Annonces() {
                                  <Button className='new-annonce-button' variant="" href='annonces/new'>Nouvelle Annonce</Button>
                             </Col>
                                 </Row>
-                 </Container>
+                                <Row className='new-annonce-button-row'>
+                                    <Col>
+                                        <Button className='new-annonce-button' variant="" href='annonces/new'>Nouvelle Annonce</Button>
+                                    </Col>
+                                </Row>
+                            </Container>
 
-                <Container className='annonces-container'> {
+                <Container className='annonces-container' data-testid="list-annonce">{
                      Object.keys(ListAnnonces).length === 0 ? 
                        <h2 className='no-result-message'>Aucun Résultat :/</h2> 
                              :
