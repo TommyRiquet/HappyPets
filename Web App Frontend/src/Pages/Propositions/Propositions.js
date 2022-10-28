@@ -21,7 +21,7 @@ function Propositions(){
   
     function LoadProposition(offset = 0){
 
-        fetch('http://localhost:3001/propositions?id=1')
+        fetch('http://localhost:3001/propositions/annonce?id=5')
             .then((response) => response.json())
             .then((data) => {
                 if(offset === 0){
@@ -57,7 +57,7 @@ function Propositions(){
                     ListPropositions.length === 0 ?
                         <h2 className="no-result-message">Personne ne s'est encore proposé :/</h2>
                         :
-                    <Row xs={1} sm={1} lg={2}>
+                    <Row xs={1} sm={1} lg={2} className="propositions-list-row" >
                         {
                             ListPropositions.map((proposition,index) => {
                                 return (
