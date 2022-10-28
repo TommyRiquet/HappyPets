@@ -4,6 +4,7 @@ import './Register.css';
 /*Importing Components */
 import {Container,Button, Form, Row, Col} from 'react-bootstrap';
 import React, {useState, useEffect} from 'react';
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 import { sub } from "date-fns/fp"
 import { useNavigate } from 'react-router';
 import {Formik} from 'formik';
@@ -75,6 +76,7 @@ function Register() {
         }
     return (
         <div className="UserForm">
+            <CustomNavbar color="rgba(47, 72, 88, 1)"/>
             <Container>
                 <h2>Page d'inscription</h2>
                 <div>
