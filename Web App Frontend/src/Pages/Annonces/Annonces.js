@@ -85,11 +85,6 @@ function Annonces() {
                                  <Button className='new-annonce-button' variant="" href='annonces/new'>Nouvelle Annonce</Button>
                             </Col>
                                 </Row>
-                                <Row className='new-annonce-button-row'>
-                                    <Col>
-                                        <Button className='new-annonce-button' variant="" href='annonces/new'>Nouvelle Annonce</Button>
-                                    </Col>
-                                </Row>
                             </Container>
 
                 <Container className='annonces-container' data-testid="list-annonce">{
