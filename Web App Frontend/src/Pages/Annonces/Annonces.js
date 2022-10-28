@@ -67,10 +67,10 @@ function Annonces() {
 
     return (
         <div className="Annonces">
-            <CustomNavbar textLinkOne="S'inscrire"
-                          linkOne="/inscription" 
-                          textLinkTwo="Se connecter"
-                          linkTwo="/connexion"
+            <CustomNavbar textLinkOne="Propositions"
+                          linkOne="/propositions"
+                          textLinkTwo="Annonces"
+                          linkTwo="/annonces"
                           color="rgba(47, 72, 88, 1)"
             />
             <Container>
