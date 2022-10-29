@@ -29,10 +29,13 @@ const AnimauxImages = {"Chien":ChienImage,
 
 function Annonces() {
     const [ListAnnonces,setListAnnonces] = useState([])
+    const [windowWidth,setWindowWidth] = useState(0)
     let offset = 0
 
     useEffect(()=>{
             window.addEventListener("scroll", handleScroll);
+            window.addEventListener("resize", handleResize);
+            setWindowWidth(window.innerWidth)
             LoadAnnonces();
         // eslint-disable-next-line
     },[])
@@ -65,6 +68,13 @@ function Annonces() {
         }
     }
 
+    function handleResize(e){
+        /* 
+        *   Fonction qui permet de récuperer la largeur de la page pour afficher les annonces en fonction de la largeur
+        */
+            setWindowWidth(window.innerWidth)
+        }
+    
     return (
         <div className="Annonces">
             <CustomNavbar textLinkOne="Propositions"
@@ -87,15 +97,75 @@ function Annonces() {
                                 </Row>
                             </Container>
 
-                <Container className='annonces-container' data-testid="list-annonce">{
-                     Object.keys(ListAnnonces).length === 0 ? 
-                       <h2 className='no-result-message'>Aucun Résultat :/</h2> 
-                             :
-                             <Row xs={1} sm={1} lg={2} >
+                <Container className='annonces-container' data-testid="list-annonce">
+                {
+                    /*
+                    * when i wrote this code, only God and i understood what i was doing
+                    * now, God only knows
+                    */
+                    Object.keys(ListAnnonces).length === 0 ? 
+                        /*Si il n'y a pas d'annonces*/
+                        <h2 className='no-result-message'>Aucun Résultat :/</h2> 
+                        
+                    :   /*Si il y a des annonces*/
+                            
+                            (windowWidth> 992 ?
+                                /*Affichage pour les grands écrans*/
+                                (   
+                                    <Row>
+                                        <Col>
+                                                <Row xs={1} >
+                                                    {
+                                                        ListAnnonces.map((annonce,index) => {
+                                                            /*Colonne de gauche*/
+                                                                    return(    
+                                                                        index%2 === 0 ?
+                                                                        <Col key={index} onClick={()=>console.log(index)}>
+                                                                            <AnimalCard annonce={annonce} image={
+                                                                                    annonce.Pets.map((pet) => {                                                            
+                                                                                        const ReturnTable = AnimauxImages[pet.Type]
+                                                                                        return ReturnTable
+                                                                                    })
+                                                                                } />
+                                                                        </Col>
+                                                                        :null
+                                                                        )
+                                                        })
+                                                    }
+                                                </Row>
+                                        </Col>
+                                        <Col>
+                                                <Row xs={1} >
+                                                    {
+                                                        ListAnnonces.map((annonce,index) => {
+                                                                /*Colonne de droite*/
+                                                                    return(    
+                                                                        index%2 === 1 ?
+                                                                        <Col key={index} onClick={()=>console.log(index)}>
+                                                                            <AnimalCard annonce={annonce} image={
+                                                                                    annonce.Pets.map((pet) => {                                                            
+                                                                                        const ReturnTable = AnimauxImages[pet.Type]
+                                                                                        return ReturnTable
+                                                                                    })
+                                                                                } />
+                                                                        </Col>
+                                                                        :null
+                                                                        )
+                                                        })
+                                                    }
+                                                </Row>
+                                        </Col>
+                                    </Row>
+                                )
+
+                                :
+                                /*Affichage pour les petits écrans*/	                   
+                                (
+                                    <Row xs={1} sm={1}>
                                         {
                                             ListAnnonces.map((annonce,index) => {
                                                 return (
-                                                        <Col key={index} colSpan={annonce.Pets.length} onClick={()=>console.log(index)}>
+                                                        <Col key={index} onClick={()=>console.log(index)}>
                                                             <AnimalCard annonce={annonce} image={
                                                                     annonce.Pets.map((pet) => {                                                            
                                                                         const ReturnTable = AnimauxImages[pet.Type]
@@ -106,9 +176,12 @@ function Annonces() {
                                                 )
                                             })
                                         }
-                             </Row>
+                                    </Row>
+                                )
+
+                            )
                  }
-                                
+                                 
                 </Container>
             </Container>
         </div>
