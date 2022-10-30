@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 function CustomNavbar(props) {
   useEffect(() => {
-    console.log(props.linkOne);
     document.getElementsByClassName("navbar")[0].style.backgroundColor = props.color;
   }, [props]);
 
