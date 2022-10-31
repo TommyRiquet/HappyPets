@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
                     attributes: ['Type','DateBegin','DateEnd'],
                         include: [ {
                             model:Pets,
-                            attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
+                            attributes: ['Name','Type','Race','Age','Sexe','sterile','Weight','Height'],
                             include: [ {
                                 model:Users,
                                 attributes: ['Firstname','City'],
@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
                 attributes: ['Type','DateBegin','DateEnd'],
                     include: [ {
                         model:Pets,
-                        attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
+                        attributes: ['Name','Type','Race','Age','Sexe','Sterile','Weight','Height'],
                         include: [ {
                             model:Users,
                             attributes: ['Firstname','City'],
