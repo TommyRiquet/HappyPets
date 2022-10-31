@@ -7,8 +7,6 @@ import './AnimalCard.css';
 /*Importing Icons*/
 import FIcon from '../../Assets/F-Icon.png';
 import MIcon from '../../Assets/M-Icon.png';
-import CheckboxChecked from '../../Assets/Checkbox-checked.jpg';
-import Checkbox from '../../Assets/Checkbox.jpg';
 
 function AnimalCard(props) {
   const MaxNumberOfPetsPerAnnonce = 3;
@@ -83,8 +81,8 @@ function AnimalCard(props) {
                           </Row>
                           <Row>
                             <Col className='annonce-sterile-checkbox'>
-                              <input type='checkbox' checked={pet.sterile} disabled data-testid={"annonce-sterile-checkbox"+index}/>
-                              <label labelfor='sterile-checkbox' class="checkmark">Stérilisation</label>                           
+                              <input type='checkbox' checked={pet.Sterile} disabled data-testid={"annonce-sterile-checkbox"+index}/>
+                              <label labelfor='sterile-checkbox'>Stérilisation</label>                           
                             </Col>
                           </Row>
                           <Row>

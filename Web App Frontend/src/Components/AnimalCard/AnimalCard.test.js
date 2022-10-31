@@ -233,7 +233,7 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
           <AnimalCard annonce={FakeAnnonce} image={"test"}/>
       )
       const propsAnnonceUser = screen.getByTestId("annonce-user-firstname")
-      expect(propsAnnonceUser.textContent).toBe("Inconnu");
+      expect(propsAnnonceUser.textContent).toBe("");
   })
 
 
