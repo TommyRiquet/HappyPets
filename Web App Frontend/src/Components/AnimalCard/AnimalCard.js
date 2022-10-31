@@ -7,6 +7,8 @@ import './AnimalCard.css';
 /*Importing Icons*/
 import FIcon from '../../Assets/F-Icon.png';
 import MIcon from '../../Assets/M-Icon.png';
+import CheckboxChecked from '../../Assets/Checkbox-checked.jpg';
+import Checkbox from '../../Assets/Checkbox.jpg';
 
 function AnimalCard(props) {
   const MaxNumberOfPetsPerAnnonce = 3;
@@ -80,6 +82,12 @@ function AnimalCard(props) {
                               </Col>
                           </Row>
                           <Row>
+                            <Col className='annonce-sterile-checkbox'>
+                              <input type='checkbox' checked={pet.sterile} disabled data-testid={"annonce-sterile-checkbox"+index}/>
+                              <label labelfor='sterile-checkbox' class="checkmark">Stérilisation</label>                           
+                            </Col>
+                          </Row>
+                          <Row>
                               <Col className='annonce-info-checkbox'>
                                 <input type="checkbox" name="chien-checkbox" checked disabled data-testid={"annonce-chien-checkbox"+index}/>
                                   <label labelfor="chien-checkbox">Chien</label>
@@ -113,9 +121,9 @@ function AnimalCard(props) {
                 <Row className='annonce-user-firstname' data-testid={"annonce-user-firstname"}>
                     <Col>
                       {
-                        props.annonce.Pets.length===0 ? "Inconnu":
-                        props.annonce.Pets[0].User.length===0 ? "Inconnu":
-                        props.annonce.Pets[0].User.Firstname.length===0 ? "Inconnu" : props.annonce.Pets[0].User.Firstname
+                         !("User" in props.annonce.Pets[0])? "": 
+                         props.annonce.Pets[0].User.length===0 ? "":
+                         props.annonce.Pets[0].User.Firstname.length===0 ? "" : props.annonce.Pets[0].User.Firstname
                       }
                     </Col>
                 </Row>
