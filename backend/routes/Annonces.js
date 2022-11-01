@@ -71,5 +71,44 @@ router.post("/",async (req, res) => {
     res.json(200)
 });
 
+router.get("/me", async(req,res) =>{
+    if(req.query.offset === "0"){
+        const listOfAnnonces = await Annonces.findAll(
+            {
+                limit: 20,
+                attributes: ['DateBegin','DateEnd'],
+                    include: [ {
+                        model:Pets,
+                        attributes: ['Name',"Type","Race","Age","Sexe","Sterile","Weight","Height"],
+                        include: [ {
+                            model:Users,
+                            attributes: [],
+                                where : {id: req.query.id},
+                        }]
+                    }]
+            }
+        )
+        res.json(listOfAnnonces)
+    }else{
+        const listOfAnnonces = await Annonces.findAll(
+            {
+                limit: 6,
+                offset: parseInt(req.query.offset),
+                attributes: ['DateBegin','DateEnd'],
+                    include: [ {
+                        model:Pets,
+                        attributes: ['Name',"Type","Race","Age"],
+                        include: [ {
+                            model:Users,
+                            attributes: [],
+                                where : {id: req.query.id},
+                        }]
+                    }]
+            }
+        )
+        res.json(listOfAnnonces)
+    }
+})
+
 
 module.exports = router
