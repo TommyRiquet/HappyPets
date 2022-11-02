@@ -97,7 +97,7 @@ router.get("/me", async(req,res) =>{
                 attributes: ['DateBegin','DateEnd'],
                     include: [ {
                         model:Pets,
-                        attributes: ['Name',"Type","Race","Age"],
+                        attributes: ['Name',"Type","Race","Age","Sexe","Sterile","Weight","Height"],
                         include: [ {
                             model:Users,
                             attributes: [],
