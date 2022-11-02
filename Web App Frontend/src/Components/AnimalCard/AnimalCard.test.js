@@ -16,7 +16,7 @@ let FakeAnnonce = {
           "Height": "Normal",
           "User": {
             "Firstname": "Kevin",
-            "Ville": "Wavre"
+            "City": "Wavre"
             }
         }
     ]
@@ -38,7 +38,7 @@ let FakeAnnonce2 = {
         "Height": "Normal",
         "User": {
           "Firstname": "Tommy",
-          "Ville": "Perwez"
+          "City": "Perwez"
           },
         },
         {
@@ -51,7 +51,7 @@ let FakeAnnonce2 = {
         "Height": "Normal",
         "User": {
           "Firstname": "Tommy",
-          "Ville": "Perwez"
+          "City": "Perwez"
           },
         }
   ]
@@ -74,7 +74,7 @@ let FakeAnnonce3 = {
         "Height": "Normal",
         "User": {
           "Firstname": "Marina",
-          "Ville": "Rixensart"
+          "City": "Rixensart"
           },
         },
         {
@@ -87,7 +87,7 @@ let FakeAnnonce3 = {
         "Height": "Normal",
         "User": {
           "Firstname": "Marina",
-          "Ville": "Rixensart"
+          "City": "Rixensart"
           },
         },
         {
@@ -100,7 +100,7 @@ let FakeAnnonce3 = {
         "Height": "Normal",
         "User": {
           "Firstname": "Marina",
-          "Ville": "Rixensart"
+          "City": "Rixensart"
           }
         }
   ]
@@ -240,7 +240,7 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
 
   it('Should replace the user city with null', async () => {
 
-    FakeAnnonce.Pets[0].User.Ville = ""
+    FakeAnnonce.Pets[0].User.City = ""
 
 
 
