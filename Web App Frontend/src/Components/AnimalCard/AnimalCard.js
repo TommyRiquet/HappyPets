@@ -112,8 +112,8 @@ function AnimalCard(props) {
                 <Row className='annonce-localite' data-testid={"annonce-user-city"}>
                       <Col>
                         {
-                          !("City" in props.annonce.Pets[0].User)? "": 
-                          props.annonce.Pets[0].User.City.length===0 ? "":
+                          !("User" in props.annonce.Pets[0])? "": 
+                          props.annonce.Pets[0].User.length===0 ? "":
                           props.annonce.Pets[0].User.City.length===0 ? "" : props.annonce.Pets[0].User.City
                         }
                       </Col>
