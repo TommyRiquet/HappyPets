@@ -29,8 +29,8 @@ describe('Integration Tests for the <Annonces> Page', () => {
         );
         
         await act(async () => {
-            expect(jestSpy).toHaveBeenCalledTimes(1);
-            expect(jestSpy).toHaveBeenCalledWith('http://localhost:3001/annonces?offset=0');
+            expect(jestSpy).toHaveBeenCalledTimes(2);
+            expect(jestSpy).toHaveBeenCalledWith("http://localhost:3001/annonces?offset=0&limit=20");
         })
 
 
