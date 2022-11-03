@@ -40,6 +40,18 @@ module.exports = (sequelize, DataTypes) => {
         Comment: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        DogFriendly: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        CatFriendly: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        KidFriendly: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
         }
 
     })

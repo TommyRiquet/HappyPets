@@ -1,5 +1,5 @@
 /*Importing Components */
-import { Card, Row, Col, } from 'react-bootstrap';
+import { Card, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 /*Importing Styles*/
 import './AnimalCard.css';
@@ -7,6 +7,9 @@ import './AnimalCard.css';
 /*Importing Icons*/
 import FIcon from '../../Assets/F-Icon.png';
 import MIcon from '../../Assets/M-Icon.png';
+import DogIcon from '../../Assets/dog-icon.png';
+import CatIcon from '../../Assets/cat-icon.png';
+import BabyIcon from '../../Assets/baby-icon.png';
 
 function AnimalCard(props) {
   const MaxNumberOfPetsPerAnnonce = 3;
@@ -87,14 +90,21 @@ function AnimalCard(props) {
                           </Row>
                           <Row>
                               <Col className='annonce-info-checkbox'>
-                                <input type="checkbox" name="chien-checkbox" checked disabled data-testid={"annonce-chien-checkbox"+index}/>
-                                  <label labelfor="chien-checkbox">Chien</label>
-                                  <br/>
-                                <input type="checkbox" name="chat-checkbox" disabled data-testid={"annonce-chat-checkbox"+index}/>
-                                  <label labelfor="chat-checkbox">Chat</label>
-                                  <br/>
-                                <input type="checkbox" name="enfant-checkbox" checked disabled data-testid={"annonce-enfant-checkbox"+index} />
-                                  <label labelfor="enfant-checkbox">Enfant</label>
+                                  <OverlayTrigger placement="top" overlay={<Tooltip>
+                                                                            {!pet.DogFriendly?"Ne supporte pas":"Supporte"} la présence de chiens
+                                                                          </Tooltip>}>
+                                      <img src={DogIcon} className={pet.DogFriendly?"green-icon":"red-icon"} width="30" height="30" alt='Dog Icon'></img>
+                                  </OverlayTrigger>
+                                  <OverlayTrigger placement="top" overlay={<Tooltip>
+                                                                            {!pet.CatFriendly?"Ne supporte pas":"Supporte"} la présence de chats
+                                                                          </Tooltip>}>
+                                      <img src={CatIcon} className={pet.CatFriendly?"green-icon":"red-icon"} width="30" height="30" alt='Cat Icon'></img>
+                                  </OverlayTrigger>
+                                  <OverlayTrigger placement="top" overlay={<Tooltip>                                                                            
+                                                                            {!pet.KidFriendly?"Ne supporte pas":"Supporte"} la présence d'enfants
+                                                                          </Tooltip>}>
+                                      <img src={BabyIcon} className={pet.KidFriendly?"green-icon":"red-icon"} width="30" height="30" alt='Baby Icon'></img>
+                                  </OverlayTrigger>
                               </Col>
                           </Row>
                       </Col>
