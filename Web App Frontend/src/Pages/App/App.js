@@ -17,6 +17,7 @@ import MesAnnonces from '../MesAnnonces/MesAnnonces';
 import Account from '../Account/Account'
 import CreatePet from '../CreatePet/CreatePet'
 import {DetailAnnonce} from '../DetailAnnonce/DetailAnnonce';
+import Admin from '../Admin/Admin';
 
 
 function App() {
@@ -50,6 +51,9 @@ function App() {
                   </Route>
 
                   {/* Lorsqu'aucune route n'a été trouvé */}
+
+                  <Route path='/admin' element={<Admin/>}/>
+
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
