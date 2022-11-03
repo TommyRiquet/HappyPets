@@ -2,18 +2,18 @@
   background-color: var(--tertiary-color);
 }
 
-.top-container{
-  margin-top: 7vh;
-}
-
 .top-container h2{
   font-size: 2.5rem;
   font-weight: 600;
   color: #3C3C3C;
 }
 
-.new-annonce-button-row{
-  float: right !important;
+.filter-button{
+  max-height: 2.5rem;
+}
+.new-annonce-button-col{
+  display: flex;
+  justify-content: flex-end;
 }
 .new-annonce-button{
   background-color: var(--secondary-color) !important;
@@ -39,3 +39,14 @@
   font-weight: bold;
   color: grey;
 }
+
+.send-filter-button{
+  border: 0 !important;
+  background-color: var(--secondary-color) !important;
+  border-radius: 50% !important;
+  transition: 0.3s !important;
+}
+.send-filter-button:hover{
+  transform: scale(1.05);
+}
+

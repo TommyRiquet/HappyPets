@@ -82,3 +82,10 @@ input[type="checkbox"]:not(:checked) {
   background-color: rgba(161, 54, 54, 0.2);
   border: 1px solid rgb(161, 54, 54);
 }
+
+.green-icon{
+  filter:brightness(0.5) sepia(1) saturate(10000%) hue-rotate(110deg) ;
+}
+.red-icon{
+  filter: brightness(0.5) sepia(1) saturate(10000%);
+}
