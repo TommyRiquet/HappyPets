@@ -32,7 +32,7 @@ function Login() {
 
     return (
         <div className="Login">
-            <CustomNavbar color="rgba(47, 72, 88, 1)"/>
+            <CustomNavbar color="rgba(47, 72, 88, 1)" position="absolute"/>
                 <Container className='title-container'>
                 <h2>Connexion</h2>
                 </Container>
