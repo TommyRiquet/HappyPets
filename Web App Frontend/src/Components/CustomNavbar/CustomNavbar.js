@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 function CustomNavbar(props) {
   useEffect(() => {
     document.getElementsByClassName("navbar")[0].style.backgroundColor = props.color;
+    document.getElementsByClassName("navbar")[0].style.position = props.position;
   }, [props]);
 
   return (
