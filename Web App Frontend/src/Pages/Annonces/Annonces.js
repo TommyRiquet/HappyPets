@@ -39,6 +39,12 @@ function Annonces() {
     const limit = 20
 
     useEffect(()=>{
+        /*
+        * Ajoute un EventListener pour détecter le redimensionnement de la fenêtre
+        * Ajoute un EventListener pour détecter le scroll de la fenêtre
+        * Appele la fonction LoadAnnonces
+        * @return la suppression des EventListeners
+        */
             window.addEventListener("scroll", handleScroll);
             window.addEventListener("resize", handleResize);
             setWindowWidth(window.innerWidth)
@@ -53,6 +59,9 @@ function Annonces() {
     },[])
 
     useEffect(()=>{
+        /*
+        * Recharge les annonces lorsque l'offset change
+        */
         LoadAnnonces(offset,limit,selectedTypes,selectedTypeAnnonce,selectedCritere);
         // eslint-disable-next-line
     },[offset])
@@ -60,14 +69,12 @@ function Annonces() {
     function LoadAnnonces(offset = 0,limit = 20,listOfType = [],listOfTypeAnnonce = [],listOfCritere = []){
     /*
     *   Fonction qui permet de charger les annonces
+    *       @param offset : le nombre d'annonces à sauter
+    *       @param limit : le nombre d'annonces à charger
+    *       @param listOfType : la liste des types d'animaux à charger
+    *       @param listOfTypeAnnonce : la liste des types d'annonces à charger
+    *       @param listOfCritere : la liste des critères à charger
     */
-   console.log('http://localhost:3001/annonces?'
-                        +'offset='+offset
-                        +'&limit='+limit
-                        +listOfType.map((typePet)=>('&typePet='+typePet)).join("")
-                        +listOfTypeAnnonce.map((typeAnnonce)=>('&typeAnnonce='+typeAnnonce)).join("")
-                        +listOfCritere.map((critere)=>('&'+critere+'='+true)).join(""))
-
         fetch('http://localhost:3001/annonces?'
                                                 +'offset='+offset
                                                 +'&limit='+limit
@@ -89,6 +96,7 @@ function Annonces() {
     function handleScroll(e){
     /* 
     *   Fonction qui permet de charger les annonces suivantes quand on arrive en bas de la page
+    *      @param e : l'évènement scroll
     */
         if(window.innerHeight+e.target.documentElement.scrollTop+1 >= e.target.documentElement.scrollHeight){
             setOffset(offset => offset+limit)
@@ -98,6 +106,7 @@ function Annonces() {
     function handleResize(e){
         /* 
         *   Fonction qui permet de récuperer la largeur de la page pour afficher les annonces en fonction de la largeur
+        *      @param e : l'évènement resize
         */
             setWindowWidth(window.innerWidth)
         }
@@ -118,60 +127,66 @@ function Annonces() {
                        </Col>
                     </Row>
                         <Row className='filter-row'>
-                            <Col xs="3">
-                                <Multiselect
-                                    options={["Chien","Chat","Rongeur","Oiseau","Poisson","NAC"]}
-                                    placeholder="Type d'animal"
-                                    isObject={false}
-                                    onSelect={(_, selectedItem) => {
-                                        setSelectedTypes(SelectedTypes => [...SelectedTypes, selectedItem])
-                                        }}
-                                    onRemove={(_, removedItem) => {
-                                        setSelectedTypes(selectedTypes.filter((item) => item !== removedItem))
-                                        }}
-                                    emptyRecordMsg="Aucun type d'animal trouvé"
-                                    closeIcon="cancel"
-                                ></Multiselect>
-                            </Col>
-                            <Col xs="3">
-                            <Multiselect
-                                    options={["Promenade","Logement","Garde à domicile","Soins à domicile"]}
-                                    placeholder="Type d'annonce"
-                                    isObject={false}
-                                    onSelect={(_, selectedItem) => {
-                                        setSelectedTypeAnnonce(SelectedTypeAnnonce => [...SelectedTypeAnnonce, selectedItem])
-                                        }}
-                                    onRemove={(_, removedItem) => {
-                                        setSelectedTypeAnnonce(selectedTypeAnnonce.filter((item) => item !== removedItem))
-                                        }}
-                                    emptyRecordMsg="Aucun type d'annonce trouvé"
-                                    closeIcon="cancel"
-                                ></Multiselect>
-                            </Col>
-                            <Col xs="2">
-                                <Multiselect
-                                    options={[{name:"Ok Chien",id:"DogFriendly"},{name:"Ok Chat",id:"CatFriendly"},{name:"Ok Enfant",id:"KidFriendly"}]}
-                                    placeholder="Autres critères"
-                                    displayValue='name'
-                                    onSelect={(_, selectedItem) => {
-                                        setSelectedCritere(SelectedCritere => [...SelectedCritere, selectedItem.id])
-                                        }}
-                                    onRemove={(_, removedItem) => {
-                                        setSelectedCritere(selectedCritere.filter((item) => item !== removedItem.id))
-                                        }}
-                                    emptyRecordMsg="Aucun autre critère trouvé"
-                                    closeIcon="cancel"
-                                ></Multiselect>
-                            </Col>
-                            <Col xs="1" className='new-annonce-button-col'>
-                                 <Button className="send-filter-button filter-button" variant="" onClick={e=>{
-                                                                                setOffset(0)
-                                                                                LoadAnnonces(offset,20,selectedTypes,selectedTypeAnnonce,selectedCritere)
-                                                                                                            }}>
-                                    <img src={sendButtonIcon} width="25" height="25" alt="send-button"></img>
-                                 </Button>
-                            </Col>
-                            <Col xs="3" className='new-annonce-button-col'>
+                            {windowWidth>=992?
+                            (<>
+                                    <Col xs="3">
+                                        <Multiselect
+                                            options={["Chien","Chat","Rongeur","Oiseau","Poisson","NAC"]}
+                                            placeholder="Type d'animal"
+                                            isObject={false}
+                                            onSelect={(_, selectedItem) => {
+                                                setSelectedTypes(SelectedTypes => [...SelectedTypes, selectedItem])
+                                                }}
+                                            onRemove={(_, removedItem) => {
+                                                setSelectedTypes(selectedTypes.filter((item) => item !== removedItem))
+                                                }}
+                                            emptyRecordMsg="Aucun type d'animal trouvé"
+                                            closeIcon="cancel"
+                                        ></Multiselect>
+                                    </Col>
+                                    <Col xs="3">
+                                    <Multiselect
+                                            options={["Promenade","Logement","Garde à domicile","Soins à domicile"]}
+                                            placeholder="Type d'annonce"
+                                            isObject={false}
+                                            onSelect={(_, selectedItem) => {
+                                                setSelectedTypeAnnonce(SelectedTypeAnnonce => [...SelectedTypeAnnonce, selectedItem])
+                                                }}
+                                            onRemove={(_, removedItem) => {
+                                                setSelectedTypeAnnonce(selectedTypeAnnonce.filter((item) => item !== removedItem))
+                                                }}
+                                            emptyRecordMsg="Aucun type d'annonce trouvé"
+                                            closeIcon="cancel"
+                                        ></Multiselect>
+                                    </Col>
+                                    <Col xs="2">
+                                        <Multiselect
+                                            options={[{name:"Ok Chien",id:"DogFriendly"},{name:"Ok Chat",id:"CatFriendly"},{name:"Ok Enfant",id:"KidFriendly"}]}
+                                            placeholder="Autres critères"
+                                            displayValue='name'
+                                            onSelect={(_, selectedItem) => {
+                                                setSelectedCritere(SelectedCritere => [...SelectedCritere, selectedItem.id])
+                                                }}
+                                            onRemove={(_, removedItem) => {
+                                                setSelectedCritere(selectedCritere.filter((item) => item !== removedItem.id))
+                                                }}
+                                            emptyRecordMsg="Aucun autre critère trouvé"
+                                            closeIcon="cancel"
+                                        ></Multiselect>
+                                    </Col>
+                                <Col xs="1" className='new-annonce-button-col'>
+                                    <Button className="send-filter-button filter-button" variant="" onClick={e=>{
+                                                                                    setOffset(0)
+                                                                                    LoadAnnonces(offset,20,selectedTypes,selectedTypeAnnonce,selectedCritere)
+                                                                                                                }}>
+                                        <img src={sendButtonIcon} width="25" height="25" alt="send-button"></img>
+                                    </Button>
+                                </Col>
+                            </>)
+                                :
+                                    null
+                                }
+                            <Col xs={windowWidth>=992?"3":"12"} className='new-annonce-button-col'>
                                  <Button className='new-annonce-button filter-button' variant="" href='annonces/new'>Nouvelle Annonce</Button>
                             </Col>
                         </Row>
@@ -189,7 +204,7 @@ function Annonces() {
                         
                     :   /*Si il y a des annonces*/
                             
-                            (windowWidth> 992 && ListAnnonces.length>1?
+                            (windowWidth>= 992 && ListAnnonces.length>1?
                                 /*Affichage pour les grands écrans*/
                                 (   
                                     <Row>
