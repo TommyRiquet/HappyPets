@@ -39,7 +39,7 @@ function AnimalCard(props) {
                             </Col>
                           </Row>
                           <Row>
-                            <Col className={'annonce-pets-information'} style={{whiteSpace:'nowrap'}}>
+                            <Col className={'annonce-pets-information'}>
                                 { 
                                   props.annonce.Pets[index].Sexe === "F" ?<img data-testid={"annonce-pets-sexe"+index} src={FIcon} alt='F-icon' width={20}></img>:
                                   props.annonce.Pets[index].Sexe === "M" ? <img data-testid={"annonce-pets-sexe"+index} src={MIcon} alt='M-icon' width={20}></img> :null

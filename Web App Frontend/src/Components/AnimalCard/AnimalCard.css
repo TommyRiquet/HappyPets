@@ -38,6 +38,7 @@
 .annonce-pets-information{
   color: grey;
   font-size: 0.8em;
+  white-space: nowrap;
 }
 
 /*Description de l'annonce*/
