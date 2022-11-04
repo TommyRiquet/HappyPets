@@ -27,6 +27,9 @@ app.use("/propositions", propositionRouter)
 const ImageRouter = require('./routes/Images')
 app.use("/images", ImageRouter)
 
+const adminRouter = require('./routes/Admin')
+app.use("/admin", adminRouter)
+
 if (process.env.NODE_ENV !== 'test') {
     db.sequelize.sync().then(() => {
         app.listen(PORT, () => {

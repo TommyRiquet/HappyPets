@@ -1,23 +1,35 @@
+import { useEffect, useState } from 'react';
 import './Report.css';
 
 function Report(data){
-    console.log(data.page)
-    let res;
+
+    const [result,setresult] = useState('')
+    
     if(data.page === 'all'){
-        res = <p>All</p>;
+        fetch('http://localhost:3001/admin',{ 
+                    method: 'GET',
+                    headers: {'Content-type': 'application/json'},
+        })
+        .then(val => val.json())
+        .then(res =>{
+            setresult(res.map((id,ClientName) => {
+                return (id,ClientName )
+            }
+            ));
+            })
     }
     else if(data.page === 'alertUser'){
-        res = <p>User</p>;
+        result = <p>User</p>;
     }
     else if(data.page === 'alertAnnonce'){
-        res =<p>Annonce</p>;
+        result =<p>Annonce</p>;
     }
     else if(data.page === 'alertAvis'){
-        res = <p>Avis</p>;
+        result = <p>Avis</p>;
     }
     return(
         <div>
-            {res}
+            {result}
         </div>
     )
 }
