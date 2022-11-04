@@ -22,8 +22,8 @@ import sendButtonIcon from '../../Assets/sendButtonIcon.png';
 const AnimauxImages = {"Chien":ChienImage,
                         "Chat":ChatImage,
                         "Poisson":PoissonImage,
-                        "Hamster":HamsterImage,
-                        "Perroquet":PerroquetImage,
+                        "Rongeur":HamsterImage,
+                        "Oiseau":PerroquetImage,
                         "Lapin":LapinImage,
                         "Serpent":SerpentImage,
                         "NAC":TortueImage}
