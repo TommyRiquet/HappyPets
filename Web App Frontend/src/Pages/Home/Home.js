@@ -37,6 +37,7 @@ function Home() {
                           textLinkTwo="Se connecter"
                           linkTwo="/login"
                           color="rgba(0, 0, 0, 0)"
+                          position="absolute"
                 />
                 <div className='homeContent1'>
                 <h1>Ensemble luttons contre les abandons</h1>
