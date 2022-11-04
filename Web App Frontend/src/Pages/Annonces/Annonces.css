@@ -17,6 +17,8 @@
 }
 .new-annonce-button{
   background-color: var(--secondary-color) !important;
+  width: fit-content !important;
+  white-space: nowrap;
   border: 0 !important;
   border-radius: 10px !important;
   color: var(--tertiary-color) !important;
