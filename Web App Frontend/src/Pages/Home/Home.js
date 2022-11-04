@@ -25,7 +25,6 @@ function Home() {
                 .then((response) => response.json())
                 .then((data) => {
                     setCounterAnnonces(data)
-                    console.log(data);
             });
     }
 
@@ -33,7 +32,7 @@ function Home() {
         <div>
             <div className='scrollDiv '>
                 <CustomNavbar textLinkOne="S'inscrire"
-                          linkOne="/inscription" 
+                          linkOne="/register" 
                           textLinkTwo="Se connecter"
                           linkTwo="/login"
                           color="rgba(0, 0, 0, 0)"
@@ -49,7 +48,7 @@ function Home() {
                         <Col style={{marginTop: '10%'}}>
                             <p>Près de <span style={{color:'orange'}}>65 000</span> animaux domestiques sont abandonnés tous les ans. Si la majorité se produit à l’approche de l’été, d’autres sont une conséquence des aleas de la vie.</p>
                             <div id="counter-home">
-                                    <img src={imgCounter}/><br/>
+                                    <img src={imgCounter} alt=""/><br/>
                                     <p><span id='number-counter-home'>{CounterAnnonces}</span><br/>
                                     <span id="text-counter-home">Animaux sauvés grâce à la plateforme</span></p>
                             </div>
