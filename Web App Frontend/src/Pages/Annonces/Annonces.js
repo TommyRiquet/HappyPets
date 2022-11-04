@@ -127,9 +127,7 @@ function Annonces() {
                        </Col>
                     </Row>
                         <Row className='filter-row'>
-                            {windowWidth>=992?
-                            (<>
-                                    <Col xs="3">
+                                    <Col xs={6} sm={6} md={3} lg={3} className='g-2'>
                                         <Multiselect
                                             options={["Chien","Chat","Rongeur","Oiseau","Poisson","NAC"]}
                                             placeholder="Type d'animal"
@@ -144,7 +142,7 @@ function Annonces() {
                                             closeIcon="cancel"
                                         ></Multiselect>
                                     </Col>
-                                    <Col xs="3">
+                                    <Col xs={6} sm={6} md={3} lg={3} className='g-2'>
                                     <Multiselect
                                             options={["Promenade","Logement","Garde à domicile","Soins à domicile"]}
                                             placeholder="Type d'annonce"
@@ -159,7 +157,7 @@ function Annonces() {
                                             closeIcon="cancel"
                                         ></Multiselect>
                                     </Col>
-                                    <Col xs="2">
+                                    <Col xs={6} sm={6} md={3} lg={2} className='g-2'>
                                         <Multiselect
                                             options={[{name:"Ok Chien",id:"DogFriendly"},{name:"Ok Chat",id:"CatFriendly"},{name:"Ok Enfant",id:"KidFriendly"}]}
                                             placeholder="Autres critères"
@@ -174,7 +172,7 @@ function Annonces() {
                                             closeIcon="cancel"
                                         ></Multiselect>
                                     </Col>
-                                <Col xs="1" className='new-annonce-button-col'>
+                                <Col xs={4} sm={4} md={1} lg={1} className='new-annonce-button-col g-2' >
                                     <Button className="send-filter-button filter-button" variant="" onClick={e=>{
                                                                                     setOffset(0)
                                                                                     LoadAnnonces(offset,20,selectedTypes,selectedTypeAnnonce,selectedCritere)
@@ -182,11 +180,7 @@ function Annonces() {
                                         <img src={sendButtonIcon} width="25" height="25" alt="send-button"></img>
                                     </Button>
                                 </Col>
-                            </>)
-                                :
-                                    null
-                                }
-                            <Col xs={windowWidth>=992?"3":"12"} className='new-annonce-button-col'>
+                            <Col sm={12} md={12} lg={3} className='new-annonce-button-col g-2'>
                                  <Button className='new-annonce-button filter-button' variant="" href='annonces/new'>Nouvelle Annonce</Button>
                             </Col>
                         </Row>
