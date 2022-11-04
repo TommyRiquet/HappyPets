@@ -3,8 +3,8 @@ const router = express.Router()
 const {Admin} = require("../models")
 
 router.get("/", async (req, res) => {
-    const listOfreq = await Admin.findAll()
-    res.json(listOfreq)
+    const allreport = await Admin.findAll()
+    res.json(allreport)
 })
 
 module.exports = router
