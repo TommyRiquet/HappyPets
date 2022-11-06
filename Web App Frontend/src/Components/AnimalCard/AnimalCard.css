@@ -57,9 +57,11 @@
 }
 
 /*Type d'annonce*/
+.type-annonce-col{
+  text-align: center;
+}
 .type-annonce{
-  color: grey;
-  font-size: 0.8em;
+  color:black 
 }
 
 input[type="checkbox"]{

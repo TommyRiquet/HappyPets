@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
                     attributes: ['Type','DateBegin','DateEnd'],
                         include: [ {
                             model:Pets,
-                            attributes: ['Name','Type','Race','Age','Sexe','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
+                            attributes: ['Name','Type','Race','Sexe','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
                             where : { //Where type of pet is in the list of typePet and isDogFriendly, isCatFriendly and isKidFriendly are equal to the value in the request
                                 [Op.and]: [
                                 {Type :{
@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
                                 },
                             include: [ {
                                 model:Users,
-                                attributes: ['Firstname','City'],
+                                attributes: ['City'],
                             }]
                         }]
                 }
