@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Multiselect from "multiselect-react-dropdown";
 import AnimalCard from "../../Components/AnimalCard/AnimalCard";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
+import {useNavigate} from 'react-router-dom';
 
 /*Importing Styles*/
 import "./Annonces.css";
@@ -38,6 +39,7 @@ function Annonces() {
   const [windowWidth, setWindowWidth] = useState(0);
   const [offset, setOffset] = useState(0);
   const limit = 20;
+  let navigate = useNavigate();
 
   useEffect(() => {
     /*
@@ -285,8 +287,8 @@ function Annonces() {
                     {ListAnnonces.map((annonce, index) => {
                       /*Colonne de gauche*/
                       return index % 2 === 0 ? (
-                        <Col key={index} onClick={() => console.log(index)}>
-                          <AnimalCard
+                        <Col key={index} onClick={()=>navigate('/detail/'+ annonce.id )}>
+                        <AnimalCard
                             annonce={annonce}
                             image={annonce.Pets.map((pet) => {
                               const ReturnTable = AnimauxImages[pet.Type];
@@ -303,7 +305,7 @@ function Annonces() {
                     {ListAnnonces.map((annonce, index) => {
                       /*Colonne de droite*/
                       return index % 2 === 1 ? (
-                        <Col key={index} onClick={() => console.log(index)}>
+                        <Col key={index} onClick={()=>navigate('/detail/'+ annonce.id )}>
                           <AnimalCard
                             annonce={annonce}
                             image={annonce.Pets.map((pet) => {
@@ -322,7 +324,7 @@ function Annonces() {
               <Row xs={1} sm={1}>
                 {ListAnnonces.map((annonce, index) => {
                   return (
-                    <Col key={index} onClick={() => console.log(index)}>
+                    <Col key={index} onClick={()=>navigate('/detail/'+ annonce.id )}>
                       <AnimalCard
                         annonce={annonce}
                         image={annonce.Pets.map((pet) => {
