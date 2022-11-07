@@ -46,11 +46,14 @@ function Home() {
                 <Container>
                     <Row>
                         <Col xs={12} md={6} style={{marginTop: '10%'}}>
-                            <p>Près de <span style={{color:'orange'}}>65 000</span> animaux domestiques sont abandonnés tous les ans. Si la majorité se produit à l’approche de l’été, d’autres sont une conséquence des aleas de la vie.</p>
+                        <p>Près de <span style={{color:'orange'}}>30 000</span> animaux de compagnie sont abandonnés tous les ans.</p>
+                        <p>Hospitalisation d’urgence, perte d’un logement, situations familiales problématiques...autant de difficultés qui ne laissent parfois 
+                            d’autres choix que d’abandonner son animal. <br/> Durant les inondations de 2021, un énorme réseau d’entraide s’est
+                            créé via les réseaux sociaux.<br/> Nous continuons l’effort ici.</p>
                             <div id="counter-home">
                                     <img src={imgCounter} alt="Maison avec des animaux"/><br/>
                                     <p><span id='number-counter-home'>{CounterAnnonces}</span><br/>
-                                    <span id="text-counter-home">Animaux sauvés grâce à la plateforme</span></p>
+                                    <span id="text-counter-home">Animaux aidés grâce à la plateforme</span></p>
                             </div>
                         </Col>
                         <Col xs={12} md={6}>
@@ -66,9 +69,7 @@ function Home() {
                             <img id="imgChicken" src={imgChicken} alt="Poule"/>
                         </Col>
                         <Col style={{marginTop: '3%', maxWeight: '100%', maxHeight: '100%'}}>
-                            <p>Hospitalisation d’urgence, perte d’un logement...autant de difficultés qui ne laissent parfois 
-                            d’autres choix que d’abandonner son animal. <br/> Durant les inondations de 2021, un énorme réseau d’entraide s’est
-                            créé via les réseaux sociaux.<br/> Nous continuons l’effort ici.</p>
+                            
                         </Col>
                     </Row>
                 </Container>

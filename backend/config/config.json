@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "qtpets",
-    "host": "localhost",
+    "username": "sql8536004",
+    "password":  "R4Ah6MAwRN",
+    "database": "sql8536004",
+    "host": "sql8.freemysqlhosting.net",
     "dialect": "mysql"
   },
   "test": {
