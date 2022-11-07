@@ -131,5 +131,9 @@ html {
     border-radius: 10%;
     max-width: 100%;
     float: left;
-    
+}
+.chicken-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

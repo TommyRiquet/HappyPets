@@ -62,7 +62,7 @@ function Home() {
             <div className='homeContent3 scrollDiv'>
                 <Container>
                     <Row xs={1} md={2}>
-                        <Col style={{marginTop: '8%', maxWeight: '100%', maxHeight: '100%'}}>
+                        <Col className='chicken-col' style={{ maxWeight: '100%', maxHeight: '100%'}}>
                             <img id="imgChicken" src={imgChicken} alt="Poule"/>
                         </Col>
                         <Col style={{marginTop: '3%', maxWeight: '100%', maxHeight: '100%'}}>
