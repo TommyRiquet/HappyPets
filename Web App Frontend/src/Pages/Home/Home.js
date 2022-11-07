@@ -5,8 +5,8 @@ import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
 import './Home.css';
 /*Importing Images*/
-import imgChicken from '../../Assets/homeBackGround2.png';
-import imgCat from '../../Assets/homeBackGround3.png';
+import imgCat from '../../Assets/homeBackGround2.png';
+import imgChicken from '../../Assets/homeBackGround3.png';
 import imgCounter from '../../Assets/counter-home.png'
 
 function Home() {
@@ -44,17 +44,17 @@ function Home() {
             </div>
             <div className='homeContent2 scrollDiv'>
                 <Container>
-                    <Row xs={1} md={2}>
-                        <Col style={{marginTop: '10%'}}>
+                    <Row>
+                        <Col xs={12} md={6} style={{marginTop: '10%'}}>
                             <p>Près de <span style={{color:'orange'}}>65 000</span> animaux domestiques sont abandonnés tous les ans. Si la majorité se produit à l’approche de l’été, d’autres sont une conséquence des aleas de la vie.</p>
                             <div id="counter-home">
-                                    <img src={imgCounter} alt=""/><br/>
+                                    <img src={imgCounter} alt="Maison avec des animaux"/><br/>
                                     <p><span id='number-counter-home'>{CounterAnnonces}</span><br/>
                                     <span id="text-counter-home">Animaux sauvés grâce à la plateforme</span></p>
                             </div>
                         </Col>
-                        <Col>
-                            <img id="imgChicken" src={imgChicken} alt="chicken"/>
+                        <Col xs={12} md={6}>
+                            <img id="imgCat" src={imgCat} alt="Chat"/>
                         </Col>
                     </Row>
                 </Container>
@@ -63,7 +63,7 @@ function Home() {
                 <Container>
                     <Row xs={1} md={2}>
                         <Col style={{marginTop: '8%', maxWeight: '100%', maxHeight: '100%'}}>
-                            <img id="imgCat" src={imgCat} alt="cat"/>
+                            <img id="imgChicken" src={imgChicken} alt="Poule"/>
                         </Col>
                         <Col style={{marginTop: '3%', maxWeight: '100%', maxHeight: '100%'}}>
                             <p>Hospitalisation d’urgence, perte d’un logement...autant de difficultés qui ne laissent parfois 
