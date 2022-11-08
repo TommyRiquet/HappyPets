@@ -16,7 +16,7 @@ import {Register} from "../Register/Register";
 import MesAnnonces from '../MesAnnonces/MesAnnonces';
 import Account from '../Account/Account'
 import CreatePet from '../CreatePet/CreatePet'
-import DetailAnimal from '../DetailAnimal/DetailAnimal';
+import DetailAnnonce from '../DetailAnnonce/DetailAnnonce';
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
                   <Route path="/account" element={<Account/>}/>
                   <Route path="/createAnimal" element={<CreatePet/>}/>
                   <Route path='/register' element={<Register/>}/>
-                  <Route path='/DetailAnimal/:id' element={<DetailAnimal/>}/>
+                  <Route path='/DetailAnnonce/:id' element={<DetailAnnonce/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
