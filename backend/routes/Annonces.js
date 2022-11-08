@@ -62,13 +62,15 @@ router.get("/amount", async (req, res) => {
     res.json(listOfAnnonces.length)
 })
 
-router.get("/detailAnimal", async (req, res) => {
+router.get("/detailAnnonce", async (req, res) => {
+    const id = req.query.id<=0 || isNaN(parseInt(req.query.id)) ? 1 : req.query.id
+
     const detailOfAnnonce = await Annonces.findOne(
-        {   where: {id: req.query.id},
+        {   where: {id: id},
             attributes: ['Comment','Type','DateBegin','DateEnd'],
                 include: [ {
                     model:Pets,
-                    attributes: ['Name','Type','Race','Age','Sexe','Weight','Height'],
+                    attributes: ['Name','Type','Race','Age','Sexe','Weight','Height','Comment','DogFriendly','CatFriendly','KidFriendly'],
                     include: [ {
                         model:Users,
                         attributes: ['Firstname','City'],
