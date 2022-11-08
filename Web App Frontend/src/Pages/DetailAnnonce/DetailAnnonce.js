@@ -5,32 +5,60 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ReturnButton from '../../Components/ReturnButton/ReturnButton';
 
+import DogIcon from "../../Assets/dog-icon.png";
+import CatIcon from "../../Assets/cat-icon.png";
+import BabyIcon from "../../Assets/baby-icon.png";
+
+/*Importing Images*/
+import ChienImage from "../../Assets/Chien.jpg";
+import ChatImage from "../../Assets/Chat.jpg";
+import PoissonImage from "../../Assets/Poisson.jpg";
+import HamsterImage from "../../Assets/Hamster.jpg";
+import PerroquetImage from "../../Assets/Perroquet.jpg";
+import LapinImage from "../../Assets/Lapin.jpg";
+import SerpentImage from "../../Assets/Serpent.jpg";
+import TortueImage from "../../Assets/Tortue.jpg";
+
+const AnimauxImages = {
+  Chien: ChienImage,
+  Chat: ChatImage,
+  Poisson: PoissonImage,
+  Rongeur: HamsterImage,
+  Oiseau: PerroquetImage,
+  Lapin: LapinImage,
+  Serpent: SerpentImage,
+  NAC: TortueImage,
+};
 
 function DetailAnnonce() {
     const [annonce,setAnnonce] = useState({
+        "DateBegin": "",
+        "DateEnd": "",
         "Pets": [
             {
-                "Name": "Yoda",
-                "Type": "Chat",
-                "Race": "Exotic",
-                "Age": "3",
-                "Sexe": "F",
-                "Weight": 3,
-                "Height": "Normal",
+                "Name": "",
+                "Type": "",
+                "Race": "",
+                "Age": "",
+                "Sexe": "",
+                "Weight": 0,
+                "Height": "",
                 "User": {
-                    "Firstname": "Marina",
-                    "City": "Rixensart"
+                    "Firstname": "",
+                    "City": ""
                 },
                 "PetsAnnonces": {
-                    "createdAt": "2022-10-02T12:00:00.000Z",
-                    "updatedAt": "2022-10-02T12:00:00.000Z",
-                    "AnnonceId": 21,
-                    "PetId": 3
+                    "createdAt": "",
+                    "updatedAt": "",
+                    "AnnonceId": 0,
+                    "PetId": 0
                 }
             },
 
         ]
     })
+    const [displayPet,setDisplayPet] = useState({})
+
     let { id } = useParams();
 
     useEffect(()=>{
@@ -44,26 +72,114 @@ function DetailAnnonce() {
             .then((response) => response.json())
             .then((data) => {
                 setAnnonce(data)
-                console.log(data)
             });
     }
+
+    useEffect(()=>{
+        setDisplayPet(annonce.Pets[0])
+    },[annonce])
 
     return (
         <div className="DetailAnnonce">
             <CustomNavbar color="rgba(47, 72, 88, 1)"/>
             <ReturnButton/>
             <Container>
-                <Row className="justify-content-md-center">
-                    <Col></Col>
+                <Row>
                     <Col>
-                    
+                        <h3>
+                            {
+                                annonce.Pets.map((pet,index) => {
+                                    return <span key={index}>{pet.Name+" "}</span>
+                                    }
+                                )
+                            }
+                        </h3>
                     </Col>
                 </Row>
-                <Row className="justify-content-md-center">
-                    <Col>Propriétaire : { annonce.Pets[0].User.Firstname }</Col>                       
+                <Row>
+                    <Col>
+                        <span>à surveiller du {annonce.DateBegin.slice(5, 10)} au {annonce.DateEnd.slice(5, 10)}</span>
+                    </Col>
                 </Row>
-                <Row className="justify-content-md-center">
-                    <Col>Description : {annonce.Comment}</Col>
+                <Row>
+                    <Col>
+                        <h5>Propriétaire : { annonce.Pets[0].User.Firstname }</h5>                       
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h5>Description : {annonce.Comment}</h5>
+                    </Col>
+                </Row>
+
+                
+                <Row>
+                            {
+                                annonce.Pets.map((pet,index) => {
+                                    return (
+                                        <Col key={index} onClick={e=>setDisplayPet(pet)}>
+                                            <img src={AnimauxImages[pet.Type]} alt=""></img>
+                                        </Col>
+                                    )}
+                                )
+                            }
+                </Row>
+                
+                <Row>
+                    <Col>
+                        {
+                            displayPet.Name +", "+ displayPet.Age
+                        }
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                    {
+                        displayPet.Race
+                    }
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <img
+                              src={DogIcon}
+                              className={
+                                displayPet.DogFriendly ? "green-icon" : "red-icon"
+                              }
+                              width="30"
+                              height="30"
+                              alt="Dog Icon"
+                            ></img>
+                    </Col>
+                    <Col>
+                        <img
+                              src={CatIcon}
+                              className={
+                                displayPet.CatFriendly ? "green-icon" : "red-icon"
+                              }
+                              width="30"
+                              height="30"
+                              alt="Cat Icon"
+                            ></img>
+                    </Col>
+                    <Col>
+                        <img
+                              src={BabyIcon}
+                              className={
+                                displayPet.BabyFriendly ? "green-icon" : "red-icon"
+                              }
+                              width="30"
+                              height="30"
+                              alt="Baby Icon"
+                            ></img>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        {
+                            displayPet.Comment
+                        }
+                    </Col>
                 </Row>
             </Container>
         </div>
