@@ -84,25 +84,26 @@ html {
 }
 
 #counter-home img{
-    max-width: 30%;
-    max-height: 30%;
+    max-width: 20%;
+    max-height: 20%;
 }
 
 #number-counter-home{
     color:#F26419;
     font-weight: bold;
-    font-size: 200%;
+    font-size: 160%;
 }
 
 #text-counter-home{
     color:#656B79;
+    font-size: 80%;
 }
 
-#imgChicken{
+#imgCat{
     border-radius: 10% 10% 10% 10%;
     max-width: 100%;
     float:right;
-    margin-top: 10%;
+    margin-top: 25%;
 }
 
 .homeContent3{
@@ -126,8 +127,13 @@ html {
     
 }
 
-#imgCat{
+#imgChicken{
     border-radius: 10%;
     max-width: 100%;
     float: left;
+}
+.chicken-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
