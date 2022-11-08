@@ -4,7 +4,7 @@ import {Container, Button, Row, Col, Form } from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import axios from "axios";
+
 
 /*Importing Components */
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
@@ -70,31 +70,29 @@ function CreatePet(){
 
     function sendFormPet(event) {
         event.preventDefault()
-        const bodyFormData = new FormData();
-
-        bodyFormData.append('Name', event.target['name'].value)
-        bodyFormData.append('Type', event.target['type'].value)
-        bodyFormData.append('Race', event.target['race'].value)
-        bodyFormData.append('Age', event.target['age'].value)
-        bodyFormData.append('Weight', event.target['weight'].value)
-        bodyFormData.append('Height', event.target['height'].value)
-        bodyFormData.append('Behaviour', event.target['behaviour'].value)
-        bodyFormData.append('Sex', event.target['sex'].value)
-        bodyFormData.append('Comment', event.target['comment'].value)
-        bodyFormData.append('Image', event.target['image'])
-
-        axios({
-            method: "post",
-            url: "http://localhost:3001/pets",
-            data: bodyFormData,
-            headers: {"Content-Type": "multipart/form-data"},
+        fetch("http://localhost:3001/pets", {
+            method: 'POST',
+            headers: {'Content-type': 'application/json'},
+            body: (
+                JSON.stringify({
+                        Name: event.target['name'].value,
+                        Type: event.target['type'].value,
+                        Race: event.target['race'].value,
+                        Age: event.target['age'].value,
+                        Weight: event.target['weight'].value,
+                        Height: event.target['height'].value,
+                        Behaviour: event.target['behaviour'].value,
+                        Sex: event.target['sex'].value,
+                        Comment: event.target['comment'].value
+                    }
+                )
+            ),
         }).then((res) => {
-            if (res.data.error) {
-                console.log(res.data.error)
-            } else {
-                navigate('/')
-            }
-        })
+
+            navigate('/')
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
 
