@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
-import DetailAnimal from './DetailAnimal';
+import DetailAnnonce from './DetailAnnonce';
 
-describe('DetailAnimal', () => {
+describe('DetailAnnonce', () => {
     it('Should render without crash', async () => {
         render(
-            <DetailAnimal/>
+            <DetailAnnonce/>
         )
     })
 })
