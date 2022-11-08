@@ -1,11 +1,12 @@
-import './DetailAnimal.css';
+import './DetailAnnonce.css';
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import ReturnButton from '../../Components/ReturnButton/ReturnButton';
 
 
-function DetailAnimal() {
+function DetailAnnonce() {
     const [annonce,setAnnonce] = useState({
         "Pets": [
             {
@@ -33,13 +34,13 @@ function DetailAnimal() {
     let { id } = useParams();
 
     useEffect(()=>{
-        getDetailAnimal ();
+        getDetailAnnonce ();
     // eslint-disable-next-line
 },[])
 
-    function getDetailAnimal () {
+    function getDetailAnnonce () {
 
-        fetch('http://localhost:3001/annonces/detailAnimal?id='+id)
+        fetch('http://localhost:3001/annonces/detailAnnonce?id='+id)
             .then((response) => response.json())
             .then((data) => {
                 setAnnonce(data)
@@ -48,8 +49,9 @@ function DetailAnimal() {
     }
 
     return (
-        <div className="DetailAnimal">
+        <div className="DetailAnnonce">
             <CustomNavbar color="rgba(47, 72, 88, 1)"/>
+            <ReturnButton/>
             <Container>
                 <Row className="justify-content-md-center">
                     <Col></Col>
@@ -68,4 +70,4 @@ function DetailAnimal() {
     );
 }
 
-export default DetailAnimal;
+export default DetailAnnonce;
