@@ -11,7 +11,7 @@ function CustomNavbar(props) {
   }, [props]);
 
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" data-testid="navbar">
       <Container fluid>
         <Navbar.Brand href="/" className='title-navbar'>
           <img
@@ -27,8 +27,8 @@ function CustomNavbar(props) {
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto"></Nav>
           <Nav className="d-flex">
-          <Nav.Link href={props.linkOne}>{props.textLinkOne}</Nav.Link>
-          <Nav.Link href={props.linkTwo}>{props.textLinkTwo}</Nav.Link>
+          <Nav.Link href={props.linkOne} data-testid='link-one'>{props.textLinkOne}</Nav.Link>
+          <Nav.Link href={props.linkTwo} data-testid='link-two'>{props.textLinkTwo}</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
