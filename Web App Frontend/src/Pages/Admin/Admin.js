@@ -3,6 +3,7 @@ import './Admin.css';
 import Nav from 'react-bootstrap/Nav';
 import Report from '../../Components/Report/Report';
 import {useState} from 'react';
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 
 function Admin (){
     const [page, setpage] = useState('all');
@@ -12,7 +13,14 @@ function Admin (){
     }
 
     return (
-        <div>
+        <div className='colorback'>
+            <CustomNavbar 
+                textLinkOne="Propositions"
+                linkOne="/propositions"
+                textLinkTwo="Annonces"
+                linkTwo="/annonces"
+                color="rgba(47, 72, 88, 1)"
+                />
             <div className='tabsStyle'>
                 <Nav className='taille' variant="tabs" defaultActiveKey="all" onSelect={handleSelect}>
                     <Nav.Item className='caseStyle'>
