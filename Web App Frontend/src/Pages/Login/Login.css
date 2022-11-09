@@ -58,3 +58,7 @@ body{
 .form-login{
     max-width: 500px;
 }
+
+#error-message{
+    color: red !important;
+}
