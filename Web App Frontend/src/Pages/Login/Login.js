@@ -1,7 +1,7 @@
 /*Importing Components */
 import {Row, Col, Form, Button, Container} from 'react-bootstrap';
 
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
 import './Login.css';
@@ -27,14 +27,12 @@ function Login() {
             )
         })
             .then(res => {
-                if (res.data.error) {
-                    alert(res.data.error)
-                } else {
-                    localStorage.setItem("accessToken", res.data.token)
-                    localStorage.setItem("user", res.data.user)
-                    navigate('/')
-                }
-            })
+                localStorage.setItem("accessToken", res.body.token)
+                localStorage.setItem("user", res.body.user)
+                navigate('/')
+            }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
