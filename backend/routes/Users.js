@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const {Users,Pets} = require("../models")
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken')
+
 const {myError} = require("../middleware/Error")
 const {verifyToken} = require("../middleware/verifyToken")
+const {Users,Pets} = require("../models")
 
 
 router.get("/info", async (req, res) => {
@@ -46,7 +47,9 @@ router.post("/", async (req, res) => {
             Password: hash,
             PhotoLink: req.body.PhotoLink,
         })
-        res.json('Succes')
+        .then((user) => {
+            res.json(user.id)
+        })
     })
 });
 router.post('/login', async (req, res) => {
@@ -55,6 +58,7 @@ router.post('/login', async (req, res) => {
         const user = await Users.findOne({where: {Email: req.body.Email}})
         if (!user) throw new myError("L'utilisateur n'existe pas", 404);
 
+        
         const match = await bcrypt.compare(req.body.Password, user.Password);
         if (!match) throw new myError("Mauvais mot de passe", 401);
 
@@ -72,4 +76,25 @@ router.post('/login', async (req, res) => {
 router.get('/auth', verifyToken, async (req, res) => {
     res.json({id: req.id, Role: req.Role})
 })
+
+
+router.post("/image/upload", async (req,res ) => {
+    let userId = req.body.userid
+    try { // si y a pas de fichier
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploaded'
+            });
+        } else {// si y a un fichier
+            let image = req.files.profilePicture;
+            image.mv('./Images/' + userId +'.'+ image.mimetype.split('/')[1]);
+
+            res.send(200);
+        }
+    } catch (error) { // en cas d'erreur
+        res.status(500).send(error);
+    }
+  });
+            
 module.exports = router

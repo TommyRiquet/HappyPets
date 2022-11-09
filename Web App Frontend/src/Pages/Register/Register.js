@@ -36,6 +36,7 @@ function Register() {
 
     
     useEffect(() => {
+        emailVerif !== "" ?
         fetch('http://localhost:3001/users/checkemail/'+emailVerif,{ 
                     method: 'GET',
                     headers: {'Content-type': 'application/json'},
@@ -45,9 +46,20 @@ function Register() {
             setResemail(res);
             }
         )
-
+        : 
+        setResemail('');
         }, [emailVerif]);
         
+    function uploadImage(file,id){
+        const formData = new FormData();
+        const request = new XMLHttpRequest();
+        
+        request.open("POST",'http://localhost:3001/users/image/upload')
+        formData.append('profilePicture', file);
+        formData.append('userid', id);
+        request.send(formData)
+
+    }
     
 
     function SendFormUSer(data){
@@ -64,15 +76,22 @@ function Register() {
                     Phone: data['Phone'],
                     Role: 0,
                     Password: data['Password'],
-                    PhotoLink: 0,
+                    PhotoLink: 0
                 })
                 
             })
             .then(response => response.json())
+            .then(res => {
+                const file = document.getElementById('profilePicture').files[0];
+                if(file){
+                    uploadImage(file,res);
+                }
+                navigate('/login');
+            })
             .catch(function (error) {
                 console.log(error);
             });
-            navigate('/');
+            
         }
     return (
         <div className="UserForm">
@@ -104,7 +123,7 @@ function Register() {
                             values,
                             errors,
                         }) => (
-                            <Form noValidate id="User" onSubmit={handleSubmit}>
+                            <Form noValidate id="User" onSubmit={handleSubmit} encType="multipart/form-data">
                                 <Form.Group as={Row} className="mb-3">
                                     <Col sm="6">
                                         <Form.Label>Nom:</Form.Label>
@@ -165,7 +184,7 @@ function Register() {
                                 <Form.Group as={Row} className="mb-4">
                                     <Col sm="12">
                                         <Form.Label>Photo de Profil:</Form.Label>
-                                        <Form.Control type="file" />
+                                        <Form.Control type="file" name="profilePicture" id="profilePicture"/>
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mb-3">
