@@ -2,3 +2,25 @@
     margin-left: 2%;
     margin-top: 2%;
 }
+
+.taille{
+    width: 98% !important;
+}
+
+a{
+    --bs-nav-link-color: #e06112;
+    --bs-nav-link-hover-color: #F2620A;
+}
+
+.Image{
+    height: 20%;
+    width: 20%;
+}
+
+.caseStyle{
+    background-color: #212529;
+}
+
+body{
+    background-color: #373b3e !important;
+}

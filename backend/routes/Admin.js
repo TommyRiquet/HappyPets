@@ -7,4 +7,9 @@ router.get("/", async (req, res) => {
     res.json(allreport)
 })
 
+router.get("/findtype/:type", async (req, res) => {
+    const allreport = await Admin.findAll({where: {Type: req.params.type}})
+    res.json(allreport)
+})
+
 module.exports = router
