@@ -2,6 +2,7 @@ import {  render, screen } from '@testing-library/react';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import Annonces from './Annonces';
+import {BrowserRouter} from 'react-router-dom';
 
 // Path: Web App Frontend\src\Pages\Annonces\Annonces.js
 
@@ -13,7 +14,9 @@ import Annonces from './Annonces';
 describe('Render Tests for the <Annonces> Page', () => {
     it('Should render without crash', async () => {
         render(
-            <Annonces/>
+            <BrowserRouter>
+                <Annonces/>
+            </BrowserRouter>
         )
     })
 })
@@ -25,8 +28,9 @@ describe('Integration Tests for the <Annonces> Page', () => {
         const jestSpy = jest.spyOn(global, 'fetch')
         
         render(
-            <Annonces/>
-        );
+            <BrowserRouter>
+                <Annonces/>
+            </BrowserRouter>        );
         
         await act(async () => {
             expect(jestSpy).toHaveBeenCalledTimes(2);
@@ -40,8 +44,9 @@ describe('Integration Tests for the <Annonces> Page', () => {
 
     it('Should display the error message because there\'s no data received', async () => {        
         render(
-            <Annonces/>
-        );
+            <BrowserRouter>
+                <Annonces/>
+            </BrowserRouter>        );
         
         
         const propsAnnonceType = screen.getByTestId("list-annonce")
