@@ -27,6 +27,7 @@
 .image-container {
     position: absolute;
     bottom: 0;
+    z-index: -1;
 
     width: 100%;
     overflow: hidden ;
@@ -34,7 +35,6 @@
 .dog-picture {
     position:relative;
     float:right !important;
-    z-index: -1;
 
     margin-right:20%;
 }
