@@ -18,7 +18,6 @@ function Login() {
 
         event.preventDefault()
 
-
         fetch("http://localhost:3001/users/login", {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
@@ -26,13 +25,20 @@ function Login() {
                 JSON.stringify(user)
             )
         })
-            .then(res => {
-                localStorage.setItem("accessToken", res.body.token)
-                localStorage.setItem("user", res.body.user)
-                navigate('/')
-            }).catch(function (error) {
-            console.log(error);
-        });
+            .then(res => res.json())
+            .then(data => {
+                    if (data.error) {
+                        document.getElementById("error-message").innerText = data.error
+                    } else {
+                        console.log(data)
+                        localStorage.setItem("accessToken", data.token)
+                        localStorage.setItem("user", JSON.stringify(data.user))
+                        navigate('/')
+                    }
+                }
+            )
+
+
     }
 
     return (
@@ -61,6 +67,8 @@ function Login() {
                         <Col>
                             <Button className='button' variant="light" type='submit'>Se connecter</Button>
                         </Col>
+                        < Form.Text id="error-message" muted/>
+
                     </Row>
                 </Form>
                 <br/>
