@@ -12,23 +12,25 @@ function Admin (){
     }
 
     return (
-        <div className='tabsStyle'>
-            <Nav variant="tabs" defaultActiveKey="all" onSelect={handleSelect}>
-                <Nav.Item>
-                    <Nav.Link eventKey="all">Feed</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="alertUser">Users</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="alertAnnonce">Annonces</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="alertAvis">Avis</Nav.Link>
-                </Nav.Item>
-            </Nav>
-            <div>
-                <Report page={page}/>
+        <div>
+            <div className='tabsStyle'>
+                <Nav className='taille' variant="tabs" defaultActiveKey="all" onSelect={handleSelect}>
+                    <Nav.Item className='caseStyle'>
+                        <Nav.Link eventKey="all">Feed</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className='caseStyle'>
+                        <Nav.Link eventKey="alertUser">Users</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className='caseStyle'>
+                        <Nav.Link eventKey="alertAnnonce">Annonces</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className='caseStyle'>
+                        <Nav.Link eventKey="alertAvis">Avis</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+                <div>
+                    <Report page={page}/>
+                </div>
             </div>
         </div>
     );
