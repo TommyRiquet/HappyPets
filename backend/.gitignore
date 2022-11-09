@@ -1,3 +1,4 @@
 /node_modules
 package-lock.json
 /Images/*
+/config/config.json

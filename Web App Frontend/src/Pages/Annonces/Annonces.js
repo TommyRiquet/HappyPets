@@ -287,7 +287,7 @@ function Annonces() {
                     {ListAnnonces.map((annonce, index) => {
                       /*Colonne de gauche*/
                       return index % 2 === 0 ? (
-                        <Col key={index} onClick={()=>navigate('/detail/'+ annonce.id )}>
+                        <Col key={index} onClick={()=>navigate('/detailannonce/'+ annonce.id )}>
                         <AnimalCard
                             annonce={annonce}
                             image={annonce.Pets.map((pet) => {
@@ -303,9 +303,10 @@ function Annonces() {
                 <Col>
                   <Row xs={1}>
                     {ListAnnonces.map((annonce, index) => {
+                      console.log(annonce);
                       /*Colonne de droite*/
                       return index % 2 === 1 ? (
-                        <Col key={index} onClick={()=>navigate('/detail/'+ annonce.id )}>
+                        <Col key={index} onClick={()=>navigate('/detailannonce/'+ annonce.id )}>
                           <AnimalCard
                             annonce={annonce}
                             image={annonce.Pets.map((pet) => {
@@ -324,7 +325,7 @@ function Annonces() {
               <Row xs={1} sm={1}>
                 {ListAnnonces.map((annonce, index) => {
                   return (
-                    <Col key={index} onClick={()=>navigate('/detail/'+ annonce.id )}>
+                    <Col key={index} onClick={()=>navigate('/detailannonce/'+ annonce.id )}>
                       <AnimalCard
                         annonce={annonce}
                         image={annonce.Pets.map((pet) => {
