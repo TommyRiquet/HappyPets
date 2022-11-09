@@ -4,7 +4,7 @@
     justify-content: left;
     width: 100%;
     height: 100%;
-    margin-top: 10%;
+    margin-top: 2%;
 }
 
 .green-icon{
@@ -12,4 +12,32 @@
   }
   .red-icon{
     filter: brightness(0.5) sepia(1) saturate(10000%);
+  }
+
+.pet-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .pet-image-container{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .pet-image-container:hover{
+    transform: scale(1.05);
+    transition: all 0.5s ease;
+  }
+
+  .row{
+    margin: 8px 0 0 0 !important;
+  }
+
+  .pet-name{
+    font-size: 1.5rem;
+    font-weight: 600;
   }

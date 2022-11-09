@@ -82,8 +82,9 @@ function DetailAnnonce() {
     return (
         <div className="DetailAnnonce">
             <CustomNavbar color="rgba(47, 72, 88, 1)"/>
-            <ReturnButton/>
+            <ReturnButton returnLink="/annonces"/>
             <Container>
+            <Container fluid>
                 <Row>
                     <Col>
                         <h3>
@@ -116,17 +117,19 @@ function DetailAnnonce() {
                 <Row>
                             {
                                 annonce.Pets.map((pet,index) => {
-                                    return (
-                                        <Col key={index} onClick={e=>setDisplayPet(pet)}>
-                                            <img src={AnimauxImages[pet.Type]} alt=""></img>
+                                    return index<=3 ? 
+                                    (
+                                        <Col xs={6} sm={3} key={index} onClick={e=>setDisplayPet(pet)} className="pet-image-container">
+                                            <img className="pet-image" src={AnimauxImages[pet.Type]} alt=""></img>
                                         </Col>
-                                    )}
+                                    ) : <></>
+                                }
                                 )
                             }
                 </Row>
                 
                 <Row>
-                    <Col>
+                    <Col className="pet-name">
                         {
                             displayPet.Name +", "+ displayPet.Age
                         }
@@ -140,7 +143,7 @@ function DetailAnnonce() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col sm={1}>
                         <img
                               src={DogIcon}
                               className={
@@ -151,7 +154,7 @@ function DetailAnnonce() {
                               alt="Dog Icon"
                             ></img>
                     </Col>
-                    <Col>
+                    <Col sm={1}>
                         <img
                               src={CatIcon}
                               className={
@@ -162,7 +165,7 @@ function DetailAnnonce() {
                               alt="Cat Icon"
                             ></img>
                     </Col>
-                    <Col>
+                    <Col sm={1}>
                         <img
                               src={BabyIcon}
                               className={
@@ -181,6 +184,7 @@ function DetailAnnonce() {
                         }
                     </Col>
                 </Row>
+            </Container>
             </Container>
         </div>
     );

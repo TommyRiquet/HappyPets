@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
                             [Op.or]: [typeAnnonce]
                         }
                     },
-                    attributes: ['Type','DateBegin','DateEnd'],
+                    attributes: ['id','Type','DateBegin','DateEnd'],
                         include: [ {
                             model:Pets,
                             attributes: ['Name','Type','Race','Sexe','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
