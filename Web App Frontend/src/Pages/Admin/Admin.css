@@ -10,6 +10,7 @@
 a{
     --bs-nav-link-color: #e06112;
     --bs-nav-link-hover-color: #F2620A;
+    color: #e06112;
 }
 
 .Image{
@@ -22,5 +23,5 @@ a{
 }
 
 body{
-    background-color: #373b3e !important;
+    background-color: #373b3e;
 }
