@@ -82,13 +82,10 @@ router.post("/image/upload", async (req,res ) => {
     let userId = req.body.userid
     try { // si y a pas de fichier
         if(!req.files) {
-            res.send({
-                status: false,
-                message: 'No file uploaded'
-            });
+            res.send(404);
         } else {// si y a un fichier
             let image = req.files.profilePicture;
-            image.mv('./Images/' + userId +'.'+ image.mimetype.split('/')[1]);
+            image.mv('./Images/user-' + userId +'.'+ image.mimetype.split('/')[1]);
 
             res.send(200);
         }
