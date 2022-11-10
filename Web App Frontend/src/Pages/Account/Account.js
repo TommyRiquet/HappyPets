@@ -7,7 +7,7 @@ import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import './Account.css';
 
 /*Importing Images*/
-import profilePicture from '../../Assets/profilePicture.png';
+import ProfilePicDefault from '../../Assets/profilePicture.png'
 import ChatPic from'../../Assets/Chat.jpg';
 import ChienPic from'../../Assets/Chien.jpg';
 import HamsterPic from'../../Assets/Hamster.jpg';
@@ -18,8 +18,6 @@ import PoissonPic from'../../Assets/Poisson.jpg';
 import SerpentPic from'../../Assets/Serpent.jpg';
 import TortuePic from'../../Assets/Tortue.jpg';
 
-/*Importing Config*/
-import config from "../../config.json";
 
 function Account() {
     const AnimauxPic = {
@@ -36,7 +34,7 @@ function Account() {
 
     const [InfoUser,setInfoUser] = useState({"Pets":[]})
     useEffect(()=>{
-        getInfoUser(3)
+        getInfoUser(2)
     },[])
 
     
@@ -47,6 +45,11 @@ function Account() {
             fetch(config.API_URL+'/users/info?id='+idUser)
                 .then((response) => response.json())
                 .then((data) => {
+                    console.log(data);
+                    if(!data.PhotoLink){
+                        //si il n'y a pas d'image d'enregistré, va prendre l'image par défaut
+                        data.PhotoLink = ProfilePicDefault;
+                    }
                     setInfoUser(data)
             });
     }
@@ -68,7 +71,9 @@ function Account() {
                 <Container className='account-container'>
                     <Row >
                         <Col md={6} xs={12} className="left-content">
-                            <img id="profilePic" src={profilePicture} alt="myself"/>
+
+                            <img id="profilePic" src={InfoUser.PhotoLink} alt="Utilisateur"/>
+                            
                             <br/>
                             <Button className='modify-button' variant="outline-secondary">Modifier vos informations</Button>
                         </Col>
