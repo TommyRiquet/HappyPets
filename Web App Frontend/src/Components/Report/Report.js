@@ -4,6 +4,7 @@ import './Report.css';
 import AnnonceImage from '../../Assets/annonces.png';
 import UserImage from '../../Assets/user.png';
 import AvisImage from '../../Assets/fillactere.png';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 function Report(data){
 
@@ -55,6 +56,17 @@ function Report(data){
         }
         return Image;
     }
+    const [show, setShow] = useState(false);
+      
+    const handleClose = () => setShow(false);
+       
+
+    let num;
+    function showSide(x){
+        setShow(true);
+        num = x;
+        return num;
+    }
 
     let date;
     return(
@@ -76,7 +88,7 @@ function Report(data){
                         .toISOString()
                         .split("T")[0];
                         return(
-                            <tr key={index}>
+                            <tr key={index} onClick={showSide()}>
                                 <td>{report.id}</td>
                                 <td>{report.ClientName}</td>
                                 <td>{report.SuspectName}</td>
@@ -87,6 +99,37 @@ function Report(data){
                     }
                     </tbody>
                 </Table>
+                <div>
+                <>
+                <Offcanvas show={show} onHide={handleClose} placement={'end'} name={'offcanva'} scroll= {true}
+    backdrop= {true}>
+                <Offcanvas.Header closeButton>
+                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    <table>
+                        <tr>
+                            {console.log(result)}
+                            <td>Utilisateur appellent</td>
+                            <td>{result[num].ClientName}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </Offcanvas.Body>
+                </Offcanvas>
+                </>
+                </div>
             </div>
     )
 }
