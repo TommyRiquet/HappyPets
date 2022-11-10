@@ -24,10 +24,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: 'backend/package.json'
-      env:
-        test_database_username : ${{ secrets.TEST_DB_USERNAME }}
-        test_database_password : ${{ secrets.TEST_DB_PASSWORD }}
-        test_database_database : ${{ secrets.TEST_DB_DATABASE }}
-        test_database_host : ${{ secrets.TEST_DB_HOST }}
+
+    - run: sed -i "s/{username}/${{ secrets.TEST_DB_USERNAME }}/g" ./backend/config/config.json
+    - run: sed -i "s/{password}/${{ secrets.TEST_DB_PASSWORD }}/g" ./backend/config/config.json
+    - run: sed -i "s/{database}/${{ secrets.TEST_DB_DATABASE }}/g" ./backend/config/config.json
+    - run: sed -i "s/{host}/${{ secrets.TEST_DB_HOST }}/g" ./backend/config/config.json
+
     - run: npm i
       working-directory: 'backend/'
+
+    - run: npm test
+      working-directory: 'backend/'
+
