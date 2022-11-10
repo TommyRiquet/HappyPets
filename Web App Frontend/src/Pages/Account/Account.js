@@ -1,6 +1,7 @@
 /*Importing Components */
 import { useEffect, useState } from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
+import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 
 /*Importing Styles*/
 import './Account.css';
@@ -53,6 +54,13 @@ function Account() {
 
     return (
         <div className="Account">
+                  <CustomNavbar
+                        textLinkOne="Propositions"
+                        linkOne="/propositions"
+                        textLinkTwo="Annonces"
+                        linkTwo="/annonces"
+                        color="rgba(47, 72, 88, 1)"
+                    />
                 <Container className='top-container'>
                 <h2>Ton profil</h2>
                 </Container>
