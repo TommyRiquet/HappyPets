@@ -17,6 +17,7 @@ router.get("/modify", async (req, res) => {
 })
 
 
+
 router.get("/info", async (req, res) => {
     const user = await Users.findOne({
         attributes: ['FirstName','LastName','City','Postal','Email'],
@@ -95,7 +96,12 @@ router.post("/image/upload", async (req,res ) => {
         } else {// si y a un fichier
             let image = req.files.profilePicture;
             image.mv('./Images/user-' + userId +'.'+ image.mimetype.split('/')[1]);
-
+            const user=await Users.update({PhotoLink: './Images/user-' + userId +'.'+ image.mimetype.split('/')[1]}, {
+                where: {
+                    id: userId
+                }
+              });
+            res.json(user);
             res.send(200);
         }
     } catch (error) { // en cas d'erreur
