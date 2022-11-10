@@ -7,9 +7,19 @@ const {Annonces,Pets,Users,PetsAnnonces} = require("../models")
 router.get("/", async (req, res) => {
     /*
     *   Route initial qui retourne les 20 premières annonces
+    *  @return {Array} - Tableau d'annonces
+    *  
+    * @query {Number} limit - Nombre d'annonces à retourner
+    * @query {Number} offset - Nombre d'annonces à sauter
+    * @query {String} typePet - Recherche par type d'animal
+    * @query {String} typeAnnonce - Recherche par type d'annonce
+    * @query {String} DogFriendly - Recherche par appréciation de l'animal pour les autres chiens
+    * @query {String} CatFriendly - Recherche par appréciation de l'animal pour les autres chats
+    * @query {String} KidFriendly - Recherche par appréciation de l'animal pour les enfants
     */
+   
     let offset = req.query.offset || 0
-    let limit = req.query.limit || 20
+    let limit = req.query.limit ? ((req.query.limit>0 && !isNaN(req.query.limit)) ? req.query.limit : 0): 20
     let typePet = req.query.typePet || ["Chien","Chat","Rongeur","Oiseau","Poisson","NAC"]
     let typeAnnonce = req.query.typeAnnonce || ["Promenade","Logement","Garde à domicile","Soins à domicile"]
     let isDogFriendly = req.query.DogFriendly==="true" || [true,false]
