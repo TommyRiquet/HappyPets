@@ -7,10 +7,19 @@ const {myError} = require("../middleware/Error")
 const {verifyToken} = require("../middleware/verifyToken")
 const {Users,Pets} = require("../models")
 
+router.get("/modify", async (req, res) => {
+    const user=await Users.update({ LastName: req.query.lastName, FirstName: req.query.firstName, City: req.query.city, Postal:req.query.postal, Email: req.query.email}, {
+        where: {
+            id: req.query.id
+        }
+      });
+    res.json(user)
+})
+
 
 router.get("/info", async (req, res) => {
     const user = await Users.findOne({
-        attributes: ['FirstName','LastName','City','Postal','Email',],
+        attributes: ['FirstName','LastName','City','Postal','Email'],
         where: {
             id: req.query.id
         },
@@ -93,5 +102,7 @@ router.post("/image/upload", async (req,res ) => {
         res.status(500).send(error);
     }
   });
+
+
             
 module.exports = router
