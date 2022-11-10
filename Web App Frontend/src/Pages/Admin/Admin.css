@@ -11,6 +11,7 @@ a{
     --bs-nav-link-color: #e06112;
     --bs-nav-link-hover-color: #F2620A;
     color: #e06112;
+    font-size: 1.2rem !important;
 }
 
 .Image{

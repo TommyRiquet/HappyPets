@@ -27,8 +27,9 @@ function CustomNavbar(props) {
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto"></Nav>
           <Nav className="d-flex">
-          <Nav.Link href={props.linkOne} data-testid='link-one'>{props.textLinkOne}</Nav.Link>
-          <Nav.Link href={props.linkTwo} data-testid='link-two'>{props.textLinkTwo}</Nav.Link>
+
+          <Nav.Link className='linkcss' href={props.linkOne} data-testid='link-one'>{props.textLinkOne}</Nav.Link>
+          <Nav.Link  className='linkcss' href={props.linkTwo} data-testid='link-two'>{props.textLinkTwo}</Nav.Link>
             {!localStorage.getItem('user') ? 
             <>
               <Nav.Link href={props.linkThree} data-testid='link-three'>{props.textLinkThree}</Nav.Link>
