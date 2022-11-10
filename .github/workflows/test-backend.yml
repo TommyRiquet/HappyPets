@@ -31,5 +31,3 @@ jobs:
         test_database_host : ${{ secrets.TEST_DB_HOST }}
     - run: npm i
       working-directory: 'backend/'
-    - run: npm test
-      working-directory: 'backend/'
