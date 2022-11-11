@@ -25,10 +25,10 @@ jobs:
         cache: 'npm'
         cache-dependency-path: 'backend/package.json'
 
-    - run: sed -i "s/{username}/${{ secrets.TEST_DB_USERNAME }}/g" ./backend/config/config.json
-    - run: sed -i "s/{password}/${{ secrets.TEST_DB_PASSWORD }}/g" ./backend/config/config.json
-    - run: sed -i "s/{database}/${{ secrets.TEST_DB_DATABASE }}/g" ./backend/config/config.json
-    - run: sed -i "s/{host}/${{ secrets.TEST_DB_HOST }}/g" ./backend/config/config.json
+    - run: sed -i "s/root/${{ secrets.TEST_DB_USERNAME }}/g" ./backend/config/config.json
+    - run: sed -i "s/null/\"${{ secrets.TEST_DB_PASSWORD }}\"/g" ./backend/config/config.json
+    - run: sed -i "s/qtpets/${{ secrets.TEST_DB_DATABASE }}/g" ./backend/config/config.json
+    - run: sed -i "s/localhost/${{ secrets.TEST_DB_HOST }}/g" ./backend/config/config.json
 
     - run: npm i
       working-directory: 'backend/'
