@@ -7,10 +7,10 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "{username}",
-    "password": "{password}",
-    "database": "{database}",
-    "host": "{host}",
+    "username": "root",
+    "password": null,
+    "database": "qtpets",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
