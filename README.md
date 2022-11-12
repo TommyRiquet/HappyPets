@@ -4,7 +4,6 @@
 [![Issues][issues-shield]][issues-url]
 
 
-
 <!-- À Propos du Projet -->
 ## À Propos du Projet
 
@@ -84,6 +83,17 @@ Vous allez avoir besoin d'un gestionnaire de packages, nous avons utiliser npm
 
 
 
+<!-- État de la plateforme -->
+## État de la plateforme 
+
+### Testing : 
+* [![BackendTests][BackendTests-shield]][BackendTests-url]
+* [![FrontendTests][FrontendTests-shield]][FrontendTests-url]
+
+
+### Déploiement : 
+* [![Netlify Status][Netlify-shield]][Netlify-url]
+
 
 
 <!-- VARIABLES -->
@@ -104,3 +114,16 @@ Vous allez avoir besoin d'un gestionnaire de packages, nous avons utiliser npm
 
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
+
+
+[BackendTests-shield]: https://github.com/TommyRiquet/ProjetIntegration/actions/workflows/test-backend.yml/badge.svg
+[BackendTests-url]: https://github.com/TommyRiquet/ProjetIntegration/actions/workflows/test-backend.yml
+
+
+[FrontendTests-shield]: https://github.com/TommyRiquet/ProjetIntegration/actions/workflows/test-frontend.yml/badge.svg
+[FrontendTests-url]: https://github.com/TommyRiquet/ProjetIntegration/actions/workflows/test-frontend.yml
+
+
+[Netlify-shield]: https://api.netlify.com/api/v1/badges/677f5d78-950a-43b7-9251-8775566cbdb4/deploy-status
+[Netlify-url]: https://app.netlify.com/sites/tommyriquethappypets/deploys
+
