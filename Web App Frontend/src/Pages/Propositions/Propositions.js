@@ -16,6 +16,7 @@ function Propositions(){
     useEffect(()=>{
             window.addEventListener("scroll", handleScroll);
             LoadProposition();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
   
