@@ -33,6 +33,7 @@ function Annonces(){
     useEffect(()=>{
         window.addEventListener("scroll", handleScroll);
         LoadAnnonces();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     function LoadAnnonces(offset = 0){
