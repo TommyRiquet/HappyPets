@@ -19,6 +19,9 @@ import LapinImage from "../../Assets/Lapin.jpg";
 import SerpentImage from "../../Assets/Serpent.jpg";
 import TortueImage from "../../Assets/Tortue.jpg";
 
+/*Importing Config*/
+import config from "../../config.json";
+
 const AnimauxImages = {
   Chien: ChienImage,
   Chat: ChatImage,
@@ -68,7 +71,7 @@ function DetailAnnonce() {
 
     function getDetailAnnonce () {
 
-        fetch('http://localhost:3001/annonces/detailAnnonce?id='+id)
+        fetch(config.API_URL+'/annonces/detailAnnonce?id='+id)
             .then((response) => response.json())
             .then((data) => {
                 setAnnonce(data)

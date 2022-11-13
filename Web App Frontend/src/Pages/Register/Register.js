@@ -1,6 +1,9 @@
 /*Importing Styles*/
 import './Register.css';
 
+/*Importing Config*/
+import config from "../../config.json";
+
 /*Importing Components */
 import {Container,Button, Form, Row, Col} from 'react-bootstrap';
 import React, {useState, useEffect} from 'react';
@@ -37,7 +40,7 @@ function Register() {
     
     useEffect(() => {
         emailVerif !== "" ?
-        fetch('http://localhost:3001/users/checkemail/'+emailVerif,{ 
+        fetch(config.API_URL+'/users/checkemail/'+emailVerif,{ 
                     method: 'GET',
                     headers: {'Content-type': 'application/json'},
         })
@@ -54,7 +57,7 @@ function Register() {
         const formData = new FormData();
         const request = new XMLHttpRequest();
         
-        request.open("POST",'http://localhost:3001/users/image/upload')
+        request.open("POST",config.API_URL+'/users/image/upload')
         formData.append('profilePicture', file);
         formData.append('userid', id);
         request.send(formData)
@@ -63,7 +66,7 @@ function Register() {
     
 
     function SendFormUSer(data){
-            fetch('http://localhost:3001/users',{ 
+            fetch(config.API_URL+'/users',{ 
                 method: 'POST',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({
