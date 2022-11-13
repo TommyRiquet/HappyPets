@@ -9,6 +9,10 @@ import imgCat from '../../Assets/homeBackGround2.png';
 import imgChicken from '../../Assets/homeBackGround3.png';
 import imgCounter from '../../Assets/counter-home.png'
 
+/*Importing Config*/
+import config from "../../config.json";
+
+
 function Home() {
 
     const [CounterAnnonces,setCounterAnnonces] = useState()
@@ -21,7 +25,7 @@ function Home() {
         /*
         Fonction qui permet de savoir combien d'annonces existent
         */
-            fetch('http://localhost:3001/annonces/amount')
+            fetch(config.API_URL+'/annonces/amount')
                 .then((response) => response.json())
                 .then((data) => {
                     setCounterAnnonces(data)

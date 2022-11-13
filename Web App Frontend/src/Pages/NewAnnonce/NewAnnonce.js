@@ -7,6 +7,10 @@ import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
 import './NewAnnonce.css';
 
+/*Importing Config*/
+import config from "../../config.json";
+
+
 function NewAnnonce() {  
     const [switchGardiennage,setSwitchGardiennage] = useState(false);
     const [switchPromenade,setSwitchPromenade] = useState(false);
@@ -17,7 +21,7 @@ function NewAnnonce() {
     function handleSubmit(event) {
         event.preventDefault();
 
-        fetch('http://localhost:3001/annonces',{ 
+        fetch(config.API_URL+'/annonces',{ 
                 method: 'POST',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({

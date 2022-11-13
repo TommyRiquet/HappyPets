@@ -17,6 +17,9 @@ import PoissonPic from'../../Assets/Poisson.jpg';
 import SerpentPic from'../../Assets/Serpent.jpg';
 import TortuePic from'../../Assets/Tortue.jpg';
 
+/*Importing Config*/
+import config from "../../config.json";
+
 function Account() {
     const AnimauxPic = {
         Chat: ChatPic,
@@ -40,7 +43,7 @@ function Account() {
         /*
         Fonction qui permet de charger les infos de l'utilisateur
         */
-            fetch('http://localhost:3001/users/info?id='+idUser)
+            fetch(config.API_URL+'/users/info?id='+idUser)
                 .then((response) => response.json())
                 .then((data) => {
                     setInfoUser(data)

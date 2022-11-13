@@ -6,6 +6,10 @@ import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
 import './Login.css';
 
+/*Importing Config*/
+import config from "../../config.json";
+
+
 function Login() {
     let navigate = useNavigate();
 
@@ -18,7 +22,7 @@ function Login() {
 
         event.preventDefault()
 
-        fetch("http://localhost:3001/users/login", {
+        fetch(config.API_URL+"/users/login", {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
             body: (

@@ -12,6 +12,8 @@ import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 /*Importing Styles*/
 import './CreatePet.css';
 
+/*Importing Config*/
+import config from "../../config.json";
 
 import ListAnimalRace from "../../Assets/race.json";
 
@@ -70,7 +72,7 @@ function CreatePet(){
 
     function sendFormPet(event) {
         event.preventDefault()
-        fetch("http://localhost:3001/pets", {
+        fetch(config.API_URL+"/pets", {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
             body: (

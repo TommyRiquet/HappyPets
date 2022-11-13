@@ -20,6 +20,9 @@ import SerpentImage from "../../Assets/Serpent.jpg";
 import TortueImage from "../../Assets/Tortue.jpg";
 import sendButtonIcon from "../../Assets/sendButtonIcon.png";
 
+/*Importing Config*/
+import config from "../../config.json";
+
 const AnimauxImages = {
   Chien: ChienImage,
   Chat: ChatImage,
@@ -91,7 +94,7 @@ function Annonces() {
      *       @param listOfCritere : la liste des critères à charger
      */
     fetch(
-      "http://localhost:3001/annonces?" +
+      config.API_URL+"/annonces?" +
         "offset=" +
         offset +
         "&limit=" +
@@ -303,7 +306,6 @@ function Annonces() {
                 <Col>
                   <Row xs={1}>
                     {ListAnnonces.map((annonce, index) => {
-                      console.log(annonce);
                       /*Colonne de droite*/
                       return index % 2 === 1 ? (
                         <Col key={index} onClick={()=>navigate('/detailannonce/'+ annonce.id )}>

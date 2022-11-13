@@ -17,6 +17,9 @@ import LapinImage from '../../Assets/Lapin.jpg';
 import SerpentImage from '../../Assets/Serpent.jpg';
 import TortueImage from '../../Assets/Tortue.jpg';
 
+/*Importing Config*/
+import config from "../../config.json";
+
 const AnimauxImages = {"Chien":ChienImage,
                         "Chat":ChatImage,
                         "Poisson":PoissonImage,
@@ -38,7 +41,7 @@ function Annonces(){
 
     function LoadAnnonces(offset = 0){
 
-            fetch('http://localhost:3001/annonces/me?id=1&offset='+offset)
+            fetch(config.API_URL+'/annonces/me?id=1&offset='+offset)
                 .then((response) => response.json())
                 .then((data) => {
                     if(offset === 0){

@@ -7,6 +7,8 @@ import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /* Importing style */
 import './Propositions.css';
 
+/*Importing Config*/
+import config from "../../config.json";
 
 
 function Propositions(){
@@ -22,7 +24,7 @@ function Propositions(){
   
     function LoadProposition(offset = 0){
 
-        fetch('http://localhost:3001/propositions/annonce?id=5')
+        fetch(config.API_URL+'/propositions/annonce?id=5')
             .then((response) => response.json())
             .then((data) => {
                 if(offset === 0){
