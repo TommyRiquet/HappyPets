@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.0.0",
     "bootstrap": "^5.2.1",
+    "crypto-hash": "^2.0.1",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
     "multiselect-react-dropdown": "^2.0.25",
