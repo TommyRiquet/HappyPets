@@ -34,7 +34,6 @@ function Login() {
                     if (data.error) {
                         document.getElementById("error-message").innerText = data.error
                     } else {
-                        console.log(data)
                         localStorage.setItem("accessToken", data.token)
                         localStorage.setItem("user", JSON.stringify(data.user))
                         navigate('/')
