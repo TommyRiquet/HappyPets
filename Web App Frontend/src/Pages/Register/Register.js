@@ -75,7 +75,7 @@ function Register() {
     }
 
 async function SendFormUSer(data){
-        const hash =  sha256(data['Password'])
+        const hash =  sha256(data['Password']+"J'aime bien Tommy")
             fetch(config.API_URL+'/users',{ 
                 method: 'POST',
                 headers: {'Content-type': 'application/json'},

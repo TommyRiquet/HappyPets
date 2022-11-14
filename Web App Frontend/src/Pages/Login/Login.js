@@ -1,6 +1,6 @@
 /*Importing Components */
 import {Row, Col, Form, Button, Container} from 'react-bootstrap';
-
+import { sha256 } from 'js-sha256';
 import {useNavigate} from 'react-router';
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
@@ -17,9 +17,9 @@ function Login() {
 
         const user = {
             Email: event.target[0].value,
-            Password: event.target[1].value
+            Password: sha256(event.target[1].value+"J'aime bien Tommy")
         };
-
+        console.log(user);
         event.preventDefault()
 
         fetch(config.API_URL+"/users/login", {
