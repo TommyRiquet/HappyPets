@@ -87,7 +87,7 @@ function DetailAnnonce() {
         <div className="DetailAnnonce">
             <CustomNavbar color="rgba(47, 72, 88, 1)"/>
             <ReturnButton returnLink="/annonces"/>
-            <Container>
+            <Container className='detail-container'>
             <Container fluid>
                 <Row>
                     <Col>
