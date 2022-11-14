@@ -108,14 +108,10 @@ router.post("/",async (req, res) => {
 });
 
 router.get("/me", async(req,res) =>{   
-    let offset = req.query.offset || 0
-    let limit = req.query.limit ? ((req.query.limit>0 && !isNaN(req.query.limit)) ? req.query.limit : 0): 20
-    let id = req.query.id || 0
+    let id = (req.query.id>0 && !isNaN(req.query.id)) ? req.query.id: 0
 
     const listOfAnnonces = await Annonces.findAll(
         {
-            limit: parseInt(limit),
-            offset: parseInt(offset),
             attributes: ['id','Type','DateBegin','DateEnd'],
                 include: [ {
                     model:Pets,

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import {Container, Row, Col, } from 'react-bootstrap';
 import AnimalCard from '../../Components/AnimalCard/AnimalCard';
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
+import {useNavigate} from 'react-router-dom';
 
 /*Importing Styles*/
 import './MesAnnonces.css';
@@ -34,11 +35,17 @@ const AnimauxImages = {
 function Annonces(){
     const[ListAnnonces, setListAnnonces] = useState ([]);
     const[id, setID] = useState(0);
+    let navigate = useNavigate();
     let offset = 0
 
     useEffect(()=>{
         window.addEventListener("scroll", handleScroll);
         setID(JSON.parse(localStorage.getItem("user")).id);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -49,7 +56,7 @@ function Annonces(){
 
     function LoadAnnonces(offset = 0,id = 0){
 
-            fetch(config.API_URL+'/annonces/me?id='+id+'&offset='+offset)
+            fetch(config.API_URL+'/annonces/me?id='+id)
                 .then((response) => response.json())
                 .then((data) => {
                     if(offset === 0){
@@ -87,7 +94,7 @@ function Annonces(){
                         {
                             ListAnnonces.map((annonce,index) => {
                                 return (
-                                        <Col key={index} colSpan={annonce.Pets.length} onClick={()=>console.log(index)}>
+                                        <Col key={index} colSpan={annonce.Pets.length} onClick={()=>navigate('/detailannonce/'+ annonce.id )}>
                                             <AnimalCard annonce={annonce} image={
                                                     annonce.Pets.map((pet) => {                                                            
                                                         const ReturnTable = AnimauxImages[pet.Type]
