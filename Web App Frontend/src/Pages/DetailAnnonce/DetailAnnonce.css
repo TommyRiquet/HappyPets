@@ -9,25 +9,25 @@
 }
 
 .green-icon{
-    filter:brightness(0.5) sepia(1) saturate(10000%) hue-rotate(110deg) ;
-  }
-  .red-icon{
-    filter: brightness(0.5) sepia(1) saturate(10000%);
-  }
+  filter:brightness(0.5) sepia(1) saturate(10000%) hue-rotate(110deg) ;
+}
+.red-icon{
+  filter: brightness(0.5) sepia(1) saturate(10000%);
+}
 
 .pet-image{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
 
-  .pet-image-container{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-  }
+.pet-image-container{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
   .pet-image-container:hover{
     transform: scale(1.03);

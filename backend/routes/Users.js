@@ -65,7 +65,14 @@ router.post("/", async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         //find and verify the match email/password
-        const user = await Users.findOne({where: {Email: req.body.Email}})
+        const user = await Users.findOne({
+            where: {Email: req.body.Email},
+            attributes: ['id', 'FirstName', 'LastName','Password', 'Email','City','Postal','Phone','PhotoLink'],
+            include: [{
+                model: Pets,
+                attributes: ['Name','Type','Race','Age','Sexe','Height','Weight','Behaviour','Comment','DogFriendly','CatFriendly','KidFriendly'],
+            }]
+        })
         if (!user) throw new myError("L'utilisateur n'existe pas", 404);
 
         
@@ -97,7 +104,7 @@ router.post("/image/upload", async (req,res ) => {
             let image = req.files.profilePicture;
             image.mv('./Images/user-' + userId +'.'+ image.mimetype.split('/')[1]);
             //si l'image a bien été téléchargé, on va stocker le lien vers l'image dans la DB
-            const user=await Users.update({PhotoLink: '../../../../backend/Images/user-' + userId +'.'+ image.mimetype.split('/')[1]}, {
+            const user=await Users.update({PhotoLink: 'user-' + userId +'.'+ image.mimetype.split('/')[1]}, {
                 where: {
                     id: userId
                 }
