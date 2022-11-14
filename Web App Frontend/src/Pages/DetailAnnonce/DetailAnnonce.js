@@ -1,3 +1,4 @@
+/*Importing Components */
 import './DetailAnnonce.css';
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import { Container, Row, Col } from 'react-bootstrap';
@@ -102,7 +103,7 @@ function DetailAnnonce() {
                 </Row>
                 <Row>
                     <Col>
-                        <span>à surveiller du {annonce.DateBegin.slice(5, 10)} au {annonce.DateEnd.slice(5, 10)}</span>
+                        <h6 className='service'>À surveiller du {annonce.DateBegin.slice(5, 10)} au {annonce.DateEnd.slice(5, 10)}</h6>
                     </Col>
                 </Row>
                 <Row>
@@ -112,7 +113,8 @@ function DetailAnnonce() {
                 </Row>
                 <Row>
                     <Col>
-                        <h5>Description : {annonce.Comment}</h5>
+                        <h5>Description : <br/></h5>
+                        <span className='content'>{annonce.Comment}</span>
                     </Col>
                 </Row>
 

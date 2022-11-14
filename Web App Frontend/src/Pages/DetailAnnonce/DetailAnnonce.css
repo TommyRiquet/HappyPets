@@ -5,6 +5,7 @@
     width: 100%;
     height: 100%;
     margin-top: 2%;
+    margin-bottom: 3%;
 }
 
 .green-icon{
@@ -40,4 +41,19 @@
   .pet-name{
     font-size: 1.5rem;
     font-weight: 600;
+  }
+
+  .content{
+    font-size: 20px !important;
+  }
+
+  .service{
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .patate{
+    font-size: 15rem !important;
+    font-weight: 700 !important;
+    background-color: red !important;
   }
