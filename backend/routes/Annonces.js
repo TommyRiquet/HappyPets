@@ -107,43 +107,28 @@ router.post("/",async (req, res) => {
     res.json(200)
 });
 
-router.get("/me", async(req,res) =>{
-    if(req.query.offset === "0"){
-        const listOfAnnonces = await Annonces.findAll(
-            {
-                limit: 20,
-                attributes: ['DateBegin','DateEnd'],
-                    include: [ {
-                        model:Pets,
-                        attributes: ['Name',"Type","Race","Age","Sexe","Sterile","Weight","Height"],
-                        include: [ {
-                            model:Users,
-                            attributes: [],
-                                where : {id: req.query.id},
-                        }]
-                    }]
-            }
-        )
-        res.json(listOfAnnonces)
-    }else{
-        const listOfAnnonces = await Annonces.findAll(
-            {
-                limit: 6,
-                offset: parseInt(req.query.offset),
-                attributes: ['DateBegin','DateEnd'],
-                    include: [ {
-                        model:Pets,
-                        attributes: ['Name',"Type","Race","Age","Sexe","Sterile","Weight","Height"],
-                        include: [ {
-                            model:Users,
-                            attributes: [],
-                                where : {id: req.query.id},
-                        }]
-                    }]
-            }
-        )
-        res.json(listOfAnnonces)
-    }
+router.get("/me", async(req,res) =>{   
+    let offset = req.query.offset || 0
+    let limit = req.query.limit ? ((req.query.limit>0 && !isNaN(req.query.limit)) ? req.query.limit : 0): 20
+    let id = req.query.id || 0
+
+    const listOfAnnonces = await Annonces.findAll(
+        {
+            limit: parseInt(limit),
+            offset: parseInt(offset),
+            attributes: ['id','Type','DateBegin','DateEnd'],
+                include: [ {
+                    model:Pets,
+                    attributes: ['Name','Type','Race','Sexe','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
+                    where : { 
+                        UserId: id
+                    }
+                }]
+        }
+    )
+
+    res.json(listOfAnnonces)
+    
 })
 
 
