@@ -13,7 +13,7 @@ import {useNavigate} from 'react-router';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
-import {sha256} from 'crypto-hash';
+import { sha256 } from 'js-sha256';
 
 YupPassword(yup)
 
@@ -75,7 +75,7 @@ function Register() {
     }
 
 async function SendFormUSer(data){
-        const hash = await sha256(data['Password'])
+        const hash =  sha256(data['Password'])
             fetch(config.API_URL+'/users',{ 
                 method: 'POST',
                 headers: {'Content-type': 'application/json'},
@@ -94,7 +94,6 @@ async function SendFormUSer(data){
                 
         }).then(val => val.json())
             .then(res => {
-                console.log(res)
                 const file = document.getElementById('profilePicture').files[0];
                 if (file) {
                     uploadImage(file, res);
