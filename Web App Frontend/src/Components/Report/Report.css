@@ -1,4 +1,27 @@
 .reportstyle{
-    text-align: center;
     margin-right: 2%;
+    text-align: center;
+}
+
+.slidestyle{
+    text-align: center;
+}
+
+.formslide{
+    border-bottom: 1px solid #b3b3b3;
+    padding-bottom: 4%;
+}
+
+.cancelButton{
+    margin-top: 70%;
+    margin-left: 70%;
+    background-color: #f20a0a !important;
+    --bs-btn-bg:#f20a0a !important;
+    --bs-btn-border-color:#f20a0a !important;
+    --bs-btn-hover-bg:#f20a0a !important;
+    --bs-btn-active-bg:#f20a0a !important;
+    --bs-btn-disabled-bg:#f20a0a !important;
+    --bs-btn-disabled-border-color:#f20a0a !important;
+    --bs-btn-hover-border-color:#f20a0a !important;
+    --bs-btn-active-border-color:#f20a0a !important;
 }

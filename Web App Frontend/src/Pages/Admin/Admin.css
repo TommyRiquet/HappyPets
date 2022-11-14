@@ -5,6 +5,7 @@
 
 .taille{
     width: 98% !important;
+    --bs-nav-tabs-border-color:None !important;
 }
 
 a{
@@ -21,8 +22,8 @@ a{
 
 .caseStyle{
     background-color: #212529;
+    border-top-left-radius: var(--bs-nav-tabs-border-radius);
+    border-top-right-radius: var(--bs-nav-tabs-border-radius);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
 }
 
-body{
-    background-color: #373b3e;
-}
