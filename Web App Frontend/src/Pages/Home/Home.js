@@ -54,14 +54,14 @@ function Home() {
                         <p>Hospitalisation d’urgence, perte d’un logement, situations familiales problématiques...autant de difficultés qui ne laissent parfois 
                             d’autres choix que d’abandonner son animal. <br/> Durant les inondations de 2021, un énorme réseau d’entraide s’est
                             créé via les réseaux sociaux.<br/> Nous continuons l’effort ici.</p>
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <img id="imgCat" src={imgCat} alt="Chat"/>
                             <div id="counter-home">
                                     <img src={imgCounter} alt="Maison avec des animaux"/><br/>
                                     <p><span id='number-counter-home'>{CounterAnnonces}</span><br/>
                                     <span id="text-counter-home">Animaux aidés grâce à la plateforme</span></p>
                             </div>
-                        </Col>
-                        <Col xs={12} md={6}>
-                            <img id="imgCat" src={imgCat} alt="Chat"/>
                         </Col>
                     </Row>
                 </Container>

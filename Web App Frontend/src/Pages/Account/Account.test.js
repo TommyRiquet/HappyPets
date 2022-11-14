@@ -4,6 +4,9 @@ import { act } from 'react-dom/test-utils';
 import Account from './Account';
 import {BrowserRouter} from 'react-router-dom';
 
+/*Importing Config*/
+import config from "../../config.json";
+
 describe('Account', () => {
     it('Should render without crash', async () => {
         render(
@@ -25,7 +28,7 @@ describe('Integration Tests for the <Account> Page', () => {
         
         await act(async () => {
             expect(jestSpy).toHaveBeenCalledTimes(1);
-            expect(jestSpy).toHaveBeenCalledWith("http://localhost:3001/users/info?id=3");
+            expect(jestSpy).toHaveBeenCalledWith(config.API_URL+"/users/info?id=3");
         })
 
 

@@ -24,6 +24,9 @@ app.use("/annonces", AnnoncesRouter)
 const propositionRouter = require('./routes/Propositions')
 app.use("/propositions", propositionRouter)
 
+const ImageRouter = require('./routes/Images')
+app.use("/images", ImageRouter)
+
 if (process.env.NODE_ENV !== 'test') {
     db.sequelize.sync().then(() => {
         app.listen(PORT, () => {
