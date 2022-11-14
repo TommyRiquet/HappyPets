@@ -1,5 +1,5 @@
 import { useEffect,useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Row, Table,Col } from 'react-bootstrap';
 import './Report.css';
 import AnnonceImage from '../../Assets/annonces.png';
 import UserImage from '../../Assets/user.png';
@@ -8,17 +8,34 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 function Report(data){
 
-    const [result,setresult] = useState([])
+    const [result,setresult] = useState([{
+        'id':0,
+        'ClientName': "empty",
+        'SuspectName': "empty",
+        'Type': "empty",
+        'createdAt': "10-11-22",
+        'updatedAt': "10-11-22",}])
+    const [offset, setOffset] = useState(0);
+    let limit  = 20;
 
-    function reportdata(){
+    function getReport(offset = 0,
+        limit = 20){
         if(data.page === 'all'){
-            fetch('http://localhost:3001/admin',{ 
+            fetch('http://localhost:3001/admin?'+
+            'offset='
+            +offset+
+            '&limit='
+            +limit,{ 
                 method: 'GET',
                 headers: {'Content-type': 'application/json'},
             })
             .then(val => val.json())
             .then(res =>{
-                setresult(res);
+                if (offset === 0){
+                    setresult(res);
+                    return;
+                }
+                setresult((result) => [...result,...res]);
             })
         }
         else if (data.page === 'alertUser' || data.page === 'alertAnnonce' || data.page === 'alertAvis'){
@@ -33,9 +50,46 @@ function Report(data){
         }
     }
    
+    function handleScroll(e) {
+        /*
+         *   Fonction qui permet de charger les annonces suivantes quand on arrive en bas de la page
+         *      @param e : l'évènement scroll
+         */
+        if (
+          window.innerHeight + e.target.documentElement.scrollTop + 1 >=
+          e.target.documentElement.scrollHeight
+        ) {
+          setOffset((offset) => offset + limit);
+        }
+      }
+
     useEffect(() => {
-        reportdata();
+        window.addEventListener("scroll", handleScroll);
+        getReport();
+        return () => {
+            setOffset(0);
+            window.removeEventListener("scroll", handleScroll);
+          };
+      
+          // eslint-disable-next-line
     },[data])
+
+    useEffect(() => {
+        /*
+         * Recharge les annonces lorsque l'offset change
+         */
+        getReport(
+          offset,
+          limit,
+        );
+        // eslint-disable-next-line
+      }, [offset]);
+
+    const [display,setdisplay] = useState('')
+
+    useEffect(()=>{
+        setdisplay(result[0])
+    },[result])
 
     const ImageReport = {
         'User':UserImage,
@@ -57,17 +111,7 @@ function Report(data){
         return Image;
     }
     const [show, setShow] = useState(false);
-      
     const handleClose = () => setShow(false);
-       
-
-    let num;
-    function showSide(x){
-        setShow(true);
-        num = x;
-        return num;
-    }
-
     let date;
     return(
             <div className='reportstyle'>
@@ -88,7 +132,7 @@ function Report(data){
                         .toISOString()
                         .split("T")[0];
                         return(
-                            <tr key={index} onClick={showSide()}>
+                            <tr key={index} onClick={() =>{setdisplay(report);setShow(true)}}>
                                 <td>{report.id}</td>
                                 <td>{report.ClientName}</td>
                                 <td>{report.SuspectName}</td>
@@ -104,28 +148,30 @@ function Report(data){
                 <Offcanvas show={show} onHide={handleClose} placement={'end'} name={'offcanva'} scroll= {true}
     backdrop= {true}>
                 <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                <Offcanvas.Title>Resumé</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <table>
-                        <tr>
-                            {console.log(result)}
-                            <td>Utilisateur appellent</td>
-                            <td>{result[num].ClientName}</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
+                    <div className='slidestyle'>
+                            <Row className='formslide'>
+                                <Col>Utilisateur appellent </Col>
+                                <Col>{display.ClientName}</Col>
+                            </Row>
+                            <Row className='formslide'>
+                                <Col>Utilisateur Suspect</Col>
+                                <Col>{display.SuspectName}</Col>
+                            </Row>
+                            <Row className='formslide'>
+                                <Col>Type de report</Col>
+                                <Col>{display.Type}</Col>
+                            </Row>
+                            <Row>
+                                <Col className='formslide' colSpan={"2"}>Description</Col>
+                            </Row>
+                            <Row>
+                                <Col colSpan={"2"} >{display.Description}</Col>
+                            </Row>
+                        </div>
+                    <Button className='cancelButton' type="submit">Annuler</Button>
                 </Offcanvas.Body>
                 </Offcanvas>
                 </>
