@@ -20,28 +20,36 @@ import TortueImage from '../../Assets/Tortue.jpg';
 /*Importing Config*/
 import config from "../../config.json";
 
-const AnimauxImages = {"Chien":ChienImage,
-                        "Chat":ChatImage,
-                        "Poisson":PoissonImage,
-                        "Hamster":HamsterImage,
-                        "Perroquet":PerroquetImage,
-                        "Lapin":LapinImage,
-                        "Serpent":SerpentImage,
-                        "Tortue":TortueImage}
+const AnimauxImages = {
+    Chien: ChienImage,
+    Chat: ChatImage,
+    Poisson: PoissonImage,
+    Rongeur: HamsterImage,
+    Oiseau: PerroquetImage,
+    Lapin: LapinImage,
+    Serpent: SerpentImage,
+    NAC: TortueImage,
+  };
 
 function Annonces(){
     const[ListAnnonces, setListAnnonces] = useState ([]);
+    const[id, setID] = useState(0);
     let offset = 0
 
     useEffect(()=>{
         window.addEventListener("scroll", handleScroll);
-        LoadAnnonces();
+        setID(JSON.parse(localStorage.getItem("user")).id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-    function LoadAnnonces(offset = 0){
+    useEffect(()=>{
+        LoadAnnonces(offset,id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[id])
 
-            fetch(config.API_URL+'/annonces/me?id=1&offset='+offset)
+    function LoadAnnonces(offset = 0,id = 0){
+
+            fetch(config.API_URL+'/annonces/me?id='+id+'&offset='+offset)
                 .then((response) => response.json())
                 .then((data) => {
                     if(offset === 0){
