@@ -89,7 +89,7 @@ async function SendFormUSer(data){
                     Phone: data['Phone'],
                     Role: 0,
                     Password: hash,
-                    PhotoLink: 0
+                    PhotoLink: null
                 })
                 
         }).then(val => val.json())
