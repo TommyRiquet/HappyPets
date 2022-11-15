@@ -7,13 +7,13 @@ const {myError} = require("../middleware/Error")
 const {verifyToken} = require("../middleware/verifyToken")
 const {Users,Pets} = require("../models")
 
-router.get("/modify", async (req, res) => {
-    const user=await Users.update({ LastName: req.query.lastName, FirstName: req.query.firstName, City: req.query.city, Postal:req.query.postal, Email: req.query.email}, {
+router.put("/updateUser", async (req, res) => {
+    const user=await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal:req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink}, {
         where: {
-            id: req.query.id
+            id: req.body.id
         }
       });
-    res.json(user)
+      res.json(200)
 })
 
 
