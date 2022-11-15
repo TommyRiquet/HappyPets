@@ -36,6 +36,7 @@ function App() {
                   <Route path="/propositions" element={<Propositions/>}/>
                   <Route path='/detailannonce/:id' element={<DetailAnnonce/>}/>
 
+
                   {/* Routes pour les utilisateurs connectés */}
                   <Route element={<VerifRoute autorized={localStorage.getItem("user")} redirectPath={'/'} />}>
                     <Route path="/account" element={<Account/>}/>
@@ -50,10 +51,12 @@ function App() {
                     <Route path="/login" element={<Login/>}/>
                   </Route>
 
+                  {/* Routes bloqués si l'utilisateur n'est pas admin et connectés */}
+                  <Route element={<VerifRoute autorized={localStorage.length !== 0 && JSON.parse(localStorage.getItem("user")).Role === 1} redirectPath={'/'} />}>
+                    <Route path='/admin' element={<Admin/>}/>
+                  </Route>
+
                   {/* Lorsqu'aucune route n'a été trouvé */}
-
-                  <Route path='/admin' element={<Admin/>}/>
-
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
