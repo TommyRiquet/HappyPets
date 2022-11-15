@@ -87,10 +87,6 @@ function Report(data){
 
     const [display,setdisplay] = useState('')
 
-    useEffect(()=>{
-        setdisplay(result[0])
-    },[result])
-
     const ImageReport = {
         'User':UserImage,
         'Annonce':AnnonceImage,
