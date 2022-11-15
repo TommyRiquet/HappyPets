@@ -5,6 +5,7 @@ import AnnonceImage from '../../Assets/annonces.png';
 import UserImage from '../../Assets/user.png';
 import AvisImage from '../../Assets/fillactere.png';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import config from '../../config.json';
 
 function Report(data){
 
@@ -21,7 +22,7 @@ function Report(data){
     function getReport(offset = 0,
         limit = 20){
         if(data.page === 'all'){
-            fetch('http://localhost:3001/admin?'+
+            fetch(config.API_URL+'/admin?'+
             'offset='
             +offset+
             '&limit='
@@ -39,13 +40,19 @@ function Report(data){
             })
         }
         else if (data.page === 'alertUser' || data.page === 'alertAnnonce' || data.page === 'alertAvis'){
-            fetch('http://localhost:3001/admin/findtype/'+data.page,{ 
+            fetch(config.API_URL+'/admin/findtype?type='+data.page+
+            '&offset='+offset+
+            '&limit='+limit,{ 
                 method: 'GET',
                 headers: {'Content-type': 'application/json'},
             })
             .then(val => val.json())
             .then(res =>{
-                setresult(res);
+                if (offset === 0){
+                    setresult(res);
+                    return;
+                }
+                setresult((result) => [...result,...res]);
             })
         }
     }
