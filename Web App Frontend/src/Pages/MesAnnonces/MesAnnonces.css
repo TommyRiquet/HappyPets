@@ -9,10 +9,6 @@
     transform: scale(1.02);
   }
   
-  .mesannonces-container{
-    margin-top: 10vh;
-  }
-  
   .no-result-message{
     margin-top: 7vh;
     text-align: center;

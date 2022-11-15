@@ -77,13 +77,13 @@ router.get("/detailAnnonce", async (req, res) => {
 
     const detailOfAnnonce = await Annonces.findOne(
         {   where: {id: id},
-            attributes: ['Comment','Type','DateBegin','DateEnd'],
+            attributes: ['id','Comment','Type','DateBegin','DateEnd'],
                 include: [ {
                     model:Pets,
-                    attributes: ['Name','Type','Race','Age','Sexe','Weight','Height','Comment','DogFriendly','CatFriendly','KidFriendly'],
+                    attributes: ['id','Name','Type','Race','Age','Sexe','Weight','Height','Comment','DogFriendly','CatFriendly','KidFriendly'],
                     include: [ {
                         model:Users,
-                        attributes: ['Firstname','City'],
+                        attributes: ['id','Firstname','City'],
                     }]
                 }]
         }
@@ -125,6 +125,36 @@ router.get("/me", async(req,res) =>{
 
     res.json(listOfAnnonces)
     
+})
+
+
+
+router.put('/updateAnnonce', async (req, res) => {
+    Annonces.update({
+        Type: req.body.Type,
+        Comment: req.body.Comment,
+        DateBegin: req.body.DateBegin,
+        DateEnd: req.body.DateEnd,
+    }, {
+        where: {
+            id: req.body.id
+        }
+    })
+
+    PetsAnnonces.destroy({
+        where: {
+            AnnonceId: req.body.id
+        }
+    }).then(() => {
+        req.body.Pets.forEach(pet => {
+        PetsAnnonces.create({
+            PetId: pet.id,
+            AnnonceId: req.body.id
+            })
+        })
+    })  
+
+    res.json(200)
 })
 
 

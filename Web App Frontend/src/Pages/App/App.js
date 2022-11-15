@@ -16,7 +16,7 @@ import {Register} from "../Register/Register";
 import MesAnnonces from '../MesAnnonces/MesAnnonces';
 import Account from '../Account/Account'
 import CreatePet from '../CreatePet/CreatePet'
-import DetailAnnonce from '../DetailAnnonce/DetailAnnonce';
+import {DetailAnnonce} from '../DetailAnnonce/DetailAnnonce';
 
 
 function App() {

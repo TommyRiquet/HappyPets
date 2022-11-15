@@ -1,5 +1,4 @@
 .return-button{
-    margin: 8vh 0 0 20vh; /* margin-top: 8vh; margin-left: 20vh; */
     width: 14vh;
     height: 5vh;
     background-color: var(--secondary-color) !important;
