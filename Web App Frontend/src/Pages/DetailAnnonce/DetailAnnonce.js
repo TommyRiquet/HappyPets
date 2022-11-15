@@ -26,6 +26,10 @@ import LapinImage from "../../Assets/Lapin.jpg";
 import SerpentImage from "../../Assets/Serpent.jpg";
 import TortueImage from "../../Assets/Tortue.jpg";
 
+/*Importing Config*/
+import config from "../../config.json";
+
+
 const AnimauxImages = {
   Chien: ChienImage,
   Chat: ChatImage,

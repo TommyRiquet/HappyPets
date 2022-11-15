@@ -14,25 +14,3 @@ describe('Account', () => {
         )
     })
 })
-
-
-describe('Integration Tests for the <Account> Page', () => { 
-
-    it('Should fetch the /account route once with the correct url', async () => {
-        const jestSpy = jest.spyOn(global, 'fetch')
-        
-        render(
-            <BrowserRouter>
-                <Account/>
-            </BrowserRouter>        );
-        
-        await act(async () => {
-            expect(jestSpy).toHaveBeenCalledTimes(1);
-            expect(jestSpy).toHaveBeenCalledWith(config.API_URL+"/users/info?id=3");
-        })
-
-
-        }
-    )
-
-})
