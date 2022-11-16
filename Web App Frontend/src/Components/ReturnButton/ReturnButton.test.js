@@ -1,7 +1,6 @@
 import { render , screen } from '@testing-library/react';
 import ReturnButton from './ReturnButton';
 
-
 describe('Render test for the component <ReturnButton />', () => {
     it('Should render without crash', async () => {
 
@@ -14,15 +13,15 @@ describe('Render test for the component <ReturnButton />', () => {
 
 
 describe('test onClick for the component <ReturnButton />', () => {
-    it('Should go back', async () => {
+    it('Should call the onClick function', async () => {
 
         render(
-            <ReturnButton/>
+                <ReturnButton/>
         )
 
-        const button = screen.getByRole('button');
-        button.click();
-        expect(window.history.back).toHaveBeenCalled();
+        const button = screen.getByRole('button')
+        button.click()
+        expect(button.className).toBe("return-button btn")
 
     })
 })
