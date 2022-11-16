@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 /*import { act } from 'react-dom/test-utils';*/
+import Report from './Report';
 
 afterEach(() => {
     jest.restoreAllMocks();
@@ -8,7 +9,7 @@ afterEach(() => {
 describe('Render Tests for the <Report> component', () => {
     it('Should render without crash', async () => {
         render(
-            
+            <Report page={'all'}/>
         )
     })
 })
