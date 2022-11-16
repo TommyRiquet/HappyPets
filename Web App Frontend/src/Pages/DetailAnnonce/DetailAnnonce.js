@@ -101,8 +101,9 @@ function DetailAnnonce() {
    */
   useEffect(() => {
     setDisplayPet(annonce.Pets[0]);
+    let id = JSON.parse(localStorage.getItem("user")) === null ? 0 : JSON.parse(localStorage.getItem("user")).id;
 
-    annonce.Pets[0].User.id === JSON.parse(localStorage.getItem("user")).id
+    annonce.Pets[0].User.id === id
       ? setIsModifiable(true)
       : setIsModifiable(false);
   }, [annonce]);
