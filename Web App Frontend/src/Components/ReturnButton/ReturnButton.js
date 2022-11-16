@@ -5,9 +5,14 @@ import { Button } from 'react-bootstrap';
 import './ReturnButton.css';
 
 function ReturnButton() {
+
+  function goBack(){
+    window.history.back()
+  }
+  
   return (
     <div className="ReturnButton">
-      <Button variant="" onClick={e=>window.history.back()} className="return-button">
+      <Button variant="" onClick={e=>goBack()} className="return-button">
         Retour
       </Button>
     </div>

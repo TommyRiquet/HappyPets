@@ -110,6 +110,7 @@ function AnimalCard(props) {
                           >
                             <img
                               src={DogIcon}
+                              data-testid={"annonce-dog-friendly" + index}
                               className={
                                 pet.DogFriendly ? "green-icon" : "red-icon"
                               }
@@ -131,6 +132,7 @@ function AnimalCard(props) {
                           >
                             <img
                               src={CatIcon}
+                              data-testid={"annonce-cat-friendly" + index}
                               className={
                                 pet.CatFriendly ? "green-icon" : "red-icon"
                               }
@@ -152,6 +154,7 @@ function AnimalCard(props) {
                           >
                             <img
                               src={BabyIcon}
+                              data-testid={"annonce-kid-friendly" + index}
                               className={
                                 pet.KidFriendly ? "green-icon" : "red-icon"
                               }

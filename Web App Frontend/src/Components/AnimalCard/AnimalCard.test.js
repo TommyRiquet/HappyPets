@@ -13,6 +13,9 @@ let FakeAnnonce = {
           "Sexe": "F",
           "Weight": 5,
           "Height": "Normal",
+          "DogFriendly": true,
+          "CatFriendly": true,
+          "KidFriendly": true,
           "User": {
             "City": "Wavre"
             }
@@ -33,6 +36,9 @@ let FakeAnnonce2 = {
         "Sexe": "F",
         "Weight": 3,
         "Height": "Normal",
+        "DogFriendly": true,
+        "CatFriendly": true,
+        "KidFriendly": true,
         "User": {
           "City": "Perwez"
           },
@@ -44,6 +50,9 @@ let FakeAnnonce2 = {
         "Sexe": "M",
         "Weight": 4,
         "Height": "Normal",
+        "DogFriendly": true,
+        "CatFriendly": true,
+        "KidFriendly": true,
         "User": {
           "City": "Perwez"
           },
@@ -65,6 +74,9 @@ let FakeAnnonce3 = {
         "Sexe": "F",
         "Weight": 3,
         "Height": "Normal",
+        "DogFriendly": true,
+        "CatFriendly": true,
+        "KidFriendly": true,
         "User": {
           "City": "Rixensart"
           },
@@ -76,6 +88,9 @@ let FakeAnnonce3 = {
         "Sexe": "M",
         "Weight": 4,
         "Height": "Normal",
+        "DogFriendly": true,
+        "CatFriendly": true,
+        "KidFriendly": true,
         "User": {
           "City": "Rixensart"
           },
@@ -87,6 +102,9 @@ let FakeAnnonce3 = {
         "Sexe": "F",
         "Weight": 5,
         "Height": "Normal",
+        "DogFriendly": true,
+        "CatFriendly": true,
+        "KidFriendly": true,
         "User": {
           "City": "Rixensart"
           }
@@ -220,6 +238,68 @@ describe("Props Test for a single pet for the component <AnimalCard/>", () => {
       const propsAnnonceType = screen.getByTestId("annonce-type")
       expect(propsAnnonceType.textContent).toBe("");
   })
+
+
+
+  it('Should correctly display the green dog-icon', async () => {
+
+    render(
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
+      )
+      const propsAnnonceType = screen.getByTestId("annonce-dog-friendly0")
+      expect(propsAnnonceType.className).toBe("green-icon");
+  })
+  it('Should correctly display the red dog-icon', async () => {
+
+    FakeAnnonce.Pets[0].DogFriendly = false
+
+    render(
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
+      )
+      const propsAnnonceType = screen.getByTestId("annonce-dog-friendly0")
+      expect(propsAnnonceType.className).toBe("red-icon");
+  })
+
+  
+  it('Should correctly display the green cat-icon', async () => {
+
+    render(
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
+      )
+      const propsAnnonceType = screen.getByTestId("annonce-cat-friendly0")
+      expect(propsAnnonceType.className).toBe("green-icon");
+  })
+  it('Should correctly display the red cat-icon', async () => {
+
+    FakeAnnonce.Pets[0].CatFriendly = false
+
+    render(
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
+      )
+      const propsAnnonceType = screen.getByTestId("annonce-cat-friendly0")
+      expect(propsAnnonceType.className).toBe("red-icon");
+  })
+
+  
+  it('Should correctly display the green kid-icon', async () => {
+
+    render(
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
+      )
+      const propsAnnonceType = screen.getByTestId("annonce-kid-friendly0")
+      expect(propsAnnonceType.className).toBe("green-icon");
+  })
+  it('Should correctly display the red kid-icon', async () => {
+
+    FakeAnnonce.Pets[0].KidFriendly = false
+
+    render(
+          <AnimalCard annonce={FakeAnnonce} image={"test"}/>
+      )
+      const propsAnnonceType = screen.getByTestId("annonce-kid-friendly0")
+      expect(propsAnnonceType.className).toBe("red-icon");
+  })
+
 
 })
 
