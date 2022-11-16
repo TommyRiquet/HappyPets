@@ -69,7 +69,7 @@ function Account() {
                 <Row >
                     <Col md={6} xs={12} className="left-content">
 
-                        <img id="profilePic" src={InfoUser.PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink} width="250px" height="250px" alt="Utilisateur" />
+                        <img id="profilePic" src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null  ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink} width="250px" height="250px" alt="Utilisateur" />
 
                         <br />
                         {editionMode ? (
