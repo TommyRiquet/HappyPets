@@ -11,8 +11,8 @@ function Report(data){
 
     const [result,setresult] = useState([{
         'id':0,
-        'ClientName': "empty",
-        'SuspectName': "empty",
+        'UserName': "empty",
+        "User":{"id":0,"FirstName":"empty"},
         'Type': "empty",
         'createdAt': "10-11-22",
         'updatedAt': "10-11-22",}])
@@ -92,7 +92,13 @@ function Report(data){
         // eslint-disable-next-line
       }, [offset]);
 
-    const [display,setdisplay] = useState('')
+    const [display,setdisplay] = useState({
+        'id':0,
+        'UserName': "empty",
+        "User":{"id":0,"FirstName":"empty"},
+        'Type': "empty",
+        'createdAt': "10-11-22",
+        'updatedAt': "10-11-22",})
 
     const ImageReport = {
         'User':UserImage,
@@ -137,8 +143,8 @@ function Report(data){
                         return(
                             <tr key={index} onClick={() =>{setdisplay(report);setShow(true)}}>
                                 <td>{report.id}</td>
-                                <td>{report.ClientName}</td>
-                                <td>{report.SuspectName}</td>
+                                <td>{report.UserName}</td>
+                                <td>{report.User.FirstName}</td>
                                 <td><img src={TransformImage(report.Type)} className='Image' alt={report.Type}/></td>
                                 <td>{date}</td>
                             </tr>)                    
@@ -157,11 +163,11 @@ function Report(data){
                     <div className='slidestyle'>
                             <Row className='formslide'>
                                 <Col>Utilisateur appellent </Col>
-                                <Col>{display.ClientName}</Col>
+                                <Col>{display.UserName}</Col>
                             </Row>
                             <Row className='formslide'>
                                 <Col>Utilisateur Suspect</Col>
-                                <Col>{display.SuspectName}</Col>
+                                <Col>{display.User.FirstName}</Col>
                             </Row>
                             <Row className='formslide'>
                                 <Col>Type de report</Col>
