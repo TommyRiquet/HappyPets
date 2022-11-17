@@ -5,15 +5,17 @@ import './Register.css';
 import config from "../../config.json";
 
 /*Importing Components */
-import {Container, Button, Form, Row, Col} from 'react-bootstrap';
+import {Container, Button, Form, Row, Col, Modal} from 'react-bootstrap';
 import React, {useState, useEffect} from 'react';
-import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 import {sub} from "date-fns/fp"
 import {useNavigate} from 'react-router';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
 import { sha256 } from 'js-sha256';
+
+import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
+import PrivacyPolicy from '../../Components/PrivacyPolicy/PrivacyPolicy';
 
 YupPassword(yup)
 
@@ -24,6 +26,8 @@ function Register() {
 
     const [emailVerif, setemailVerif] = useState('');
     const [Resemail, setResemail] = useState('');
+    const [showPrivacyPolicyModal, setShowPrivacyPolicyModal] = useState(false);
+    const [event, setEvent] = useState({});
 
     const schema = yup.object().shape({
         LastName: yup.string().matches(/^[a-zA-Z]*$/, 'Symboles et chiffres interdits').required('Champ obligatoire'),
@@ -74,7 +78,12 @@ function Register() {
 
     }
 
-async function SendFormUSer(data){
+    function handleSendForm(event){
+        setShowPrivacyPolicyModal(true);
+        setEvent(event);
+    }
+
+    async function SendFormUSer(data){
         const hash =  sha256(data['Password']+"J'aime bien Tommy")
             fetch(config.API_URL+'/users',{ 
                 method: 'POST',
@@ -113,7 +122,7 @@ async function SendFormUSer(data){
                 <div>
                     <Formik
                         validationSchema={schema}
-                        onSubmit={SendFormUSer}
+                        onSubmit={e=>handleSendForm(e)}
                         initialValues={{
                             LastName: '',
                             FirstName: '',
@@ -241,15 +250,88 @@ async function SendFormUSer(data){
                                     </Col>
                                 </Form.Group>
                                 <Form.Group className="mb-3">
-                                    <Button className='UserDB' type="submit">Envoyer</Button>
+                                    <Button className='UserDB' type='file'>Accepter</Button>
                                 </Form.Group>
                             </Form>
                         )}
                     </Formik>
                 </div>
             </Container>
+            <PrivacyPolicyModal
+                show={showPrivacyPolicyModal}
+                onHide={setShowPrivacyPolicyModal}
+                sendForm={SendFormUSer}
+                event={event}
+            />
         </div>
     );
 }
+
+
+
+
+function PrivacyPolicyModal(props) {
+    const [ hasRead, setHasRead ] = useState(false);
+    const [checkValue,setCheckValue] = useState(false);
+
+    function handleScroll(e) {
+        const { scrollTop, scrollHeight, clientHeight } = e.target;
+
+        if (scrollTop + clientHeight+1 >= scrollHeight) {
+            setHasRead(true)
+        }
+    }
+
+    function handleClick(e) {
+        props.onHide(true)
+        props.sendForm(props.event)
+    }
+
+    useEffect(() => {
+        const container = document.getElementById('scrollable-container');
+        if (container) {
+            container.addEventListener('scroll', handleScroll);
+            return () => {
+                container.removeEventListener('scroll', handleScroll);
+            };
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.show]);
+    
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Privacy Policy
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Container className='privacy-policy-container' id='scrollable-container'>
+                <PrivacyPolicy/>
+            </Container>
+        </Modal.Body>
+        <Modal.Footer className='custom-modal-footer'>
+            <Container fluid>
+                <Row>
+                    <Col className='PP-Checkbox-container'>
+                        <Form.Label>J'ai lu et j'accepte la Privacy Policy</Form.Label>
+                        <Form.Check value={checkValue} defaultChecked={checkValue} className='p-2' onChange={e=>setCheckValue(!checkValue)}></Form.Check>
+                    </Col>
+                    <Col className='center'>            
+                        <Button className="edit-button" disabled={!(hasRead && checkValue)} onClick={handleClick}>
+                            Envoyer
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
 export {Register};
