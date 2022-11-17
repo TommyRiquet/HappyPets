@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
             attributes: ['id', 'FirstName', 'LastName','Password', 'Email','City','Postal','Phone','PhotoLink'],
             include: [{
                 model: Pets,
-                attributes: ['Name','Type','Race','Age','Sexe','Height','Weight','Behaviour','Comment','DogFriendly','CatFriendly','KidFriendly'],
+                attributes: ['id','Name','Type','Race','Age','Sexe','Height','Weight','Behaviour','Comment','DogFriendly','CatFriendly','KidFriendly'],
             }]
         })
         if (!user) throw new myError("L'utilisateur n'existe pas", 404);

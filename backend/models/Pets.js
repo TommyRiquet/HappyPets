@@ -1,6 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
 
     const Pets = sequelize.define("Pets", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true
+        },
         Name: {
             type: DataTypes.STRING,
             allowNull: false
