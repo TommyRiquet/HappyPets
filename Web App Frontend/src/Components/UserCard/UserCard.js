@@ -14,18 +14,61 @@ function UserCard(props){
                             <img src='https://afcm.ca/wp-content/uploads/2018/06/no-photo.png' className="user-picture" alt="UserProfilePicture"></img>
                         </Col>
                         <Col>
-                            <Row>
-                                <Col  className='g-2'>
+                            <Row>                               
                                     <div className='proposition-name'>
-                                        <span data-testid='proposition-name'>{(props.proposition.User.FirstName.length===0? "Inconnu" :props.proposition.User.FirstName )}</span>
-                                    </div>
-                                </Col>
+                                        <span data-testid='proposition-name'>
+                                            {(
+                                                props.proposition.User.FirstName.length === 0 ? 
+                                                "Inconnu" : props.proposition.User.FirstName 
+                                            )}
+                                        </span>
+                                        </div>
                             </Row>
                             <Row>
-                                <Col className='g-2'>
-                                    <div className='proposition-lieu'>
-                                        <span data-testid='proposition-lieu'>{(props.proposition.User.City.length===0? "Inconnu" :props.proposition.User.City )}</span>
-                                    </div>
+                                <span className='proposition-description' data-testid='proposition-description'>
+                                {(
+                                    props.proposition.Type.length===0 ? "" : 
+                                    props.proposition.Frequence.length===0 && props.proposition.Animal.length===0 ? props.proposition.Type :
+                                    props.proposition.Frequence.length===0 ? props.proposition.Type + ' de ' + props.proposition.Animal : 
+                                    props.proposition.Animal.length===0 ? props.proposition.Type + ' ' + props.proposition.Frequence :                               
+                                    props.proposition.Type + ' ' + props.proposition.Frequence + ' de ' + props.proposition.Animal
+                                )}
+                                </span>
+                            </Row>
+                            <Row className='list-proposition'>
+                                {(
+                                    !("Pets" in props.proposition.User)? "" :
+                                    props.proposition.User.Pets.length===0 ? "" :    
+                                    <select >
+                                        <option hidden>Animaux</option>
+                                        {(
+                                            props.proposition.User.Pets.map((pet,index)=>
+                                            {
+                                                return(
+                                                <option className='list-proposition-animaux' data-testid='proposition-pets' disabled key={index}>
+                                                    {(
+                                                        !("Pets" in props.proposition.User)? "" : 
+                                                        pet.length===0 ? "" :
+                                                        pet.Name.length===0 ? pet.Type : 
+                                                        pet.Type.length===0 ? pet.Name : 
+                                                        pet.Name + " est un " + pet.Type
+                                                    )}
+                                                </option>
+                                                )
+                                            })                                 
+                                        )}
+                                    </select>                            
+                                )}
+                            </Row> 
+                        </Col>
+                            <Col>
+                            <Row className='proposition-localite' data-testid={"proposition-user-city"}>
+                                <Col>
+                                    {
+                                    !("User" in props.proposition)? "": 
+                                    props.proposition.User.length===0 ? "":
+                                    props.proposition.User.City.length===0 ? "" : props.proposition.User.City
+                                    }
                                 </Col>
                             </Row>
                         </Col>

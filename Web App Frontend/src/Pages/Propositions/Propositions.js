@@ -10,7 +10,7 @@ import './Propositions.css';
 /*Importing Config*/
 import config from "../../config.json";
 
-
+    
 function Propositions(){
     const [ListPropositions,setListPropositions] = useState([])
     let offset = 0
@@ -24,23 +24,23 @@ function Propositions(){
   
     function LoadProposition(offset = 0){
 
-        fetch(config.API_URL+'/propositions/annonce?id=5')
+        fetch('http://localhost:3001/propositions?offset='+offset)
             .then((response) => response.json())
             .then((data) => {
+                console.log(data)
                 if(offset === 0){
                     setListPropositions(data)
                     return
                 }
                 setListPropositions(ListPropositions => [...ListPropositions, ...data])
-        });
+            });
     }
 
 
     function handleScroll(e){
 
         if(window.innerHeight+e.target.documentElement.scrollTop+1 >= e.target.documentElement.scrollHeight){
-
-            offset += 6 
+            offset += 10 
             LoadProposition(offset)
         }
     }

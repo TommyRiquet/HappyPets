@@ -5,15 +5,30 @@
     box-shadow: #1e1e1e 0 0 3px 0;
     transition: 0.2s;
   }
-  .proposition:hover{
+.proposition:hover{
     transform: scale(1.01);
     box-shadow: #1e1e1e 0 0 7px 0;
   }
-  .proposition .proposition-name, .proposition .proposition-lieu {
+.proposition .proposition-name, .proposition .proposition-lieu {
     font-size: 1.2em;
     font-weight: bold;
   }
-  .user-picture{
+.user-picture{
     width: 80px !important;
     height: 80px !important;
   }
+.proposition-localite{
+  float: right;
+  color: grey;
+}
+.proposition-description{
+  width: 20em !important;
+  margin: 4px 0 4px 4px;
+}
+.list-proposition{
+  width: 7em;
+  margin : 4px 0 4px 0 !important;
+}
+.list-proposition-animaux:disabled{
+  color: rgb(0, 0, 1) !important;
+}
