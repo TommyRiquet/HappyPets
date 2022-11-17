@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
+import xIcon from "../../Assets/x-button.png";
 
 /*Importing Styles*/
 import './Account.css';
@@ -35,6 +36,7 @@ function Account() {
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user')) || { Pets: [] }
         setInfoUser(user)
+        console.log(user);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -49,6 +51,31 @@ function Account() {
             },
             body: JSON.stringify(InfoUser)
         })
+    }
+
+    function deleteAnimal(index) {
+        /*
+         *   Supprime un animal du profil
+         */
+
+
+        // eslint-disable-next-line no-restricted-globals
+        let beSure = confirm("Voulez-vous vraiment supprimer cet animal ?");
+        if (beSure) {
+            fetch(config.API_URL + "/pets/hasAnnonce?id=" + index)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                if(data){
+                    alert("Vous ne pouvez pas supprimer un animal qui a des annonces");
+                }
+            });
+        } else {
+            fetch(config.API_URL + "/pets/deleteAnimal?id=" + index)
+            .then((response) => response.json());
+            alert("Animal bien supprimé. Déconnectez-vous pour actualiser votre profil.");
+        }
+        console.log(index);
     }
 
 
@@ -69,17 +96,11 @@ function Account() {
                 <Row >
                     <Col md={6} xs={12} className="left-content">
 
-                        <img id="profilePic" src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null  ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink} width="250px" height="250px" alt="Utilisateur" />
+                        <img id="profilePic" src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink} width="250px" height="250px" alt="Utilisateur" />
 
                         <br />
                         {editionMode ? (
-
-                                <Form.Group as={Row} className="mb-4 choose-image">
-                                <Col sm="12">
-                                    <Form.Label className="modify-label">Modifier la photo de profil</Form.Label>
-                                    <Form.Control type="file" name="profilePicture" id="profilePicture" />
-                                </Col>
-                                </Form.Group>
+                            <p className="modify-label">Modifier la photo de profil</p>
                         ) : ("")}
                         <br />
                         <Button className='modify-button' onClick={
@@ -200,8 +221,23 @@ function Account() {
                                     <tr className='div-pic-animal'>
                                         {InfoUser.Pets.map((pet, index) => {
                                             return <td className='pic-animal' key={"pets" + index}><img alt="mon animal" src={AnimauxImages[pet.Type]} /><br />
-                                                <p className='name-animal'>{pet.Name}</p></td>
+                                                <p className='name-animal'>{pet.Name}</p>
+                                                {editionMode ? (
+                                                <img
+                                                    src={xIcon}
+                                                    alt="supprimer l'animal"
+                                                    onClick={(e) => deleteAnimal(index)}
+                                                    className="x-icon"
+                                                ></img>
+                                                )
+                                            :
+                                            null
+                                            }
+                                                </td>
                                         })}
+                                    
+                                
+
                                     </tr>
                                 </tbody>
                             </table>
