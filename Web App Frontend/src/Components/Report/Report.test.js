@@ -30,32 +30,5 @@ describe('Integration Tests for the <Annonces> Page', () => {
         }
     )
 
-    it('Should fetch the /Report route with the correct url', async () => {
-        const jestSpy = jest.spyOn(global, 'fetch')
-        
-        render(<Report page={'alertAnnonce'}/>);
-        
-        await act(async () => {
-            expect(jestSpy).toHaveBeenCalledTimes(2);
-            expect(jestSpy).toHaveBeenCalledWith("http://localhost:3001/admin/findtype?type=alertAnnonce&offset=0&limit=20", {"headers": {"Content-type": "application/json"}, "method": "GET"});
-        })
-
-
-        }
-    )
-
-    it('Should fetch the /Report routes with the correct url', async () => {
-        const jestSpy = jest.spyOn(global, 'fetch')
-        
-        render(<Report page={'alertAvis'}/>);
-        
-        await act(async () => {
-            expect(jestSpy).toHaveBeenCalledTimes(2);
-            expect(jestSpy).toHaveBeenCalledWith("http://localhost:3001/admin/findtype?type=alertAvis&offset=0&limit=20", {"headers": {"Content-type": "application/json"}, "method": "GET"});
-        })
-
-
-        }
-    )
-
+    
 })
