@@ -1,2 +1,5 @@
 /node_modules
+/Images/*
 /config/config.json
+
+/coverage
