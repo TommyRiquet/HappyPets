@@ -65,17 +65,19 @@ function Account() {
             fetch(config.API_URL + "/pets/hasAnnonce?id=" + index)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
+                console.log(index)
                 if(data){
                     alert("Vous ne pouvez pas supprimer un animal qui a des annonces");
                 }
+                else{
+                    fetch(config.API_URL + "/pets/deleteAnimal?id=" + index)
+                    .then((response) => response.json());
+                    alert("Animal bien supprimé. Déconnectez-vous pour actualiser votre profil.");
+
+                    document.getElementById("animal-"+index).innerHTML="";
+                }
             });
-        } else {
-            fetch(config.API_URL + "/pets/deleteAnimal?id=" + index)
-            .then((response) => response.json());
-            alert("Animal bien supprimé. Déconnectez-vous pour actualiser votre profil.");
         }
-        console.log(index);
     }
 
 
@@ -220,13 +222,13 @@ function Account() {
                                 <tbody>
                                     <tr className='div-pic-animal'>
                                         {InfoUser.Pets.map((pet, index) => {
-                                            return <td className='pic-animal' key={"pets" + index}><img alt="mon animal" src={AnimauxImages[pet.Type]} /><br />
+                                            return <td className='pic-animal' id={"animal-"+pet.id} key={"pets" + index}><img alt="mon animal" src={AnimauxImages[pet.Type]} /><br />
                                                 <p className='name-animal'>{pet.Name}</p>
                                                 {editionMode ? (
                                                 <img
                                                     src={xIcon}
                                                     alt="supprimer l'animal"
-                                                    onClick={(e) => deleteAnimal(index)}
+                                                    onClick={(e) => deleteAnimal(pet.id)}
                                                     className="x-icon"
                                                 ></img>
                                                 )

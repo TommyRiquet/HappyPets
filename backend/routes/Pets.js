@@ -31,13 +31,15 @@ router.get("/hasAnnonce", async (req, res) => {
 })
 
 router.get("/deleteAnimal", async (req, res) => {
-
-    const pets = await Pets.destroy(
-        { where: { id: req.query.id } }
-    )
-    res.send(200);
-
-})
+    try {
+        const pet=await Pets.destroy(
+            { where: { id: req.query.id } }
+        )
+        res.send(200);
+    } catch (error) { // en cas d'erreur
+        res.status(500).send(error);
+    }
+  });
 
 router.post("/", async (req, res) => {
     console.log(req.body);
