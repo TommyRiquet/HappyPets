@@ -35,12 +35,17 @@ function Home() {
     return (
         <div>
             <div className='scrollDiv '>
-                <CustomNavbar textLinkOne="S'inscrire"
-                          linkOne="/register" 
-                          textLinkTwo="Se connecter"
-                          linkTwo="/login"
-                          color="rgba(0, 0, 0, 0)"
-                          position="absolute"
+                <CustomNavbar 
+                    textLinkOne="Propositions"
+                    linkOne="/propositions" 
+                    textLinkTwo="Annonces"
+                    linkTwo="/annonces"
+                    textLinkThree="S'inscrire"
+                    linkThree="/register" 
+                    textLinkFour="Se connecter"
+                    linkFour="/login"
+                    color="rgba(0, 0, 0, 0)"
+                    position="absolute"
                 />
                 <div className='homeContent1'>
                 <h1>Ensemble luttons contre les abandons</h1>
