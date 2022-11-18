@@ -29,6 +29,13 @@ function CustomNavbar(props) {
           <Nav className="d-flex">
           <Nav.Link href={props.linkOne} data-testid='link-one'>{props.textLinkOne}</Nav.Link>
           <Nav.Link href={props.linkTwo} data-testid='link-two'>{props.textLinkTwo}</Nav.Link>
+            {!localStorage.getItem('user') ? 
+            <>
+              <Nav.Link href={props.linkThree} data-testid='link-three'>{props.textLinkThree}</Nav.Link>
+              <Nav.Link href={props.linkFour} data-testid='link-four'>{props.textLinkFour}</Nav.Link>
+            </>
+            : null
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>

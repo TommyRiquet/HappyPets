@@ -1,5 +1,5 @@
 /*Importing Components */
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Outlet, Navigate} from 'react-router-dom';
 import Footer from "../../Components/Footer/Footer";
 
 /*Importing Styles*/
@@ -20,19 +20,36 @@ import {DetailAnnonce} from '../DetailAnnonce/DetailAnnonce';
 
 
 function App() {
+  const VerifRoute = ({autorized,redirectPath,children,}) => {
+    if (!autorized){
+      return <Navigate to={redirectPath} replace/>;
+    }
+
+    return children ? children : <Outlet/>;
+  }
   return (
           <BrowserRouter>
               <Routes>
                   <Route path="/" element={<Home/>}/>
                   <Route path="/annonces" element={<Annonces/>}/>
-                  <Route path="/login" element={<Login/>}/>
-                  <Route path="/annonces/new" element={<NewAnnonce/>}/>
                   <Route path="/propositions" element={<Propositions/>}/>
-                  <Route path="/mesannonces" element={<MesAnnonces/>}/>
-                  <Route path="/account" element={<Account/>}/>
-                  <Route path="/createAnimal" element={<CreatePet/>}/>
-                  <Route path='/register' element={<Register/>}/>
                   <Route path='/detailannonce/:id' element={<DetailAnnonce/>}/>
+
+                  {/* Routes pour les utilisateurs connectés */}
+                  <Route element={<VerifRoute autorized={localStorage.getItem("user")} redirectPath={'/'} />}>
+                    <Route path="/account" element={<Account/>}/>
+                    <Route path="/createAnimal" element={<CreatePet/>}/>
+                    <Route path="/annonces/new" element={<NewAnnonce/>}/>
+                    <Route path="/mesannonces" element={<MesAnnonces/>}/>
+                  </Route>
+
+                  {/* Routes bloqués lorsque l'utilisateur est connectés */}
+                  <Route element={<VerifRoute autorized={!localStorage.getItem("user")} redirectPath={'/'} />}>
+                    <Route path='/register' element={<Register/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                  </Route>
+
+                  {/* Lorsqu'aucune route n'a été trouvé */}
                   <Route path="*" element={<Error/>}/>
               </Routes>
               <Footer/>
