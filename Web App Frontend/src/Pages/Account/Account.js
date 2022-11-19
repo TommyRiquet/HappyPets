@@ -36,7 +36,6 @@ function Account() {
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user')) || { Pets: [] }
         setInfoUser(user)
-        console.log(user);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -51,6 +50,8 @@ function Account() {
             },
             body: JSON.stringify(InfoUser)
         })
+        //Maintenant que InfoUser est à jour, on dit que le localStorage correspond à InfoUser
+        localStorage.setItem("user", JSON.stringify(InfoUser))
     }
 
     function deleteAnimal(index) {
@@ -65,16 +66,23 @@ function Account() {
             fetch(config.API_URL + "/pets/hasAnnonce?id=" + index)
             .then((response) => response.json())
             .then((data) => {
-                console.log(index)
                 if(data){
                     alert("Vous ne pouvez pas supprimer un animal qui a des annonces");
                 }
                 else{
                     fetch(config.API_URL + "/pets/deleteAnimal?id=" + index)
                     .then((response) => response.json());
-                    alert("Animal bien supprimé. Déconnectez-vous pour actualiser votre profil.");
-
+                    alert("Animal bien supprimé.");
+                    //pour enlever la photo de l'animal
                     document.getElementById("animal-"+index).innerHTML="";
+                    //pour enlever, dans l'objet InfoUser, l'animal
+                    for (let i in InfoUser.Pets){
+                        if(InfoUser.Pets[i].id===index){
+                            InfoUser.Pets.splice(i,1);
+                        }
+                    }
+                    //Maintenant que l'animal est enlevé dans InfoUser, on dit que le localStorage correspond à InfoUser
+                    localStorage.setItem("user", JSON.stringify(InfoUser))
                 }
             });
         }
