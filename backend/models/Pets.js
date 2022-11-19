@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        Sexe: {
+        Sex: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -56,6 +56,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         KidFriendly: {
             type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        PhotoLink: {
+            type: DataTypes.STRING,
             allowNull: true
         }
 
