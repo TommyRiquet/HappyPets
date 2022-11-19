@@ -42,10 +42,33 @@ router.get("/deleteAnimal", async (req, res) => {
   });
 
 router.post("/", async (req, res) => {
-    console.log(req.body);
-    const newPet = req.body;
-    console.log(newPet);
-    Pets.create(newPet);
-    res.json(newPet);
+  const newPet = req.body;
+  Pets.create(newPet).then((pet) => {
+  res.json(pet)})
 });
+
+router.post("/image/upload", async (req,res ) => {
+    let petID = req.body.petID
+    console.log(req.body);
+    console.log(petID)
+    try { // si y a pas de fichier
+        if(!req.files) {
+            res.send(404);
+        } else {// si y a un fichier
+            let image = req.files.petPicture;
+            image.mv('./Images/pet-' + petID +'.'+ image.mimetype.split('/')[1]);
+            //si l'image a bien été téléchargé, on va stocker le lien vers l'image dans la DB
+            const pet=await Pets.update({PhotoLink: 'pet-' + petID +'.'+ image.mimetype.split('/')[1]}, {
+                where: {
+                    id: petID
+                }
+            });
+            //si tout s'est bien passé -> renvoi 200
+            res.send(200);
+        }
+    } catch (error) { // en cas d'erreur
+        res.status(500).send(error);
+    }
+});
+
 module.exports = router;

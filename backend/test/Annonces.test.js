@@ -225,6 +225,5 @@ describe('Testing for the /annonces routes', function() {
                 expect(res.body[i].Pets[pets].KidFriendly).toBe(true);
             }
         }
-    }) 
-  
+    })
   });
