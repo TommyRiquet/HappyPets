@@ -51,9 +51,6 @@ module.exports = (sequelize, DataTypes) => {
         Users.hasMany(models.Propositions, {
                 onDelete: "cascade"
         })
-        Users.hasMany(models.Admin, {
-                onDelete: "cascade",
-        })
      }
 
     return Users;
