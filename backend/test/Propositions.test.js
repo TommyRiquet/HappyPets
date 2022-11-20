@@ -122,7 +122,10 @@ describe('Testing for the typeAnimalProposition queryString of /propositions', f
         const res = await request(app)
             .get('/propositions?typeProposition=Promenade')
 
-            expect(res.body[0].Type).toBe("Promenade");
+        for(i in res.body){
+            expect(res.body[i].Type).toBe("Promenade");
+        }
+            
 
     }) 
 
@@ -130,14 +133,18 @@ describe('Testing for the typeAnimalProposition queryString of /propositions', f
         const res = await request(app)
             .get('/propositions?typeProposition=Logement')
 
-            expect(res.body[1].Type).toBe("Logement");
+        for(i in res.body){
+            expect(res.body[i].Type).toBe("Logement");
+            }
     }) 
 
     it('Should only get Home Care', async() =>{
         const res = await request(app)
             .get('/propositions?typeProposition=Soins%20à%20domicile')
 
-            expect(res.body[2].Type).toBe("Soins à domicile");
+        for(i in res.body){
+            expect(res.body[i].Type).toBe("Soins à domicile");
+        }
 
     }) 
 
@@ -145,7 +152,9 @@ describe('Testing for the typeAnimalProposition queryString of /propositions', f
         const res = await request(app)
             .get('/propositions?typeProposition=Garde%20à%20domicile')
 
-            expect(res.body[5].Type).toBe("Garde à domicile");
+        for(i in res.body){
+            expect(res.body[i].Type).toBe("Garde à domicile");
+        }
 
     }) 
   

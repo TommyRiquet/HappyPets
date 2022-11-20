@@ -45,12 +45,15 @@ module.exports = (sequelize, DataTypes) => {
     })
     
      Users.associate = (models) => {
-         Users.hasMany(models.Pets, {
+        Users.hasMany(models.Pets, {
              onDelete: "cascade"
-         })
-         Users.hasMany(models.Propositions, {
+        })
+        Users.hasMany(models.Propositions, {
                 onDelete: "cascade"
-            })
+        })
+        Users.hasMany(models.Admin, {
+                onDelete: "cascade",
+        })
      }
 
     return Users;
