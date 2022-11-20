@@ -8,19 +8,19 @@ router.get("/", async (req, res) => {
 
     let offset = req.query.offset || 0
     let limit = req.query.limit ? ((req.query.limit>0 && !isNaN(req.query.limit)) ? req.query.limit : 0): 10
-    let typeProposition = req.query.typePropositionn || ["Promenade","Logement","Soins à domicile","Garde à domicile"]
-    let frequenceProposition = req.query.frequenceProposition || ["Régulière","Occasionnel"]
+    let typeProposition = req.query.typeProposition || ["Promenade","Logement","Garde à domicile","Soins à domicile"]
+    let frequenceProposition = req.query.frequenceProposition || ["Régulière","Occasionnelle"]
     let animalProposition = req.query.animalProposition || ["Chien","Chat","Rongeur","Oiseau","Poisson","NAC"]
 
         const ListPropositions = await Propositions.findAll({
             limit : parseInt(limit), 
             offset: parseInt(offset),
-            attributes : ['Type','Frequence','Animal','id'],
             where: {
                 Type : {[Op.or] : [typeProposition]},
                 Frequence : {[Op.or] : [frequenceProposition]},
                 Animal : {[Op.or] : [animalProposition]}
             },
+            attributes : ['Type','Frequence','Animal'],
                 include : [{
                     model : Users,
                     attributes : ['FirstName', 'City'],
