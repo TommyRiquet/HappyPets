@@ -19,7 +19,6 @@ function Login() {
             Email: event.target[0].value,
             Password: sha256(event.target[1].value+"J'aime bien Tommy")
         };
-        console.log(user);
         event.preventDefault()
 
         fetch(config.API_URL+"/users/login", {
