@@ -14,20 +14,29 @@ import config from "../../config.json";
 function Propositions(){
     const [ListPropositions,setListPropositions] = useState([])
     let offset = 0
+    const limit = 10
 
     useEffect(()=>{
             window.addEventListener("scroll", handleScroll);
-            LoadProposition();
+            LoadProposition(
+                offset,
+                limit,
+            );
             // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
   
     function LoadProposition(offset = 0){
 
-        fetch('http://localhost:3001/propositions?offset='+offset)
+        fetch(config.API_URL + 
+            '/propositions?' +
+            'offset=' +
+            offset +
+            "&limit=" +
+            limit
+            )
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 if(offset === 0){
                     setListPropositions(data)
                     return
@@ -64,7 +73,7 @@ function Propositions(){
                         {
                             ListPropositions.map((proposition,index) => {
                                 return (
-                                    <Col key={index} onClick={e=>console.log(proposition.name)}>
+                                    <Col key={index} onClick={e=>console.log(proposition.Type)}>
                                         <UserCard proposition={proposition} />
                                     </Col>
                                 )
