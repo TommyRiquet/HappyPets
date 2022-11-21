@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Annonces.associate = (models) => {
+        
         Annonces.belongsToMany(models.Pets, { 
             through : models.PetsAnnonces,
             onDelete: "cascade"
