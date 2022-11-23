@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
                     attributes: ['id','Type','DateBegin','DateEnd'],
                         include: [ {
                             model:Pets,
-                            attributes: ['Name','Type','Race','Sexe','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
+                            attributes: ['Name','Type','Race','Sex','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
                             where : { //Where type of pet is in the list of typePet and isDogFriendly, isCatFriendly and isKidFriendly are equal to the value in the request
                                 [Op.and]: [
                                 {Type :{
@@ -80,7 +80,7 @@ router.get("/detailAnnonce", async (req, res) => {
             attributes: ['id','Comment','Type','DateBegin','DateEnd'],
                 include: [ {
                     model:Pets,
-                    attributes: ['id','Name','Type','Race','Age','Sexe','Weight','Height','Comment','DogFriendly','CatFriendly','KidFriendly'],
+                    attributes: ['id','Name','Type','Race','Age','Sex','Weight','Height','Comment','DogFriendly','CatFriendly','KidFriendly'],
                     include: [ {
                         model:Users,
                         attributes: ['id','Firstname','City'],
@@ -115,7 +115,7 @@ router.get("/me", async(req,res) =>{
             attributes: ['id','Type','DateBegin','DateEnd'],
                 include: [ {
                     model:Pets,
-                    attributes: ['Name','Type','Race','Sexe','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
+                    attributes: ['Name','Type','Race','Sex','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
                     where : { 
                         UserId: id
                     }
