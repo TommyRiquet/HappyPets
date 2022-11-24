@@ -260,7 +260,7 @@ function Register() {
             <PrivacyPolicyModal
                 show={showPrivacyPolicyModal}
                 onHide={setShowPrivacyPolicyModal}
-                submitForm={SendFormUSer}
+                sendForm={SendFormUSer}
                 event={event}
             />
         </div>
@@ -273,7 +273,6 @@ function Register() {
 function PrivacyPolicyModal(props) {
     const [ hasRead, setHasRead ] = useState(false);
     const [checkValue,setCheckValue] = useState(false);
-    const { show, onHide, submitForm, event } = props;
 
     function handleScroll(e) {
         const { scrollTop, scrollHeight, clientHeight } = e.target;
@@ -283,9 +282,9 @@ function PrivacyPolicyModal(props) {
         }
     }
 
-    function handleClick() {
-        onHide(true)
-        submitForm(event)
+    function handleClick(e) {
+        props.onHide(true)
+        props.sendForm(props.event)
     }
 
     useEffect(() => {
@@ -297,12 +296,11 @@ function PrivacyPolicyModal(props) {
             };
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [show]);
+    }, [props.show]);
     
     return (
       <Modal
-        show={show}
-        onHide={onHide}
+        {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
