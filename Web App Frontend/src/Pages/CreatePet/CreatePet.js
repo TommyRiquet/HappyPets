@@ -80,6 +80,8 @@ function CreatePet() {
 
 
     function sendFormPet(event) {
+        console.log(event)
+        const user = JSON.parse(localStorage.getItem("user"));
         fetch(config.API_URL + "/pets", {
             method: 'POST',
             headers: {
@@ -97,6 +99,7 @@ function CreatePet() {
                         Behaviour: event['behaviour'],
                         Sex: event['sex'],
                         Comment: event['comment'],
+                        UserId: user.id
                     }
                 )
             ),
@@ -115,8 +118,15 @@ function CreatePet() {
 
 
     return (
+        <div className={"CreatePet"}>
+        <CustomNavbar
+            textLinkOne="Propositions"
+            linkOne="/propositions"
+            textLinkTwo="Annonces"
+            linkTwo="/annonces"
+            color="rgba(47, 72, 88, 1)"
+        />
         <Container>
-            <CustomNavbar/>
             <div className="formPet">
                 <h1>Inscrivez votre animal</h1>
                 <Formik
@@ -336,7 +346,7 @@ function CreatePet() {
                             <Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>Commentaire</Form.Label>
-                                    <Form.Control name="comment" as="textarea" rows={3}/>
+                                    <Form.Control onChange={handleChange} name="comment" as="textarea" rows={3}/>
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -357,6 +367,7 @@ function CreatePet() {
                 </Formik>
             </div>
         </Container>
+        </div>
     )
 }
 
