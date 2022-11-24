@@ -3,7 +3,7 @@ import './PrivacyPolicy.css';
 function PrivacyPolicy() {
     return (
         <div className="PrivacyPolicy">
-            Lorem Ipsum Ea sint consectetur adipisicing proident excepteur incididunt exercitation ipsum eu irure. Ut mollit deserunt qui duis tempor aute qui commodo non dolor. Nostrud excepteur laborum anim laborum consequat laboris do sunt non culpa nulla non ad. Laborum ad do cillum exercitation est duis Lorem magna cillum.
+            Ea sint consectetur adipisicing proident excepteur incididunt exercitation ipsum eu irure. Ut mollit deserunt qui duis tempor aute qui commodo non dolor. Nostrud excepteur laborum anim laborum consequat laboris do sunt non culpa nulla non ad. Laborum ad do cillum exercitation est duis Lorem magna cillum.
 
             Minim adipisicing in nulla ut nisi duis aute reprehenderit nulla aliquip aliqua non non. Consectetur consequat sint aliquip Lorem amet. Officia aliquip culpa do mollit adipisicing enim. Consequat consequat reprehenderit commodo id commodo. Esse dolor ut officia reprehenderit culpa sit consectetur ullamco nulla. Ut pariatur elit esse ullamco mollit irure exercitation. Dolore consequat consequat nisi sit voluptate nulla enim sit tempor excepteur excepteur anim.
 
