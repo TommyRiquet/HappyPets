@@ -201,7 +201,7 @@ function CreatePet() {
                                                  value={values.behaviour}
                                                  onChange={handleChange}
                                                  onBlur={handleBlur}
-                                                 isValid={!touched.behavior && errors.behaviour}
+                                                 isValid={!errors.behaviour && touched.behavior}
                                                  isInvalid={touched.behavior && errors.behaviour}>
                                         <option value="no-value">Sélectionner un caractère</option>
                                         <option value="Dominant">Dominant</option>
@@ -247,7 +247,7 @@ function CreatePet() {
                                             autoComplete="off"
                                             onChange={e => ChangeToCamelcase(e)}
                                             onBlur={handleBlur}
-                                            isValid={!touched.race && errors.race}
+                                            isValid={!errors.race && touched.race}
                                             isInvalid={touched.race && errors.race}
                                         />
                                         <div className="animal-proposition">
@@ -271,7 +271,7 @@ function CreatePet() {
                                         value={values.age}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        isValid={!touched.age && errors.age}
+                                        isValid={!errors.age && touched.age}
                                         isInvalid={touched.age && errors.age}
                                     />
                                     <Form.Control.Feedback type="invalid">
@@ -284,7 +284,7 @@ function CreatePet() {
                                                  value={values.sex}
                                                  onChange={handleChange}
                                                  onBlur={handleBlur}
-                                                 isValid={!touched.sex && errors.sex}
+                                                 isValid={!errors.sex && touched.sex}
                                                  isInvalid={touched.sex && errors.sex}>
                                         <option>Sélectionner un sexe</option>
                                         <option value="M">Mâle</option>
@@ -303,7 +303,7 @@ function CreatePet() {
                                         value={values.weight}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        isValid={!touched.weight && errors.weight}
+                                        isValid={!errors.weight && touched.weight}
                                         isInvalid={touched.weight && errors.weight}
                                     />
                                     <Form.Control.Feedback type="invalid">
@@ -317,7 +317,7 @@ function CreatePet() {
                                                  value={values.height}
                                                  onChange={handleChange}
                                                  onBlur={handleBlur}
-                                                 isValid={!touched.height && errors.height}
+                                                 isValid={!errors.height && touched.height}
                                                  isInvalid={touched.height && errors.height}
                                     >
                                         <option>Sélectionner une taille</option>
