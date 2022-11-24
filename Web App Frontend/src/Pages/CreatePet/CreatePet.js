@@ -82,7 +82,10 @@ function CreatePet() {
     function sendFormPet(event) {
         fetch(config.API_URL + "/pets", {
             method: 'POST',
-            headers: {'Content-type': 'application/json'},
+            headers: {
+                'Content-type': 'application/json',
+                'accessToken': localStorage.getItem("accessToken")
+            },
             body: (
                 JSON.stringify({
                         Name: event['name'],
@@ -93,7 +96,7 @@ function CreatePet() {
                         Height: event['height'],
                         Behaviour: event['behaviour'],
                         Sex: event['sex'],
-                        Comment: event['comment']
+                        Comment: event['comment'],
                     }
                 )
             ),
@@ -339,7 +342,8 @@ function CreatePet() {
                             <Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>Photos</Form.Label>
-                                    <Form.Control name="image" type="file" id="petPicture"/>
+                                    <Form.Control name="image" type="file" id="petPicture"
+                                                  accept="image/png, image/jpeg"/>
                                 </Form.Group>
                             </Row>
                             <Row>
