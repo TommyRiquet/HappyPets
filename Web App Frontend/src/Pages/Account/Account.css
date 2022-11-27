@@ -71,9 +71,15 @@ td{
   display: inline-flex!important;
 }
 
-.choose-image .modify-label{
+.modify-label, #labelChooseColor{
   font-weight: bold;
+  font-size: 150%;
 
+}
+
+.imgProfileChoose{
+  max-width: 15%;
+  max-height: 15%;
 }
 .modify-button{
   max-width: 100%;
@@ -108,4 +114,9 @@ td{
 #profile-pic{
   margin-bottom: 15px;
   align-items: center !important;
+  border-radius: 300px !important;
+}
+
+#chooseColor{
+  min-width: 20%;
 }
