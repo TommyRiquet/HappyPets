@@ -88,6 +88,48 @@ function Account() {
         }
     }
 
+    function changeProfilPic(numberProfilPic){
+        if(typeof(numberProfilPic)!="number" || numberProfilPic>6 || numberProfilPic<0){
+            alert("Problème au changement de l'image");
+            return -1;
+        }
+        else{
+            setInfoUser({
+                ...InfoUser,
+                PhotoLink: "user-icon"+numberProfilPic+".png"
+            })
+            document.getElementById("profilePic").innerHTML="<img id='profilePic' src='"+config.API_URL +"/images/user-icon"+numberProfilPic+".png' width='250px' height='250px' alt='Utilisateur' />";
+            return 0;
+        }
+    }
+
+    function changeProfilColor(colorCode){
+        if(typeof(colorCode)==="string" && colorCode.length===7 && colorCode[0]==="#"){
+            let error=false;
+            let regex = /^[a-z0-9]+$/i;
+            //regarde pour voir si le code comporte bien que des chiffres et des lettres
+            for(let i=1; i<colorCode.length;i++){
+                if(!colorCode[i].match(regex)){
+                    error=true;
+                }
+            }
+            //si il y a autre chose qu'un chiffre ou lettre dans le code
+            if(error){
+                alert("Problème avec le changement de couleur.");
+                return -1;
+            }
+            else{
+                document.getElementById("profilePic").style.backgroundColor=colorCode;
+                return 0;
+            }
+        }
+        else{
+            //si problème avec le type, la longueur ou le début de la variable colorCode
+            alert("Problème avec le changement de couleur.");
+            return -1;
+        }
+    }
+
 
     return (
         <div className="Account">
@@ -110,7 +152,20 @@ function Account() {
 
                         <br />
                         {editionMode ? (
-                            <p className="modify-label">Modifier la photo de profil</p>
+                            <div>
+                                <p className="modify-label">Modifier la photo de profil</p>
+                                <img src={config.API_URL + "/images/user-icon1.png"} alt="avatar 1" className='imgProfileChoose' onClick={() => changeProfilPic(1)}/>
+                                <img src={config.API_URL + "/images/user-icon2.png"} alt="avatar 2" className='imgProfileChoose' onClick={() => changeProfilPic(2)}/>
+                                <img src={config.API_URL + "/images/user-icon3.png"} alt="avatar 3" className='imgProfileChoose' onClick={() => changeProfilPic(3)}/>
+                                <img src={config.API_URL + "/images/user-icon4.png"} alt="avatar 4" className='imgProfileChoose' onClick={() => changeProfilPic(4)}/>
+                                <img src={config.API_URL + "/images/user-icon5.png"} alt="avatar 5" className='imgProfileChoose' onClick={() => changeProfilPic(5)}/>
+                                <img src={config.API_URL + "/images/user-icon6.png"} alt="avatar 6" className='imgProfileChoose' onClick={() => changeProfilPic(6)}/>
+                                <br />
+                                <label for="chooseColor" id="labelChooseColor">Choisissez une couleur: </label>
+                                <br/>
+                                <input onChange={(e) => changeProfilColor(e.target.value)} id="chooseColor" type="color" />
+                            </div>
+                            
                         ) : ("")}
                         <br />
                         <Button className='modify-button' onClick={
