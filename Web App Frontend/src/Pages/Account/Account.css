@@ -27,7 +27,6 @@ td{
 .left-content{
   text-align: center;
   max-height: 100%;
-  overflow: hidden !important;
 
 }
 
@@ -71,7 +70,7 @@ td{
   display: inline-flex!important;
 }
 
-.modify-label, #labelChooseColor{
+.modify-label, #label-choose-color{
   font-weight: bold;
   font-size: 150%;
 
@@ -81,7 +80,7 @@ td{
   max-width: 15%;
   max-height: 15%;
 }
-.modify-button{
+.orange-button{
   max-width: 100%;
   background-color: var(--secondary-color) !important;
 
@@ -95,7 +94,7 @@ td{
   font-weight: bold !important;
   transition: 0.2s !important;
 }
-.modify-button:hover, .choose-button:hover{
+.orange-button:hover, .choose-button:hover{
   transform: scale(1.01);
 }
 
@@ -114,9 +113,9 @@ td{
 #profile-pic{
   margin-bottom: 15px;
   align-items: center !important;
-  border-radius: 300px !important;
+  border-radius: 200px !important;
 }
 
-#chooseColor{
+#choose-color{
   min-width: 20%;
 }
