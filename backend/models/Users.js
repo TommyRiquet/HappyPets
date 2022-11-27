@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
         PhotoLink: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        ColorPhoto: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
 
     })

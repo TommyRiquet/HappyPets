@@ -161,7 +161,7 @@ function Account() {
                                 <img src={config.API_URL + "/images/user-icon5.png"} alt="avatar 5" className='imgProfileChoose' onClick={() => changeProfilPic(5)}/>
                                 <img src={config.API_URL + "/images/user-icon6.png"} alt="avatar 6" className='imgProfileChoose' onClick={() => changeProfilPic(6)}/>
                                 <br />
-                                <label for="chooseColor" id="labelChooseColor">Choisissez une couleur: </label>
+                                <label htmlFor="chooseColor" id="labelChooseColor">Choisissez une couleur: </label>
                                 <br/>
                                 <input onChange={(e) => changeProfilColor(e.target.value)} id="chooseColor" type="color" />
                             </div>

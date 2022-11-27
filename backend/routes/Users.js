@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
         //find and verify the match email/password
         const user = await Users.findOne({
             where: {Email: req.body.Email},
-            attributes: ['id', 'FirstName', 'LastName','Password', 'Email','City','Postal','Phone','PhotoLink'],
+            attributes: ['id', 'FirstName', 'LastName','Password', 'Email','City','Postal','Phone','PhotoLink', 'ColorPhoto'],
             include: [{
                 model: Pets,
                 attributes: ['id','Name','Type','Race','Age','Sexe','Height','Weight','Behaviour','Comment','DogFriendly','CatFriendly','KidFriendly'],
