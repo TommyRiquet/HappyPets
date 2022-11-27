@@ -33,9 +33,11 @@ function Account() {
     const [editionMode, setEditionMode] = useState(false);
 
 
+
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user')) || { Pets: [] }
         setInfoUser(user)
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -64,71 +66,90 @@ function Account() {
         let beSure = confirm("Voulez-vous vraiment supprimer cet animal ?");
         if (beSure) {
             fetch(config.API_URL + "/pets/hasAnnonce?id=" + index)
-            .then((response) => response.json())
-            .then((data) => {
-                if(data){
-                    alert("Vous ne pouvez pas supprimer un animal qui a des annonces");
-                }
-                else{
-                    fetch(config.API_URL + "/pets/deleteAnimal?id=" + index)
-                    .then((response) => response.json());
-                    alert("Animal bien supprimé.");
-                    //pour enlever la photo de l'animal
-                    document.getElementById("animal-"+index).innerHTML="";
-                    //pour enlever, dans l'objet InfoUser, l'animal
-                    for (let i in InfoUser.Pets){
-                        if(InfoUser.Pets[i].id===index){
-                            InfoUser.Pets.splice(i,1);
-                        }
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        alert("Vous ne pouvez pas supprimer un animal qui a des annonces");
                     }
-                    //Maintenant que l'animal est enlevé dans InfoUser, on dit que le localStorage correspond à InfoUser
-                    localStorage.setItem("user", JSON.stringify(InfoUser))
-                }
-            });
+                    else {
+                        fetch(config.API_URL + "/pets/deleteAnimal?id=" + index)
+                            .then((response) => response.json());
+                        alert("Animal bien supprimé.");
+                        //pour enlever la photo de l'animal
+                        document.getElementById("animal-" + index).innerHTML = "";
+                        //pour enlever, dans l'objet InfoUser, l'animal
+                        for (let i in InfoUser.Pets) {
+                            if (InfoUser.Pets[i].id === index) {
+                                InfoUser.Pets.splice(i, 1);
+                            }
+                        }
+                        //Maintenant que l'animal est enlevé dans InfoUser, on dit que le localStorage correspond à InfoUser
+                        localStorage.setItem("user", JSON.stringify(InfoUser))
+                    }
+                });
         }
     }
 
-    function changeProfilPic(numberProfilPic){
-        if(typeof(numberProfilPic)!="number" || numberProfilPic>6 || numberProfilPic<0){
+    function changeProfilPic(numberProfilPic) {
+        if (typeof (numberProfilPic) != "number" || numberProfilPic > 6 || numberProfilPic < 0) {
             alert("Problème au changement de l'image");
             return -1;
         }
-        else{
+        else {
             setInfoUser({
                 ...InfoUser,
-                PhotoLink: "user-icon"+numberProfilPic+".png"
+                PhotoLink: "user-icon" + numberProfilPic + ".png"
             })
-            document.getElementById("profilePic").innerHTML="<img id='profilePic' src='"+config.API_URL +"/images/user-icon"+numberProfilPic+".png' width='250px' height='250px' alt='Utilisateur' />";
+            document.getElementById("profilePic").innerHTML = "<img id='profilePic' src='" + config.API_URL + "/images/user-icon" + numberProfilPic + ".png' width='250px' height='250px' alt='Utilisateur' />";
             return 0;
         }
     }
 
-    function changeProfilColor(colorCode){
-        if(typeof(colorCode)==="string" && colorCode.length===7 && colorCode[0]==="#"){
-            let error=false;
+    function changeProfilColor(colorCode) {
+        if (typeof (colorCode) === "string" && colorCode.length === 7 && colorCode[0] === "#") {
+            let error = false;
             let regex = /^[a-z0-9]+$/i;
             //regarde pour voir si le code comporte bien que des chiffres et des lettres
-            for(let i=1; i<colorCode.length;i++){
-                if(!colorCode[i].match(regex)){
-                    error=true;
+            for (let i = 1; i < colorCode.length; i++) {
+                if (!colorCode[i].match(regex)) {
+                    error = true;
                 }
             }
             //si il y a autre chose qu'un chiffre ou lettre dans le code
-            if(error){
+            if (error) {
                 alert("Problème avec le changement de couleur.");
                 return -1;
             }
-            else{
-                document.getElementById("profilePic").style.backgroundColor=colorCode;
+            else {
+                document.getElementById("profile-pic").style.backgroundColor = colorCode;
                 return 0;
             }
         }
-        else{
+        else {
             //si problème avec le type, la longueur ou le début de la variable colorCode
             alert("Problème avec le changement de couleur.");
             return -1;
         }
     }
+
+    function resetColor() {
+        if (InfoUser.ColorPhoto === undefined || InfoUser.ColorPhoto === null) {
+            //si pas de code enregistre
+            document.getElementById("profile-pic").style.backgroundColor = "";
+        }
+        else {
+            document.getElementById("profile-pic").style.backgroundColor = InfoUser.ColorPhoto;
+        }
+
+    }
+
+    function saveColor() {
+        setInfoUser({
+            ...InfoUser,
+            ColorPhoto: document.getElementById("choose-color").value
+        })
+    }
+
 
 
     return (
@@ -148,27 +169,30 @@ function Account() {
                 <Row >
                     <Col md={6} xs={12} className="left-content">
 
-                        <img id="profilePic" src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink} width="250px" height="250px" alt="Utilisateur" />
+                        <img id="profile-pic" style={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? { backgroundColor: "" } : { backgroundColor: InfoUser.ColorPhoto}} src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink} width="250px" height="250px" alt="Utilisateur" />
 
                         <br />
                         {editionMode ? (
                             <div>
                                 <p className="modify-label">Modifier la photo de profil</p>
-                                <img src={config.API_URL + "/images/user-icon1.png"} alt="avatar 1" className='imgProfileChoose' onClick={() => changeProfilPic(1)}/>
-                                <img src={config.API_URL + "/images/user-icon2.png"} alt="avatar 2" className='imgProfileChoose' onClick={() => changeProfilPic(2)}/>
-                                <img src={config.API_URL + "/images/user-icon3.png"} alt="avatar 3" className='imgProfileChoose' onClick={() => changeProfilPic(3)}/>
-                                <img src={config.API_URL + "/images/user-icon4.png"} alt="avatar 4" className='imgProfileChoose' onClick={() => changeProfilPic(4)}/>
-                                <img src={config.API_URL + "/images/user-icon5.png"} alt="avatar 5" className='imgProfileChoose' onClick={() => changeProfilPic(5)}/>
-                                <img src={config.API_URL + "/images/user-icon6.png"} alt="avatar 6" className='imgProfileChoose' onClick={() => changeProfilPic(6)}/>
+                                <img src={config.API_URL + "/images/user-icon1.png"} alt="avatar 1" className='imgProfileChoose' onClick={() => changeProfilPic(1)} />
+                                <img src={config.API_URL + "/images/user-icon2.png"} alt="avatar 2" className='imgProfileChoose' onClick={() => changeProfilPic(2)} />
+                                <img src={config.API_URL + "/images/user-icon3.png"} alt="avatar 3" className='imgProfileChoose' onClick={() => changeProfilPic(3)} />
+                                <img src={config.API_URL + "/images/user-icon4.png"} alt="avatar 4" className='imgProfileChoose' onClick={() => changeProfilPic(4)} />
+                                <img src={config.API_URL + "/images/user-icon5.png"} alt="avatar 5" className='imgProfileChoose' onClick={() => changeProfilPic(5)} />
+                                <img src={config.API_URL + "/images/user-icon6.png"} alt="avatar 6" className='imgProfileChoose' onClick={() => changeProfilPic(6)} />
                                 <br />
-                                <label htmlFor="chooseColor" id="labelChooseColor">Choisissez une couleur: </label>
-                                <br/>
-                                <input onChange={(e) => changeProfilColor(e.target.value)} id="chooseColor" type="color" />
+                                <label htmlFor="choose-color" id="label-choose-color">Choisissez une couleur: </label>
+                                <br />
+                                <input onChange={(e) => changeProfilColor(e.target.value)} id="choose-color" type="color" />
+                                <br />
+                                <Button className='orange-button' onClick={() => saveColor()}>Sauvegarder</Button>
+                                <Button className='orange-button' onClick={() => resetColor()}>Réinitialiser</Button>
                             </div>
-                            
+
                         ) : ("")}
                         <br />
-                        <Button className='modify-button' onClick={
+                        <Button className='orange-button' onClick={
                             editionMode ? (e) => { sendUpdateProfile(); setEditionMode(false); }
                                 : (e) => setEditionMode(true)
                         }>
@@ -285,23 +309,23 @@ function Account() {
                                 <tbody>
                                     <tr className='div-pic-animal'>
                                         {InfoUser.Pets.map((pet, index) => {
-                                            return <td className='pic-animal' id={"animal-"+pet.id} key={"pets" + index}><img alt="mon animal" src={AnimauxImages[pet.Type]} /><br />
+                                            return <td className='pic-animal' id={"animal-" + pet.id} key={"pets" + index}><img alt="mon animal" src={AnimauxImages[pet.Type]} /><br />
                                                 <p className='name-animal'>{pet.Name}</p>
                                                 {editionMode ? (
-                                                <img
-                                                    src={xIcon}
-                                                    alt="supprimer l'animal"
-                                                    onClick={(e) => deleteAnimal(pet.id)}
-                                                    className="x-icon"
-                                                ></img>
+                                                    <img
+                                                        src={xIcon}
+                                                        alt="supprimer l'animal"
+                                                        onClick={(e) => deleteAnimal(pet.id)}
+                                                        className="x-icon"
+                                                    ></img>
                                                 )
-                                            :
-                                            null
-                                            }
-                                                </td>
+                                                    :
+                                                    null
+                                                }
+                                            </td>
                                         })}
-                                    
-                                
+
+
 
                                     </tr>
                                 </tbody>

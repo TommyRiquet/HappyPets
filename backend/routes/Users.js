@@ -8,7 +8,7 @@ const {verifyToken} = require("../middleware/verifyToken")
 const {Users,Pets} = require("../models")
 
 router.put("/updateUser", async (req, res) => {
-    const user=await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal:req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink}, {
+    const user=await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal:req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink, ColorPhoto: req.body.ColorPhoto}, {
         where: {
             id: req.body.id
         }
