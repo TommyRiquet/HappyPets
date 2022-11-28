@@ -91,6 +91,8 @@ function Account() {
     }
 
     function changeProfilPic(numberProfilPic) {
+        //va changer la photo de profil dans la variable InfoUser
+
         if (typeof (numberProfilPic) != "number" || numberProfilPic > 6 || numberProfilPic < 0) {
             alert("Problème au changement de l'image");
             return -1;
@@ -106,6 +108,9 @@ function Account() {
     }
 
     function changeProfilColor(colorCode) {
+        //va changer la couleur du background du profil pendant qu'on change la couleur voulue
+
+
         if (typeof (colorCode) === "string" && colorCode.length === 7 && colorCode[0] === "#") {
             let error = false;
             let regex = /^[a-z0-9]+$/i;
@@ -133,6 +138,7 @@ function Account() {
     }
 
     function resetColor() {
+        //va remettre la couleur à sa valeur d'origine
         if (InfoUser.ColorPhoto === undefined || InfoUser.ColorPhoto === null) {
             //si pas de code enregistre
             document.getElementById("profile-pic").style.backgroundColor = "";
@@ -144,9 +150,19 @@ function Account() {
     }
 
     function saveColor() {
+        //va sauvegarder la couleur choisie et va la mettre dans la variable InfoUser
         setInfoUser({
             ...InfoUser,
             ColorPhoto: document.getElementById("choose-color").value
+        })
+    }
+
+    function delColor(){
+        //va supprimer la couleur d'arrière-plan et va changer la valeur de la variable InfoUser.ColorPhoto à null
+        document.getElementById("profile-pic").style.backgroundColor = "";
+        setInfoUser({
+            ...InfoUser,
+            ColorPhoto: null
         })
     }
 
@@ -186,8 +202,11 @@ function Account() {
                                 <br />
                                 <input onChange={(e) => changeProfilColor(e.target.value)} id="choose-color" type="color" />
                                 <br />
-                                <Button className='orange-button' onClick={() => saveColor()}>Sauvegarder</Button>
-                                <Button className='orange-button' onClick={() => resetColor()}>Réinitialiser</Button>
+                                <Button className='blue-button' onClick={() => saveColor()}>Sauvegarder la couleur choisie</Button>
+                                <Button className='blue-button' onClick={() => resetColor()}>Réinitialiser à la couleur sauvegardée</Button>
+                                <br/>
+                                <br/>
+                                <Button className='blue-button' onClick={() => delColor()}>Supprimer l'arrière-plan</Button>
                             </div>
 
                         ) : ("")}
@@ -196,7 +215,7 @@ function Account() {
                             editionMode ? (e) => { sendUpdateProfile(); setEditionMode(false); }
                                 : (e) => setEditionMode(true)
                         }>
-                            {editionMode ? "Valider" : "Modifier les informations"}
+                            {editionMode ? "Valider tous les changements" : "Modifier les informations"}
                         </Button>
                     </Col>
                     <Col md={6} xs={12} className="right-content">
