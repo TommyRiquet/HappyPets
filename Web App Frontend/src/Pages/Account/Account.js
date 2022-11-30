@@ -8,7 +8,7 @@ import xIcon from "../../Assets/x-button.png";
 import './Account.css';
 
 /*Importing Images*/
-import ProfilePicDefault from '../../Assets/profilePicture.png'
+import ProfilePicDefault from '../../Assets/profilePictureDefault.png'
 import ChatImage from '../../Assets/Chat.jpg';
 import ChienImage from '../../Assets/Chien.jpg';
 import HamsterImage from '../../Assets/Hamster.jpg';
