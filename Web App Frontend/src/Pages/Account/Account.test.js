@@ -4,10 +4,10 @@ import Account from './Account';
 
 /*Importing Config*/
 
-describe('Account', () => {
+describe('Render Test for the Page Account', () => {
     it('Should render without crash', async () => {
         render(
             <Account/>
         )
-    })
+    })    
 })
