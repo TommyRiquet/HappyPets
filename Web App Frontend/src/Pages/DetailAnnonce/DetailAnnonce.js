@@ -17,14 +17,14 @@ import xIcon from "../../Assets/x-button.png";
 import "./DetailAnnonce.css";
 
 /*Importing Images*/
-import ChienImage from "../../Assets/Chien.jpg";
-import ChatImage from "../../Assets/Chat.jpg";
-import PoissonImage from "../../Assets/Poisson.jpg";
-import HamsterImage from "../../Assets/Hamster.jpg";
-import PerroquetImage from "../../Assets/Perroquet.jpg";
-import LapinImage from "../../Assets/Lapin.jpg";
-import SerpentImage from "../../Assets/Serpent.jpg";
-import TortueImage from "../../Assets/Tortue.jpg";
+import ChienImage from "../../Assets/dog.png";
+import ChatImage from "../../Assets/cat.png";
+import PoissonImage from "../../Assets/fish.png";
+import HamsterImage from "../../Assets/rodent.png";
+import PerroquetImage from "../../Assets/bird.png";
+import LapinImage from "../../Assets/rodent.png";
+import SerpentImage from "../../Assets/nac.png";
+import TortueImage from "../../Assets/nac.png";
 
 /*Importing Config*/
 import config from "../../config.json";
