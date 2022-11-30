@@ -56,8 +56,11 @@ module.exports = (sequelize, DataTypes) => {
                 onDelete: "cascade"
             })
         Users.hasMany(models.Admin, {
-            onDelete: "cascade",
-        })
+            foreignKey: 'SuspectId', targetKey: 'id',
+            as: 'FK_SuspectId'}),
+        Users.hasMany(models.Admin, {
+            foreignKey: 'UserId', targetKey: 'id',
+            as: 'FK_UserId'})
      }
 
     return Users;

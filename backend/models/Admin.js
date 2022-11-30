@@ -1,10 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
     const Admin = sequelize.define("Admin", {
-        UserName:{
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         Type: {
             type: DataTypes.STRING,
             allowNull: false
@@ -17,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Admin.associate = (models) => {
-        Admin.belongsTo(models.Users, {
-        foreignKey: 'SuspectId', targetKey: 'id'})
+        Admin.belongsTo(models.Users)
     }
 
     return Admin;
