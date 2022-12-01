@@ -84,6 +84,7 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign({id: user.dataValues.id, Role: user.dataValues.Role}, "secret", {
             expiresIn: 60 * 60 * 24
         });
+        delete user.dataValues.Password
         res.json({token: token, user: user.dataValues});
     } catch (e) {
         const status = e.status || 500;
