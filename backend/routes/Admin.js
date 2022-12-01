@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const {Admin,Users} = require("../models")
-const {Op} = require('sequelize')
 
 router.get("/", async (req, res) => {
     let offset = req.query.offset || 0
