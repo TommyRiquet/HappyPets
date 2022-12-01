@@ -160,11 +160,12 @@ function Account() {
     return (
         <div className="Account">
             <CustomNavbar
-                textLinkOne="Propositions"
+                textLinkOne="Je propose mon aide"
                 linkOne="/propositions"
-                textLinkTwo="Annonces"
+                textLinkTwo="J'ai besoin d'aide"
                 linkTwo="/annonces"
                 color="rgba(47, 72, 88, 1)"
+                position="absolute"
             />
             <Container className='top-container'>
                 <h2>Ton profil</h2>

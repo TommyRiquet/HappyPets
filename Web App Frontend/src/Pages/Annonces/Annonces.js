@@ -4,7 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Multiselect from "multiselect-react-dropdown";
 import AnimalCard from "../../Components/AnimalCard/AnimalCard";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 /*Importing Styles*/
 import "./Annonces.css";
@@ -80,16 +80,16 @@ function Annonces() {
      *       @param listOfCritere : la liste des critères à charger
      */
     fetch(
-      config.API_URL+"/annonces?" +
-        "offset=" +
-        offset +
-        "&limit=" +
-        limit +
-        listOfType.map((typePet) => "&typePet=" + typePet).join("") +
-        listOfTypeAnnonce
-          .map((typeAnnonce) => "&typeAnnonce=" + typeAnnonce)
-          .join("") +
-        listOfCritere.map((critere) => "&" + critere + "=" + true).join("")
+      config.API_URL + "/annonces?" +
+      "offset=" +
+      offset +
+      "&limit=" +
+      limit +
+      listOfType.map((typePet) => "&typePet=" + typePet).join("") +
+      listOfTypeAnnonce
+        .map((typeAnnonce) => "&typeAnnonce=" + typeAnnonce)
+        .join("") +
+      listOfCritere.map((critere) => "&" + critere + "=" + true).join("")
     )
       .then((response) => response.json())
       .then((data) => {
@@ -126,11 +126,16 @@ function Annonces() {
   return (
     <div className="Annonces">
       <CustomNavbar
-        textLinkOne="Propositions"
+        textLinkOne="Je propose mon aide"
         linkOne="/propositions"
-        textLinkTwo="Annonces"
+        textLinkTwo="J'ai besoin d'aide"
         linkTwo="/annonces"
+        textLinkThree="S'inscrire"
+        linkThree="/register"
+        textLinkFour="Se connecter"
+        linkFour="/login"
         color="rgba(47, 72, 88, 1)"
+        position="absolute"
       />
       <Container>
         <Container className="top-container" fluid>
@@ -268,64 +273,64 @@ function Annonces() {
               <h2 className="no-result-message">Aucun Résultat :/</h2>
             ) : /*Si il y a des annonces*/
 
-            windowWidth >= 992 && ListAnnonces.length > 1 ? (
-              /*Affichage pour les grands écrans*/
-              <Row>
-                <Col>
-                  <Row xs={1}>
-                    {ListAnnonces.map((annonce, index) => {
-                      /*Colonne de gauche*/
-                      return index % 2 === 0 ? (
-                        <Col key={index} onClick={()=>navigate('/detailannonce/'+ annonce.id )}>
+              windowWidth >= 992 && ListAnnonces.length > 1 ? (
+                /*Affichage pour les grands écrans*/
+                <Row>
+                  <Col>
+                    <Row xs={1}>
+                      {ListAnnonces.map((annonce, index) => {
+                        /*Colonne de gauche*/
+                        return index % 2 === 0 ? (
+                          <Col key={index} onClick={() => navigate('/detailannonce/' + annonce.id)}>
+                            <AnimalCard
+                              annonce={annonce}
+                              image={annonce.Pets.map((pet) => {
+                                const ReturnTable = AnimauxImages[pet.Type];
+                                return ReturnTable;
+                              })}
+                            />
+                          </Col>
+                        ) : null;
+                      })}
+                    </Row>
+                  </Col>
+                  <Col>
+                    <Row xs={1}>
+                      {ListAnnonces.map((annonce, index) => {
+                        /*Colonne de droite*/
+                        return index % 2 === 1 ? (
+                          <Col key={index} onClick={() => navigate('/detailannonce/' + annonce.id)}>
+                            <AnimalCard
+                              annonce={annonce}
+                              image={annonce.Pets.map((pet) => {
+                                const ReturnTable = AnimauxImages[pet.Type];
+                                return ReturnTable;
+                              })}
+                            />
+                          </Col>
+                        ) : null;
+                      })}
+                    </Row>
+                  </Col>
+                </Row>
+              ) : (
+                /*Affichage pour les petits écrans ou lorsqu'il n'y a qu'un seule item dans ListAnnonce*/
+                <Row xs={1} sm={1}>
+                  {ListAnnonces.map((annonce, index) => {
+                    return (
+                      <Col key={index} onClick={() => navigate('/detailannonce/' + annonce.id)}>
                         <AnimalCard
-                            annonce={annonce}
-                            image={annonce.Pets.map((pet) => {
-                              const ReturnTable = AnimauxImages[pet.Type];
-                              return ReturnTable;
-                            })}
-                          />
-                        </Col>
-                      ) : null;
-                    })}
-                  </Row>
-                </Col>
-                <Col>
-                  <Row xs={1}>
-                    {ListAnnonces.map((annonce, index) => {
-                      /*Colonne de droite*/
-                      return index % 2 === 1 ? (
-                        <Col key={index} onClick={()=>navigate('/detailannonce/'+ annonce.id )}>
-                          <AnimalCard
-                            annonce={annonce}
-                            image={annonce.Pets.map((pet) => {
-                              const ReturnTable = AnimauxImages[pet.Type];
-                              return ReturnTable;
-                            })}
-                          />
-                        </Col>
-                      ) : null;
-                    })}
-                  </Row>
-                </Col>
-              </Row>
-            ) : (
-              /*Affichage pour les petits écrans ou lorsqu'il n'y a qu'un seule item dans ListAnnonce*/
-              <Row xs={1} sm={1}>
-                {ListAnnonces.map((annonce, index) => {
-                  return (
-                    <Col key={index} onClick={()=>navigate('/detailannonce/'+ annonce.id )}>
-                      <AnimalCard
-                        annonce={annonce}
-                        image={annonce.Pets.map((pet) => {
-                          const ReturnTable = AnimauxImages[pet.Type];
-                          return ReturnTable;
-                        })}
-                      />
-                    </Col>
-                  );
-                })}
-              </Row>
-            )
+                          annonce={annonce}
+                          image={annonce.Pets.map((pet) => {
+                            const ReturnTable = AnimauxImages[pet.Type];
+                            return ReturnTable;
+                          })}
+                        />
+                      </Col>
+                    );
+                  })}
+                </Row>
+              )
           }
         </Container>
       </Container>

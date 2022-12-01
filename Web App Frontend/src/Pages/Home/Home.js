@@ -1,5 +1,5 @@
 /*Importing Components */
-import {Row, Col, Container } from 'react-bootstrap';
+import {Row, Col, Container, Button } from 'react-bootstrap';
 import { useState,useEffect } from 'react';
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 /*Importing Styles*/
@@ -36,9 +36,9 @@ function Home() {
         <div>
             <div className='scrollDiv '>
                 <CustomNavbar 
-                    textLinkOne="Propositions"
+                    textLinkOne="Je propose mon aide"
                     linkOne="/propositions" 
-                    textLinkTwo="Annonces"
+                    textLinkTwo="J'ai besoin d'aide"
                     linkTwo="/annonces"
                     textLinkThree="S'inscrire"
                     linkThree="/register" 
@@ -72,13 +72,25 @@ function Home() {
                 </Container>
             </div>
             <div className='homeContent3 scrollDiv'>
-                <Container>
+                <Container style={{margin:'0', padding:"0"}}>
                     <Row xs={1} md={2}>
                         <Col className='chicken-col' style={{ maxWeight: '100%', maxHeight: '100%'}}>
                             <img id="imgChicken" src={imgChicken} alt="Poule"/>
                         </Col>
-                        <Col style={{marginTop: '3%', maxWeight: '100%', maxHeight: '100%'}}>
-                            
+                        <Col id='all-buttons-home-page'>
+                            <Button className='button-home-page' href="/propositions">Je propose mon aide</Button>
+                            <br/>
+                            <Button className='button-home-page' href="/annonces">J'ai besoin d'aide</Button>
+                            {!localStorage.getItem('user') ? 
+                                <>
+                                <br/>
+                                <Button className='button-home-page' href="/register">S'inscrire</Button>
+                                <br/>
+                                <Button className='button-home-page' href="/login">Se connecter</Button>
+                                </>
+                                : null
+                            }
+
                         </Col>
                     </Row>
                 </Container>
