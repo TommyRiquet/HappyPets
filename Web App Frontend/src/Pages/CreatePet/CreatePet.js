@@ -80,7 +80,6 @@ function CreatePet() {
 
 
     function sendFormPet(event) {
-        console.log(event)
         const user = JSON.parse(localStorage.getItem("user"));
         fetch(config.API_URL + "/pets", {
             method: 'POST',
