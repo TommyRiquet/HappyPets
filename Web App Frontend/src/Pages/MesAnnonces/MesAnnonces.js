@@ -8,29 +8,11 @@ import {useNavigate} from 'react-router-dom';
 /*Importing Styles*/
 import './MesAnnonces.css';
 
-/*Importing Images*/
-import ChienImage from '../../Assets/Chien.jpg';
-import ChatImage from '../../Assets/Chat.jpg';
-import PoissonImage from '../../Assets/Poisson.jpg';
-import HamsterImage from '../../Assets/Hamster.jpg';
-import PerroquetImage from '../../Assets/Perroquet.jpg';
-import LapinImage from '../../Assets/Lapin.jpg';
-import SerpentImage from '../../Assets/Serpent.jpg';
-import TortueImage from '../../Assets/Tortue.jpg';
+/*Importing Assets*/
+import AnimauxImages from "../../AnimalPictures.js";
 
 /*Importing Config*/
 import config from "../../config.json";
-
-const AnimauxImages = {
-    Chien: ChienImage,
-    Chat: ChatImage,
-    Poisson: PoissonImage,
-    Rongeur: HamsterImage,
-    Oiseau: PerroquetImage,
-    Lapin: LapinImage,
-    Serpent: SerpentImage,
-    NAC: TortueImage,
-  };
 
 function Annonces(){
     const[ListAnnonces, setListAnnonces] = useState ([]);

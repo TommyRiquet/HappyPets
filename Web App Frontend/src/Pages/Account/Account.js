@@ -1,34 +1,23 @@
 /*Importing Components */
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
-import xIcon from "../../Assets/x-button.png";
 
 /*Importing Styles*/
 import './Account.css';
 
 /*Importing Images*/
 import ProfilePicDefault from '../../Assets/profilePictureDefault.png'
-import ChatImage from '../../Assets/Chat.jpg';
-import ChienImage from '../../Assets/Chien.jpg';
-import HamsterImage from '../../Assets/Hamster.jpg';
-import OiseauImage from '../../Assets/Oiseau.jpg';
-import PoissonImage from '../../Assets/Poisson.jpg';
-import TortueImage from '../../Assets/Tortue.jpg';
+import xIcon from "../../Assets/x-button.png";
+
+/*Importing Assets*/
+import AnimauxImages from "../../AnimalPictures.js";
 
 /*Importing Config*/
 import config from "../../config.json";
 
 function Account() {
-    const AnimauxImages = {
-        Chien: ChienImage,
-        Chat: ChatImage,
-        Poisson: PoissonImage,
-        Rongeur: HamsterImage,
-        Oiseau: OiseauImage,
-        NAC: TortueImage,
-    };
-
     const [InfoUser, setInfoUser] = useState({ Pets: [] })
     const [editionMode, setEditionMode] = useState(false);
 

@@ -16,30 +16,14 @@ import xIcon from "../../Assets/x-button.png";
 /*Importing Styles*/
 import "./DetailAnnonce.css";
 
-/*Importing Images*/
-import ChienImage from "../../Assets/dog.png";
-import ChatImage from "../../Assets/cat.png";
-import PoissonImage from "../../Assets/fish.png";
-import HamsterImage from "../../Assets/rodent.png";
-import PerroquetImage from "../../Assets/bird.png";
-import LapinImage from "../../Assets/rodent.png";
-import SerpentImage from "../../Assets/nac.png";
-import TortueImage from "../../Assets/nac.png";
+/*Importing Assets*/
+import AnimauxImages from "../../AnimalPictures.js";
 
 /*Importing Config*/
 import config from "../../config.json";
 
 
-const AnimauxImages = {
-  Chien: ChienImage,
-  Chat: ChatImage,
-  Poisson: PoissonImage,
-  Rongeur: HamsterImage,
-  Oiseau: PerroquetImage,
-  Lapin: LapinImage,
-  Serpent: SerpentImage,
-  NAC: TortueImage,
-};
+
 
 function DetailAnnonce() {
   /*
