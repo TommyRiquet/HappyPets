@@ -10,29 +10,15 @@ import {useNavigate} from 'react-router-dom';
 import "./Annonces.css";
 
 /*Importing Images*/
-import ChienImage from "../../Assets/dog.png";
-import ChatImage from "../../Assets/cat.png";
-import PoissonImage from "../../Assets/fish.png";
-import HamsterImage from "../../Assets/rodent.png";
-import PerroquetImage from "../../Assets/bird.png";
-import LapinImage from "../../Assets/rodent.png";
-import SerpentImage from "../../Assets/nac.png";
-import TortueImage from "../../Assets/nac.png";
 import sendButtonIcon from "../../Assets/sendButtonIcon.png";
+
+/*Importing Assets*/
+import AnimauxImages from "../../AnimalPictures.js";
 
 /*Importing Config*/
 import config from "../../config.json";
 
-const AnimauxImages = {
-  Chien: ChienImage,
-  Chat: ChatImage,
-  Poisson: PoissonImage,
-  Rongeur: HamsterImage,
-  Oiseau: PerroquetImage,
-  Lapin: LapinImage,
-  Serpent: SerpentImage,
-  NAC: TortueImage,
-};
+
 
 function Annonces() {
   const [ListAnnonces, setListAnnonces] = useState([]);
