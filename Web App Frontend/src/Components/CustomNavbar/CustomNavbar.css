@@ -1,3 +1,12 @@
+@media screen and (max-width : 992px) { 
+    .image-profil{
+        max-height: 20% !important;
+        max-width: 30% !important;
+        margin:0 !important;
+    }
+
+} 
+
 .navbar{
     position: relative;
     top: 0 !important;
@@ -18,4 +27,12 @@
     font-weight: 600 !important;
     color: #fff !important;
     margin-right: 1rem !important;
+}
+
+.image-profil{
+    max-height: 5% !important;
+    max-width: 7%;
+    border-radius: 200px !important;
+    float:right !important;
+    margin-left: 20%;
 }
