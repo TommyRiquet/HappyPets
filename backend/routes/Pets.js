@@ -43,8 +43,12 @@ router.get("/deleteAnimal", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const newPet = req.body;
-  Pets.create(newPet).then((pet) => {
-  res.json(pet)})
+  try {
+    const pet = await Pets.create(newPet);
+    res.json(pet);
+  } catch (error){
+        res.status(500).send
+    }
 });
 
 router.post("/image/upload", async (req,res ) => {
