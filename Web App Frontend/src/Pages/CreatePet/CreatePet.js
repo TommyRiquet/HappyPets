@@ -108,7 +108,15 @@ function CreatePet() {
                 if (file) {
                     uploadImage(file, res);
                 }
-                navigate('/');
+                let user = JSON.parse(localStorage.getItem("user"));
+                if (user.Pets) {
+                    user.Pets.push(res);
+                }
+                else {
+                    user.Pets = [res];
+                }
+                localStorage.setItem("user", JSON.stringify(user))
+                navigate('/account');
             })
             .catch(function (error) {
                 console.log(error);
