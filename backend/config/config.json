@@ -7,10 +7,10 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "qtpets",
-    "host": "localhost",
+    "username": "sql7555386",
+    "password": "gHmQDJVFdH",
+    "database": "sql7555386",
+    "host": "sql7.freemysqlhosting.net",
     "dialect": "mysql"
   },
   "production": {

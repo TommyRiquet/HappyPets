@@ -9,7 +9,7 @@ afterEach(() => {
 describe('Render Tests for the <Report> component', () => {
     it('Should render without crash', async () => {
         render(
-            <Report page={'all'}/>
+            
         )
     })
 })
