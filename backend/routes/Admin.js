@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
         FROM `Admins` A \
         JOIN `Users` US ON US.id = A.SuspectId \
         JOIN `Users` U ON U.id = A.UserId \
+        ORDER BY A.createdAt ASC \
         LIMIT "+limit+" OFFSET "+offset
     , { type: QueryTypes.SELECT });
     res.json(allreport)
@@ -20,14 +21,14 @@ router.get("/", async (req, res) => {
 router.get("/findtype", async (req, res) => {
     let offset = req.query.offset || 0
     let limit = req.query.limit ? ((req.query.limit>0 && !isNaN(req.query.limit)) ? req.query.limit : 0): 20
-    const allreport = await Admin.findAll({
-        limit:parseInt(limit),
-        offset:parseInt(offset), 
-        where: {Type: req.query.type},
-        include : [{
-        model:Users,
-        attributes:['id','FirstName']}]
-})
+    const allreport = await sequelize.query("SELECT A.*, US.FirstName 'NomSus', U.FirstName 'NomUser'\
+    FROM `Admins` A \
+    JOIN `Users` US ON US.id = A.SuspectId \
+    JOIN `Users` U ON U.id = A.UserId \
+    WHERE A.Type LIKE '%"+req.query.type+"%' \
+    ORDER BY A.createdAt ASC \
+    LIMIT "+limit+" OFFSET "+offset
+, { type: QueryTypes.SELECT })
     res.json(allreport)
 })
 
