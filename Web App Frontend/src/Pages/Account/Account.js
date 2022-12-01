@@ -102,7 +102,7 @@ function Account() {
                 ...InfoUser,
                 PhotoLink: "user-icon" + numberProfilPic + ".png"
             })
-            document.getElementById("profilePic").innerHTML = "<img id='profilePic' src='" + config.API_URL + "/images/user-icon" + numberProfilPic + ".png' width='250px' height='250px' alt='Utilisateur' />";
+            document.getElementById("profile-pic").innerHTML = "<img id='profilePic' src='" + config.API_URL + "/images/user-icon" + numberProfilPic + ".png' width='250px' height='250px' alt='Utilisateur' />";
             return 0;
         }
     }
@@ -200,13 +200,10 @@ function Account() {
                                 <br />
                                 <label htmlFor="choose-color" id="label-choose-color">Choisissez une couleur: </label>
                                 <br />
-                                <input onChange={(e) => changeProfilColor(e.target.value)} id="choose-color" type="color" />
+                                <input onChange={(e) => changeProfilColor(e.target.value)} id="choose-color" type="color" /><p className='emoji-icon' onClick={() => saveColor()}>✔️</p><p className='emoji-icon' onClick={() => delColor()}>❌</p>
                                 <br />
-                                <Button className='blue-button' onClick={() => saveColor()}>Sauvegarder la couleur choisie</Button>
                                 <Button className='blue-button' onClick={() => resetColor()}>Réinitialiser à la couleur sauvegardée</Button>
                                 <br/>
-                                <br/>
-                                <Button className='blue-button' onClick={() => delColor()}>Supprimer l'arrière-plan</Button>
                             </div>
 
                         ) : ("")}
