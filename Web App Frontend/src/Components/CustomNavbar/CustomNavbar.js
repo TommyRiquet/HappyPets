@@ -19,7 +19,7 @@ function CustomNavbar(props) {
               width="30"
               height="30"
               className="d-inline-block align-top"
-              alt="React Bootstrap logo"
+              alt="Logo de QTPets"
             />
             QTPets 
             </Navbar.Brand>

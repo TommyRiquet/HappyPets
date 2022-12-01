@@ -12,11 +12,16 @@ function Error() {
   return (
     <div className="Error">
       <CustomNavbar
-        textLinkOne="Propositions"
+        textLinkOne="Je propose mon aide"
         linkOne="/propositions"
-        textLinkTwo="Annonces"
+        textLinkTwo="J'ai besoin d'aide"
         linkTwo="/annonces"
+        textLinkThree="S'inscrire"
+        linkThree="/register"
+        textLinkFour="Se connecter"
+        linkFour="/login"
         color="rgba(47, 72, 88, 1)"
+        position="absolute"
       />
       <Container>
         <h1 className="title">Perdu ?</h1>
