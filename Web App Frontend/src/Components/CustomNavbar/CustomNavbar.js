@@ -1,7 +1,7 @@
 import './CustomNavbar.css';
 import {Navbar, Container} from "react-bootstrap";
 import Nav from 'react-bootstrap/Nav';  
-import PerroquetImage from '../../Assets/Perroquet.jpg'; 
+import PerroquetImage from '../../Assets/bird.png'; 
 import { useEffect } from 'react';
 
 function CustomNavbar(props) {
