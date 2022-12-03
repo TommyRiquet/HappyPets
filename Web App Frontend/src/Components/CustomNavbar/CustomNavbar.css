@@ -22,17 +22,31 @@
     
 }
 
-.linkcss{
+.link-white{
     font-size: 1.2rem !important;
     font-weight: 600 !important;
     color: #fff !important;
     margin-right: 1rem !important;
+    margin-top: 3px;
+}
+
+.link-orange{
+    margin-top: 3px;
 }
 
 .image-profil{
-    max-height: 5% !important;
-    max-width: 7%;
+    max-height: 25% !important;
+    max-width: 25% !important;
     border-radius: 200px !important;
-    float:right !important;
-    margin-left: 20%;
+}
+
+#removeButton{
+    font-weight: 500;
+    text-decoration: none !important;
+    background-color: transparent !important ;
+    color: white;
+    border: 0;
+    max-width: 50%;
+    max-height: 50%;
+    
 }
