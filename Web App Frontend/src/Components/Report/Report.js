@@ -138,10 +138,8 @@ function Report(data){
                     </thead>
                     <tbody>
                     {result.map((report,index) => {
-                        date = new Date(report.updatedAt)
-                        date = new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
-                        .toISOString()
-                        .split("T")[0];
+                        date = new Date(report.updatedAt).toLocaleDateString("en-FR");
+                        
                         return(
                             <tr key={index} onClick={() =>{setdisplay(report);setShow(true)}}>
                                 <td>{report.id}</td>
