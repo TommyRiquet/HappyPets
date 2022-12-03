@@ -46,13 +46,6 @@ function Home() {
                     linkFour="/login"
                     color="rgba(0, 0, 0, 0)"
                     position="absolute"
-                    PhotoLink= {localStorage.getItem('user') ? 
-                                
-                                localStorage.getItem('user').PhotoLink
-                                
-                                : null
-                    }
-                    {...console.log(localStorage.getItem('user').PhotoLink)}
                 />
                 <div className='homeContent1'>
                 <h1>Ensemble luttons contre les abandons</h1>

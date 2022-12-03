@@ -1,5 +1,5 @@
 import './CustomNavbar.css';
-import { Navbar, Container } from "react-bootstrap";
+import { Navbar, Container, NavDropdown } from "react-bootstrap";
 import Nav from 'react-bootstrap/Nav';
 import { useEffect } from 'react';
 
@@ -40,8 +40,22 @@ function CustomNavbar(props) {
                 <Nav.Link href={props.linkThree} data-testid='link-three'>{props.textLinkThree}</Nav.Link>
                 <Nav.Link href={props.linkFour} data-testid='link-four'>{props.textLinkFour}</Nav.Link>
               </>
-              :           
-              <img className='image-profil' src={config.API_URL + "/images/" + props.PhotoLink} alt="Accès au profil" />
+              :   
+
+              //si j'ai un user dans le local storage  
+              <NavDropdown src={JSON.parse(localStorage.getItem('user')).PhotoLink === undefined || JSON.parse(localStorage.getItem('user')).PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + JSON.parse(localStorage.getItem('user')).PhotoLink} id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+              
+              
 
             }
 
