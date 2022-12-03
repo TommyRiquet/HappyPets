@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
         FROM `Admins` A \
         JOIN `Users` US ON US.id = A.SuspectId \
         JOIN `Users` U ON U.id = A.UserId \
-        ORDER BY A.createdAt ASC \
+        ORDER BY A.updatedAt DESC \
         LIMIT "+limit+" OFFSET "+offset
     , { type: QueryTypes.SELECT });
     res.json(allreport)
@@ -26,7 +26,7 @@ router.get("/findtype", async (req, res) => {
     JOIN `Users` US ON US.id = A.SuspectId \
     JOIN `Users` U ON U.id = A.UserId \
     WHERE A.Type LIKE '%"+req.query.type+"%' \
-    ORDER BY A.createdAt ASC \
+    ORDER BY A.updatedAt DESC \
     LIMIT "+limit+" OFFSET "+offset
 , { type: QueryTypes.SELECT })
     res.json(allreport)
