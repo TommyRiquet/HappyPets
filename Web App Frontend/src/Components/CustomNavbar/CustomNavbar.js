@@ -2,7 +2,6 @@ import './CustomNavbar.css';
 import { Navbar, Container, NavDropdown } from "react-bootstrap";
 import Nav from 'react-bootstrap/Nav';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
 
 /*Importing Images*/
 import ProfilePicDefault from '../../Assets/profilePictureDefault.png'
@@ -14,8 +13,6 @@ import config from "../../config.json";
 
 
 function CustomNavbar(props) {
-  let navigate = useNavigate();
-
   useEffect(() => {
     document.getElementsByClassName("navbar")[0].style.backgroundColor = props.color;
     document.getElementsByClassName("navbar")[0].style.position = props.position;
@@ -23,7 +20,6 @@ function CustomNavbar(props) {
 
   function clearLocalStorage(){
     localStorage.clear();
-    navigate('/');
   }
 
   
@@ -64,7 +60,7 @@ function CustomNavbar(props) {
                 {JSON.parse(localStorage.getItem('user')).Role === 1 ? <NavDropdown.Item href="/admin">Administration</NavDropdown.Item> : null }
                 
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={()=>{clearLocalStorage()}}>
+                <NavDropdown.Item href="/" onClick={()=>{clearLocalStorage()}}>
                   Déconnexion
                 </NavDropdown.Item>
               </NavDropdown>
