@@ -32,30 +32,32 @@ function CustomNavbar(props) {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto"></Nav>
-          <Nav className="d-flex">
-            <Nav.Link href={props.linkOne} data-testid='link-one'>{props.textLinkOne}</Nav.Link>
-            <Nav.Link href={props.linkTwo} data-testid='link-two'>{props.textLinkTwo}</Nav.Link>
+          <Nav className="d-flex" style={{float: "right !important"}}>
+            <Nav.Link className='link-white' href={props.linkOne} data-testid='link-one'>{props.textLinkOne}</Nav.Link>
+            <Nav.Link className='link-white' href={props.linkTwo} data-testid='link-two'>{props.textLinkTwo}</Nav.Link>
             {!localStorage.getItem('user') ?
               <>
-                <Nav.Link href={props.linkThree} data-testid='link-three'>{props.textLinkThree}</Nav.Link>
-                <Nav.Link href={props.linkFour} data-testid='link-four'>{props.textLinkFour}</Nav.Link>
+                <Nav.Link className='link-orange' href={props.linkThree} data-testid='link-three'>{props.textLinkThree}</Nav.Link>
+                <Nav.Link className='link-orange' href={props.linkFour} data-testid='link-four'>{props.textLinkFour}</Nav.Link>
               </>
-              :   
+              :
 
               //si j'ai un user dans le local storage  
-              <NavDropdown src={JSON.parse(localStorage.getItem('user')).PhotoLink === undefined || JSON.parse(localStorage.getItem('user')).PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + JSON.parse(localStorage.getItem('user')).PhotoLink} id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-              
-              
+              <NavDropdown title={<button id='removeButton'>Mon compte  <img src={JSON.parse(localStorage.getItem('user')).PhotoLink === undefined || JSON.parse(localStorage.getItem('user')).PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + JSON.parse(localStorage.getItem('user')).PhotoLink } alt="Menu Profil" className='image-profil' id="navbarScrollingDropdown"/></button>} >
+                <NavDropdown.Item href="/account">Mon profil</NavDropdown.Item>
+                <NavDropdown.Item href="/mesannonces">
+                  Mes annonces
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/mespropositions">Mes propositions</NavDropdown.Item>
+                {JSON.parse(localStorage.getItem('user')).Role === 1 ? <NavDropdown.Item href="/admin">Administration</NavDropdown.Item> : null }
+                
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="/admin">
+                  Déconnexion
+                </NavDropdown.Item>
+              </NavDropdown>
+
+
 
             }
 
