@@ -91,6 +91,17 @@ router.get("/detailAnnonce", async (req, res) => {
     res.json(detailOfAnnonce)
 })
 
+router.get("/deleteAnnonce", async (req, res) => {
+    try {
+        const annonce=await Annonces.destroy(
+            { where: { id: req.query.id } }
+        )
+        res.send(200);
+    } catch (error) { // en cas d'erreur
+        res.status(500).send(error);
+    }
+  });
+
 router.post("/",async (req, res) => {
     Annonces.create({
         Type: req.body.Type,

@@ -12,7 +12,7 @@ import CatIcon from "../../Assets/cat-icon.png";
 import BabyIcon from "../../Assets/baby-icon.png";
 import addButton from "../../Assets/add-button.png";
 import xIcon from "../../Assets/x-button.png";
-
+import { useNavigate } from "react-router-dom";
 /*Importing Styles*/
 import "./DetailAnnonce.css";
 
@@ -40,7 +40,7 @@ function DetailAnnonce() {
    *   showAddPetModal : Si le modal d'ajout d'animal est affiché ou non
    *   annonce : Annonce affichée
    */
-
+  let navigate = useNavigate();
   let { id } = useParams();
   const [displayPet, setDisplayPet] = useState({});
   const [isModifiable, setIsModifiable] = useState(false);
@@ -150,6 +150,20 @@ function DetailAnnonce() {
     }
   }
 
+  function deleteAnnonce(index) {
+    /*
+     *   Supprime une annonce
+     */
+    // eslint-disable-next-line no-restricted-globals
+    let beSure = confirm("Voulez-vous vraiment supprimer cette annonce ?");
+    if (beSure) {
+      fetch(config.API_URL + "/annonces/deleteAnnonce?id=" + index);
+      alert("Annonce bien supprimée.");
+      navigate('/mesannonces');
+      
+    }
+  }
+
   return (
     <div className="DetailAnnonce">
       <CustomNavbar
@@ -184,6 +198,11 @@ function DetailAnnonce() {
               >
                 {editionMode ? "Valider" : "Modifier"}
               </Button>
+            </Col>
+          ) : null}
+          {isModifiable ? (
+            <Col xs={{ span: 3, offset: 8 }}>
+              <Button className="delete-button" onClick={() => deleteAnnonce(annonce.id)}>Supprimer</Button>
             </Col>
           ) : null}
         </Row>
