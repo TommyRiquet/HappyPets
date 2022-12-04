@@ -1,11 +1,11 @@
 import './CustomNavbar.css';
 import { Navbar, Container, NavDropdown } from "react-bootstrap";
 import Nav from 'react-bootstrap/Nav';
+import logo from '../../Assets/logo1.png'; 
 import { useEffect } from 'react';
 
 /*Importing Images*/
 import ProfilePicDefault from '../../Assets/profilePictureDefault.png'
-import PerroquetImage from '../../Assets/bird.png';
 
 /*Importing Config*/
 import config from "../../config.json";
@@ -29,14 +29,14 @@ function CustomNavbar(props) {
       <Container fluid>
         <Navbar.Brand href="/" className='title-navbar'>
           <img
-            src={PerroquetImage}
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-            alt="Logo de QTPets"
-          />
-          QTPets
-        </Navbar.Brand>
+              src={logo}
+              width="40"
+              height="40"
+              className="d-inline-block align-top"
+              alt="Logo de HappyPets"
+            />
+            HappyPets 
+            </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto"></Nav>
