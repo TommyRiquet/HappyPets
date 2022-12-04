@@ -56,6 +56,7 @@ router.post("/", async (req, res) => {
             Role: req.body.Role,
             Password: hash,
             PhotoLink: req.body.PhotoLink,
+            ConsentPolicy: req.body.ConsentPolicy
         })
         .then((user) => {
             res.json(user.id)
