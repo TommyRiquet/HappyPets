@@ -1,6 +1,6 @@
 import {Register} from './Register';
 import {BrowserRouter} from 'react-router-dom';
-import {render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import * as yup from 'yup';
 import { sub } from "date-fns/fp"
 
@@ -302,7 +302,7 @@ try{
     errors.push(err['errors'][0]);
 }
 
-describe('Register', () => {
+describe('RegisterVerify', () => {
     it('Verif champ Name', async () => {
         expect(errors[0]).toBe('Que des characteres');
         expect(errors[1]).toBe('Que des characteres');
