@@ -44,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
         ColorPhoto: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        ConsentPolicy:{
+            type:DataTypes.BOOLEAN,
+            allowNull: false
         }
 
     })

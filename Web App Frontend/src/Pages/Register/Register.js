@@ -98,7 +98,8 @@ function Register() {
                     Phone: data['Phone'],
                     Role: 0,
                     Password: hash,
-                    PhotoLink: null
+                    PhotoLink: null,
+                    ConsentPolicy: data['Terms']
                 })
                 
         }).then(val => val.json())
@@ -112,6 +113,7 @@ function Register() {
             .catch(function (error) {
                 console.log(error);
             })
+
     }
 
     return (
