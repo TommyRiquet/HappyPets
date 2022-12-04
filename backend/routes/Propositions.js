@@ -33,33 +33,4 @@ router.get("/", async (req, res) => {
         res.json(ListPropositions)
 })
 
-router.get("/annonce", async (req, res) => {
-    if(req.query.offset === "0"){
-        const ListPropositions = await Propositions.findAll({
-            limit : 20, 
-            attributes : [],
-            where : {AnnonceId : req.query.id},
-                include : [{
-                    model : Users,
-                    attributes : ['FirstName', 'Age', 'City'],
-                }],
-            
-        })
-        res.json(ListPropositions)
-    }else{
-        const ListPropositions = await Propositions.findAll({
-            limit : 6, 
-            attributes : [],
-            where : {AnnonceId : req.query.id},
-                include : [{
-                    model : Users,
-                    attributes : ['FirstName', 'Age', 'City'],
-                }],
-            
-
-        })
-        res.json(ListPropositions)
-    }
-})
-
 module.exports = router

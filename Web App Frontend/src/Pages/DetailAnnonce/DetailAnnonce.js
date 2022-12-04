@@ -12,7 +12,7 @@ import CatIcon from "../../Assets/cat-icon.png";
 import BabyIcon from "../../Assets/baby-icon.png";
 import addButton from "../../Assets/add-button.png";
 import xIcon from "../../Assets/x-button.png";
-
+import { useNavigate } from "react-router-dom";
 /*Importing Styles*/
 import "./DetailAnnonce.css";
 
@@ -40,7 +40,7 @@ function DetailAnnonce() {
    *   showAddPetModal : Si le modal d'ajout d'animal est affiché ou non
    *   annonce : Annonce affichée
    */
-
+  let navigate = useNavigate();
   let { id } = useParams();
   const [displayPet, setDisplayPet] = useState({});
   const [isModifiable, setIsModifiable] = useState(false);
@@ -127,7 +127,7 @@ function DetailAnnonce() {
     /*
      *   Envoie les modifications de l'annonce
      */
-    fetch(config.API_URL + "/annonces/updateAnnonce", { 
+    fetch(config.API_URL + "/annonces/updateAnnonce", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -150,6 +150,20 @@ function DetailAnnonce() {
     }
   }
 
+  function deleteAnnonce(index) {
+    /*
+     *   Supprime une annonce
+     */
+    // eslint-disable-next-line no-restricted-globals
+    let beSure = confirm("Voulez-vous vraiment supprimer cette annonce ?");
+    if (beSure) {
+      fetch(config.API_URL + "/annonces/deleteAnnonce?id=" + index);
+      alert("Annonce bien supprimée.");
+      navigate('/mesannonces');
+      
+    }
+  }
+
   return (
     <div className="DetailAnnonce">
       <CustomNavbar color="rgba(47, 72, 88, 1)" />
@@ -165,14 +179,19 @@ function DetailAnnonce() {
                 onClick={
                   editionMode
                     ? (e) => {
-                        sendNewAnnonce();
-                        setEditionMode(false);
-                      }
+                      sendNewAnnonce();
+                      setEditionMode(false);
+                    }
                     : (e) => setEditionMode(true)
                 }
               >
                 {editionMode ? "Valider" : "Modifier"}
               </Button>
+            </Col>
+          ) : null}
+          {isModifiable ? (
+            <Col xs={{ span: 3, offset: 8 }}>
+              <Button className="delete-button" onClick={() => deleteAnnonce(annonce.id)}>Supprimer</Button>
             </Col>
           ) : null}
         </Row>
@@ -287,7 +306,7 @@ function DetailAnnonce() {
                 <></>
               );
             })}
-            {editionMode && annonce.Pets.length<4? (
+            {editionMode && annonce.Pets.length < 4 ? (
               <Col>
                 <Button
                   className="add-pet-button"
@@ -396,22 +415,22 @@ function AddPetModal(props) {
             *  Affiche les animaux de l'utilisateur en enlevant ceux déjà dans l'annonce
             */
             Object.values(props.pets).filter((pet) => !Object.values(props.annonce.Pets).map((pet) => pet.id).includes(pet.id))
-            .map((pet, index) => {
-              return (
-                <Col
-                  key={index}
-                  className="pet-image-modal-col"
-                  onClick={(e) => addPetToAnnonce(pet.id)}
-                >
-                  <img
-                    src={AnimauxImages[pet.Type]}
-                    alt=""
-                    className="pet-image-modal"
-                  ></img>
-                  <span>{pet.Name}</span>
-                </Col>
-              );
-            })
+              .map((pet, index) => {
+                return (
+                  <Col
+                    key={index}
+                    className="pet-image-modal-col"
+                    onClick={(e) => addPetToAnnonce(pet.id)}
+                  >
+                    <img
+                      src={AnimauxImages[pet.Type]}
+                      alt=""
+                      className="pet-image-modal"
+                    ></img>
+                    <span>{pet.Name}</span>
+                  </Col>
+                );
+              })
           )}
         </Row>
       </Modal.Body>
@@ -424,4 +443,4 @@ function AddPetModal(props) {
   );
 }
 
-export {DetailAnnonce, AddPetModal};
+export { DetailAnnonce, AddPetModal };

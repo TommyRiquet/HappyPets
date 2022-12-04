@@ -61,8 +61,7 @@ function Account() {
                         alert("Vous ne pouvez pas supprimer un animal qui a des annonces");
                     }
                     else {
-                        fetch(config.API_URL + "/pets/deleteAnimal?id=" + index)
-                            .then((response) => response.json());
+                        fetch(config.API_URL + "/pets/deleteAnimal?id=" + index);
                         alert("Animal bien supprimé.");
                         //pour enlever la photo de l'animal
                         document.getElementById("animal-" + index).innerHTML = "";
