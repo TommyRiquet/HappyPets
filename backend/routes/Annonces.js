@@ -34,13 +34,15 @@ router.get("/", async (req, res) => {
                     where: { // Where type of annonce is in the list of type of annonce
                         Type: {
                             [Op.or]: [typeAnnonce]
-                        }
+                        },
+                        isActive:true
                     },
                     attributes: ['id','Type','DateBegin','DateEnd'],
                         include: [ {
                             model:Pets,
                             attributes: ['Name','Type','Race','Sex','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
-                            where : { //Where type of pet is in the list of typePet and isDogFriendly, isCatFriendly and isKidFriendly are equal to the value in the request
+                            where : { 
+                                //Where type of pet is in the list of typePet and isDogFriendly, isCatFriendly and isKidFriendly are equal to the value in the request
                                 [Op.and]: [
                                 {Type :{
                                         [Op.or]:[typePet]
@@ -76,7 +78,7 @@ router.get("/detailAnnonce", async (req, res) => {
     const id = req.query.id<=0 || isNaN(parseInt(req.query.id)) ? 1 : req.query.id
 
     const detailOfAnnonce = await Annonces.findOne(
-        {   where: {id: id},
+        {   where: {id: id, isActive:true},
             attributes: ['id','Comment','Type','DateBegin','DateEnd'],
                 include: [ {
                     model:Pets,

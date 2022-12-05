@@ -19,6 +19,11 @@ module.exports = (sequelize) => {
         Nombre: {
             type: DataTypes.INTEGER,
             allowNull: true
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
 
     })

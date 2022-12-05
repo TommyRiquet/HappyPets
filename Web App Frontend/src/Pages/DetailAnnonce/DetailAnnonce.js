@@ -2,6 +2,7 @@
 import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import {useNavigate} from 'react-router';
 
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
@@ -12,7 +13,6 @@ import CatIcon from "../../Assets/cat-icon.png";
 import BabyIcon from "../../Assets/baby-icon.png";
 import addButton from "../../Assets/add-button.png";
 import xIcon from "../../Assets/x-button.png";
-import { useNavigate } from "react-router-dom";
 /*Importing Styles*/
 import "./DetailAnnonce.css";
 
@@ -108,7 +108,14 @@ function DetailAnnonce() {
     fetch(config.API_URL + "/annonces/detailAnnonce?id=" + id)
       .then((response) => response.json())
       .then((data) => {
-        setAnnonce(data);
+        if(data===null){
+          //si l'annonce est inactive
+          navigate('/');
+        }
+        else{
+          setAnnonce(data);
+        }
+        
       });
   }
 
