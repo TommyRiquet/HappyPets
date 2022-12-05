@@ -3,30 +3,30 @@ const router = express.Router()
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken')
 
-const {myError} = require("../middleware/Error")
-const {verifyToken} = require("../middleware/verifyToken")
-const {Users,Pets} = require("../models")
+const { myError } = require("../middleware/Error")
+const { verifyToken } = require("../middleware/verifyToken")
+const { Users, Pets, Propositions, Annonces, PetsAnnonces} = require("../models")
 
 router.put("/updateUser", async (req, res) => {
-    const user=await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal:req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink, ColorPhoto: req.body.ColorPhoto}, {
+    const user = await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal: req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink, ColorPhoto: req.body.ColorPhoto }, {
         where: {
             id: req.body.id
         }
-      });
-      res.json(200)
+    });
+    res.json(200)
 })
 
 
 
 router.get("/info", async (req, res) => {
     const user = await Users.findOne({
-        attributes: ['FirstName','LastName','City','Postal','Email', 'PhotoLink'],
+        attributes: ['FirstName', 'LastName', 'City', 'Postal', 'Email', 'PhotoLink'],
         where: {
             id: req.query.id
         },
         include: [{
             model: Pets,
-            attributes: ['Name','Type'],
+            attributes: ['Name', 'Type'],
         }]
     }
     )
@@ -34,7 +34,7 @@ router.get("/info", async (req, res) => {
 })
 
 router.get("/checkemail/:email", async (req, res) => {
-    let existingUser = await Users.findOne({where: {Email: req.params.email}});
+    let existingUser = await Users.findOne({ where: { Email: req.params.email } });
     if (existingUser === null) {
         res.json(true)
     } else {
@@ -58,77 +58,124 @@ router.post("/", async (req, res) => {
             PhotoLink: req.body.PhotoLink,
             ConsentPolicy: req.body.ConsentPolicy
         })
-        .then((user) => {
-            res.json(user.id)
-        })
+            .then((user) => {
+                res.json(user.id)
+            })
     })
 });
 router.post('/login', async (req, res) => {
     try {
         //find and verify the match email/password
         const user = await Users.findOne({
-            where: {Email: req.body.Email, isActive:true},
-            attributes: ['id', 'FirstName', 'LastName','Password', 'Email','City','Postal','Phone','Role','PhotoLink', 'ColorPhoto'],
+            where: { Email: req.body.Email, isActive: true },
+            attributes: ['id', 'FirstName', 'LastName', 'Password', 'Email', 'City', 'Postal', 'Phone', 'Role', 'PhotoLink', 'ColorPhoto'],
             include: [{
                 model: Pets,
-                attributes: ['id','Name','Type','Race','Age','Sex','Height','Weight','Behaviour','Comment','DogFriendly','CatFriendly','KidFriendly'],
+                attributes: ['id', 'Name', 'Type', 'Race', 'Age', 'Sex', 'Height', 'Weight', 'Behaviour', 'Comment', 'DogFriendly', 'CatFriendly', 'KidFriendly'],
             }]
         })
         if (!user) throw new myError("L'utilisateur n'existe pas", 404);
 
-        
+
         const match = await bcrypt.compare(req.body.Password, user.Password);
         if (!match) throw new myError("Mauvais mot de passe", 401);
 
         //create token
-        const token = jwt.sign({id: user.dataValues.id, Role: user.dataValues.Role}, "secret", {
+        const token = jwt.sign({ id: user.dataValues.id, Role: user.dataValues.Role }, "secret", {
             expiresIn: 60 * 60 * 24
         });
+<<<<<<< HEAD
         delete user.dataValues.Password
         res.json({token: token, user: user.dataValues});
+=======
+        res.json({ token: token, user: user.dataValues });
+>>>>>>> 3c78060 (Finalisation de la suppression d'un compte)
     } catch (e) {
         const status = e.status || 500;
-        res.status(status).json({error: e.message});
+        res.status(status).json({ error: e.message });
     }
 });
 
 router.get('/auth', verifyToken, async (req, res) => {
-    res.json({id: req.id, Role: req.Role})
+    res.json({ id: req.id, Role: req.Role })
 })
 
 
-router.post("/image/upload", async (req,res ) => {
+router.post("/image/upload", async (req, res) => {
     let userId = req.body.userid
     try { // si y a pas de fichier
-        if(!req.files) {
+        if (!req.files) {
             res.send(404);
         } else {// si y a un fichier
             let image = req.files.profilePicture;
-            image.mv('./Images/user-' + userId +'.'+ image.mimetype.split('/')[1]);
+            image.mv('./Images/user-' + userId + '.' + image.mimetype.split('/')[1]);
             //si l'image a bien été téléchargé, on va stocker le lien vers l'image dans la DB
-            const user=await Users.update({PhotoLink: 'user-' + userId +'.'+ image.mimetype.split('/')[1]}, {
+            const user = await Users.update({ PhotoLink: 'user-' + userId + '.' + image.mimetype.split('/')[1] }, {
                 where: {
                     id: userId
                 }
-              });
+            });
             //si tout s'est bien passé -> renvoi 200
             res.send(200);
         }
     } catch (error) { // en cas d'erreur
         res.status(500).send(error);
     }
-  });
+});
 
-  router.put('/deleteUser', async (req, res) => {
+router.put('/deleteUser', async (req, res) => {
     Users.update({
-        LastName: null
+        FirstName: "X",
+        LastName: "X",
+        Email:"X",
+        Phone:0,
+        Password:"X",
+        isActive:0
     }, {
         where: {
             id: req.body.id
         }
     })
+
+    Propositions.update({
+        isActive: false
+    }, {
+        where: {
+            UserId: req.body.id
+        }
+    })
+
+    Pets.update({
+        isActive: false
+    }, {
+        where: {
+            UserId: req.body.id
+        }
+    })
+
+
+    //Pour les annonces
+    let AnnoncesId=[];
+    for(let i in req.body.petsId){
+        AnnoncesId.push(await PetsAnnonces.findOne({
+            where: { PetId: req.body.petsId[i]},
+            attributes: ['AnnonceId']
+        }))
+    }
+    for(let i in AnnoncesId){
+        Annonces.update({
+            isActive: false
+        }, {
+            where: {
+                id: AnnoncesId[i].dataValues.AnnonceId
+            }
+        })
+    }
+
+
+
     res.json(200)
 })
 
-            
+
 module.exports = router

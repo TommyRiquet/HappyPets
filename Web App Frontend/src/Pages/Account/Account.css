@@ -123,8 +123,8 @@ td{
   transition: 0.2s !important;
 }
 
-.delete-button{
-  margin-top: 5%;
+.delete-profil-button{
+  margin-top:5%;
   max-width: 100%;
   background-color: red !important;
   font-size: 150% !important;
