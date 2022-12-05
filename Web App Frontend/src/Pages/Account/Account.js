@@ -1,7 +1,12 @@
 /*Importing Components */
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+<<<<<<< HEAD
 import {useNavigate} from "react-router-dom";
+=======
+import {useNavigate} from 'react-router';
+
+>>>>>>> d265aef (Debut Suppression profil)
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 
 
@@ -25,6 +30,7 @@ import config from "../../config.json";
 function Account() {
     const [InfoUser, setInfoUser] = useState({ Pets: [] })
     const [editionMode, setEditionMode] = useState(false);
+    let navigate = useNavigate();
 
 
     useEffect(() => {
@@ -157,7 +163,31 @@ function Account() {
         navigate('/createAnimal')
     }
 
+<<<<<<< HEAD
     let navigate = useNavigate();
+=======
+    function deleteProfil() {
+        //va supprimer le profil
+        // eslint-disable-next-line no-restricted-globals
+        let beSure = confirm("Voulez-vous vraiment supprimer ce profil ainsi que tout le concernant ?");
+        if (beSure) {
+            fetch(config.API_URL + "/users/deleteUser", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({id:InfoUser.id})
+            })
+            alert("Compte bien supprimé.");
+            //pour supprimer toutes les info du localStorage
+            localStorage.clear();
+            navigate('/');
+        }
+    }
+
+
+
+>>>>>>> d265aef (Debut Suppression profil)
     return (
         <div className="Account">
             <CustomNavbar
@@ -176,10 +206,14 @@ function Account() {
                 <Row>
                     <Col md={6} xs={12} className="left-content">
 
+<<<<<<< HEAD
                         <img id="profile-pic"
                              style={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? {backgroundColor: ""} : {backgroundColor: InfoUser.ColorPhoto}}
                              src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink}
                              width="250px" height="250px" alt="Utilisateur"/>
+=======
+                        <img id="profile-pic" style={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? { backgroundColor: "" } : { backgroundColor: InfoUser.ColorPhoto }} src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink} width="250px" height="250px" alt="Utilisateur" />
+>>>>>>> d265aef (Debut Suppression profil)
 
                         <br/>
                         {editionMode ? (
@@ -199,6 +233,7 @@ function Account() {
                                      className='imgProfileChoose' onClick={() => changeProfilPic(6)}/>
                                 <br/>
                                 <label htmlFor="choose-color" id="label-choose-color">Choisissez une couleur: </label>
+<<<<<<< HEAD
                                 <br/>
                                 <input onChange={(e) => changeProfilColor(e.target.value)} id="choose-color"
                                        type="color"/><p className='emoji-icon' onClick={() => saveColor()}>✔️</p><p
@@ -207,6 +242,13 @@ function Account() {
                                 <Button className='blue-button' onClick={() => resetColor()}>Réinitialiser à la couleur
                                     sauvegardée</Button>
                                 <br/>
+=======
+                                <br />
+                                <input onChange={(e) => changeProfilColor(e.target.value)} id="choose-color" type="color" /><p className='emoji-icon' onClick={() => saveColor()}>✔️</p><p className='emoji-icon' onClick={() => delColor()}>❌</p>
+                                <br />
+                                <Button className='blue-button' onClick={() => resetColor()}>Réinitialiser à la couleur sauvegardée</Button>
+                                <br />
+>>>>>>> d265aef (Debut Suppression profil)
                             </div>
 
                         ) : ("")}
@@ -219,6 +261,12 @@ function Account() {
                                 : (e) => setEditionMode(true)
                         }>
                             {editionMode ? "Valider tous les changements" : "Modifier les informations"}
+                        </Button>
+                        <br />
+                        <Button className='delete-button' onClick={
+                            () => { deleteProfil() }
+                        }>
+                            Supprimer mon profil
                         </Button>
                     </Col>
                     <Col md={6} xs={12} className="right-content">

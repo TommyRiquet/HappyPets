@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define("Users", {
         FirstName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         LastName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         Age: {
             type: DataTypes.STRING,
@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         Email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         Phone: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         Role: {
             type: DataTypes.INTEGER,
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         Password: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         PhotoLink: {
             type: DataTypes.STRING,
@@ -48,6 +48,11 @@ module.exports = (sequelize, DataTypes) => {
         ConsentPolicy:{
             type:DataTypes.BOOLEAN,
             allowNull: false
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
 
     })

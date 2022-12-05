@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
     try {
         //find and verify the match email/password
         const user = await Users.findOne({
-            where: {Email: req.body.Email},
+            where: {Email: req.body.Email, isActive:true},
             attributes: ['id', 'FirstName', 'LastName','Password', 'Email','City','Postal','Phone','Role','PhotoLink', 'ColorPhoto'],
             include: [{
                 model: Pets,
@@ -119,6 +119,16 @@ router.post("/image/upload", async (req,res ) => {
     }
   });
 
+  router.put('/deleteUser', async (req, res) => {
+    Users.update({
+        LastName: null
+    }, {
+        where: {
+            id: req.body.id
+        }
+    })
+    res.json(200)
+})
 
             
 module.exports = router
