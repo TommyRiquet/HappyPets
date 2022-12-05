@@ -11,6 +11,7 @@ import './Account.css';
 /*Importing Images*/
 import ProfilePicDefault from '../../Assets/profilePictureDefault.png'
 import xIcon from "../../Assets/x-button.png";
+import addButton from "../../Assets/add-button.png";
 
 /*Importing Assets*/
 import AnimauxImages from "../../AnimalPictures.js";
@@ -355,7 +356,7 @@ function Account() {
                                 </tbody>
                             </table>
                             :
-                            <p>Vous n'avez pas d'animaux :/</p>
+                            <div className="pic-animal"><img alt="ajouter animal" src={addButton} onClick={navigateToCreateAnimal}/></div>
 
                         }
 
