@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define("Users", {
         FirstName: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         LastName: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         Age: {
             type: DataTypes.STRING,
@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         Email: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         Phone: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         Role: {
             type: DataTypes.INTEGER,
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         Password: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         PhotoLink: {
             type: DataTypes.STRING,

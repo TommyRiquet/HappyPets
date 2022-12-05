@@ -171,12 +171,17 @@ function Account() {
         // eslint-disable-next-line no-restricted-globals
         let beSure = confirm("Voulez-vous vraiment supprimer ce profil ainsi que tout le concernant ?");
         if (beSure) {
+            let allPetsId=[];
+            for (let i in InfoUser.Pets){
+                allPetsId.push(InfoUser.Pets[i].id)
+
+            }
             fetch(config.API_URL + "/users/deleteUser", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({id:InfoUser.id})
+                body: JSON.stringify({id:InfoUser.id, petsId:allPetsId})
             })
             alert("Compte bien supprimé.");
             //pour supprimer toutes les info du localStorage
@@ -263,10 +268,10 @@ function Account() {
                             {editionMode ? "Valider tous les changements" : "Modifier les informations"}
                         </Button>
                         <br />
-                        <Button className='delete-button' onClick={
+                        <Button className='delete-profil-button' onClick={
                             () => { deleteProfil() }
                         }>
-                            Supprimer mon profil
+                            Supprimer le profil
                         </Button>
                     </Col>
                     <Col md={6} xs={12} className="right-content">
