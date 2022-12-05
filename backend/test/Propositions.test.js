@@ -13,11 +13,6 @@ describe('Testing for the /propositions routes', function() {
   });
 
 describe('Testing the querystring of /proposition', function(){
-    it('should get 10 data', async() =>{
-        const res = await request(app)
-            .get('/propositions')
-        expect(res.body.length).toBe(10);
-    })
     it('should get 6 data', async() =>{
         const res = await request(app)
             .get('/propositions?limit=6')
