@@ -11,7 +11,6 @@ describe('Render Test for the Page Account', () => {
             <BrowserRouter>
                 <Account/>
             </BrowserRouter>
-
         )
     })    
 })
