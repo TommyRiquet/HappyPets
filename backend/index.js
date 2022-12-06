@@ -36,6 +36,9 @@ app.use("/images", ImageRouter)
 const adminRouter = require('./routes/Admin')
 app.use("/admin", adminRouter)
 
+const NotificationRouter = require('./routes/Notifications')
+app.use("/notifications", NotificationRouter)
+
 if (process.env.NODE_ENV !== 'test') {
     db.sequelize.sync().then(() => {
         app.listen(PORT, () => {
