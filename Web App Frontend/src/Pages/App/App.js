@@ -20,6 +20,7 @@ import {DetailAnnonce} from '../DetailAnnonce/DetailAnnonce';
 import Admin from '../Admin/Admin';
 import CreateProposition from '../CreateProposition/CreateProposition';
 import { DetailProposition } from '../DetailProposition/DetailProposition';
+import Notifications from '../Notifications/Notifications';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
                     <Route path="/annonces/new" element={<NewAnnonce/>}/>
                     <Route path="/mesannonces" element={<MesAnnonces/>}/>
                     <Route path="/createProposition" element={<CreateProposition/>}/>
+                    <Route path="/notifications" element={<Notifications/>}/>
                   </Route>
 
                   {/* Routes bloqués lorsque l'utilisateur est connectés */}
