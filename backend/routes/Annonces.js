@@ -95,9 +95,13 @@ router.get("/detailAnnonce", async (req, res) => {
 
 router.get("/deleteAnnonce", async (req, res) => {
     try {
-        const annonce=await Annonces.destroy(
-            { where: { id: req.query.id } }
-        )
+        Annonces.update({
+            isActive: false
+        }, {
+            where: {
+                id: req.query.id
+            }
+        })
         res.send(200);
     } catch (error) { // en cas d'erreur
         res.status(500).send(error);
@@ -130,9 +134,10 @@ router.get("/me", async(req,res) =>{
                     model:Pets,
                     attributes: ['Name','Type','Race','Sex','Sterile','Weight','Height','DogFriendly','CatFriendly','KidFriendly'],
                     where : { 
-                        UserId: id
+                        UserId: id, 
                     }
-                }]
+                }],
+                where:{isActive:true}
         }
     )
 
