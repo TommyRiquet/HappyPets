@@ -11,7 +11,7 @@ router.get("/info/:id", async (req, res) => {
     let id = req.params.id || 0
 
     const pets = await Pets.findAll(
-        { where: { UserId: req.params.id } }
+        { where: { UserId: req.params.id} }
     )
     res.json(pets)
 })
@@ -31,10 +31,14 @@ router.get("/hasAnnonce", async (req, res) => {
 })
 
 router.get("/deleteAnimal", async (req, res) => {
-    try {
-        const pet=await Pets.destroy(
-            { where: { id: req.query.id } }
-        )
+    try {      
+        Pets.update({
+            isActive: false
+        }, {
+            where: {
+                id: req.query.id
+            }
+        })
         res.send(200);
     } catch (error) { // en cas d'erreur
         res.status(500).send(error);
