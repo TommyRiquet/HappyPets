@@ -59,17 +59,33 @@ module.exports = (sequelize, DataTypes) => {
     
      Users.associate = (models) => {
         Users.hasMany(models.Pets, {
-             onDelete: "cascade"
-        })
+            onDelete: "cascade"
+        }),
+
         Users.hasMany(models.Propositions, {
-                onDelete: "cascade"
-            })
+            onDelete: "cascade"
+        }),
+
         Users.hasMany(models.Admin, {
             foreignKey: 'SuspectId', targetKey: 'id',
-            as: 'FK_SuspectId'}),
+            as: 'FK_SuspectId'
+        }),
+
         Users.hasMany(models.Admin, {
             foreignKey: 'UserId', targetKey: 'id',
-            as: 'FK_UserId'})
+            as: 'FK_UserId'
+        }),
+
+        Users.belongsToMany(models.Annonces, { 
+            through : models.UsersAnnonces,
+            onDelete: "cascade"
+        }),
+
+        Users.belongsToMany(models.Propositions, { 
+            through : models.UsersPropositions,
+            onDelete: "cascade"
+        })
+        
      }
 
     return Users;
