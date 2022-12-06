@@ -19,6 +19,7 @@ import CreatePet from '../CreatePet/CreatePet'
 import {DetailAnnonce} from '../DetailAnnonce/DetailAnnonce';
 import Admin from '../Admin/Admin';
 import CreateProposition from '../CreateProposition/CreateProposition';
+import { DetailProposition } from '../DetailProposition/DetailProposition';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                   <Route path="/annonces" element={<Annonces/>}/>
                   <Route path="/propositions" element={<Propositions/>}/>
                   <Route path='/detailannonce/:id' element={<DetailAnnonce/>}/>
+                  <Route path='/detailproposition/:id' element={<DetailProposition/>}/>
 
 
                   {/* Routes pour les utilisateurs connectés */}
