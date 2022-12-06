@@ -53,10 +53,9 @@ function CustomNavbar(props) {
               //si j'ai un user dans le local storage  
               <NavDropdown title={<button id='removeButton'>Mon compte  <img src={JSON.parse(localStorage.getItem('user')).PhotoLink === undefined || JSON.parse(localStorage.getItem('user')).PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + JSON.parse(localStorage.getItem('user')).PhotoLink } alt="Menu Profil" className='image-profil' id="navbarScrollingDropdown"/></button>} >
                 <NavDropdown.Item href="/account">Mon profil</NavDropdown.Item>
-                <NavDropdown.Item href="/mesannonces">
-                  Mes annonces
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/mesannonces">Mes annonces</NavDropdown.Item>
                 <NavDropdown.Item href="/mespropositions">Mes propositions</NavDropdown.Item>
+                <NavDropdown.Item href="/notifications">Mes notifications</NavDropdown.Item>
                 {JSON.parse(localStorage.getItem('user')).Role === 1 ? <NavDropdown.Item href="/admin">Administration</NavDropdown.Item> : null }
                 
                 <NavDropdown.Divider />
