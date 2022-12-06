@@ -76,13 +76,11 @@ module.exports = (sequelize, DataTypes) => {
             as: 'FK_UserId'
         }),
 
-        Users.belongsToMany(models.Annonces, { 
-            through : models.UsersAnnonces,
+        Users.hasMany(models.UsersAnnonces, { 
             onDelete: "cascade"
         }),
 
-        Users.belongsToMany(models.Propositions, { 
-            through : models.UsersPropositions,
+        Users.hasMany(models.UsersPropositions, { 
             onDelete: "cascade"
         })
         

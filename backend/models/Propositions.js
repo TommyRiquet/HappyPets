@@ -30,7 +30,12 @@ module.exports = (sequelize) => {
 
     Propositions.associate = (models) => {
         
-        Propositions.belongsTo(models.Users, {})
+        Propositions.belongsTo(models.Users, {}),
+
+        Propositions.belongsToMany(models.Users, { 
+            through : models.UsersPropositions,
+            onDelete: "cascade"
+        })
 
     }
 

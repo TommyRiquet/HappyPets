@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         Annonces.belongsToMany(models.Pets, { 
             through : models.PetsAnnonces,
             onDelete: "cascade"
+        }),
+
+        Annonces.belongsToMany(models.Users, { 
+            through : models.UsersAnnonces,
+            onDelete: "cascade"
         })
     }
 
