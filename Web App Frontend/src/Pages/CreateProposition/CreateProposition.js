@@ -22,7 +22,7 @@ function CreateProposition() {
 
     function sendFormProposition(event) {
         const user = JSON.parse(localStorage.getItem("user"));
-        fetch(config.API_URL + "/proposition", {
+        fetch(config.API_URL + "/Propositions", {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
