@@ -85,12 +85,8 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign({ id: user.dataValues.id, Role: user.dataValues.Role }, "secret", {
             expiresIn: 60 * 60 * 24
         });
-<<<<<<< HEAD
         delete user.dataValues.Password
         res.json({token: token, user: user.dataValues});
-=======
-        res.json({ token: token, user: user.dataValues });
->>>>>>> 3c78060 (Finalisation de la suppression d'un compte)
     } catch (e) {
         const status = e.status || 500;
         res.status(status).json({ error: e.message });

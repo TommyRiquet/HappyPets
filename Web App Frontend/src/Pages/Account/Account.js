@@ -1,12 +1,8 @@
 /*Importing Components */
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-<<<<<<< HEAD
-import {useNavigate} from "react-router-dom";
-=======
 import {useNavigate} from 'react-router';
 
->>>>>>> d265aef (Debut Suppression profil)
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 
 
@@ -163,9 +159,6 @@ function Account() {
         navigate('/createAnimal')
     }
 
-<<<<<<< HEAD
-    let navigate = useNavigate();
-=======
     function deleteProfil() {
         //va supprimer le profil
         // eslint-disable-next-line no-restricted-globals
@@ -192,7 +185,6 @@ function Account() {
 
 
 
->>>>>>> d265aef (Debut Suppression profil)
     return (
         <div className="Account">
             <CustomNavbar
@@ -211,14 +203,10 @@ function Account() {
                 <Row>
                     <Col md={6} xs={12} className="left-content">
 
-<<<<<<< HEAD
                         <img id="profile-pic"
                              style={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? {backgroundColor: ""} : {backgroundColor: InfoUser.ColorPhoto}}
                              src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink}
                              width="250px" height="250px" alt="Utilisateur"/>
-=======
-                        <img id="profile-pic" style={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? { backgroundColor: "" } : { backgroundColor: InfoUser.ColorPhoto }} src={InfoUser.PhotoLink === undefined || InfoUser.PhotoLink === null ? ProfilePicDefault : config.API_URL + "/images/" + InfoUser.PhotoLink} width="250px" height="250px" alt="Utilisateur" />
->>>>>>> d265aef (Debut Suppression profil)
 
                         <br/>
                         {editionMode ? (
@@ -238,7 +226,6 @@ function Account() {
                                      className='imgProfileChoose' onClick={() => changeProfilPic(6)}/>
                                 <br/>
                                 <label htmlFor="choose-color" id="label-choose-color">Choisissez une couleur: </label>
-<<<<<<< HEAD
                                 <br/>
                                 <input onChange={(e) => changeProfilColor(e.target.value)} id="choose-color"
                                        type="color"/><p className='emoji-icon' onClick={() => saveColor()}>✔️</p><p
@@ -247,13 +234,6 @@ function Account() {
                                 <Button className='blue-button' onClick={() => resetColor()}>Réinitialiser à la couleur
                                     sauvegardée</Button>
                                 <br/>
-=======
-                                <br />
-                                <input onChange={(e) => changeProfilColor(e.target.value)} id="choose-color" type="color" /><p className='emoji-icon' onClick={() => saveColor()}>✔️</p><p className='emoji-icon' onClick={() => delColor()}>❌</p>
-                                <br />
-                                <Button className='blue-button' onClick={() => resetColor()}>Réinitialiser à la couleur sauvegardée</Button>
-                                <br />
->>>>>>> d265aef (Debut Suppression profil)
                             </div>
 
                         ) : ("")}
