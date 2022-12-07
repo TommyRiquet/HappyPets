@@ -1,6 +1,6 @@
 /* Importing Components */
 import { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import UserCard from "../../Components/UserCard/UserCard";
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 
@@ -69,6 +69,15 @@ function Propositions() {
             />
             <Container className='title'>
                 <h2>Propositions</h2>
+            </Container>
+            <Container>
+                <Button
+                    className="new-annonce-button filter-button"
+                    variant=""
+                    href="createProposition"
+                >
+                    Nouvelle Proposition
+                </Button>
             </Container>
             <Container className='proposition-list'>
                 {
