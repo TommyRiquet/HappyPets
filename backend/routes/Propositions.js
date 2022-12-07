@@ -34,4 +34,15 @@ router.get("/", async (req, res) => {
         res.json(ListPropositions)
 })
 
+router.post("/", async (req, res) => {
+    try {
+        const newProposition = await Propositions.create(req.body)
+        res.json(newProposition)
+    }
+    catch (error) {
+        res.status(400).send(error);
+    }
+})
+
+
 module.exports = router

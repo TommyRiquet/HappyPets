@@ -41,7 +41,7 @@ router.get("/deleteAnimal", async (req, res) => {
         })
         res.send(200);
     } catch (error) { // en cas d'erreur
-        res.status(500).send(error);
+        res.status(400).send(error);
     }
   });
 
@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
     const pet = await Pets.create(newPet);
     res.json(pet);
   } catch (error){
-        res.status(500).send
+    res.status(400).send(error);
     }
 });
 
@@ -75,7 +75,7 @@ router.post("/image/upload", async (req,res ) => {
             res.send(200);
         }
     } catch (error) { // en cas d'erreur
-        res.status(500).send(error);
+        res.status(400).send(error);
     }
 });
 
