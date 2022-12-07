@@ -17,18 +17,17 @@ router.put("/updateUser", async (req, res) => {
 })
 
 
-
 router.get("/info", async (req, res) => {
     const user = await Users.findOne({
-        attributes: ['FirstName', 'LastName', 'City', 'Postal', 'Email', 'PhotoLink'],
-        where: {
-            id: req.query.id
-        },
-        include: [{
-            model: Pets,
-            attributes: ['Name', 'Type'],
-        }]
-    }
+            attributes: ['FirstName', 'LastName', 'City', 'Postal', 'Email', 'PhotoLink'],
+            where: {
+                id: req.query.id
+            },
+            include: [{
+                model: Pets,
+                attributes: ['Name', 'Type'],
+            }]
+        }
     )
     res.json(user)
 })
@@ -107,7 +106,7 @@ router.post("/image/upload", async (req, res) => {
             let image = req.files.profilePicture;
             image.mv('./Images/user-' + userId + '.' + image.mimetype.split('/')[1]);
             //si l'image a bien été téléchargé, on va stocker le lien vers l'image dans la DB
-            const user = await Users.update({ PhotoLink: 'user-' + userId + '.' + image.mimetype.split('/')[1] }, {
+            const user = await Users.update({PhotoLink: 'user-' + userId + '.' + image.mimetype.split('/')[1]}, {
                 where: {
                     id: userId
                 }

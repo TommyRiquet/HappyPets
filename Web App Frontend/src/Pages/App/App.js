@@ -18,6 +18,7 @@ import Account from '../Account/Account'
 import CreatePet from '../CreatePet/CreatePet'
 import {DetailAnnonce} from '../DetailAnnonce/DetailAnnonce';
 import Admin from '../Admin/Admin';
+import CreateProposition from '../CreateProposition/CreateProposition';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
                     <Route path="/createAnimal" element={<CreatePet/>}/>
                     <Route path="/annonces/new" element={<NewAnnonce/>}/>
                     <Route path="/mesannonces" element={<MesAnnonces/>}/>
+                    <Route path="/createProposition" element={<CreateProposition/>}/>
                   </Route>
 
                   {/* Routes bloqués lorsque l'utilisateur est connectés */}
