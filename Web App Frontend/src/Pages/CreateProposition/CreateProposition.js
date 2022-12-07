@@ -47,6 +47,7 @@ function CreateProposition() {
 
 
     return (
+
         <div className={"CreateProposition"}>
             <CustomNavbar
                 textLinkOne="Je propose mon aide"
@@ -177,7 +178,7 @@ function CreateProposition() {
                     </Formik>
                 </div>
             </Container>
-        </div>
+        </div >
     )
 }
 
