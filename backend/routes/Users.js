@@ -157,21 +157,30 @@ router.put('/deleteUser', async (req, res) => {
 
     //Pour les annonces
     let AnnoncesId=[];
+    let forOnePet=[];
     for(let i in req.body.petsId){
-        AnnoncesId.push(await PetsAnnonces.findOne({
+        forOnePet=(await PetsAnnonces.findAll({
             where: { PetId: req.body.petsId[i]},
-            attributes: ['AnnonceId']
+            attributes: ['AnnonceId'] 
         }))
+        for(let i in forOnePet){
+            AnnoncesId.push(forOnePet[i])
+        }
+        forOnePet=[];
     }
-    for(let i in AnnoncesId){
-        Annonces.update({
-            isActive: false
-        }, {
-            where: {
-                id: AnnoncesId[i].dataValues.AnnonceId
-            }
-        })
+    console.log(AnnoncesId)
+    if(AnnoncesId!=[] || AnnoncesId!=undefined || AnnoncesId!=null){
+        for(let i in AnnoncesId){
+            Annonces.update({
+                isActive: false
+            }, {
+                where: {
+                    id: AnnoncesId[i].dataValues.AnnonceId
+                }
+            })
+        }
     }
+
 
 
 
