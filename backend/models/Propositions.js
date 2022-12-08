@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        Frequence: {
+        Frequency: {
             type: DataTypes.STRING,
             allowNull: false
         },

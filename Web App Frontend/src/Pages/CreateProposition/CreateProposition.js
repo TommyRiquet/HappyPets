@@ -30,7 +30,7 @@ function CreateProposition() {
             body: (
                 JSON.stringify({
                     Type: event['type'],
-                    Frequence: event['frequence'],
+                    Frequency: event['frequency'],
                     Animal: event['animal'],
                     Number: event['number'],
                     UserId: user.id
@@ -63,7 +63,7 @@ function CreateProposition() {
                     <Formik
                         initialValues={{
                             type: '',
-                            frequence: '',
+                            frequency: '',
                             animal: '',
                             number: '',
                         }}
@@ -72,7 +72,7 @@ function CreateProposition() {
                             type: Yup.string()
                                 .required('Champ obligatoire')
                                 .oneOf(['Promenade', 'Logement', 'Garde à domicile', 'Soins à domicile'], 'Type invalide'),
-                            frequence: Yup.string()
+                            frequency: Yup.string()
                                 .required('Champ obligatoire')
                                 .oneOf(['Occasionnelle', 'Régulière'], 'Fréquence invalide'),
                             animal: Yup.string()
@@ -115,19 +115,19 @@ function CreateProposition() {
                                     </Form.Group>
                                     <Form.Group as={Col}>
                                         <Form.Label>Fréquence de l'aide</Form.Label>
-                                        <Form.Select name="frequence"
-                                            data-testid="frequence"
-                                            value={values.frequence}
+                                        <Form.Select name="frequency"
+                                            data-testid="frequency"
+                                            value={values.frequency}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            isValid={!errors.frequence && touched.frequence}
-                                            isInvalid={touched.frequence && errors.frequence}>
+                                            isValid={!errors.frequency && touched.frequency}
+                                            isInvalid={touched.frequency && errors.frequency}>
                                             <option value="no-value">Sélectionner la fréquence</option>
                                             <option value="Occasionnelle">Occasionnelle</option>
                                             <option value="Régulière">Régulière</option>
                                         </Form.Select>
-                                        <Form.Control.Feedback frequence="invalid">
-                                            {errors.frequence}
+                                        <Form.Control.Feedback frequency="invalid">
+                                            {errors.frequency}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
