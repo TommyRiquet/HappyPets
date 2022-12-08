@@ -21,6 +21,7 @@ import Admin from '../Admin/Admin';
 import CreateProposition from '../CreateProposition/CreateProposition';
 import { DetailProposition } from '../DetailProposition/DetailProposition';
 import Notifications from '../Notifications/Notifications';
+import Policy from '../Policy/Policy';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                   <Route path="/propositions" element={<Propositions/>}/>
                   <Route path='/detailannonce/:id' element={<DetailAnnonce/>}/>
                   <Route path='/detailproposition/:id' element={<DetailProposition/>}/>
+                  <Route path='/policy' element={<Policy/>}/>
 
 
                   {/* Routes pour les utilisateurs connectés */}
