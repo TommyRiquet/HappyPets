@@ -1,6 +1,5 @@
 /*Importing Components */
 import {BrowserRouter, Routes, Route, Outlet, Navigate} from 'react-router-dom';
-import Footer from "../../Components/Footer/Footer";
 
 /*Importing Styles*/
 import './App.css';
@@ -67,7 +66,6 @@ function App() {
                   {/* Lorsqu'aucune route n'a été trouvé */}
                   <Route path="*" element={<Error/>}/>
               </Routes>
-              <Footer/>
           </BrowserRouter>
   );
 }
