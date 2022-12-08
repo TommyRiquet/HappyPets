@@ -3,3 +3,19 @@
     height:100%;
     margin-top: 20px;
 }
+
+.title2{
+    text-align: left !important;
+    font-weight: bolder !important;
+    margin-top: 3%;
+    margin-left: 0% !important;
+}
+
+.clarity{
+    text-align: left !important;
+    font-size: 1.2em !important;
+    margin-top: 3%;}
+
+.droit{
+    font-weight: 700 !important;
+}
