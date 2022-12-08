@@ -3,11 +3,17 @@ const app = express()
 const fileUpload = require('express-fileupload');
 const cors = require('cors')
 require("dotenv").config();
+const env = process.env.NODE_ENV || 'development';
 const PORT = process.env.PORT || 3001
+
+var corsOptions = {
+    origin: env==='production'?'https://tommyriquethappypets.netlify.app/':'http://localhost:3000',
+    optionsSuccessStatus: 200
+  }
 
 app.use(express.json())
 app.use(fileUpload({createParentPath: true}));
-app.use(cors())
+app.use(cors(corsOptions))
 
 const db = require('./models')
 
