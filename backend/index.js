@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'development';
 const PORT = process.env.PORT || 3001
 
 var corsOptions = {
-    origin: env==='production'?'https://tommyriquethappypets.netlify.app/':'http://localhost:3000',
+    origin: env==='production'?'https://tommyriquethappypets.netlify.app':'http://localhost:3000',
     optionsSuccessStatus: 200
   }
 
