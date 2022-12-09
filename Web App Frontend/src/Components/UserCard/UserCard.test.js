@@ -3,7 +3,7 @@ import UserCard from './UserCard';
 
 describe('Component rendering test <UserCard />', () => {
     it('Should render without crash', async () => {
-      const FakeUser = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
+      const FakeUser = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
 
 
       render(
@@ -16,7 +16,7 @@ describe('Testing component User props <Usercard />', () => {
 
     it('Should display everything correctly', async () =>{
 
-        const FakeUser = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre'}}
+        const FakeUser = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre'}}
 
         render(
             <UserCard proposition={FakeUser}/>
@@ -30,7 +30,7 @@ describe('Testing component User props <Usercard />', () => {
     })
 
     it('Should replace the FirstName with "Inconnu"', async () => {
-        const FakeUser = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "", City: 'Wavre'}}
+        const FakeUser = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "", City: 'Wavre'}}
         
         render(
               <UserCard proposition={FakeUser}/>
@@ -41,7 +41,7 @@ describe('Testing component User props <Usercard />', () => {
 
     it('should replace the place with ""', async () =>{
 
-        const FakeUser = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: ''}}
+        const FakeUser = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: ''}}
 
         render(
             <UserCard proposition={FakeUser}/>
@@ -54,7 +54,7 @@ describe('Testing component User props <Usercard />', () => {
 
 describe('Testing of Pets props', () => {
     it('Should display everything correctly', async () => {
-        const FakePet = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
+        const FakePet = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
 
         render(
             <UserCard proposition={FakePet}/>
@@ -64,7 +64,7 @@ describe('Testing of Pets props', () => {
     })
 
     it('Should display with nothing', async () => {
-        const FakePet = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", Age: 21, City: 'Wavre', Pets : [{Type : '' ,Name : ''}]}}
+        const FakePet = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", Age: 21, City: 'Wavre', Pets : [{Type : '' ,Name : ''}]}}
 
         render(
             <UserCard proposition={FakePet}/>
@@ -73,7 +73,7 @@ describe('Testing of Pets props', () => {
         expect(propsType.textContent).toBe('');
     })
     it('Should display with Type=""', async () => {
-        const FakePet = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", Age: 21, City: 'Wavre', Pets : [{Type : '' ,Name : 'Kiwi'}]}}
+        const FakePet = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", Age: 21, City: 'Wavre', Pets : [{Type : '' ,Name : 'Kiwi'}]}}
 
         render(
             <UserCard proposition={FakePet}/>
@@ -82,7 +82,7 @@ describe('Testing of Pets props', () => {
         expect(propsType.textContent).toBe(FakePet.User.Pets[0].Name);
     })
     it('Should display with Name=""', async () => {
-        const FakePet = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", Age: 21, City: 'Wavre', Pets : [{Type : 'Chien' ,Name : ''}]}}
+        const FakePet = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", Age: 21, City: 'Wavre', Pets : [{Type : 'Chien' ,Name : ''}]}}
 
         render(
             <UserCard proposition={FakePet}/>
@@ -95,16 +95,16 @@ describe('Testing of Pets props', () => {
 
 describe('Testing descriptin of proposition', () => {
     it('Should display everything correctly', async () => {
-        const FakeProposition = {Type : 'Promenade', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
+        const FakeProposition = {Type : 'Promenade', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
 
         render(
             <UserCard proposition={FakeProposition}/>
         )
         const propsProposition = screen.getByTestId("proposition-description")
-        expect(propsProposition.textContent).toBe(FakeProposition.Type + ' ' + FakeProposition.Frequence + ' de ' + FakeProposition.Animal)
+        expect(propsProposition.textContent).toBe(FakeProposition.Type + ' ' + FakeProposition.Frequency + ' de ' + FakeProposition.Animal)
     })
-    it('Should display with Type, Frequence and Animal =""', async () => {
-        const FakeProposition = {Type : '', Frequence : '', Animal : '', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
+    it('Should display with Type, Frequency and Animal =""', async () => {
+        const FakeProposition = {Type : '', Frequency : '', Animal : '', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
 
         render(
             <UserCard proposition={FakeProposition}/>
@@ -113,7 +113,7 @@ describe('Testing descriptin of proposition', () => {
         expect(propsProposition.textContent).toBe('')
     })
     it('Should display with Type=""', async () => {
-        const FakeProposition = {Type : '', Frequence : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
+        const FakeProposition = {Type : '', Frequency : 'Régulière', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
 
         render(
             <UserCard proposition={FakeProposition}/>
@@ -121,8 +121,8 @@ describe('Testing descriptin of proposition', () => {
         const propsProposition = screen.getByTestId("proposition-description")
         expect(propsProposition.textContent).toBe('')
     })
-    it('Should display with frequence and Animal=""', async () => {
-        const FakeProposition = {Type : 'Promenade', Frequence : '', Animal : '', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
+    it('Should display with frequency and Animal=""', async () => {
+        const FakeProposition = {Type : 'Promenade', Frequency : '', Animal : '', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
 
         render(
             <UserCard proposition={FakeProposition}/>
@@ -130,8 +130,8 @@ describe('Testing descriptin of proposition', () => {
         const propsProposition = screen.getByTestId("proposition-description")
         expect(propsProposition.textContent).toBe(FakeProposition.Type)
     })
-    it('Should display with Frequence=""', async () => {
-        const FakeProposition = {Type : 'Promenade', Frequence : '', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
+    it('Should display with Frequency=""', async () => {
+        const FakeProposition = {Type : 'Promenade', Frequency : '', Animal : 'Chien', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
 
         render(
             <UserCard proposition={FakeProposition}/>
@@ -140,13 +140,13 @@ describe('Testing descriptin of proposition', () => {
         expect(propsProposition.textContent).toBe(FakeProposition.Type + ' de ' + FakeProposition.Animal)
     })
     it('Should display with Animal=""', async () => {
-        const FakeProposition = {Type : 'Promenade', Frequence : 'Régulière', Animal : '', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
+        const FakeProposition = {Type : 'Promenade', Frequency : 'Régulière', Animal : '', User : {FirstName: "Kevin", City: 'Wavre', Pets : [{Type : 'Chien' ,Name : 'Kiwi'}]}}
 
         render(
             <UserCard proposition={FakeProposition}/>
         )
         const propsProposition = screen.getByTestId("proposition-description")
-        expect(propsProposition.textContent).toBe(FakeProposition.Type + ' ' + FakeProposition.Frequence)
+        expect(propsProposition.textContent).toBe(FakeProposition.Type + ' ' + FakeProposition.Frequency)
     })
     
 })
