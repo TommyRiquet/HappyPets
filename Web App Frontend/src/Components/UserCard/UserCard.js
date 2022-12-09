@@ -35,10 +35,10 @@ function UserCard(props){
                                 <span className='proposition-description' data-testid='proposition-description'>
                                 {(
                                     props.proposition.Type.length===0 ? "" : 
-                                    props.proposition.Frequence.length===0 && props.proposition.Animal.length===0 ? props.proposition.Type :
-                                    props.proposition.Frequence.length===0 ? props.proposition.Type + ' de ' + props.proposition.Animal : 
-                                    props.proposition.Animal.length===0 ? props.proposition.Type + ' ' + props.proposition.Frequence :                               
-                                    props.proposition.Type + ' ' + props.proposition.Frequence + ' de ' + props.proposition.Animal
+                                    props.proposition.Frequency.length===0 && props.proposition.Animal.length===0 ? props.proposition.Type :
+                                    props.proposition.Frequency.length===0 ? props.proposition.Type + ' de ' + props.proposition.Animal : 
+                                    props.proposition.Animal.length===0 ? props.proposition.Type + ' ' + props.proposition.Frequency :                               
+                                    props.proposition.Type + ' ' + props.proposition.Frequency + ' de ' + props.proposition.Animal
                                 )}
                                 </span>
                             </Row>
