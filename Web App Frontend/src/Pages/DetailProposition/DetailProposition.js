@@ -2,12 +2,19 @@
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 
 /*Importing Icons*/
-import { useNavigate } from "react-router-dom";
+import DogIcon from "../../Assets/dog-icon.png";
+import CatIcon from "../../Assets/cat-icon.png";
+import BabyIcon from "../../Assets/baby-icon.png";
+
+/*Importing Assets*/
+import AnimauxImages from "../../AnimalPictures.js";
+
 /*Importing Styles*/
 import "./DetailProposition.css";
 
@@ -26,13 +33,13 @@ function DetailProposition() {
 
   /*
    *   id : Récupération de l'id de la proposition depuis l'url
-   *   isModifiable : Si l'annonce est modifiable ou non (si le user possède l'annonce)
-   *   editionMode : Si l'annonce est en mode édition ou non
-   *   annonce : Annonce affichée
+   *   isModifiable : Si la proposition est modifiable ou non (si le user possède la proposition)
+   *   editionMode : Si la proposition est en mode édition ou non
+   *   proposition : Proposition affichée
    */
   let navigate = useNavigate();
   let { id } = useParams();
-  const [displayAnnonce, setDisplayProposition] = useState({});
+  const [displayPet, setDisplayPet] = useState({});
   const [isModifiable, setIsModifiable] = useState(false);
   const [editionMode, setEditionMode] = useState(false);
   const [proposition, setProposition] = useState({
@@ -46,6 +53,16 @@ function DetailProposition() {
         Age: 0,
         City: "",
         Postal: 0,
+        Pets: [
+          {
+            Name: "",
+            Type: "",
+            Race: "",
+            Age: "",
+            Sexe: "",
+            Weight: 0,
+            Height: "",
+      }]
       },
     ],
   });
@@ -57,17 +74,23 @@ function DetailProposition() {
   }, []);
 
   /*
-   * Affiche la proposition par défault dans displayProposition
+   * Prends tout les animaux du user qui a fait la proposition et le mets dans allPetsUser
+   * Mets ensuite le premier animal dans displayPet (l'animal qui va être affiché en premier)
    * Vérifie si la proposition est modifiable ou non
    */
   useEffect(() => {
-    setDisplayProposition(proposition);
-    let id = JSON.parse(localStorage.getItem("user")) === null ? 0 : JSON.parse(localStorage.getItem("user")).id;
+    setDisplayPet(proposition.User.Pets[0]);
 
+    let id = JSON.parse(localStorage.getItem("user")) === null ? 0 : JSON.parse(localStorage.getItem("user")).id;
     proposition.User.id === id
       ? setIsModifiable(true)
       : setIsModifiable(false);
+
+      console.log(proposition.User)
   }, [proposition]);
+
+
+
 
 
 
@@ -102,16 +125,15 @@ function DetailProposition() {
     // eslint-disable-next-line no-restricted-globals
     let beSure = confirm("Voulez-vous vraiment supprimer cette proposition ?");
     if (beSure) {
-        console.log()
-        fetch(config.API_URL + "/propositions/deleteProposition", {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(proposition)
-          })
-          navigate("/")
-      
+      fetch(config.API_URL + "/propositions/deleteProposition", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(proposition)
+      })
+      navigate("/")
+
     }
   }
 
@@ -169,12 +191,12 @@ function DetailProposition() {
           </Row>
           <Row>
             <Col>
-                <span className="city-container">{proposition.User.City},{proposition.User.Postal}</span>
+              <span className="city-container">{proposition.User.City},{proposition.User.Postal}</span>
             </Col>
           </Row>
           <Row>
             <Col>
-              <h5>                
+              <h5>
                 {editionMode ? (
                   <>
                     Type :{" "}
@@ -190,7 +212,7 @@ function DetailProposition() {
                 ) : (
                   <>Type : {proposition.Type}</>
                 )}
-                </h5>
+              </h5>
             </Col>
           </Row>
           <Row>
@@ -217,7 +239,7 @@ function DetailProposition() {
           <Row>
             <Col>
               <h5>
-              {editionMode ? (
+                {editionMode ? (
                   <>
                     Pour garder {" "}
                     <Form.Control
@@ -232,7 +254,7 @@ function DetailProposition() {
                 ) : (
                   <>Pour garder {proposition.Nombre}</>
                 )}
-                   
+
                 {editionMode ? (
                   <>
                     {" "}
@@ -251,11 +273,79 @@ function DetailProposition() {
               </h5>
             </Col>
           </Row>
-          </Container>
-          </Container>
-    </div>
+          <Row>
+            <Col>
+            <h5>Les animaux de la personne</h5>
+          </Col>
+          </Row>
+          <Row>
+              {proposition.User[0].Pets.map((pet, index) => {
+                return index <= 3 ? (
+                  <Col
+                    xs={6}
+                    sm={3}
+                    key={index}
+                    onClick={(e) => setDisplayPet(pet)}
+                    className="pet-image-container"
+                  >
+                    <img
+                      className={"pet-image"}
+                      src={AnimauxImages[pet.Type]}
+                      alt=""
+                    ></img>
+
+                  </Col>
+                ) : (
+                  <></>
+                );
+              })}
+            </Row>
+
+          <Row>
+            <Col className="pet-name">
+              {displayPet.Name + ", " + displayPet.Age}
+            </Col>
+          </Row>
+          <Row>
+            <Col>{displayPet.Race}</Col>
+          </Row>
+          <Row>
+            <Col sm={1}>
+              <img
+                src={DogIcon}
+                className={displayPet.DogFriendly ? "green-icon" : "red-icon"}
+                width="30"
+                height="30"
+                alt="Dog Icon"
+              ></img>
+            </Col>
+            <Col sm={1}>
+              <img
+                src={CatIcon}
+                className={displayPet.CatFriendly ? "green-icon" : "red-icon"}
+                width="30"
+                height="30"
+                alt="Cat Icon"
+              ></img>
+            </Col>
+            <Col sm={1}>
+              <img
+                src={BabyIcon}
+                className={displayPet.BabyFriendly ? "green-icon" : "red-icon"}
+                width="30"
+                height="30"
+                alt="Baby Icon"
+              ></img>
+            </Col>
+          </Row>
+          <Row>
+            <Col>{displayPet.Comment}</Col>
+          </Row>
+        </Container>
+      </Container>
+    </div >
   );
 }
 
 
-export { DetailProposition};
+export { DetailProposition };
