@@ -17,10 +17,15 @@ import emailPicture from '../../Assets/email.png';
 function NotificationCard(props){
     const [displayEmail, setDisplayEmail] = useState(false)
 
+
     useEffect(() => {
         setDisplayEmail(false)
     },[props.type])
 
+
+    useEffect(() => {
+        setDisplayEmail(false)
+    },[props.resetShowEmail])
 
     
     return (

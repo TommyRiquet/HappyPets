@@ -78,11 +78,11 @@ function Notifications() {
             <Container className="notifications-container">
               {activeTab === "annonces" ? (
                 <>
-                  <h3>Les personnes intérressés par mes annonces</h3>
+                  <h3>Les personnes intérressées par mes annonces</h3>
                 </>
               ) : (
                 <>
-                  <h3>Les personnes souhaitant m'aider</h3>
+                  <h3>Les personnes intérressées par mes propositions</h3>
                 </>
               )}
                 <Container className='notification-list'>
@@ -95,7 +95,7 @@ function Notifications() {
                                 displayList.map((notification, index) => {
                                     return (
                                         <Col key={index}>
-                                            <NotificationCard deleteSelf={setNotificationToDelete} 
+                                            <NotificationCard resetShowEmail={displayList} deleteSelf={setNotificationToDelete} 
                                             type={activeTab} index={index} notification={notification}/>
                                         </Col>
                                     )
