@@ -5,18 +5,18 @@ import './Register.css';
 import config from "../../config.json";
 
 /*Importing Components */
-import {Container, Button, Form, Row, Col, Modal} from 'react-bootstrap';
-import React, {useState, useEffect} from 'react';
-import {sub} from "date-fns/fp"
-import {useNavigate} from 'react-router';
-import {Formik} from 'formik';
+import { Container, Button, Form, Row, Col, Modal } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { sub } from "date-fns/fp"
+import { useNavigate } from 'react-router';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
 import { sha256 } from 'js-sha256';
 
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 import PrivacyPolicy from '../../Components/PrivacyPolicy/PrivacyPolicy';
-
+import ReCAPTCHA from "react-google-recaptcha";
 YupPassword(yup)
 
 
@@ -29,10 +29,26 @@ function Register() {
     const [showPrivacyPolicyModal, setShowPrivacyPolicyModal] = useState(false);
     const [event, setEvent] = useState({});
 
+    const [captchaResult, setCaptchaResult] = useState()
+    const recaptchaRef = React.createRef();
+
+    function capchaverif(value) {
+        fetch(config.API_URL + "/users/capcha", {
+            method: 'POST',
+            body: JSON.stringify({ 'captcha_value': value }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(data => {
+                if (data) {
+                    setCaptchaResult(true)
+                }
+
+            })
+    }
     const schema = yup.object().shape({
         LastName: yup.string().matches(/^[a-zA-Z]*$/, 'Symboles et chiffres interdits').required('Champ obligatoire'),
         FirstName: yup.string().matches(/^[a-zA-Z]*$/, 'Symboles et chiffres interdits').required('Champ obligatoire'),
-        Age: yup.date().max(sub({years: 18}, new Date()), "Il faut être âgé de 18 ans minimum").required('Champ obligatoire'),
+        Age: yup.date().max(sub({ years: 18 }, new Date()), "Il faut être âgé de 18 ans minimum").required('Champ obligatoire'),
         City: yup.string().matches(/^[a-zA-Z]*$/, 'Symboles et chiffres interdits').required('Champ obligatoire'),
         Postal: yup.number().min(1000, 'Code postal incorrect').test('len', 'Numero incorrect', (val) => {
             if (val) return val.toString().length === 4;
@@ -54,42 +70,44 @@ function Register() {
 
     useEffect(() => {
         emailVerif !== "" ?
-        fetch(config.API_URL+'/users/checkemail/'+emailVerif,{ 
-                    method: 'GET',
-                    headers: {'Content-type': 'application/json'},
-        })
-        .then(val => val.json())
-        .then(res =>{
-            setResemail(res);
-            }
-        )
-        : 
-        setResemail('');
-        }, [emailVerif]);
-        
-    function uploadImage(file,id){
+            fetch(config.API_URL + '/users/checkemail/' + emailVerif, {
+                method: 'GET',
+                headers: { 'Content-type': 'application/json' },
+            })
+                .then(val => val.json())
+                .then(res => {
+                    setResemail(res);
+                }
+                )
+            :
+            setResemail('');
+    }, [emailVerif]);
+
+    function uploadImage(file, id) {
         const formData = new FormData();
         const request = new XMLHttpRequest();
-        
-        request.open("POST",config.API_URL+'/users/image/upload')
+
+        request.open("POST", config.API_URL + '/users/image/upload')
         formData.append('profilePicture', file);
         formData.append('userid', id);
         request.send(formData)
 
     }
 
-    function handleSendForm(event){
+    function handleSendForm(event) {
         setShowPrivacyPolicyModal(true);
         setEvent(event);
     }
 
-    async function SendFormUSer(data){
-        const hash =  sha256(data['Password']+"J'aime bien Tommy")
-            fetch(config.API_URL+'/users',{ 
+    async function SendFormUSer(data) {
+        recaptchaRef.current.reset();
+        if (captchaResult) {
+            const hash = sha256(data['Password'] + "J'aime bien Tommy")
+            fetch(config.API_URL + '/users', {
                 method: 'POST',
-                headers: {'Content-type': 'application/json'},
+                headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({
-                    LastName: data['LastName'], 
+                    LastName: data['LastName'],
                     FirstName: data['FirstName'],
                     Age: data['Age'],
                     City: data['City'],
@@ -101,30 +119,31 @@ function Register() {
                     PhotoLink: null,
                     ConsentPolicy: data['Terms']
                 })
-                
-        }).then(val => val.json())
-            .then(res => {
-                const file = document.getElementById('profilePicture').files[0];
-                if (file) {
-                    uploadImage(file, res);
-                }
-                navigate('/login');
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+
+            }).then(val => val.json())
+                .then(res => {
+                    const file = document.getElementById('profilePicture').files[0];
+                    if (file) {
+                        uploadImage(file, res);
+                    }
+                    navigate('/login');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
 
     }
 
     return (
         <div className="UserForm">
-            <CustomNavbar color="rgba(47, 72, 88, 1)"/>
+            <CustomNavbar color="rgba(47, 72, 88, 1)" />
             <Container>
                 <h2>Page d'inscription</h2>
                 <div>
                     <Formik
                         validationSchema={schema}
-                        onSubmit={e=>handleSendForm(e)}
+                        onSubmit={e => handleSendForm(e)}
                         initialValues={{
                             LastName: '',
                             FirstName: '',
@@ -139,31 +158,31 @@ function Register() {
                         }}
                     >
                         {({
-                              handleSubmit,
-                              handleChange,
-                              handleBlur,
-                              touched,
-                              values,
-                              errors,
-                          }) => (
+                            handleSubmit,
+                            handleChange,
+                            handleBlur,
+                            touched,
+                            values,
+                            errors,
+                        }) => (
                             <Form noValidate id="User" onSubmit={handleSubmit} encType="multipart/form-data">
                                 <Form.Group as={Row} className="mb-3">
                                     <Col sm="6">
                                         <Form.Label>Nom:</Form.Label>
                                         <Form.Control type={'text'} name={"LastName"} data-testid="testNom"
-                                                      placeholder={'Ex: Jean'} value={values.LastName}
-                                                      onChange={handleChange} onBlur={handleBlur}
-                                                      isValid={!errors.LastName && touched.LastName}
-                                                      isInvalid={errors.LastName && touched.LastName} required/>
+                                            placeholder={'Ex: Jean'} value={values.LastName}
+                                            onChange={handleChange} onBlur={handleBlur}
+                                            isValid={!errors.LastName && touched.LastName}
+                                            isInvalid={errors.LastName && touched.LastName} required />
                                         <Form.Control.Feedback type="invalid">{errors.LastName}</Form.Control.Feedback>
                                     </Col>
                                     <Col sm="6">
                                         <Form.Label>Prénom:</Form.Label>
                                         <Form.Control type={'text'} name={"FirstName"} placeholder={'Ex: Dupuis'}
-                                                      value={values.FirstName} onChange={handleChange}
-                                                      onBlur={handleBlur}
-                                                      isValid={!errors.FirstName && touched.FirstName}
-                                                      isInvalid={errors.FirstName && touched.FirstName} required/>
+                                            value={values.FirstName} onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={!errors.FirstName && touched.FirstName}
+                                            isInvalid={errors.FirstName && touched.FirstName} required />
                                         <Form.Control.Feedback type="invalid">{errors.FirstName}</Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
@@ -171,18 +190,18 @@ function Register() {
                                     <Col sm="8">
                                         <Form.Label>Ville:</Form.Label>
                                         <Form.Control type={'text'} name={"City"} placeholder={'Ex: Wavre'}
-                                                      value={values.City} onChange={handleChange} onBlur={handleBlur}
-                                                      isValid={!errors.City && touched.City}
-                                                      isInvalid={errors.City && touched.City} required/>
+                                            value={values.City} onChange={handleChange} onBlur={handleBlur}
+                                            isValid={!errors.City && touched.City}
+                                            isInvalid={errors.City && touched.City} required />
                                         <Form.Control.Feedback type="invalid">{errors.City}</Form.Control.Feedback>
                                     </Col>
                                     <Col sm="4">
                                         <Form.Label>Code Postal:</Form.Label>
                                         <Form.Control type={'number'} name={"Postal"} data-testid="testPostal"
-                                                      placeholder={'Ex: 1300'} value={values.Postal}
-                                                      onChange={handleChange} onBlur={handleBlur}
-                                                      isValid={!errors.Postal && touched.Postal}
-                                                      isInvalid={errors.Postal && touched.Postal} required/>
+                                            placeholder={'Ex: 1300'} value={values.Postal}
+                                            onChange={handleChange} onBlur={handleBlur}
+                                            isValid={!errors.Postal && touched.Postal}
+                                            isInvalid={errors.Postal && touched.Postal} required />
                                         <Form.Control.Feedback type="invalid">{errors.Postal}</Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
@@ -190,10 +209,10 @@ function Register() {
                                     <Col sm="12">
                                         <Form.Label>Adresse Mail:</Form.Label>
                                         <Form.Control type={'email'} name={"Email"}
-                                                      placeholder={'Ex: J.dupuis@hotmail.fr'} value={values.Email}
-                                                      onChange={handleChange} onBlur={handleBlur}
-                                                      isValid={!errors.Email && touched.Email}
-                                                      isInvalid={errors.Email && touched.Email} required/>
+                                            placeholder={'Ex: J.dupuis@hotmail.fr'} value={values.Email}
+                                            onChange={handleChange} onBlur={handleBlur}
+                                            isValid={!errors.Email && touched.Email}
+                                            isInvalid={errors.Email && touched.Email} required />
                                         <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
@@ -201,16 +220,16 @@ function Register() {
                                     <Col sm="7">
                                         <Form.Label>Numéro de téléphone:</Form.Label>
                                         <Form.Control type={'number'} name={"Phone"} placeholder={'Ex: 04********'}
-                                                      value={values.Phone} onChange={handleChange} onBlur={handleBlur}
-                                                      isValid={!errors.Phone && touched.Phone}
-                                                      isInvalid={errors.Phone && touched.Phone} required/>
+                                            value={values.Phone} onChange={handleChange} onBlur={handleBlur}
+                                            isValid={!errors.Phone && touched.Phone}
+                                            isInvalid={errors.Phone && touched.Phone} required />
                                         <Form.Control.Feedback type="invalid">{errors.Phone}</Form.Control.Feedback>
                                     </Col>
                                     <Col sm="5">
                                         <Form.Label>Date de naissance:</Form.Label>
                                         <Form.Control type={'date'} name={"Age"} onChange={handleChange}
-                                                      onBlur={handleBlur} isValid={!errors.Age && touched.Age}
-                                                      isInvalid={errors.Age && touched.Age}/>
+                                            onBlur={handleBlur} isValid={!errors.Age && touched.Age}
+                                            isInvalid={errors.Age && touched.Age} />
                                         <Form.Control.Feedback type="invalid">{errors.Age}</Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
@@ -218,9 +237,9 @@ function Register() {
                                     <Col sm="12">
                                         <Form.Label>Mot de passe:</Form.Label>
                                         <Form.Control type={'password'} name={"Password"} placeholder={'Mot de passe'}
-                                                      value={values.Password} onChange={handleChange}
-                                                      onBlur={handleBlur} isValid={!errors.Password && touched.Password}
-                                                      isInvalid={errors.Password && touched.Password} required/>
+                                            value={values.Password} onChange={handleChange}
+                                            onBlur={handleBlur} isValid={!errors.Password && touched.Password}
+                                            isInvalid={errors.Password && touched.Password} required />
                                         <Form.Control.Feedback type="invalid">{errors.Password}</Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
@@ -228,29 +247,35 @@ function Register() {
                                     <Col sm="12">
                                         <Form.Label>Confirmer le mot de passe:</Form.Label>
                                         <Form.Control type={'password'} name={"Password2"}
-                                                      placeholder={'Confirmation Mot de passe'} value={values.Password2}
-                                                      onChange={handleChange} onBlur={handleBlur}
-                                                      isValid={!errors.Password2 && touched.Password2}
-                                                      isInvalid={errors.Password2 && touched.Password2} required/>
+                                            placeholder={'Confirmation Mot de passe'} value={values.Password2}
+                                            onChange={handleChange} onBlur={handleBlur}
+                                            isValid={!errors.Password2 && touched.Password2}
+                                            isInvalid={errors.Password2 && touched.Password2} required />
                                         <Form.Control.Feedback type="invalid">{errors.Password2}</Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mb-4">
                                     <Col sm="12">
                                         <Form.Label>Photo de Profil:</Form.Label>
-                                        <Form.Control type="file" name="profilePicture" id="profilePicture"/>
+                                        <Form.Control type="file" name="profilePicture" id="profilePicture" />
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mb-3">
                                     <Col sm="12">
                                         <Form.Check type={'switch'} name={'Terms'}
-                                                    label={"J'accepte les conditions d'utilisation."}
-                                                    onChange={handleChange} onBlur={handleBlur}
-                                                    isValid={!errors.Terms && touched.Terms}
-                                                    isInvalid={errors.Terms && touched.Terms} feedback={errors.Terms}
-                                                    feedbackType="invalid" required/>
+                                            label={"J'accepte les conditions d'utilisation."}
+                                            onChange={handleChange} onBlur={handleBlur}
+                                            isValid={!errors.Terms && touched.Terms}
+                                            isInvalid={errors.Terms && touched.Terms} feedback={errors.Terms}
+                                            feedbackType="invalid" required />
                                     </Col>
                                 </Form.Group>
+                                <Row>
+                                    <Col>
+                                        <ReCAPTCHA sitekey={"6LcJY20jAAAAAKaQm8F7OUTWEewO6kuQDWRmaINV"} ref={recaptchaRef}
+                                            onChange={capchaverif} className='captcha' />
+                                    </Col>
+                                </Row>
                                 <Form.Group className="mb-3">
                                     <Button className='UserDB' type='file'>Accepter</Button>
                                 </Form.Group>
@@ -273,14 +298,14 @@ function Register() {
 
 
 function PrivacyPolicyModal(props) {
-    const [ hasRead, setHasRead ] = useState(false);
-    const [checkValue,setCheckValue] = useState(false);
+    const [hasRead, setHasRead] = useState(false);
+    const [checkValue, setCheckValue] = useState(false);
     const { show, onHide, submitForm, event } = props;
 
     function handleScroll(e) {
         const { scrollTop, scrollHeight, clientHeight } = e.target;
 
-        if (scrollTop + clientHeight+1 >= scrollHeight) {
+        if (scrollTop + clientHeight + 1 >= scrollHeight) {
             setHasRead(true)
         }
     }
@@ -300,42 +325,42 @@ function PrivacyPolicyModal(props) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [show]);
-    
-    return (
-      <Modal
-        show={show}
-        onHide={onHide}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Privacy Policy
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <Container className='privacy-policy-container' id='scrollable-container'>
-                <PrivacyPolicy/>
-            </Container>
-        </Modal.Body>
-        <Modal.Footer className='custom-modal-footer'>
-            <Container fluid>
-                <Row>
-                    <Col className='PP-Checkbox-container'>
-                        <Form.Label>J'ai lu et j'accepte la Privacy Policy</Form.Label>
-                        <Form.Check value={checkValue} defaultChecked={checkValue} className='p-2' onChange={e=>setCheckValue(!checkValue)}></Form.Check>
-                    </Col>
-                    <Col className='center'>            
-                        <Button className="edit-button" disabled={!(hasRead && checkValue)} onClick={handleClick}>
-                            Envoyer
-                        </Button>
-                    </Col>
-                </Row>
-            </Container>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
 
-export {Register};
+    return (
+        <Modal
+            show={show}
+            onHide={onHide}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Privacy Policy
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Container className='privacy-policy-container' id='scrollable-container'>
+                    <PrivacyPolicy />
+                </Container>
+            </Modal.Body>
+            <Modal.Footer className='custom-modal-footer'>
+                <Container fluid>
+                    <Row>
+                        <Col className='PP-Checkbox-container'>
+                            <Form.Label>J'ai lu et j'accepte la Privacy Policy</Form.Label>
+                            <Form.Check value={checkValue} defaultChecked={checkValue} className='p-2' onChange={e => setCheckValue(!checkValue)}></Form.Check>
+                        </Col>
+                        <Col className='center'>
+                            <Button className="edit-button" disabled={!(hasRead && checkValue)} onClick={handleClick}>
+                                Envoyer
+                            </Button>
+                        </Col>
+                    </Row>
+                </Container>
+            </Modal.Footer>
+        </Modal>
+    );
+}
+
+export { Register };
