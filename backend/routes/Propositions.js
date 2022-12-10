@@ -45,7 +45,7 @@ router.get("/detailProposition", async (req, res) => {
                 attributes: ['id', 'Firstname', 'Age', 'City', 'Postal'],
                 include: [{
                     model: Pets,
-                    attributes: ['Type', 'Name', 'Race', 'Age','Sex','Weight', 'Height', 'Behaviour', 'Comment', 'DogFriendly','CatFriendly', 'KidFriendly'],
+                    attributes: ['Type', 'Name', 'Age', 'Race', 'DogFriendly','CatFriendly', 'KidFriendly', 'Comment'],
                     where:{isActive:true}
                 }],
             }]

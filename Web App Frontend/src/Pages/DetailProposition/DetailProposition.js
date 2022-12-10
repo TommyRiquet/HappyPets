@@ -44,49 +44,46 @@ function DetailProposition() {
   const [editionMode, setEditionMode] = useState(false);
   const [proposition, setProposition] = useState({
     Type: "",
-    Frequence: "",
+    Frequency: "",
     Animal: "",
-    Nombre: 0,
-    User: [
-      {
-        Firstname: "",
-        Age: 0,
-        City: "",
-        Postal: 0,
-        Pets: [
-          {
-            Name: "",
-            Type: "",
-            Race: "",
-            Age: "",
-            Sexe: "",
-            Weight: 0,
-            Height: "",
-      }]
-      },
-    ],
+    Number: 0,
+    User: {
+      Firstname: "",
+      Age: "",
+      City: "",
+      Postal: 0,
+      Pets: [
+        {
+          Type: "",
+          Name: "",
+          Age: "",
+          Race: "",
+          DogFriendly: true,
+          CatFriendly: true,
+          KidFriendly: true,
+          Comment: ""
+        }
+      ]
+    }
   });
 
-  /*Appelle la fonction getDetailProposition au début du composant*/
+  /*Appelle la fonction getDetailAnnonce au début du composant*/
   useEffect(() => {
     getDetailProposition();
     // eslint-disable-next-line
   }, []);
 
   /*
-   * Prends tout les animaux du user qui a fait la proposition et le mets dans allPetsUser
-   * Mets ensuite le premier animal dans displayPet (l'animal qui va être affiché en premier)
-   * Vérifie si la proposition est modifiable ou non
+   * Affiche l'animal par défault dans displayPet
+   * Vérifie si l'annonce est modifiable ou non
    */
   useEffect(() => {
     setDisplayPet(proposition.User.Pets[0]);
-
     let id = JSON.parse(localStorage.getItem("user")) === null ? 0 : JSON.parse(localStorage.getItem("user")).id;
+
     proposition.User.id === id
       ? setIsModifiable(true)
       : setIsModifiable(false);
-
-      console.log(proposition.User)
   }, [proposition]);
 
 
@@ -101,7 +98,14 @@ function DetailProposition() {
     fetch(config.API_URL + "/propositions/detailProposition?id=" + id)
       .then((response) => response.json())
       .then((data) => {
-        setProposition(data);
+        if (data === null) {
+          //si l'annonce est inactive
+          navigate('/');
+        }
+        else {
+          setProposition(data);
+        }
+
       });
   }
 
@@ -109,16 +113,42 @@ function DetailProposition() {
     /*
      *   Envoie les modifications de la proposition
      */
-    fetch(config.API_URL + "/propositions/updateProposition", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(proposition)
-    })
+    
+    //test si tout les champs sont du bon type
+    proposition.Number=Number(proposition.Number);
+    if(typeof(proposition.Type)==="string" && typeof(proposition.Frequency)==="string" && typeof(proposition.Animal)==="string" && typeof(proposition.Number)==="number"){
+      //test si le nombre est bien entre 0 et 10
+      if(proposition.Number>0 && proposition.Number<=10){
+        //test si les valeurs sont bien celles proposées
+        if(["Promenade", "Logement", "Garde à domicile", "Soins à domicile"].includes(proposition.Type) && ["Occasionnelle", "Régulière"].includes(proposition.Frequency) && ["Chien", "Chat", "Rongeur", "Oiseau", "Poisson", "NAC"].includes(proposition.Animal)){
+            fetch(config.API_URL + "/propositions/updateProposition", {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(proposition)
+            })
+        }
+        else{
+          alert("Mauvaise données envoyées");
+          window.location.reload(false);
+        }
+
+      }
+      else{
+        alert("Vous ne pouvez garder maximum 10 animaux");
+        window.location.reload(false);
+      }
+
+    }
+    else{
+      alert("Problèmes avec les données entrées");
+      window.location.reload(false);
+    }
+
   }
 
-  function deleteProposition(index) {
+  function deleteProposition() {
     /*
      *   Supprime une proposition
      */
@@ -200,14 +230,18 @@ function DetailProposition() {
                 {editionMode ? (
                   <>
                     Type :{" "}
-                    <Form.Control
-                      as="textarea"
-                      type="text"
+                    <Form.Select name="type"
+                      data-testid="type"
                       value={proposition.Type}
                       onChange={(e) =>
                         setProposition({ ...proposition, Type: e.target.value })
-                      }
-                    />
+                      }>
+                      <option value="Promenade">Promenade</option>
+                      <option value="Logement">Logement</option>
+                      <option value="Garde à domicile">Garde à domicile</option>
+                      <option value="Soins à domicile">Soins à domicile</option>
+                    </Form.Select>
+
                   </>
                 ) : (
                   <>Type : {proposition.Type}</>
@@ -221,17 +255,18 @@ function DetailProposition() {
                 {editionMode ? (
                   <>
                     Fréquence :{" "}
-                    <Form.Control
-                      as="textarea"
-                      type="text"
-                      value={proposition.Frequence}
+                    <Form.Select name="frequency"
+                      data-testid="frequency"
+                      value={proposition.Frequency}
                       onChange={(e) =>
-                        setProposition({ ...proposition, Frequence: e.target.value })
-                      }
-                    />
+                        setProposition({ ...proposition, Frequency: e.target.value })
+                      }>
+                      <option value="Occasionnelle">Occasionnelle</option>
+                      <option value="Régulière">Régulière</option>
+                    </Form.Select>
                   </>
                 ) : (
-                  <>Fréquence : {proposition.Frequence}</>
+                  <>Fréquence : {proposition.Frequency}</>
                 )}
               </h5>
             </Col>
@@ -243,29 +278,38 @@ function DetailProposition() {
                   <>
                     Pour garder {" "}
                     <Form.Control
-                      as="textarea"
                       type="number"
-                      value={proposition.Nombre}
+                      name="number"
+                      data-testid="number"
+                      max="10"
+                      min="1"
+                      value={proposition.Number}
                       onChange={(e) =>
-                        setProposition({ ...proposition, Nombre: e.target.value })
+                        setProposition({ ...proposition, Number: e.target.value })
                       }
                     />
                   </>
                 ) : (
-                  <>Pour garder {proposition.Nombre}</>
+                  <>Pour garder {proposition.Number}</>
                 )}
 
                 {editionMode ? (
                   <>
                     {" "}
-                    <Form.Control
-                      as="textarea"
-                      type="text"
+                    <Form.Select name="animal"
+                      data-testid="animal"
                       value={proposition.Animal}
                       onChange={(e) =>
                         setProposition({ ...proposition, Animal: e.target.value })
                       }
-                    />
+                    >
+                      <option value="Chien">Chien</option>
+                      <option value="Chat">Chat</option>
+                      <option value="Rongeur">Rongeur</option>
+                      <option value="Oiseau">Oiseau</option>
+                      <option value="Poisson">Poisson</option>
+                      <option value="NAC">NAC</option>
+                    </Form.Select>
                   </>
                 ) : (
                   <> {proposition.Animal.toLowerCase()}(s)</>
@@ -275,11 +319,12 @@ function DetailProposition() {
           </Row>
           <Row>
             <Col>
-            <h5>Les animaux de la personne</h5>
-          </Col>
+              <h3 className="person-animal">Les animaux de la personne</h3>
+            </Col>
           </Row>
           <Row>
-              {proposition.User[0].Pets.map((pet, index) => {
+            {
+              proposition.User.Pets.map((pet, index) => {
                 return index <= 3 ? (
                   <Col
                     xs={6}
@@ -299,7 +344,7 @@ function DetailProposition() {
                   <></>
                 );
               })}
-            </Row>
+          </Row>
 
           <Row>
             <Col className="pet-name">
