@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import UserCard from "../../Components/UserCard/UserCard";
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
+import { useNavigate } from 'react-router-dom';
 
 /* Importing style */
 import './Propositions.css';
@@ -12,6 +13,7 @@ import config from "../../config.json";
 
 
 function Propositions() {
+    let navigate = useNavigate();
     const [ListPropositions, setListPropositions] = useState([])
     let offset = 0
     const limit = 10
@@ -88,7 +90,7 @@ function Propositions() {
                             {
                                 ListPropositions.map((proposition, index) => {
                                     return (
-                                        <Col key={index} onClick={e => console.log(proposition.Type)}>
+                                        <Col key={index} onClick={() => navigate('/detailproposition/' + proposition.id)}>
                                             <UserCard proposition={proposition} />
                                         </Col>
                                     )
