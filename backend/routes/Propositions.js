@@ -18,9 +18,10 @@ router.get("/", async (req, res) => {
         where: {
             Type: { [Op.or]: [typeProposition] },
             Frequency: { [Op.or]: [frequenceProposition] },
-            Animal: { [Op.or]: [animalProposition] }
+            Animal: { [Op.or]: [animalProposition] },
+            isActive:true
         },
-        attributes: ['Type', 'Frequency', 'Animal'],
+        attributes: ['id','Type', 'Frequency', 'Animal'],
         include: [{
             model: Users,
             attributes: ['FirstName', 'City', 'PhotoLink'],

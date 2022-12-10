@@ -325,7 +325,7 @@ function DetailProposition() {
           <Row>
             {
               proposition.User.Pets.map((pet, index) => {
-                return index <= 3 ? (
+                return (
                   <Col
                     xs={6}
                     sm={3}
@@ -340,8 +340,6 @@ function DetailProposition() {
                     ></img>
 
                   </Col>
-                ) : (
-                  <></>
                 );
               })}
           </Row>
