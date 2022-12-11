@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 import ReCAPTCHA from "react-google-recaptcha";
 import React, { useState } from 'react';
-
+import Footer from '../../Components/Footer/Footer'
 
 /*Importing Styles*/
 import './Login.css';
@@ -109,7 +109,7 @@ function Login() {
                     </Col>
                 </Row>
             </Container>
-
+            <Footer/>
         </div>
     );
 }

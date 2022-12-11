@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import {useNavigate} from 'react-router';
-
+import Footer from '../../Components/Footer/Footer';
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 
 
@@ -396,7 +396,7 @@ function Account() {
                     </Col>
                 </Row>
             </Container>
-
+            <Footer/>
         </div>
     );
 }

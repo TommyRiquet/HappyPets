@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import UserCard from "../../Components/UserCard/UserCard";
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../Components/Footer/Footer';
 
 /* Importing style */
 import './Propositions.css';
@@ -99,6 +100,7 @@ function Propositions() {
                         </Row>
                 }
             </Container>
+            <Footer/>
         </div>
     )
 }

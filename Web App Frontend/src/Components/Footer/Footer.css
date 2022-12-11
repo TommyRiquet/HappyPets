@@ -1,7 +1,17 @@
 .footer {
 	height: 75px;
-    position:absolute;
+    position: fixed !important;
     bottom: 0;
-    left: 0;
+    top: auto !important;
     background-color: rgba(47, 72, 88, 1);
 }
+
+.invisible{
+   visibility: hidden;
+   height: 75px;
+}
+
+.visible{
+    visibility: visible;
+    height: 75px;
+ }

@@ -2,8 +2,13 @@
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { useNavigate } from 'react-router';
 
+=======
+import {useNavigate} from 'react-router';
+import Footer from '../../Components/Footer/Footer';
+>>>>>>> 682a662 (Affichage du footer)
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import AddPetModal from "../../Components/AddPetModal/AddPetModal";
@@ -415,7 +420,6 @@ function DetailAnnonce() {
         annonce={annonce}
         editannonce={setAnnonce}
       ></AddPetModal>
-
       {isModifiable===false && JSON.parse(localStorage.getItem("user")) !== null ? (
         <AddSignalement
           show={showAddSignalAnnonce}
@@ -427,7 +431,7 @@ function DetailAnnonce() {
       ) :
         null
       }
-
+      <Footer/>
     </div>
   );
 }

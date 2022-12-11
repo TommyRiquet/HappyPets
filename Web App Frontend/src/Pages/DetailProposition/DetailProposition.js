@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import AddSignalement from "../../Components/AddSignalement/AddSignalement";
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
+import Footer from '../../Components/Footer/Footer';
 
 /*Importing Icons*/
 import DogIcon from "../../Assets/dog-icon.png";
@@ -401,7 +402,6 @@ function DetailProposition() {
           </Row>
         </Container>
       </Container>
-
       {isModifiable === false && JSON.parse(localStorage.getItem("user")) !== null ? (
         <AddSignalement
           show={showAddSignalAnnonce}
@@ -413,7 +413,7 @@ function DetailProposition() {
       ) :
         null
       }
-
+      <Footer/>
     </div >
   );
 }
