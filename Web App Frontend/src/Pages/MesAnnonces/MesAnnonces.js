@@ -4,6 +4,8 @@ import {Container, Row, Col, } from 'react-bootstrap';
 import AnimalCard from '../../Components/AnimalCard/AnimalCard';
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 import {useNavigate} from 'react-router-dom';
+import Footer from '../../Components/Footer/Footer'
+
 
 /*Importing Styles*/
 import './MesAnnonces.css';
@@ -93,7 +95,7 @@ function Annonces(){
                 }
                     
             </Container>
-
+<Footer/>
         </div>
     );
 }

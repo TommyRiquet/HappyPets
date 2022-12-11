@@ -95,9 +95,10 @@ function Home() {
 
                             </Col>
                         </Row>
+                        <Footer/>
                     </Container>
                 </div>
-                <Footer/>
+                
             </div>
         </div>
     );

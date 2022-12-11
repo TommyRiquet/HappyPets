@@ -1,6 +1,7 @@
 /*Importing Components*/
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import { Button, Container } from "react-bootstrap";
+import Footer from '../../Components/Footer/Footer';
 
 /*Importing Images*/
 import sadDog from "../../Assets/sad-dog.png";
@@ -32,6 +33,7 @@ function Error() {
       <div className="image-container">
         <img src={sadDog} className="dog-picture" alt="Chien Triste" />
       </div>
+      <Footer/>
     </div>
   );
 }

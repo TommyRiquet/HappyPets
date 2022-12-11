@@ -13,6 +13,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
 import { sha256 } from 'js-sha256';
+import Footer from '../../Components/Footer/Footer';
 
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 import PrivacyPolicy from '../../Components/PrivacyPolicy/PrivacyPolicy';
@@ -290,6 +291,7 @@ function Register() {
                 submitForm={SendFormUSer}
                 event={event}
             />
+            <Footer/>
         </div>
     );
 }

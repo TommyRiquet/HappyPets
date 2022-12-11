@@ -4,6 +4,7 @@ import { Container, Button, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import Footer from '../../Components/Footer/Footer';
 
 
 /*Importing Components */
@@ -510,6 +511,7 @@ function CreatePet() {
                     </Formik>
                 </div>
             </Container>
+            <Footer/>
         </div>
     )
 }
