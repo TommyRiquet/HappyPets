@@ -65,7 +65,7 @@ function AddPetModal(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button className="edit-button" onClick={props.onHide}>
-            Close
+            Fermer
           </Button>
         </Modal.Footer>
       </Modal>
