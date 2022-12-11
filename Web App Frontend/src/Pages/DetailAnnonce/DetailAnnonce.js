@@ -1,11 +1,12 @@
 /*Importing Components*/
-import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {useNavigate} from 'react-router';
 
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
+import AddPetModal from "../../Components/AddPetModal/AddPetModal";
 
 /*Importing Icons*/
 import DogIcon from "../../Assets/dog-icon.png";
@@ -183,7 +184,6 @@ function DetailAnnonce() {
         textLinkFour="Se connecter"
         linkFour="/login"
         color="rgba(47, 72, 88, 1)"
-        position="absolute"
       />
       <Container fluid className="top-container">
         <Row>
@@ -396,69 +396,4 @@ function DetailAnnonce() {
   );
 }
 
-function AddPetModal(props) {
-  function addPetToAnnonce(id) {
-    /*
-     *   Ajoute l'animal correspondant à l'id reçu à l'annonce
-     *  @id : id de l'animal à ajouter 
-     */
-    if (props.annonce.Pets.length < 4) {
-      let newAnnonce = props.annonce;
-      newAnnonce.Pets.push(props.pets.filter((pet) => pet.id === id)[0]);
-      props.editannonce(newAnnonce);
-      props.onHide();
-    }
-  }
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Ajouter un animal
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Vos Animaux :</h4>
-        <Row xs={1} md={2} data-testid="list-pets">
-          {props.pets.length === 0 ? ( // Si l'utilisateur n'a pas d'animaux en plus de ceux dans l'annonce
-            <Col>
-              <h5>Aucun animal :/</h5>
-            </Col>
-          ) : (
-            /*
-            *  Affiche les animaux de l'utilisateur en enlevant ceux déjà dans l'annonce
-            */
-            Object.values(props.pets).filter((pet) => !Object.values(props.annonce.Pets).map((pet) => pet.id).includes(pet.id))
-              .map((pet, index) => {
-                return (
-                  <Col
-                    key={index}
-                    className="pet-image-modal-col"
-                    onClick={(e) => addPetToAnnonce(pet.id)}
-                  >
-                    <img
-                      src={AnimauxImages[pet.Type]}
-                      alt=""
-                      className="pet-image-modal"
-                    ></img>
-                    <span>{pet.Name}</span>
-                  </Col>
-                );
-              })
-          )}
-        </Row>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button className="edit-button" onClick={props.onHide}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
-export { DetailAnnonce, AddPetModal };
+export { DetailAnnonce };
