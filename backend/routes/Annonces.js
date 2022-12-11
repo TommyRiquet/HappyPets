@@ -108,18 +108,21 @@ router.get("/deleteAnnonce", async (req, res) => {
     }
   });
 
-router.post("/",async (req, res) => {
+router.post("/",async (req, res) => {    
     Annonces.create({
         Type: req.body.Type,
         Comment: req.body.Comment,
         DateBegin: req.body.DateBegin,
         DateEnd: req.body.DateEnd,
     }).then(annonce => {
-        PetsAnnonces.create({
-            PetId: req.body.PetId,
-            AnnonceId: annonce.dataValues.id
-        })
+        for(let i=0; i<req.body.PetId.length;i++){
+            PetsAnnonces.create({
+                PetId: req.body.PetId[i].id,
+                AnnonceId: annonce.dataValues.id
+            })
+        }
     })
+    
 
     res.json(200)
 });
