@@ -1,7 +1,7 @@
 import './CustomNavbar.css';
 import { Navbar, Container, NavDropdown } from "react-bootstrap";
 import Nav from 'react-bootstrap/Nav';
-import logo from '../../Assets/logo1.png'; 
+import logo from '../../Assets/logo_index.png'; 
 import { useEffect } from 'react';
 
 /*Importing Images*/
@@ -31,7 +31,7 @@ function CustomNavbar(props) {
           <img
               src={logo}
               width="40"
-              height="40"
+              height="30"
               className="d-inline-block align-top"
               alt="Logo de HappyPets"
             />
