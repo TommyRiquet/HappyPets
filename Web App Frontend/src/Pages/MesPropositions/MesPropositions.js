@@ -58,7 +58,7 @@ function Propositions() {
         <div className="propositions">
             <CustomNavbar
                 textLinkOne="Je propose mon aide"
-                linkOne="/ Propositions"
+                linkOne="/propositions"
                 textLinkTwo="J'ai besoin d'aide"
                 linkTwo="/annonces"
                 textLinkThree="S'inscrire"
@@ -80,7 +80,7 @@ function Propositions() {
                             {
                                 ListPropositions.map((proposition, index) => {
                                     return (
-                                        <Col key={index} onClick={e => console.log(proposition.Type)}>
+                                        <Col key={index}>
                                             <UserCard proposition={proposition} />
                                         </Col>
                                     )

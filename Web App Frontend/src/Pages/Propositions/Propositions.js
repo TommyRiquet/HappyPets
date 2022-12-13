@@ -28,7 +28,7 @@ function Propositions() {
     }, [])
 
 
-    function LoadProposition(offset = 0) {
+    function LoadProposition(offset = 0,limit = 20) {
 
         fetch(config.API_URL +
             '/propositions?' +

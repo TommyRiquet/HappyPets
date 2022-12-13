@@ -104,11 +104,11 @@ router.get("/me", async (req, res) => {
             offset: parseInt(offset),
             where: {
                 Type : {[Op.or] : [typeProposition]},
-                Frequence : {[Op.or] : [frequenceProposition]},
+                Frequency : {[Op.or] : [frequenceProposition]},
                 Animal : {[Op.or] : [animalProposition]},
                 isActive:true
             },
-            attributes : ['Type','Frequence','Animal'],
+            attributes : ['Type','Frequency','Animal'],
                 include : [{
                     model : Users,
                     attributes : ['PhotoLink'],
