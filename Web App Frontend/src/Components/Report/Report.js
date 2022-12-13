@@ -138,7 +138,7 @@ function Report(data){
                     </thead>
                     <tbody>
                     {result.map((report,index) => {
-                        date = new Date(report.updatedAt).toLocaleDateString("en-FR");
+                        date = new Date(report.updatedAt).toLocaleDateString("fr-FR");
                         
                         return(
                             <tr key={index} onClick={() =>{setdisplay(report);setShow(true)}}>
