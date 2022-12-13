@@ -209,17 +209,25 @@ function DetailAnnonce() {
               </Button>
             </Col>
           ) :
+            null
+          }
+          {isModifiable===false&& JSON.parse(localStorage.getItem("user")) !== null ? (
             <Col xs={{ span: 3, offset: 3 }}>
               <Button
                 className="signal-button"
                 onClick={
-                      ()=>setShowAddSignalAnnonce(true)
+                  () => setShowAddSignalAnnonce(true)
                 }
               >
                 Signaler
               </Button>
             </Col>
+          ) :
+            null
           }
+
+
+
           {isModifiable ? (
             <Col xs={{ span: 3, offset: 8 }}>
               <Button className="delete-button" onClick={() => deleteAnnonce(annonce.id)}>Supprimer</Button>
@@ -408,11 +416,18 @@ function DetailAnnonce() {
         editannonce={setAnnonce}
       ></AddPetModal>
 
-      <AddSignalAnnonce
-        show={showAddSignalAnnonce}
-        onHide={() => setShowAddSignalAnnonce(false)}
-        idUser={annonce.Pets[0].User.id}
-      ></AddSignalAnnonce>
+      {isModifiable===false && JSON.parse(localStorage.getItem("user")) !== null ? (
+        <AddSignalAnnonce
+          show={showAddSignalAnnonce}
+          onHide={() => setShowAddSignalAnnonce(false)}
+          idSuspect={annonce.Pets[0].User.id}
+          idUser={JSON.parse(localStorage.getItem("user")).id}
+          type="alertProposition"
+        ></AddSignalAnnonce>
+      ) :
+        null
+      }
+
     </div>
   );
 }
