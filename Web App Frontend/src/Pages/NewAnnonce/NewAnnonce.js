@@ -4,11 +4,9 @@ import { Container, Button, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
-<<<<<<< HEAD
 import AddPetModal from "../../Components/AddPetModal/AddPetModal";
-=======
 import Footer from '../../Components/Footer/Footer';
->>>>>>> 1d26e3e (Affichage du footer)
+
 
 /*Importing Styles*/
 import './NewAnnonce.css';
