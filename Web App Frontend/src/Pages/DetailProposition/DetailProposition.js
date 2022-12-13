@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import AddSignalement from "../../Components/AddSignalement/AddSignalement";
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 
@@ -42,6 +42,7 @@ function DetailProposition() {
   const [displayPet, setDisplayPet] = useState({});
   const [isModifiable, setIsModifiable] = useState(false);
   const [editionMode, setEditionMode] = useState(false);
+  const [showAddSignalAnnonce, setShowAddSignalAnnonce] = useState(false);
   const [proposition, setProposition] = useState({
     Type: "",
     Frequency: "",
@@ -113,35 +114,35 @@ function DetailProposition() {
     /*
      *   Envoie les modifications de la proposition
      */
-    
+
     //test si tout les champs sont du bon type
-    proposition.Number=Number(proposition.Number);
-    if(typeof(proposition.Type)==="string" && typeof(proposition.Frequency)==="string" && typeof(proposition.Animal)==="string" && typeof(proposition.Number)==="number"){
+    proposition.Number = Number(proposition.Number);
+    if (typeof (proposition.Type) === "string" && typeof (proposition.Frequency) === "string" && typeof (proposition.Animal) === "string" && typeof (proposition.Number) === "number") {
       //test si le nombre est bien entre 0 et 10
-      if(proposition.Number>0 && proposition.Number<=10){
+      if (proposition.Number > 0 && proposition.Number <= 10) {
         //test si les valeurs sont bien celles proposées
-        if(["Promenade", "Logement", "Garde à domicile", "Soins à domicile"].includes(proposition.Type) && ["Occasionnelle", "Régulière"].includes(proposition.Frequency) && ["Chien", "Chat", "Rongeur", "Oiseau", "Poisson", "NAC"].includes(proposition.Animal)){
-            fetch(config.API_URL + "/propositions/updateProposition", {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(proposition)
-            })
+        if (["Promenade", "Logement", "Garde à domicile", "Soins à domicile"].includes(proposition.Type) && ["Occasionnelle", "Régulière"].includes(proposition.Frequency) && ["Chien", "Chat", "Rongeur", "Oiseau", "Poisson", "NAC"].includes(proposition.Animal)) {
+          fetch(config.API_URL + "/propositions/updateProposition", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(proposition)
+          })
         }
-        else{
+        else {
           alert("Mauvaise données envoyées");
           window.location.reload(false);
         }
 
       }
-      else{
+      else {
         alert("Vous ne pouvez garder maximum 10 animaux");
         window.location.reload(false);
       }
 
     }
-    else{
+    else {
       alert("Problèmes avec les données entrées");
       window.location.reload(false);
     }
@@ -203,6 +204,20 @@ function DetailProposition() {
               </Button>
             </Col>
           ) : null}
+          {isModifiable === false && JSON.parse(localStorage.getItem("user")) !== null ? (
+            <Col xs={{ span: 3, offset: 3 }}>
+              <Button
+                className="signal-button"
+                onClick={
+                  () => setShowAddSignalAnnonce(true)
+                }
+              >
+                Signaler
+              </Button>
+            </Col>
+          ) :
+            null
+          }
           {isModifiable ? (
             <Col xs={{ span: 3, offset: 8 }}>
               <Button className="delete-button" onClick={() => deleteProposition(proposition.id)}>Supprimer</Button>
@@ -386,6 +401,19 @@ function DetailProposition() {
           </Row>
         </Container>
       </Container>
+
+      {isModifiable === false && JSON.parse(localStorage.getItem("user")) !== null ? (
+        <AddSignalement
+          show={showAddSignalAnnonce}
+          onHide={() => setShowAddSignalAnnonce(false)}
+          idSuspect={proposition.User.id}
+          idUser={JSON.parse(localStorage.getItem("user")).id}
+          type="alertProposition"
+        ></AddSignalement>
+      ) :
+        null
+      }
+
     </div >
   );
 }

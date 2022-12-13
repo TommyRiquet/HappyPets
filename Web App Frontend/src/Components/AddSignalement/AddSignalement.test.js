@@ -1,11 +1,11 @@
 import { render} from '@testing-library/react';
-import AddSignalAnnonce from './AddSignalAnnonce';
+import AddSignalement from './AddSignalement';
 
-describe('Render Test for the component AddPetModal', () => {
+describe('Render Test for the component AddSignalement', () => {
     it('Should render without crash', async () => {
         render(
             <>
-                <AddSignalAnnonce           
+                <AddSignalement           
           idSuspect={""}
           idUser={""}
           type=""/>

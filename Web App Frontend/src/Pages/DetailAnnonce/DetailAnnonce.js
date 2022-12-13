@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import AddPetModal from "../../Components/AddPetModal/AddPetModal";
-import AddSignalAnnonce from "../../Components/AddSignalAnnonce/AddSignalAnnonce";
+import AddSignalement from "../../Components/AddSignalement/AddSignalement";
 
 /*Importing Icons*/
 import DogIcon from "../../Assets/dog-icon.png";
@@ -417,13 +417,13 @@ function DetailAnnonce() {
       ></AddPetModal>
 
       {isModifiable===false && JSON.parse(localStorage.getItem("user")) !== null ? (
-        <AddSignalAnnonce
+        <AddSignalement
           show={showAddSignalAnnonce}
           onHide={() => setShowAddSignalAnnonce(false)}
           idSuspect={annonce.Pets[0].User.id}
           idUser={JSON.parse(localStorage.getItem("user")).id}
-          type="alertProposition"
-        ></AddSignalAnnonce>
+          type="alertAnnonce"
+        ></AddSignalement>
       ) :
         null
       }
