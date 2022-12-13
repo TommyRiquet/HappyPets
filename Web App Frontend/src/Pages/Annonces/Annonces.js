@@ -5,7 +5,6 @@ import Multiselect from "multiselect-react-dropdown";
 import AnimalCard from "../../Components/AnimalCard/AnimalCard";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import { useNavigate } from 'react-router-dom';
-import Footer from '../../Components/Footer/Footer'
 
 /*Importing Styles*/
 import "./Annonces.css";
@@ -335,7 +334,6 @@ function Annonces() {
           }
         </Container>
       </Container>
-      <Footer/>
     </div>
   );
 }
