@@ -36,7 +36,7 @@ describe('Testing component User props <Usercard />', () => {
               <UserCard proposition={FakeUser}/>
           )
           const propsFirstName = screen.getByTestId("proposition-name")
-          expect(propsFirstName.textContent).toBe("Inconnu");
+          expect(propsFirstName.textContent).toBe("");
       })
 
     it('should replace the place with ""', async () =>{

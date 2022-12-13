@@ -11,6 +11,7 @@ import Error from "../Error/Error";
 import Annonces from "../Annonces/Annonces";
 import Login from '../Login/Login';
 import Propositions from '../Propositions/Propositions';
+import MesPropositions from '../MesPropositions/MesPropositions';
 import NewAnnonce from "../NewAnnonce/NewAnnonce";
 import {Register} from "../Register/Register";
 import MesAnnonces from '../MesAnnonces/MesAnnonces';
@@ -51,6 +52,7 @@ function App() {
                     <Route path="/mesannonces" element={<MesAnnonces/>}/>
                     <Route path="/createProposition" element={<CreateProposition/>}/>
                     <Route path="/notifications" element={<Notifications/>}/>
+                    <Route path="/mespropositions" element={<MesPropositions/>}/>
                   </Route>
 
                   {/* Routes bloqués lorsque l'utilisateur est connectés */}
