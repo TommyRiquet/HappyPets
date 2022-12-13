@@ -25,8 +25,9 @@ function UserCard(props){
                                     <div className='proposition-name'>
                                         <span data-testid='proposition-name'>
                                             {(
+                                                !("FirstName" in props.proposition.User)? "" : 
                                                 props.proposition.User.FirstName.length === 0 ? 
-                                                "Inconnu" : props.proposition.User.FirstName 
+                                                "" : props.proposition.User.FirstName 
                                             )}
                                         </span>
                                         </div>
@@ -74,6 +75,7 @@ function UserCard(props){
                                     {
                                     !("User" in props.proposition)? "": 
                                     props.proposition.User.length===0 ? "":
+                                    !("City" in props.proposition.User)? "": 
                                     props.proposition.User.City.length===0 ? "" : props.proposition.User.City
                                     }
                                 </Col>
