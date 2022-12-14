@@ -33,7 +33,7 @@ function Admin (){
                         <Nav.Link eventKey="alertAnnonce">Annonces</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className='caseStyle'>
-                        <Nav.Link eventKey="alertProposition">Propositions</Nav.Link>
+                        <Nav.Link eventKey="alertAvis">Avis</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 <div>

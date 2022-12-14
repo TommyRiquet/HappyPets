@@ -3,7 +3,7 @@ import { Button, Row, Table,Col } from 'react-bootstrap';
 import './Report.css';
 import AnnonceImage from '../../Assets/annonces.png';
 import UserImage from '../../Assets/user.png';
-import PropositionImage from '../../Assets/fillactere.png';
+import AvisImage from '../../Assets/fillactere.png';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import config from '../../config.json';
 
@@ -40,7 +40,7 @@ function Report(data){
                 setresult((result) => [...result,...res]);
             })
         }
-        else if (data.page === 'alertUser' || data.page === 'alertAnnonce' || data.page === 'alertProposition'){
+        else if (data.page === 'alertUser' || data.page === 'alertAnnonce' || data.page === 'alertAvis'){
             fetch(config.API_URL+'/admin/findtype?type='+data.page+
             '&offset='+offset+
             '&limit='+limit,{ 
@@ -105,7 +105,7 @@ function Report(data){
     const ImageReport = {
         'User':UserImage,
         'Annonce':AnnonceImage,
-        'Proposition':PropositionImage
+        'Avis':AvisImage
     };
 
     function TransformImage(word){
@@ -116,8 +116,8 @@ function Report(data){
         else if (word === 'alertUser'){
             Image = ImageReport['User']
         }
-        else if (word === 'alertProposition'){
-            Image = ImageReport['Proposition']
+        else if (word === 'alertAvis'){
+            Image = ImageReport['Avis']
         }
         return Image;
     }

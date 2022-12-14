@@ -2,12 +2,11 @@
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
 import AddPetModal from "../../Components/AddPetModal/AddPetModal";
-import AddSignalAnnonce from "../../Components/AddSignalAnnonce/AddSignalAnnonce";
 
 /*Importing Icons*/
 import DogIcon from "../../Assets/dog-icon.png";
@@ -48,7 +47,6 @@ function DetailAnnonce() {
   const [isModifiable, setIsModifiable] = useState(false);
   const [editionMode, setEditionMode] = useState(false);
   const [showAddPetModal, setShowAddPetModal] = useState(false);
-  const [showAddSignalAnnonce, setShowAddSignalAnnonce] = useState(false);
   const [newPets, setNewPets] = useState([]);
   const [annonce, setAnnonce] = useState({
     DateBegin: "",
@@ -111,14 +109,14 @@ function DetailAnnonce() {
     fetch(config.API_URL + "/annonces/detailAnnonce?id=" + id)
       .then((response) => response.json())
       .then((data) => {
-        if (data === null) {
+        if(data===null){
           //si l'annonce est inactive
           navigate('/');
         }
-        else {
+        else{
           setAnnonce(data);
         }
-
+        
       });
   }
 
@@ -170,7 +168,7 @@ function DetailAnnonce() {
       fetch(config.API_URL + "/annonces/deleteAnnonce?id=" + index);
       alert("Annonce bien supprimée.");
       navigate('/mesannonces');
-
+      
     }
   }
 
@@ -208,25 +206,12 @@ function DetailAnnonce() {
                 {editionMode ? "Valider" : "Modifier"}
               </Button>
             </Col>
-          ) :
-            <Col xs={{ span: 3, offset: 3 }}>
-              <Button
-                className="signal-button"
-                onClick={
-                      ()=>setShowAddSignalAnnonce(true)
-                }
-              >
-                Signaler
-              </Button>
-            </Col>
-          }
+          ) : null}
           {isModifiable ? (
             <Col xs={{ span: 3, offset: 8 }}>
               <Button className="delete-button" onClick={() => deleteAnnonce(annonce.id)}>Supprimer</Button>
             </Col>
-          ) :
-            null
-          }
+          ) : null}
         </Row>
       </Container>
       <Container className="detail-container">
@@ -407,12 +392,6 @@ function DetailAnnonce() {
         annonce={annonce}
         editannonce={setAnnonce}
       ></AddPetModal>
-
-      <AddSignalAnnonce
-        show={showAddSignalAnnonce}
-        onHide={() => setShowAddSignalAnnonce(false)}
-        idUser={annonce.Pets[0].User.id}
-      ></AddSignalAnnonce>
     </div>
   );
 }
