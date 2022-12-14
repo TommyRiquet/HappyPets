@@ -14,7 +14,7 @@ describe('Render Tests for the <DetailProposition> Page', () => {
         )
     })
 })
-
+/*
 
 describe('Integration Tests for the <DetailProposition> Page', () => { 
 
@@ -35,4 +35,4 @@ describe('Integration Tests for the <DetailProposition> Page', () => {
         }
     )
 
-})
+})*/

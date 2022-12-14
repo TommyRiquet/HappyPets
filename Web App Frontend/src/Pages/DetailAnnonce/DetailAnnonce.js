@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router';
 
 
-import {useNavigate} from 'react-router';
 import Footer from '../../Components/Footer/Footer';
 import ReturnButton from "../../Components/ReturnButton/ReturnButton";
 import CustomNavbar from "../../Components/CustomNavbar/CustomNavbar";
