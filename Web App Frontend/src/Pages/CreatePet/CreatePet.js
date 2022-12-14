@@ -1,8 +1,8 @@
 /*External Import*/
-import React, {useEffect, useState} from "react";
-import {Container, Button, Row, Col, Form} from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
-import {Formik} from 'formik';
+import React, { useEffect, useState } from "react";
+import { Container, Button, Row, Col, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 
@@ -81,6 +81,26 @@ function CreatePet() {
 
     function sendFormPet(event) {
         const user = JSON.parse(localStorage.getItem("user"));
+        if ( event['sterile'] === "Oui") {
+            event['sterile'] = 1;
+        } else {
+            event['sterile'] = 0;
+        }
+        if ( event['dogFriendly'] === "Oui") {
+            event['dogFriendly'] = 1;
+        } else {
+            event['dogFriendly'] = 0;
+        }
+        if ( event['catFriendly'] === "Oui") {
+            event['catFriendly'] = 1;
+        } else {
+            event['catFriendly'] = 0;
+        }
+        if ( event['kidFriendly'] === "Oui") {
+            event['kidFriendly'] = 1;
+        } else {
+            event['kidFriendly'] = 0;
+        }
         fetch(config.API_URL + "/pets", {
             method: 'POST',
             headers: {
@@ -89,17 +109,21 @@ function CreatePet() {
             },
             body: (
                 JSON.stringify({
-                        Name: event['name'],
-                        Type: event['type'],
-                        Race: event['race'],
-                        Age: event['age'],
-                        Weight: event['weight'],
-                        Height: event['height'],
-                        Behaviour: event['behaviour'],
-                        Sex: event['sex'],
-                        Comment: event['comment'],
-                        UserId: user.id
-                    }
+                    Name: event['name'],
+                    Type: event['type'],
+                    Race: event['race'],
+                    Age: event['age'],
+                    Weight: event['weight'],
+                    Height: event['height'],
+                    Behaviour: event['behaviour'],
+                    Sex: event['sex'],
+                    Sterile: event['sterile'],
+                    DogFriendly: event['dogFriendly'],
+                    CatFriendly: event['catFriendly'],
+                    KidFriendly: event['kidFriendly'],
+                    Comment: event['comment'],
+                    UserId: user.id
+                }
                 )
             ),
         }).then(val => val.json())
@@ -147,6 +171,10 @@ function CreatePet() {
                             height: '',
                             behaviour: '',
                             sex: '',
+                            sterile: '',
+                            dogFriendly: '',
+                            catFriendly: '',
+                            kidFriendly: '',
                             comment: '',
                         }}
                         onSubmit={sendFormPet}
@@ -187,17 +215,41 @@ function CreatePet() {
                                     ['M', 'F', 'NC'],
                                     'Sexe invalide'
                                 ),
+                            sterile: Yup.string()
+                                .required('Champ obligatoire')
+                                .oneOf(
+                                    ['Oui', 'Non'],
+                                    'Champ invalide'
+                                ),
+                            dogFriendly: Yup.string()
+                                .required('Champ obligatoire')
+                                .oneOf(
+                                    ['Oui', 'Non'],
+                                    'Champ invalide'
+                                ),
+                            catFriendly: Yup.string()
+                                .required('Champ obligatoire')
+                                .oneOf(
+                                    ['Oui', 'Non'],
+                                    'Champ invalide'
+                                ),
+                            kidFriendly: Yup.string()
+                                .required('Champ obligatoire')
+                                .oneOf(
+                                    ['Oui', 'Non'],
+                                    'Champ invalide'
+                                ),
                             comment: Yup.string(),
                         })}
                     >
                         {({
-                              handleSubmit,
-                              handleChange,
-                              handleBlur,
-                              values,
-                              errors,
-                              touched,
-                          }) => (
+                            handleSubmit,
+                            handleChange,
+                            handleBlur,
+                            values,
+                            errors,
+                            touched,
+                        }) => (
                             <Form noValidate onSubmit={handleSubmit} encType="multipart/form-data">
                                 <Row>
                                     <Form.Group as={Col}>
@@ -219,12 +271,12 @@ function CreatePet() {
                                     <Form.Group as={Col}>
                                         <Form.Label>Caractère</Form.Label>
                                         <Form.Select name="behaviour"
-                                                     data-testid="behaviour"
-                                                     value={values.behaviour}
-                                                     onChange={handleChange}
-                                                     onBlur={handleBlur}
-                                                     isValid={!errors.behaviour && touched.behavior}
-                                                     isInvalid={touched.behavior && errors.behaviour}>
+                                            data-testid="behaviour"
+                                            value={values.behaviour}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={!errors.behaviour && touched.behaviour}
+                                            isInvalid={touched.behaviour && errors.behaviour}>
                                             <option value="no-value">Sélectionner un caractère</option>
                                             <option value="Dominant">Dominant</option>
                                             <option value="Dominé">Dominé</option>
@@ -238,13 +290,13 @@ function CreatePet() {
                                     <Form.Group as={Col}>
                                         <Form.Label>Type</Form.Label>
                                         <Form.Select name="type"
-                                                     data-testid="type"
-                                                     value={values.type}
-                                                     onChange={handleChange}
-                                                     onBlur={handleBlur}
-                                                     onInput={e => setAnimalType(e.target.value)}
-                                                     isValid={!errors.type && touched.type}
-                                                     isInvalid={errors.type && touched.type}
+                                            data-testid="type"
+                                            value={values.type}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            onInput={e => setAnimalType(e.target.value)}
+                                            isValid={!errors.type && touched.type}
+                                            isInvalid={errors.type && touched.type}
                                         >
                                             <option value="no-value">Sélectionner un type</option>
                                             <option value="Chien">Chien</option>
@@ -306,12 +358,12 @@ function CreatePet() {
                                     <Form.Group as={Col}>
                                         <Form.Label>Sexe</Form.Label>
                                         <Form.Select name="sex"
-                                                     data-testid="sex"
-                                                     value={values.sex}
-                                                     onChange={handleChange}
-                                                     onBlur={handleBlur}
-                                                     isValid={!errors.sex && touched.sex}
-                                                     isInvalid={touched.sex && errors.sex}>
+                                            data-testid="sex"
+                                            value={values.sex}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={!errors.sex && touched.sex}
+                                            isInvalid={touched.sex && errors.sex}>
                                             <option>Sélectionner un sexe</option>
                                             <option value="M">Mâle</option>
                                             <option value="F">Femelle</option>
@@ -341,12 +393,12 @@ function CreatePet() {
                                     <Form.Group as={Col}>
                                         <Form.Label>Taille</Form.Label>
                                         <Form.Select name="height"
-                                                     data-testid="height"
-                                                     value={values.height}
-                                                     onChange={handleChange}
-                                                     onBlur={handleBlur}
-                                                     isValid={!errors.height && touched.height}
-                                                     isInvalid={touched.height && errors.height}
+                                            data-testid="height"
+                                            value={values.height}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={!errors.height && touched.height}
+                                            isInvalid={touched.height && errors.height}
                                         >
                                             <option>Sélectionner une taille</option>
                                             <option value="Grand">Grand</option>
@@ -360,23 +412,97 @@ function CreatePet() {
                                 </Row>
                                 <Row>
                                     <Form.Group as={Col}>
+                                        <Form.Label>Est-il stérile?</Form.Label>
+                                        <Form.Select name="sterile"
+                                            data-testid="sterile"
+                                            value={values.sterile}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={!errors.sterile && touched.sterile}
+                                            isInvalid={touched.sterile && errors.sterile}
+                                        >
+                                            <option>Sélectionner une option</option>
+                                            <option value="Oui">Oui</option>
+                                            <option value="Non">Non</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.sterile}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Aime t-il les chiens?</Form.Label>
+                                        <Form.Select name="dogFriendly"
+                                            data-testid="dogFriendly"
+                                            value={values.dogFriendly}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={!errors.dogFriendly && touched.dogFriendly}
+                                            isInvalid={touched.dogFriendly && errors.dogFriendly}
+                                        >
+                                            <option>Sélectionner une option</option>
+                                            <option value="Oui">Oui</option>
+                                            <option value="Non">Non</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.dogFriendly}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Aime t-il les chats?</Form.Label>
+                                        <Form.Select name="catFriendly"
+                                            data-testid="catFriendly"
+                                            value={values.catFriendly}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={!errors.catFriendly && touched.catFriendly}
+                                            isInvalid={touched.catFriendly && errors.catFriendly}
+                                        >
+                                            <option>Sélectionner une option</option>
+                                            <option value="Oui">Oui</option>
+                                            <option value="Non">Non</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.catFriendly}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>Aime t-il les enfants?</Form.Label>
+                                        <Form.Select name="kidFriendly"
+                                            data-testid="kidFriendly"
+                                            value={values.kidFriendly}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={!errors.kidFriendly && touched.kidFriendly}
+                                            isInvalid={touched.kidFriendly && errors.kidFriendly}
+                                        >
+                                            <option>Sélectionner une option</option>
+                                            <option value="Oui">Oui</option>
+                                            <option value="Non">Non</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.kidFriendly}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Row>
+                                <Row>
+                                    <Form.Group as={Col}>
                                         <Form.Label>Commentaire</Form.Label>
                                         <Form.Control onChange={handleChange} data-testid="comment" name="comment"
-                                                      as="textarea" rows={3}/>
+                                            as="textarea" rows={3} />
                                     </Form.Group>
                                 </Row>
                                 <Row>
                                     <Form.Group as={Col}>
                                         <Form.Label>Photos</Form.Label>
                                         <Form.Control name="image" type="file" id="petPicture"
-                                                      accept="image/png, image/jpeg"/>
+                                            accept="image/png, image/jpeg" />
                                     </Form.Group>
                                 </Row>
                                 <Row>
                                     <Col className={"div-button"}>
                                         <Button className='submit-button' type="submit" accept="image/*"
-                                                data-testid="submit"
-                                                multiple>Enregistrer</Button>
+                                            data-testid="submit"
+                                            multiple>Enregistrer</Button>
                                     </Col>
                                 </Row>
                             </Form>
