@@ -2,12 +2,10 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken')
-const axios = require('axios');
-
 
 const { myError } = require("../middleware/Error")
 const { verifyToken } = require("../middleware/verifyToken")
-const { Users, Pets, Propositions, Annonces, PetsAnnonces } = require("../models")
+const { Users, Pets, Propositions, Annonces, PetsAnnonces} = require("../models")
 
 router.put("/updateUser", async (req, res) => {
     const user = await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal: req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink, ColorPhoto: req.body.ColorPhoto }, {
@@ -73,7 +71,6 @@ router.post('/login', async (req, res) => {
             include: [{
                 model: Pets,
                 attributes: ['id', 'Name', 'Type', 'Race', 'Age', 'Sex', 'Height', 'Weight', 'Behaviour', 'Comment', 'DogFriendly', 'CatFriendly', 'KidFriendly'],
-                where: { isActive: true }
             }]
         })
         if (!user) throw new myError("L'utilisateur n'existe pas", 404);
@@ -87,7 +84,7 @@ router.post('/login', async (req, res) => {
             expiresIn: 60 * 60 * 24
         });
         delete user.dataValues.Password
-        res.json({ token: token, user: user.dataValues });
+        res.json({token: token, user: user.dataValues});
     } catch (e) {
         const status = e.status || 500;
         res.status(status).json({ error: e.message });
@@ -125,10 +122,10 @@ router.put('/deleteUser', async (req, res) => {
     Users.update({
         FirstName: "X",
         LastName: "X",
-        Email: "X",
-        Phone: 0,
-        Password: "X",
-        isActive: 0
+        Email:"X",
+        Phone:0,
+        Password:"X",
+        isActive:0
     }, {
         where: {
             id: req.body.id
@@ -153,21 +150,21 @@ router.put('/deleteUser', async (req, res) => {
 
 
     //Pour les annonces
-    let AnnoncesId = [];
-    let forOnePet = [];
-    for (let i in req.body.petsId) {
-        forOnePet = (await PetsAnnonces.findAll({
-            where: { PetId: req.body.petsId[i] },
-            attributes: ['AnnonceId']
+    let AnnoncesId=[];
+    let forOnePet=[];
+    for(let i in req.body.petsId){
+        forOnePet=(await PetsAnnonces.findAll({
+            where: { PetId: req.body.petsId[i]},
+            attributes: ['AnnonceId'] 
         }))
-        for (let i in forOnePet) {
+        for(let i in forOnePet){
             AnnoncesId.push(forOnePet[i])
         }
-        forOnePet = [];
+        forOnePet=[];
     }
     console.log(AnnoncesId)
-    if (AnnoncesId != [] || AnnoncesId != undefined || AnnoncesId != null) {
-        for (let i in AnnoncesId) {
+    if(AnnoncesId!=[] || AnnoncesId!=undefined || AnnoncesId!=null){
+        for(let i in AnnoncesId){
             Annonces.update({
                 isActive: false
             }, {
@@ -183,20 +180,6 @@ router.put('/deleteUser', async (req, res) => {
 
     res.json(200)
 })
-
-router.post("/capcha", async (req, res) => {
-    try {
-        const { token } = req.body['captcha_value'];
-        await axios.post(
-            `https://www.google.com/recaptcha/api/siteverify?secret=6LcJY20jAAAAAKAhPWB6XyLt1cNNjE&response=${token}`
-        );
-        if (res.status(200)) {
-            res.send("ok");
-        }
-    } catch (error) {
-        console.log(error)
-    }
-});
 
 
 module.exports = router
