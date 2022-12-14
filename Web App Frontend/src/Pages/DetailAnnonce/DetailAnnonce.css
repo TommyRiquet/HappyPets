@@ -80,6 +80,11 @@
     font-weight: 700;
   }
 
+  .patate{
+    font-size: 15rem !important;
+    font-weight: 700 !important;
+    background-color: red !important;
+  }
   .top-container{
     margin-top: 50px;
   }
