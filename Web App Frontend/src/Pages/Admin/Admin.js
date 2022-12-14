@@ -2,24 +2,25 @@ import './Admin.css';
 
 import Nav from 'react-bootstrap/Nav';
 import Report from '../../Components/Report/Report';
-import { useState } from 'react';
+import {useState} from 'react';
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
 
-function Admin() {
+function Admin (){
     const [page, setpage] = useState('all');
-    function handleSelect(CurrentPage) {
+    function handleSelect(CurrentPage)
+    {
         setpage(CurrentPage);
     }
 
     return (
         <div className='colorback'>
-            <CustomNavbar
-                textLinkOne="Je propose mon aide"
+            <CustomNavbar 
+                textLinkOne="Propositions"
                 linkOne="/propositions"
-                textLinkTwo="J'ai besoin d'aide"
+                textLinkTwo="Annonces"
                 linkTwo="/annonces"
                 color="rgba(47, 72, 88, 1)"
-            />
+                />
             <div className='tabsStyle'>
                 <Nav className='taille' variant="tabs" defaultActiveKey="all" onSelect={handleSelect}>
                     <Nav.Item className='caseStyle'>
@@ -36,7 +37,7 @@ function Admin() {
                     </Nav.Item>
                 </Nav>
                 <div>
-                    <Report page={page} />
+                    <Report page={page}/>
                 </div>
             </div>
         </div>
