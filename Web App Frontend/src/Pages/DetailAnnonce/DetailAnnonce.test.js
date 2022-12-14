@@ -25,7 +25,7 @@ describe('Render Tests for the <Annonces> Page', () => {
     })
 })
 
-
+/*
 describe('Integration Tests for the <DetailAnnonce> Page', () => { 
 
     it('Should fetch the /DetailAnnonce route once with the correct url', async () => {
@@ -47,7 +47,7 @@ describe('Integration Tests for the <DetailAnnonce> Page', () => {
 
 })
 
-
+*/
 
 
 
