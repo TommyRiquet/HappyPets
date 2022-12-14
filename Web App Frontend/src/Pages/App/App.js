@@ -60,7 +60,7 @@ function App() {
                   </Route>
 
                   {/* Routes bloqués si l'utilisateur n'est pas admin et connectés */}
-                  <Route element={<VerifRoute autorized={localStorage.getItem("user") !== null && JSON.parse(localStorage.getItem("user")).Role === 1} redirectPath={'/'} />}>
+                  <Route element={<VerifRoute autorized={localStorage.length !== 0 && JSON.parse(localStorage.getItem("user")).Role === 1} redirectPath={'/'} />}>
                     <Route path='/admin' element={<Admin/>}/>
                   </Route>
 
