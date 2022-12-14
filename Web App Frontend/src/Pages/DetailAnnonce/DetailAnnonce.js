@@ -1,5 +1,5 @@
 /*Importing Components*/
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router';
@@ -51,6 +51,8 @@ function DetailAnnonce() {
   const [editionMode, setEditionMode] = useState(false);
   const [showAddPetModal, setShowAddPetModal] = useState(false);
   const [showAddSignalAnnonce, setShowAddSignalAnnonce] = useState(false);
+  const [showNotif, setShowNotif] = useState(false);
+  const handleCloseNotif = () => setShowNotif(false);
   const [newPets, setNewPets] = useState([]);
   const [helpGive,sethelpGive] = useState(true);
   const [annonce, setAnnonce] = useState({
