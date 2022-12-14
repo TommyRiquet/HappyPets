@@ -1,9 +1,9 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import config from '../../config.json';
-import './AddSignalement.css';
+import './AddSignalAnnonce.css';
 
-function AddSignalement(props) {
-  function addSignalement(idSuspect, idUser, comment, type) {
+function AddSignalAnnonce(props) {
+  function addSignalAnnonce(idSuspect, idUser, comment, type) {
     /*
      *   Envoie le signalement à la DB
      *  @id : id du user qui a l'annonce
@@ -64,7 +64,7 @@ function AddSignalement(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button className="edit-button" onClick={() => addSignalement(props.idSuspect, props.idUser, document.getElementById("signalementDescription").value, props.type)}>
+        <Button className="edit-button" onClick={() => addSignalAnnonce(props.idSuspect, props.idUser, document.getElementById("signalementDescription").value, props.type)}>
           Envoyer
         </Button>
         <Button className="edit-button" onClick={props.onHide}>
@@ -75,4 +75,4 @@ function AddSignalement(props) {
   );
 }
 
-export default AddSignalement;
+export default AddSignalAnnonce;
