@@ -52,6 +52,7 @@ function DetailAnnonce() {
   const [showAddPetModal, setShowAddPetModal] = useState(false);
   const [showAddSignalAnnonce, setShowAddSignalAnnonce] = useState(false);
   const [newPets, setNewPets] = useState([]);
+  const [helpGive,sethelpGive] = useState(true);
   const [annonce, setAnnonce] = useState({
     DateBegin: "",
     DateEnd: "",
@@ -98,6 +99,14 @@ function DetailAnnonce() {
   }, [annonce]);
 
   /*
+   * Vérifie si la personne ne c'est pas encore proposer pour cette annonce
+   */
+  useEffect(() => {
+    getHelpGived(JSON.parse(localStorage.getItem("user")).id,annonce.id);
+    // eslint-disable-next-line
+  }, [annonce]);
+
+  /*
    *Appelle la fonction qui appelle les animaux du user
    */
   useEffect(() => {
@@ -121,6 +130,14 @@ function DetailAnnonce() {
           setAnnonce(data);
         }
 
+      });
+  }
+
+  function getHelpGived(idUser,idAnnonce){
+    fetch(config.API_URL + "/notifications/checkhelp?idUser="+idUser+'&idAnnonce='+idAnnonce)
+      .then((response) => response.json())
+      .then((data) => {
+        sethelpGive(data);
       });
   }
 
@@ -174,6 +191,18 @@ function DetailAnnonce() {
       navigate('/mesannonces');
 
     }
+  }
+
+  function sendHelp(idAnnonce,idHelper){
+    fetch(config.API_URL+'/notifications/sendhelp' ,{
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({
+        idAnnonce: idAnnonce,
+        idHelper: idHelper
+      })
+    }).then((response) => response.json())
+      .then(() => {getDetailAnnonce();});
   }
 
   return (
@@ -234,9 +263,11 @@ function DetailAnnonce() {
             <Col xs={{ span: 3, offset: 8 }}>
               <Button className="delete-button" onClick={() => deleteAnnonce(annonce.id)}>Supprimer</Button>
             </Col>
-          ) :
-            null
-          }
+          ) : helpGive ? <Col xs={{ span: 3, offset: 8 }}>
+                <Button variant="success" className="proposition-button" onClick={() => {sendHelp(annonce.id,JSON.parse(localStorage.getItem("user")).id);setShowNotif(true);}}>Se proposer</Button>
+              </Col> : null
+        }
+
         </Row>
       </Container>
       <Container className="detail-container">
@@ -417,6 +448,25 @@ function DetailAnnonce() {
         annonce={annonce}
         editannonce={setAnnonce}
       ></AddPetModal>
+      <Modal
+      show={showNotif}
+      onHide={handleCloseNotif}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+      <Modal.Title id="contained-modal-title-vcenter">
+          Proposition envoyée
+      </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+          <div>
+              <h4>Opération réussi !</h4>
+              <p>La Proposition à bien été envoyée.</p>
+              <Button className='centrePage' onClick={handleCloseNotif}>OK</Button></div>
+      </Modal.Body>
+    </Modal>
       {isModifiable===false && JSON.parse(localStorage.getItem("user")) !== null ? (
         <AddSignalement
           show={showAddSignalAnnonce}

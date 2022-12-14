@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const {Op} = require('sequelize')
 const {Users,UsersAnnonces, UsersPropositions, PetsAnnonces, Pets, Propositions} = require("../models")
 
 
@@ -116,6 +116,74 @@ router.delete("/propositions", async (req, res) => {
             })
         }
     }catch(err){console.log(err)}
+})
+
+router.post("/sendhelp", async (req, res) => {
+    try {
+        UsersAnnonces.create({
+            AnnonceId: req.body.idAnnonce,
+            UserId: req.body.idHelper
+        })
+            .then(() => {
+                res.json(200)
+            })
+
+    } catch (error) { // en cas d'erreur
+        res.status(500).send(error);
+    }
+});
+
+router.get("/checkhelp", async (req, res) => {
+    let idAnnonce = req.query.idAnnonce ? req.query.idAnnonce : 0
+    let idHelper = req.query.idUser ? req.query.idUser : 0
+    let existingHelper = await UsersAnnonces.findOne({ 
+        where: {
+        [Op.and]: [
+            {UserId: idHelper},
+            {AnnonceId: idAnnonce} 
+        ]  
+        }
+    });
+    if (existingHelper === null) {
+        res.json(true)
+    } else {
+        res.json(false)
+    }
+
+})
+
+router.post("/askhelp", async (req, res) => {
+    try {
+        UsersPropositions.create({
+            PropositionId: req.body.idProposition,
+            UserId: req.body.idHelper
+        })
+            .then(() => {
+                res.json(200)
+            })
+
+    } catch (error) { // en cas d'erreur
+        res.status(500).send(error);
+    }
+});
+
+router.get("/checkasked", async (req, res) => {
+    let idProposition = req.query.idProposition ? req.query.idProposition : 0
+    let idHelper = req.query.idUser ? req.query.idUser : 0
+    let existingAsker = await UsersPropositions.findOne({ 
+        where: {
+        [Op.and]: [
+            {UserId: idHelper},
+            {PropositionId: idProposition} 
+        ]  
+        }
+    });
+    if (existingAsker === null) {
+        res.json(true)
+    } else {
+        res.json(false)
+    }
+
 })
 
 

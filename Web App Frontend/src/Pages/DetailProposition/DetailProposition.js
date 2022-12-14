@@ -1,5 +1,5 @@
 /*Importing Components*/
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -44,6 +44,9 @@ function DetailProposition() {
   const [isModifiable, setIsModifiable] = useState(false);
   const [editionMode, setEditionMode] = useState(false);
   const [showAddSignalAnnonce, setShowAddSignalAnnonce] = useState(false);
+  const [showNotif, setShowNotif] = useState(false);
+  const handleCloseNotif = () => setShowNotif(false);
+  const [helpAsked,sethelpAsked] = useState(true);
   const [proposition, setProposition] = useState({
     Type: "",
     Frequency: "",
@@ -88,9 +91,13 @@ function DetailProposition() {
       : setIsModifiable(false);
   }, [proposition]);
 
-
-
-
+  /*
+   * Vérifie si la personne ne c'est pas encore proposer pour cette proposition
+   */
+  useEffect(() => {
+    getHelpAsked(JSON.parse(localStorage.getItem("user")).id,proposition.id);
+    // eslint-disable-next-line
+  }, [proposition]);
 
 
   function getDetailProposition() {
@@ -108,6 +115,14 @@ function DetailProposition() {
           setProposition(data);
         }
 
+      });
+  }
+
+  function getHelpAsked(idUser,idProposition){
+    fetch(config.API_URL + "/notifications/checkasked?idUser="+idUser+'&idProposition='+idProposition)
+      .then((response) => response.json())
+      .then((data) => {
+        sethelpAsked(data);
       });
   }
 
@@ -150,6 +165,18 @@ function DetailProposition() {
 
   }
 
+  function askHelp(idProposition,idHelper){
+    fetch(config.API_URL+'/notifications/askhelp' ,{
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({
+        idProposition: idProposition,
+        idHelper: idHelper
+      })
+    }).then((response) => response.json())
+      .then(() => {getDetailProposition();});
+  }
+
   function deleteProposition() {
     /*
      *   Supprime une proposition
@@ -181,7 +208,6 @@ function DetailProposition() {
         textLinkFour="Se connecter"
         linkFour="/login"
         color="rgba(47, 72, 88, 1)"
-        position="absolute"
       />
       <Container fluid className="top-container">
         <Row>
@@ -223,7 +249,9 @@ function DetailProposition() {
             <Col xs={{ span: 3, offset: 8 }}>
               <Button className="delete-button" onClick={() => deleteProposition(proposition.id)}>Supprimer</Button>
             </Col>
-          ) : null}
+          ) : helpAsked ? <Col xs={{ span: 3, offset: 8 }}>
+          <Button variant="success" className="proposition-button" onClick={() => {askHelp(proposition.id,JSON.parse(localStorage.getItem("user")).id);setShowNotif(true);}}>Demander</Button>
+        </Col> : null}
         </Row>
       </Container>
       <Container className="detail-container">
@@ -402,6 +430,26 @@ function DetailProposition() {
           </Row>
         </Container>
       </Container>
+      <Modal
+      show={showNotif}
+      onHide={handleCloseNotif}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+      <Modal.Title id="contained-modal-title-vcenter">
+          Aide demandée
+      </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+          <div>
+              <h4>Opération réussi !</h4>
+              <p>La demande d'aide à bien été envoyée.</p>
+              <Button className='centrePage' onClick={handleCloseNotif}>OK</Button></div>
+      </Modal.Body>
+      </Modal>
+
       {isModifiable === false && JSON.parse(localStorage.getItem("user")) !== null ? (
         <AddSignalement
           show={showAddSignalAnnonce}
