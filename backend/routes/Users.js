@@ -187,7 +187,7 @@ router.post("/capcha", async (req, res) => {
     try {
         const { token } = req.body['captcha_value'];
         await axios.post(
-            `https://www.google.com/recaptcha/api/siteverify?secret=6LcJY20jAAAAAKAhPWB6XyLt1cNNjE&response=${token}`
+            `https://www.google.com/recaptcha/api/siteverify?secret=6LfwAH4jAAAAAIYcWST_qo1DkWdU4Oy3x43LZiYl&response=${token}`
         );
         if (res.status(200)) {
             res.send("ok");

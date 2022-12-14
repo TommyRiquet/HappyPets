@@ -273,7 +273,7 @@ function Register() {
                                 </Form.Group>
                                 <Row>
                                     <Col>
-                                        <ReCAPTCHA sitekey={"6LcJY20jAAAAAKaQm8F7OUTWEewO6kuQDWRmaINV"} ref={recaptchaRef}
+                                        <ReCAPTCHA sitekey={"6LfwAH4jAAAAAO6KL5QLdOXx0X2afAxHCYHzEzs5 "} ref={recaptchaRef}
                                             onChange={capchaverif} className='captcha' />
                                     </Col>
                                 </Row>
