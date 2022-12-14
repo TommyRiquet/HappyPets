@@ -39,7 +39,7 @@ function Footer() {
       <Navbar expand="lg footer">
         <Container fluid>
           <Nav className="d-flex">
-            <Nav.Link className='link-orange' href={'/mentionslegales'}>{'Mentions légales'}</Nav.Link>
+            <Nav.Link className='link-orange' href={'/policy'}>{'Mentions légales'}</Nav.Link>
             <Nav.Link className='link-orange' href={'mailto:happypets.support@hotmail.com'}>{'Contactez-Nous'}</Nav.Link>
           </Nav>
         </Container>
