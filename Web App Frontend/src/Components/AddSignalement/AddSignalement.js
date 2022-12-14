@@ -9,7 +9,7 @@ function AddSignalement(props) {
      *  @id : id du user qui a l'annonce
      *  @comment : commentaire rapporté 
      */
-    if (comment !== "" && comment.length>=10 && comment.length<=200) {
+    if (comment !== "" || comment.length>=10 ||comment.length>=200) {
       fetch(config.API_URL + "/admin", {
         method: 'POST',
         headers: {
