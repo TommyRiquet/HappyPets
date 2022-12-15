@@ -44,6 +44,7 @@ function Account() {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "verifyToken" : localStorage.getItem("accessToken")
             },
             body: JSON.stringify(InfoUser)
         })
@@ -173,6 +174,7 @@ function Account() {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
+                    "verifyToken" : localStorage.getItem("accessToken")
                 },
                 body: JSON.stringify({id:InfoUser.id, petsId:allPetsId})
             })
