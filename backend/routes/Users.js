@@ -72,8 +72,7 @@ router.post('/login', async (req, res) => {
             attributes: ['id', 'FirstName', 'LastName', 'Password', 'Email', 'City', 'Postal', 'Phone', 'Role', 'PhotoLink', 'ColorPhoto'],
             include: [{
                 model: Pets,
-                attributes: ['id', 'Name', 'Type', 'Race', 'Age', 'Sex', 'Height', 'Weight', 'Behaviour', 'Comment', 'DogFriendly', 'CatFriendly', 'KidFriendly'],
-                where: { isActive: true }
+                attributes: ['id', 'Name', 'Type', 'Race', 'Age', 'Sex', 'Height', 'Weight', 'Behaviour', 'Comment', 'DogFriendly', 'CatFriendly', 'KidFriendly']
             }]
         })
         if (!user) throw new myError("L'utilisateur n'existe pas", 404);
