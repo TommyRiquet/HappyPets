@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const myError = require("../middleware/Error")
+
 const verifyToken = (req, res, next) => {
     try {
-        const token = req.headers["access-token"];
+        const token = req.headers.verifytoken;
         if (!token) throw new myError("No token provided", 400);
         jwt.verify(token, "secret", (err, decoded) => {
             if (err) throw new myError("Wrong token", 400);
