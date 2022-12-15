@@ -10,7 +10,7 @@ const { verifyToken } = require("../middleware/verifyToken")
 const { Users, Pets, Propositions, Annonces, PetsAnnonces } = require("../models")
 
 router.put("/updateUser",verifyToken, async (req, res) => {
-    if(req.id === req.body.id){
+    if(req.id === req.body.id || req.Role === 1){
     await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal: req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink, ColorPhoto: req.body.ColorPhoto }, {
         where: {
             id: req.body.id
@@ -36,7 +36,7 @@ router.get("/info",verifyToken, async (req, res) => {
             }]
         }
     ).then((user) => { // si l'utilisateur existe, on vérifie si le droit d'accès est bon
-        if(user.id === req.id)
+        if(user.id === req.id || req.Role === 1)
             res.json(user)
         else
             res.json(401)
@@ -131,7 +131,7 @@ router.post("/image/upload", async (req, res) => {
 
 router.put('/deleteUser',verifyToken, async (req, res) => {
 
-    if (req.id === req.body.id) {
+    if (req.id === req.body.id || req.Role === 1) {
         Users.update({
             FirstName: "X",
             LastName: "X",
