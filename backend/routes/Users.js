@@ -9,19 +9,24 @@ const { myError } = require("../middleware/Error")
 const { verifyToken } = require("../middleware/verifyToken")
 const { Users, Pets, Propositions, Annonces, PetsAnnonces } = require("../models")
 
-router.put("/updateUser", async (req, res) => {
-    const user = await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal: req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink, ColorPhoto: req.body.ColorPhoto }, {
+router.put("/updateUser",verifyToken, async (req, res) => {
+    if(req.id === req.body.id){
+    await Users.update({ LastName: req.body.LastName, FirstName: req.body.FirstName, City: req.body.City, Postal: req.body.Postal, Email: req.body.Email, PhotoLink: req.body.PhotoLink, ColorPhoto: req.body.ColorPhoto }, {
         where: {
             id: req.body.id
         }
     });
     res.json(200)
+    } else{
+        res.json(401)
+    }
 })
 
 
-router.get("/info", async (req, res) => {
-    const user = await Users.findOne({
-            attributes: ['FirstName', 'LastName', 'City', 'Postal', 'Email', 'PhotoLink'],
+router.get("/info",verifyToken, async (req, res) => {
+
+    await Users.findOne({
+            attributes: ['id','FirstName', 'LastName', 'City', 'Postal', 'Email', 'PhotoLink'],
             where: {
                 id: req.query.id
             },
@@ -30,8 +35,12 @@ router.get("/info", async (req, res) => {
                 attributes: ['Name', 'Type'],
             }]
         }
-    )
-    res.json(user)
+    ).then((user) => { // si l'utilisateur existe, on vérifie si le droit d'accès est bon
+        if(user.id === req.id)
+            res.json(user)
+        else
+            res.json(401)
+    })
 })
 
 router.get("/checkemail/:email", async (req, res) => {
@@ -120,67 +129,72 @@ router.post("/image/upload", async (req, res) => {
     }
 });
 
-router.put('/deleteUser', async (req, res) => {
-    Users.update({
-        FirstName: "X",
-        LastName: "X",
-        Email: "X",
-        Phone: 0,
-        Password: "X",
-        isActive: 0
-    }, {
-        where: {
-            id: req.body.id
-        }
-    })
+router.put('/deleteUser',verifyToken, async (req, res) => {
 
-    Propositions.update({
-        isActive: false
-    }, {
-        where: {
-            UserId: req.body.id
-        }
-    })
+    if (req.id === req.body.id) {
+        Users.update({
+            FirstName: "X",
+            LastName: "X",
+            Email: "X",
+            Phone: 0,
+            Password: "X",
+            isActive: 0
+        }, {
+            where: {
+                id: req.body.id
+            }
+        })
 
-    Pets.update({
-        isActive: false
-    }, {
-        where: {
-            UserId: req.body.id
-        }
-    })
+        Propositions.update({
+            isActive: false
+        }, {
+            where: {
+                UserId: req.body.id
+            }
+        })
+
+        Pets.update({
+            isActive: false
+        }, {
+            where: {
+                UserId: req.body.id
+            }
+        })
 
 
-    //Pour les annonces
-    let AnnoncesId = [];
-    let forOnePet = [];
-    for (let i in req.body.petsId) {
-        forOnePet = (await PetsAnnonces.findAll({
-            where: { PetId: req.body.petsId[i] },
-            attributes: ['AnnonceId']
-        }))
-        for (let i in forOnePet) {
-            AnnoncesId.push(forOnePet[i])
+        //Pour les annonces
+        let AnnoncesId = [];
+        let forOnePet = [];
+        for (let i in req.body.petsId) {
+            forOnePet = (await PetsAnnonces.findAll({
+                where: { PetId: req.body.petsId[i] },
+                attributes: ['AnnonceId']
+            }))
+            for (let i in forOnePet) {
+                AnnoncesId.push(forOnePet[i])
+            }
+            forOnePet = [];
         }
-        forOnePet = [];
+        console.log(AnnoncesId)
+        if (AnnoncesId != [] || AnnoncesId != undefined || AnnoncesId != null) {
+            for (let i in AnnoncesId) {
+                Annonces.update({
+                    isActive: false
+                }, {
+                    where: {
+                        id: AnnoncesId[i].dataValues.AnnonceId
+                    }
+                })
+            }
+        }
+
+
+
+
+        res.json(200)
+    } else {
+        res.json(401)
     }
-    console.log(AnnoncesId)
-    if (AnnoncesId != [] || AnnoncesId != undefined || AnnoncesId != null) {
-        for (let i in AnnoncesId) {
-            Annonces.update({
-                isActive: false
-            }, {
-                where: {
-                    id: AnnoncesId[i].dataValues.AnnonceId
-                }
-            })
-        }
-    }
-
-
-
-
-    res.json(200)
 })
 
 router.post("/capcha", async (req, res) => {
