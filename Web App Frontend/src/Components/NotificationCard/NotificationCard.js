@@ -49,7 +49,7 @@ function NotificationCard(props){
                             {
                             displayEmail ?
                             <Col xs={{span: 3, offset:1}} lg={{span: 4, offset:1}} className='center-row-notification'>
-                                {props.notification.User.Email}
+                                <a href={"mailto:"+props.notification.User.Email}>{props.notification.User.Email}</a>
                             </Col>
                             :
                             <Col xs={{span: 3, offset:3}} lg={{span: 2, offset:3}} className='center-row-notification'>
