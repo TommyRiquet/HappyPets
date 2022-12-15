@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import UserCard from "../../Components/UserCard/UserCard";
 import CustomNavbar from '../../Components/CustomNavbar/CustomNavbar';
+import { useNavigate } from 'react-router-dom';
 
 /* Importing style */
 import './MesPropositions.css';
@@ -12,6 +13,7 @@ import config from "../../config.json";
 
 
 function Propositions() {
+    let navigate = useNavigate();
     const [ListPropositions, setListPropositions] = useState([])
     const[id, setID] = useState(0)
     let offset = 0
@@ -80,7 +82,7 @@ function Propositions() {
                             {
                                 ListPropositions.map((proposition, index) => {
                                     return (
-                                        <Col key={index}>
+                                        <Col key={index} onClick={() => navigate('/detailproposition/' + proposition.id)}>
                                             <UserCard proposition={proposition} />
                                         </Col>
                                     )
