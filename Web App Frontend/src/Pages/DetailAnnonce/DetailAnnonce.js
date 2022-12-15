@@ -266,7 +266,7 @@ function DetailAnnonce() {
               <Button className="delete-button" onClick={() => deleteAnnonce(annonce.id)}>Supprimer</Button>
             </Col>
           ) : helpGive ? <Col xs={{ span: 3, offset: 8 }}>
-                <Button variant="success" className="proposition-button" onClick={() => {sendHelp(annonce.id,JSON.parse(localStorage.getItem("user")).id);setShowNotif(true);}}>Se proposer</Button>
+                <Button variant="success" className="proposition-button" onClick={() => {sendHelp(annonce.id,JSON.parse(localStorage.getItem("user")).id);setShowNotif(true);}}>proposer</Button>
               </Col> : null
         }
 
