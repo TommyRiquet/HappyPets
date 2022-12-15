@@ -90,6 +90,15 @@ router.put("/deleteProposition", async (req, res) => {
     }
 });
 
+router.post("/", async (req, res) => {
+        try {
+            const newProposition = await Propositions.create(req.body)
+            res.json(newProposition)
+        }
+        catch (error) {
+            res.status(400).send(error);
+        }})
+
 router.get("/me", async (req, res) => {
 
     let id = (req.query.id>0 && !isNaN(req.query.id)) ? req.query.id: 0
