@@ -133,7 +133,7 @@ function CreateProposition() {
                                 </Row>
                                 <Row>
                                     <Form.Group as={Col}>
-                                        <Form.Label>Animal souhaiter</Form.Label>
+                                        <Form.Label>Animal souhaité</Form.Label>
                                         <Form.Select name="animal"
                                             data-testid="animal"
                                             value={values.animal}
@@ -141,7 +141,7 @@ function CreateProposition() {
                                             onBlur={handleBlur}
                                             isValid={!errors.animal && touched.animal}
                                             isInvalid={touched.animal && errors.animal}>
-                                            <option value="no-value">Sélectionner la fréquence</option>
+                                            <option value="no-value">Sélectionner le type d'animal</option>
                                             <option value="Chien">Chien</option>
                                             <option value="Chat">Chat</option>
                                             <option value="Rongeur">Rongeur</option>
