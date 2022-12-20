@@ -84,17 +84,6 @@ function Register() {
             setResemail('');
     }, [emailVerif]);
 
-    function uploadImage(file, id) {
-        const formData = new FormData();
-        const request = new XMLHttpRequest();
-
-        request.open("POST", config.API_URL + '/users/image/upload')
-        formData.append('profilePicture', file);
-        formData.append('userid', id);
-        request.send(formData)
-
-    }
-
     function handleSendForm(event) {
         setShowPrivacyPolicyModal(true);
         setEvent(event);
@@ -121,14 +110,7 @@ function Register() {
                     ConsentPolicy: data['Terms']
                 })
 
-            }).then(val => val.json())
-                .then(res => {
-                    const file = document.getElementById('profilePicture').files[0];
-                    if (file) {
-                        uploadImage(file, res);
-                    }
-                    navigate('/login');
-                })
+            }).then(navigate('/login'))
                 .catch(function (error) {
                     console.log(error);
                 })
@@ -253,12 +235,6 @@ function Register() {
                                             isValid={!errors.Password2 && touched.Password2}
                                             isInvalid={errors.Password2 && touched.Password2} required />
                                         <Form.Control.Feedback type="invalid">{errors.Password2}</Form.Control.Feedback>
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} className="mb-4">
-                                    <Col sm="12">
-                                        <Form.Label>Photo de Profil:</Form.Label>
-                                        <Form.Control type="file" name="profilePicture" id="profilePicture" />
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mb-3">
