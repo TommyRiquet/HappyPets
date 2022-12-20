@@ -110,7 +110,7 @@ function Register() {
                     ConsentPolicy: data['Terms']
                 })
 
-            }).then(navigate('/login'))
+            }).then(navigate('/'))
                 .catch(function (error) {
                     console.log(error);
                 })
