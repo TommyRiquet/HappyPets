@@ -95,7 +95,7 @@ function DetailProposition() {
    * Vérifie si la personne ne c'est pas encore proposer pour cette proposition
    */
   useEffect(() => {
-    getHelpAsked(JSON.parse(localStorage.getItem("user")).id,proposition.id);
+    getHelpAsked(JSON.parse(localStorage.getItem("user")) == null ? 0 : JSON.parse(localStorage.getItem("user")).id ,proposition.id);
     // eslint-disable-next-line
   }, [proposition]);
 
@@ -249,7 +249,8 @@ function DetailProposition() {
             <Col xs={{ span: 3, offset: 8 }}>
               <Button className="delete-button" onClick={() => deleteProposition(proposition.id)}>Supprimer</Button>
             </Col>
-          ) : helpAsked ? <Col xs={{ span: 3, offset: 8 }}>
+          ) : helpAsked && JSON.parse(localStorage.getItem("user")) != null? <Col xs={{ span: 3, offset: 8 }}>
+          
           <Button variant="success" className="proposition-button" onClick={() => {askHelp(proposition.id,JSON.parse(localStorage.getItem("user")).id);setShowNotif(true);}}>Demander</Button>
         </Col> : null}
         </Row>

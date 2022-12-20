@@ -104,7 +104,7 @@ function DetailAnnonce() {
    * Vérifie si la personne ne c'est pas encore proposer pour cette annonce
    */
   useEffect(() => {
-    getHelpGived(JSON.parse(localStorage.getItem("user")).id,annonce.id);
+    getHelpGived(JSON.parse(localStorage.getItem("user")) == null ? 0 : JSON.parse(localStorage.getItem("user")).id ,annonce.id);
     // eslint-disable-next-line
   }, [annonce]);
 
@@ -265,7 +265,7 @@ function DetailAnnonce() {
             <Col xs={{ span: 3, offset: 8 }}>
               <Button className="delete-button" onClick={() => deleteAnnonce(annonce.id)}>Supprimer</Button>
             </Col>
-          ) : helpGive ? <Col xs={{ span: 3, offset: 8 }}>
+          ) : helpGive && JSON.parse(localStorage.getItem("user")) != null ? <Col xs={{ span: 3, offset: 8 }}>
                 <Button variant="success" className="proposition-button" onClick={() => {sendHelp(annonce.id,JSON.parse(localStorage.getItem("user")).id);setShowNotif(true);}}>Proposer</Button>
               </Col> : null
         }
