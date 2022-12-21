@@ -195,6 +195,18 @@ function DetailProposition() {
 
     }
   }
+  
+  function Age(date){
+    var an=date.substr(0,4);
+    var mois=date.substr(5,2);
+    var day= date.substr(8,2); 
+    var dateNaissance = new Date(an + "-" + mois + "-" + day);
+
+    var diff = Date.now() - dateNaissance.getTime();
+    var age = new Date(diff); 
+
+    return Math.abs(age.getUTCFullYear() - 1970)
+  }
 
   return (
     <div className="DetailProposition">
@@ -260,7 +272,7 @@ function DetailProposition() {
           <Row>
             <Col>
               <h3>
-                Proposition de {proposition.User.Firstname}, {proposition.User.Age} ans
+                Proposition de {proposition.User.Firstname}, {Age(proposition.User.Age)} ans
               </h3>
             </Col>
           </Row>
