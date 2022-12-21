@@ -46,7 +46,8 @@ function DetailProposition() {
   const [showAddSignalAnnonce, setShowAddSignalAnnonce] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
   const handleCloseNotif = () => setShowNotif(false);
-  const [helpAsked,sethelpAsked] = useState(true);
+  const [helpAsked, sethelpAsked] = useState(true);
+  const [havePets, setHavePets] = useState(true);
   const [proposition, setProposition] = useState({
     Type: "",
     Frequency: "",
@@ -111,15 +112,18 @@ function DetailProposition() {
           //si l'annonce est inactive
           navigate('/');
         }
-        else {
+        else if (data.User.Pets.length === 0) {
+          //si l'annonce n'a pas d'animal
+          setHavePets(false);
+          setProposition(data);
+        } else {
           setProposition(data);
         }
-
       });
   }
 
-  function getHelpAsked(idUser,idProposition){
-    fetch(config.API_URL + "/notifications/checkasked?idUser="+idUser+'&idProposition='+idProposition)
+  function getHelpAsked(idUser, idProposition) {
+    fetch(config.API_URL + "/notifications/checkasked?idUser=" + idUser + '&idProposition=' + idProposition)
       .then((response) => response.json())
       .then((data) => {
         sethelpAsked(data);
@@ -165,8 +169,8 @@ function DetailProposition() {
 
   }
 
-  function askHelp(idProposition,idHelper){
-    fetch(config.API_URL+'/notifications/askhelp' ,{
+  function askHelp(idProposition, idHelper) {
+    fetch(config.API_URL + '/notifications/askhelp', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
@@ -174,7 +178,7 @@ function DetailProposition() {
         idHelper: idHelper
       })
     }).then((response) => response.json())
-      .then(() => {getDetailProposition();});
+      .then(() => { getDetailProposition(); });
   }
 
   function deleteProposition() {
@@ -374,93 +378,96 @@ function DetailProposition() {
               </h5>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <h3 className="person-animal">Les animaux de la personne</h3>
-            </Col>
-          </Row>
-          <Row>
-            {
-              proposition.User.Pets.map((pet, index) => {
-                return (
-                  <Col
-                    xs={6}
-                    sm={3}
-                    key={index}
-                    onClick={(e) => setDisplayPet(pet)}
-                    className="pet-image-container"
-                  >
-                    <img
-                      className={"pet-image"}
-                      src={AnimauxImages[pet.Type]}
-                      alt=""
-                    ></img>
+          {havePets ? (
+            <>
+              <Row>
+                <Col>
+                  <h3 className="person-animal">Les animaux de la personne</h3>
+                </Col>
+              </Row>
+              <Row>
+                {
+                  proposition.User.Pets.map((pet, index) => {
+                    return (
+                      <Col
+                        xs={6}
+                        sm={3}
+                        key={index}
+                        onClick={(e) => setDisplayPet(pet)}
+                        className="pet-image-container"
+                      >
+                        <img
+                          className={"pet-image"}
+                          src={AnimauxImages[pet.Type]}
+                          alt=""
+                        ></img>
 
-                  </Col>
-                );
-              })}
-          </Row>
-
-          <Row>
-            <Col className="pet-name">
-              {displayPet.Name + ", " + displayPet.Age}
-            </Col>
-          </Row>
-          <Row>
-            <Col>{displayPet.Race}</Col>
-          </Row>
-          <Row>
-            <Col sm={1}>
-              <img
-                src={DogIcon}
-                className={displayPet.DogFriendly ? "green-icon" : "red-icon"}
-                width="30"
-                height="30"
-                alt="Dog Icon"
-              ></img>
-            </Col>
-            <Col sm={1}>
-              <img
-                src={CatIcon}
-                className={displayPet.CatFriendly ? "green-icon" : "red-icon"}
-                width="30"
-                height="30"
-                alt="Cat Icon"
-              ></img>
-            </Col>
-            <Col sm={1}>
-              <img
-                src={BabyIcon}
-                className={displayPet.BabyFriendly ? "green-icon" : "red-icon"}
-                width="30"
-                height="30"
-                alt="Baby Icon"
-              ></img>
-            </Col>
-          </Row>
-          <Row>
-            <Col>{displayPet.Comment}</Col>
-          </Row>
+                      </Col>
+                    );
+                  })}
+              </Row>
+              <Row>
+                <Col className="pet-name">
+                  {displayPet.Name + ", " + displayPet.Age}
+                </Col>
+              </Row>
+              <Row>
+                <Col>{displayPet.Race}</Col>
+              </Row>
+              <Row>
+                <Col sm={1}>
+                  <img
+                    src={DogIcon}
+                    className={displayPet.DogFriendly ? "green-icon" : "red-icon"}
+                    width="30"
+                    height="30"
+                    alt="Dog Icon"
+                  ></img>
+                </Col>
+                <Col sm={1}>
+                  <img
+                    src={CatIcon}
+                    className={displayPet.CatFriendly ? "green-icon" : "red-icon"}
+                    width="30"
+                    height="30"
+                    alt="Cat Icon"
+                  ></img>
+                </Col>
+                <Col sm={1}>
+                  <img
+                    src={BabyIcon}
+                    className={displayPet.BabyFriendly ? "green-icon" : "red-icon"}
+                    width="30"
+                    height="30"
+                    alt="Baby Icon"
+                  ></img>
+                </Col>
+              </Row>
+              <Row>
+                <Col>{displayPet.Comment}</Col>
+              </Row>
+            </>
+          ) : (<Row><Col><h3 className="person-animal">L'utilisateur n'a pas d'animaux</h3></Col> </Row>)}
         </Container>
       </Container>
       <Modal
-      show={showNotif}
-      onHide={handleCloseNotif}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-      <Modal.Title id="contained-modal-title-vcenter">
-          Aide demandée
-      </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+        show={showNotif}
+        onHide={handleCloseNotif}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Aide demandée
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <div>
-              <h4>Opération réussi !</h4>
-              <p>La demande d'aide à bien été envoyée.</p>
-              <Button className='centrePage' onClick={handleCloseNotif}>OK</Button></div>
-      </Modal.Body>
+            <h4>Opération réussi !</h4>
+            <p>La demande d'aide à bien été envoyée.</p>
+            <Button className='centrePage' onClick={handleCloseNotif}>OK</Button></div>
+        </Modal.Body>
       </Modal>
 
       {isModifiable === false && JSON.parse(localStorage.getItem("user")) !== null ? (
@@ -474,7 +481,7 @@ function DetailProposition() {
       ) :
         null
       }
-      <Footer/>
+      <Footer />
     </div >
   );
 }
