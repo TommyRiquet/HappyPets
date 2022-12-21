@@ -10,6 +10,32 @@ describe('Testing for the /annonces routes', function() {
             .get('/annonces')
             .expect(200, done);
     })  
+
+
+    it('Should responds 200 to /annonces/amount', function (done) {
+        request(app)
+            .get('/annonces/amount')
+            .expect(200, done);
+    }) 
+    
+    it('Should responds 200 to /annonces/detailAnnonce', function (done) {
+        request(app)
+            .get('/annonces/detailAnnonce')
+            .expect(200, done);
+    }) 
+
+
+    it('Should responds 200 to /annonces/me', function (done) {
+        request(app)
+            .get('/annonces/me')
+            .expect(200, done);
+    }) 
+
+    it('Should responds 200 to /annonces/me', function (done) {
+        request(app)
+            .get('/annonces/deleteAnnonce')
+            .expect(200, done);
+    }) 
   
   });
 
