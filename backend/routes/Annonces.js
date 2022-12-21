@@ -94,12 +94,13 @@ router.get("/detailAnnonce", async (req, res) => {
 })
 
 router.get("/deleteAnnonce", async (req, res) => {
+    const id = req.query.id || 0
     try {
         Annonces.update({
             isActive: false
         }, {
             where: {
-                id: req.query.id
+                id: id
             }
         })
         res.send(200);
